@@ -10,12 +10,12 @@ Agents must consult and adhere to the source reference specifications and gold s
 
 | Directory | File | Purpose & Contents |
 | :--- | :--- | :--- |
-| `../house-rules` | `../house-rules/python-rules.md` | Core rules for Python development: mathematical typography, modern RNG, typing, package hygiene, docstrings, and script flow. |
+| `../house-rules` | `../house-rules/python-rules_v1.md` | Core rules for Python development: mathematical typography, modern RNG, typing, package hygiene, docstrings, and script flow. |
 | `../house-rules` | `../house-rules/css-rules.md` | The Scriber Experience design system: 4-layer token hierarchy, glassmorphism baseline, ADHD semantic color coding, and golden ratio spacing. |
-| `../boilerplates` | `../boilerplates/gold-standard-boilerplate.py` | Gold standard reference script template implementing mathematical simulation, explicit type annotations, shape assertions, deterministic RNG, and smoke testing. |
-| `../boilerplates` | `../boilerplates/visualization-boilerplate.py` | Generalizable visualization bootstrapping script for Matplotlib, Pyplot, and Seaborn with high-contrast curves and 3-style heatmaps. |
-| `../boilerplates` | `../boilerplates/tse-boilerplate.css` | Gold standard reference stylesheet implementing the full 4-layer taxonomy, CSS tokens, glassmorphism components, gradients, and responsive layouts. |
-| `../boilerplates` | `../boilerplates/visuals-boilerplate.ipynb` | Gold standard reference notebook template for scientific visualization, NetworkX graph topologies, dashboards, and design token / colormap palettes. |
+| `../boilerplates` | `../boilerplates/python/gold-standard-boilerplate.py` | Gold standard reference script template implementing mathematical simulation, explicit type annotations, shape assertions, deterministic RNG, and smoke testing. |
+| `../boilerplates` | `../boilerplates/python/visualization_boilerplate.py` | Generalizable visualization bootstrapping script for Matplotlib, Pyplot, and Seaborn with high-contrast curves and 3-style heatmaps. |
+| `../boilerplates` | `../boilerplates/css` | Gold standard reference stylesheet implementing the full 4-layer taxonomy, CSS tokens, glassmorphism components, gradients, and responsive layouts. |
+| `../boilerplates` | `../boilerplates/notebooks/visuals-boilerplate.ipynb` | Gold standard reference notebook template for scientific visualization, NetworkX graph topologies, dashboards, and design token / colormap palettes. |
 
 ---
 
@@ -45,7 +45,7 @@ Use explicit number-emoji section headers as semantic anchors (not mere decorati
 
 ## 🐍 2. Python Engineering & Mathematical Rigor
 
-When writing or modifying Python modules, follow the rules defined in `../house-rules/python-rules.md` and reference `../boilerplates/gold-standard-boilerplate.py`:
+When writing or modifying Python modules, follow the rules defined in `../house-rules/python-rules_v1.md` and reference `../boilerplates/python/gold-standard-boilerplate.py`:
 
 1. **Modern Deterministic RNG**:
    - Always use `np.random.default_rng(seed)`.
@@ -72,7 +72,7 @@ When writing or modifying Python modules, follow the rules defined in `../house-
 
 ## 🎨 3. CSS, Design System & Cognitive Load Architecture
 
-When styling web pages, apps, data dashboards, or CLI outputs, adhere to `../house-rules/css-rules.md` and `../boilerplates/tse-boilerplate.css`:
+When styling web pages, apps, data dashboards, or CLI outputs, adhere to `../house-rules/css-rules.md` and `../boilerplates/css`:
 
 1. **The Scriber Glassmorphism Baseline**:
    - Dark mode first (`--color-bg: #0d1117`, `--color-surface: #161b22`, `--color-surface-elevated: #21262d`).

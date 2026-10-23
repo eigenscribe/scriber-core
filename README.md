@@ -11,10 +11,13 @@ Welcome to the canonical environment index for autonomous development agents. Th
 │   ├── python-rules.md        # Mathematical typography, packaging hygiene & consistency rules
 │   └── css-rules.md           # Glassmorphic visual layout layering standards
 ├── boilerplates/
-│   ├── gold-standard-boilerplate.py  # Gold standard numeric integration script template
-│   ├── visualization-boilerplate.py  # Generalizable visualization bootstrap for Matplotlib/Pyplot/Seaborn
-│   ├── tse-boilerplate.css          # Eigenscribe signature high-contrast layout blueprint
-│   └── visuals-boilerplate.ipynb    # Visualizations, NetworkX topologies & color palettes template
+│   ├── css/
+│   │   └── tse-boilerplate.css          # Eigenscribe signature high-contrast layout blueprint
+│   ├── notebooks/
+│   │   └── visuals-boilerplate.ipynb    # Visualizations, NetworkX topologies & color palettes template
+│   └── python/
+│       ├── gold-standard-boilerplate.py # Gold standard numeric integration script template
+│       └── visualization_boilerplate.py # Generalizable visualization bootstrap for Matplotlib/Pyplot/Seaborn
 ├── .junie/
 │   └── AGENTS.md              # Canonical agent guidelines & workspace directives
 ├── pyproject.toml             # uv environment dependencies and locks

@@ -14,10 +14,13 @@ agent-workspace (Canonical Single Source of Truth)
 │   ├── python-rules.md
 │   └── css-rules.md
 ├── boilerplates/
-│   ├── gold-standard-boilerplate.py
-│   ├── visualization_boilerplate.py
-│   ├── tse-boilerplate.css
-│   └── visuals-boilerplate.ipynb
+│   ├── css/
+│   │   └── tse-boilerplate.css
+│   ├── notebooks/
+│   │   └── visuals-boilerplate.ipynb
+│   └── python/
+│       ├── gold-standard-boilerplate.py
+│       └── visualization_boilerplate.py
 └── docs/
     └── workspace-setup-guide.md
 
@@ -54,10 +57,10 @@ This project adheres to canonical Eigenscribe Inc. / Scriber Labs development st
 Agents must consult the linked rules and templates in `.agent-workspace`:
 - **Python Rules**: `.agent-workspace/house-rules/python-rules.md`
 - **CSS / UI System**: `.agent-workspace/house-rules/css-rules.md`
-- **Python Numeric Template**: `.agent-workspace/boilerplates/gold-standard-boilerplate.py`
-- **Visualization Bootstrap Template**: `.agent-workspace/boilerplates/visualization-boilerplate.py`
-- **CSS Design System Template**: `.agent-workspace/boilerplates/tse-boilerplate.css`
-- **Visuals & Graphs Template**: `.agent-workspace/boilerplates/visuals-boilerplate.ipynb`
+- **Python Numeric Template**: `.agent-workspace/boilerplates/python/gold-standard-boilerplate.py`
+- **Visualization Bootstrap Template**: `.agent-workspace/boilerplates/python/visualization_boilerplate.py`
+- **CSS Design System Template**: `.agent-workspace/boilerplates/css/tse-boilerplate.css`
+- **Visuals & Graphs Template**: `.agent-workspace/boilerplates/notebooks/visuals-boilerplate.ipynb`
 
 ## 🎯 Project-Specific Context & Overrides
 - Target domain and operational requirements for this repository.

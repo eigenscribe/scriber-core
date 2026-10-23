@@ -1,5 +1,5 @@
 """
-visualization-boilerplate.py
+visualization_boilerplate.py
 
 Generalizable visualization bootstrapping script for Matplotlib, Pyplot, and Seaborn
 graphics conforming to the Eigenscribe / Scriber Labs Design System.
@@ -118,7 +118,7 @@ HIGH_CONTRAST_CYCLE: Final[List[str]] = [
 STYLE_1_PALETTE: Final[Dict[str, str]] = {
     "primary": COLOR_PRIMARY_LIGHT,
     "secondary": COLOR_SECONDARY,
-    "accent": "#00e8ff",
+    "accent": "#f472b6",
 }
 
 # Style 2: NetworkX Graphs Palette (for topological structures, graph nodes, and networks)
@@ -177,26 +177,26 @@ def create_eigenscribe_colormap(
 # Heatmap style 1: Pink-to-Blue Gradient (Vibrant Diverging/Sequential High Contrast)
 HEATMAP_PINK_TO_BLUE: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
     "eigenscribe_pink_to_blue",
-    [COLOR_PERNARY, "#a855f7", "#3b82f6", COLOR_PRIMARY_LIGHT],
+    [COLOR_PERNARY, COLOR_SECONDARY_LIGHT, COLOR_PRIMARY, COLOR_PRIMARY_LIGHT],
 )
 
 # Heatmap style 2: Light Blue-to-Dark Blue Gradient (Sequential High Dynamic Range)
 HEATMAP_LIGHT_BLUE_TO_DARK_BLUE: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
     "eigenscribe_light_blue_to_dark_blue",
-    ["#e0f7ff", COLOR_PRIMARY_LIGHT, COLOR_PRIMARY, "#0052cc", "#051329"],
+    [COLOR_PRIMARY_LIGHT, COLOR_PRIMARY, COLOR_PRIMARY_DARK],
 )
 
 # Heatmap style 3: Light Green-to-Dark Green Gradient (Sequential STEM / Coherence Metric)
 HEATMAP_LIGHT_GREEN_TO_DARK_GREEN: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
     "eigenscribe_light_green_to_dark_green",
-    ["#e8fdf2", COLOR_TERTIARY_LIGHT, COLOR_TERTIARY, COLOR_TERTIARY_DARK, "#022c1d"],
+    [COLOR_TERTIARY_LIGHT, COLOR_TERTIARY, COLOR_TERTIARY_DARK],
 )
 
 # Semantic Colormaps (exported for generalized continuous gradient visualizations)
 SEMANTIC_COLORMAPS: Final[Dict[str, LinearSegmentedColormap]] = {
     "Phase [0, 2π)": create_eigenscribe_colormap(
         "eigenscribe_phase",
-        [COLOR_PRIMARY_LIGHT, COLOR_SECONDARY, COLOR_PERNARY, COLOR_PRIMARY_LIGHT],
+        [COLOR_PRIMARY_LIGHT, COLOR_PRIMARY, COLOR_SECONDARY, COLOR_TERTIARY],
     ),
     "Order Parameter [0, 1]": create_eigenscribe_colormap(
         "eigenscribe_order_param",
@@ -513,7 +513,7 @@ def run_smoke_test() -> bool:
         plt.close(fig_sub)
         
     plt.close(fig)
-    print("✨ Smoke tests passed: Theme applied, colormaps registered, and plots verified.")
+    print("[Verification] Smoke tests passed: Theme applied, colormaps registered, and plots verified.")
     return True
 
 
