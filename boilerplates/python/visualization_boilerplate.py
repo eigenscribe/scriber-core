@@ -23,6 +23,13 @@ except ImportError:
     sns = None
     HAS_SEABORN = False
 
+try:
+    import plotly.graph_objects as go
+    HAS_PLOTLY = True
+except ImportError:
+    go = None
+    HAS_PLOTLY = False
+
 ArrayOrFloat: TypeAlias = float | NDArray[np.float64]
 
 # -----------------------------------------------------------------------------------------------------------
@@ -36,6 +43,7 @@ COLOR_BG: Final[str] = "#0d1117"
 COLOR_SURFACE: Final[str] = "#161b22"
 COLOR_SURFACE_ELEVATED: Final[str] = "#21262d"
 COLOR_SURFACE_OVERLAY: Final[str] = "rgba(22, 27, 34, 0.75)"
+COLOR_GRAPH_BG: Final[str] = "rgba(3, 7, 18, 0.85)"
 
 COLOR_TEXT: Final[str] = "#f0f6fc"
 COLOR_TEXT_BRIGHT: Final[str] = "#ffffff"
@@ -192,12 +200,30 @@ HEATMAP_LIGHT_GREEN_TO_DARK_GREEN: Final[LinearSegmentedColormap] = create_eigen
     [COLOR_TERTIARY_LIGHT, COLOR_TERTIARY, COLOR_TERTIARY_DARK],
 )
 
+# Heatmap style 4: High-Contrast Cyclic Phase Colormap (0 to 2π Continuous)
+HEATMAP_CYCLIC_PHASE: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
+    "eigenscribe_cyclic_phase",
+    ["#0070eb", "#0a95eb", "#14b5ff", "#00f0ff", "#a855f7", "#5e17eb", "#0070eb"],
+)
+
+# Plotly Format Cyclic Phase Colorscale (for Dash / Plotly heatmaps & circle graphs)
+PLOTLY_CYCLIC_PHASE_COLORSCALE: Final[List[List[Any]]] = [
+    [0.0, "#0070eb"],
+    [0.2, "#0A95EB"],
+    [0.35, "#14B5FF"],
+    [0.5, "#00f0ff"],
+    [0.65, "#A855F7"],
+    [0.8, "#5E17EB"],
+    [1.0, "#0070eb"],
+]
+
 # Semantic Colormaps (exported for generalized continuous gradient visualizations)
 SEMANTIC_COLORMAPS: Final[Dict[str, LinearSegmentedColormap]] = {
     "Phase [0, 2π)": create_eigenscribe_colormap(
         "eigenscribe_phase",
         [COLOR_PRIMARY_LIGHT, COLOR_PRIMARY, COLOR_SECONDARY, COLOR_TERTIARY],
     ),
+    "Cyclic Phase": HEATMAP_CYCLIC_PHASE,
     "Order Parameter [0, 1]": create_eigenscribe_colormap(
         "eigenscribe_order_param",
         [COLOR_SURFACE, COLOR_PRIMARY, COLOR_PRIMARY_LIGHT],
@@ -221,6 +247,7 @@ EIGENSCRIBE_COLORMAPS: Final[Dict[str, LinearSegmentedColormap]] = {
     "pink_to_blue": HEATMAP_PINK_TO_BLUE,
     "light_blue_to_dark_blue": HEATMAP_LIGHT_BLUE_TO_DARK_BLUE,
     "light_green_to_dark_green": HEATMAP_LIGHT_GREEN_TO_DARK_GREEN,
+    "cyclic_phase": HEATMAP_CYCLIC_PHASE,
     **{k.lower().split()[0]: v for k, v in SEMANTIC_COLORMAPS.items()},
 }
 
@@ -422,6 +449,52 @@ def plot_eigenscribe_heatmap(
     return ax
 
 
+def create_plotly_base_figure(title: str = "", height: int = 340) -> Any:
+    """Create a Plotly figure pre-configured with the Scriber dark glassmorphic theme.
+
+    Parameters
+    ----------
+    title : str, default=""
+        Plot/dashboard card header title text.
+    height : int, default=340
+        Default figure pixel height.
+
+    Returns
+    -------
+    plotly.graph_objects.Figure
+        Styled Plotly figure instance.
+    """
+    if not HAS_PLOTLY or go is None:
+        raise ImportError(
+            "Plotly is required for create_plotly_base_figure. Install via `pip install plotly`."
+        )
+
+    figure = go.Figure()
+    figure.update_layout(
+        template="plotly_dark",
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor=COLOR_GRAPH_BG,
+        margin=dict(l=48, r=20, t=44, b=40),
+        title=dict(
+            text=title,
+            font=dict(family="Aclonica, sans-serif", size=13, color=COLOR_TEXT_BRIGHT),
+            x=0.02,
+            y=0.96,
+        ),
+        font=dict(color=COLOR_TEXT_MUTED, family="Aclonica, sans-serif", size=11),
+        height=height,
+    )
+    figure.update_xaxes(
+        gridcolor="rgba(160, 180, 220, 0.12)",
+        zerolinecolor="rgba(160, 180, 220, 0.18)",
+    )
+    figure.update_yaxes(
+        gridcolor="rgba(160, 180, 220, 0.12)",
+        zerolinecolor="rgba(160, 180, 220, 0.18)",
+    )
+    return figure
+
+
 # -----------------------------------------------------------------------------------------------------------
 # 3️⃣ Private helpers
 # -----------------------------------------------------------------------------------------------------------
@@ -443,6 +516,7 @@ def _resolve_heatmap_colormap(style: str) -> Colormap:
         "pink_to_blue": HEATMAP_PINK_TO_BLUE,
         "light_blue_to_dark_blue": HEATMAP_LIGHT_BLUE_TO_DARK_BLUE,
         "light_green_to_dark_green": HEATMAP_LIGHT_GREEN_TO_DARK_GREEN,
+        "cyclic_phase": HEATMAP_CYCLIC_PHASE,
     }
     
     if style in style_map:
@@ -454,7 +528,7 @@ def _resolve_heatmap_colormap(style: str) -> Colormap:
     else:
         raise ValueError(
             f"Unknown heatmap style '{style}'. Choose from 'pink_to_blue', "
-            f"'light_blue_to_dark_blue', 'light_green_to_dark_green', or registered colormaps."
+            f"'light_blue_to_dark_blue', 'light_green_to_dark_green', 'cyclic_phase', or registered colormaps."
         )
 
 
@@ -477,6 +551,7 @@ def run_smoke_test() -> bool:
     assert "eigenscribe_pink_to_blue" in mpl.colormaps, "Colormap registration failed."
     assert "eigenscribe_light_blue_to_dark_blue" in mpl.colormaps, "Colormap registration failed."
     assert "eigenscribe_light_green_to_dark_green" in mpl.colormaps, "Colormap registration failed."
+    assert "eigenscribe_cyclic_phase" in mpl.colormaps, "Cyclic phase colormap registration failed."
     
     # 2. Multi-curve line plot contrast & array validation
     x = np.linspace(0, 10, 100)
@@ -494,7 +569,7 @@ def run_smoke_test() -> bool:
     ax_line.set_ylabel("Amplitude")
     ax_line.legend()
     
-    # 3. Heatmap verification with three core styles
+    # 3. Heatmap verification with core styles
     matrix_data = rng.uniform(0.0, 1.0, size=(8, 8))
     assert matrix_data.ndim == 2, "Heatmap matrix must be 2D."
     
@@ -507,12 +582,19 @@ def run_smoke_test() -> bool:
     )
     
     # Test remaining colormaps without error
-    for style_name in ["light_blue_to_dark_blue", "light_green_to_dark_green"]:
+    for style_name in ["light_blue_to_dark_blue", "light_green_to_dark_green", "cyclic_phase"]:
         fig_sub, ax_sub = plt.subplots(figsize=(4, 4))
         plot_eigenscribe_heatmap(matrix_data, style=style_name, ax=ax_sub, title=style_name)
         plt.close(fig_sub)
         
     plt.close(fig)
+
+    # 4. Verification of Plotly base figure if Plotly is installed
+    if HAS_PLOTLY:
+        plotly_fig = create_plotly_base_figure("Test Glassmorphic Chart")
+        assert plotly_fig.layout.plot_bgcolor == COLOR_GRAPH_BG, "Plotly plot background mismatch."
+        assert len(PLOTLY_CYCLIC_PHASE_COLORSCALE) == 7, "Plotly cyclic colorscale stop count mismatch."
+
     print("[Verification] Smoke tests passed: Theme applied, colormaps registered, and plots verified.")
     return True
 
