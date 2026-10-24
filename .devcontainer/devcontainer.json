@@ -1,5 +1,5 @@
 {
-  "name": "Agent Workspace",
+  "name": "Scriber Core",
   "image": "://microsoft.com",
   
   // Automatically install 'uv' and set up a virtual environment upon creation

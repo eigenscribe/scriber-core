@@ -32,14 +32,14 @@ Welcome to the canonical environment index for autonomous development agents. Th
 
 ## 📦 Cross-Project Distribution & Package Setup
 
-`agent-workspace` serves as the single source of truth across all **Eigenscribe Inc.** and **Scriber Labs** projects. There are three core ways to utilize and package this workspace:
+`scriber-core` serves as the single source of truth across all **Eigenscribe Inc.** and **Scriber Labs** projects. There are three core ways to utilize and package this workspace:
 
 1. **Git Submodule (Existing Projects)**:
    - Link this workspace into target repositories:
      ```bash
-     git submodule add <AGENT_WORKSPACE_REPO_URL> .agent-workspace
+     git submodule add <SCRIBER_CORE_REPO_URL> .scriber-core
      ```
-   - Connect guidelines via `.junie/AGENTS.md` bridging to `.agent-workspace/house-rules/...`.
+   - Connect guidelines via `.junie/AGENTS.md` bridging to `.scriber-core/house-rules/...`.
    - Update anytime with: `git submodule update --remote --merge`.
 
 2. **Template Repository (Green-field Projects)**:

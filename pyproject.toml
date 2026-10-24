@@ -1,7 +1,7 @@
 [project]
-name = "agent-workspace-boilerplate"
+name = "scriber-core"
 version = "0.1.0"
-description = "Deterministic workspace boilerplate for scientific and visualization agents."
+description = "Deterministic workspace baseline and rules for scientific and visualization agents."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

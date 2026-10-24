@@ -10,7 +10,7 @@ Agents must consult and adhere to the source reference specifications and gold s
 
 | Directory | File | Purpose & Contents |
 | :--- | :--- | :--- |
-| `../house-rules` | `../house-rules/python-rules_v1.md` | Core rules for Python development: mathematical typography, modern RNG, typing, package hygiene, docstrings, and script flow. |
+| `../house-rules` | `../house-rules/python-rules.md` | Core rules for Python development: mathematical typography, modern RNG, typing, package hygiene, docstrings, and script flow. |
 | `../house-rules` | `../house-rules/css-rules.md` | The Scriber Experience design system: 4-layer token hierarchy, glassmorphism baseline, ADHD semantic color coding, and golden ratio spacing. |
 | `../boilerplates` | `../boilerplates/python/gold-standard-boilerplate.py` | Gold standard reference script template implementing mathematical simulation, explicit type annotations, shape assertions, deterministic RNG, and smoke testing. |
 | `../boilerplates` | `../boilerplates/python/visualization_boilerplate.py` | Generalizable visualization bootstrapping script for Matplotlib, Pyplot, and Seaborn with high-contrast curves and 3-style heatmaps. |
@@ -45,7 +45,7 @@ Use explicit number-emoji section headers as semantic anchors (not mere decorati
 
 ## 🐍 2. Python Engineering & Mathematical Rigor
 
-When writing or modifying Python modules, follow the rules defined in `../house-rules/python-rules_v1.md` and reference `../boilerplates/python/gold-standard-boilerplate.py`:
+When writing or modifying Python modules, follow the rules defined in `../house-rules/python-rules.md` and reference `../boilerplates/python/gold-standard-boilerplate.py`:
 
 1. **Modern Deterministic RNG**:
    - Always use `np.random.default_rng(seed)`.
