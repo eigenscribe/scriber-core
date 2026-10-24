@@ -87,6 +87,14 @@
   --gradient-producer: linear-gradient(135deg, #f472b6, #8b5cf6, #3b82f6);
   --gradient-producer-green: linear-gradient(135deg, #4ade80, #06b6d4, #3b82f6);
   --gradient-blue: linear-gradient(to right bottom, #00c8ff, #14a5ff, #7066ff, #5e17eb);
+  --gradient-pycharm: linear-gradient(135deg, #00c6ff 0%, #0072ff 25%, #7652f5 60%, #c026d3 85%, #f43f5e 100%);
+  --gradient-pycharm-subtle: linear-gradient(135deg, #0070eb 0%, #14b5ff 30%, #7652f5 75%, #a855f7 100%);
+  --gradient-sunset: linear-gradient(135deg, #7652f5 0%, #9b7dff 35%, #ec4899 75%, #f78166 100%);
+  --gradient-emerald: linear-gradient(135deg, #00e8ff 0%, #14b5ff 35%, #7652f5 75%, #a855f7 100%);
+  --gradient-rainbow: linear-gradient(135deg, #0070eb 0%, #14b5ff 25%, #7652f5 55%, #c026d3 80%, #ec4899 100%);
+  --gradient-purple-magenta: linear-gradient(135deg, #6253e1 0%, #7652f5 35%, #a855f7 70%, #ec4899 100%);
+  --creator-gradient: linear-gradient(135deg, #00e8ff 0%, #14b5ff 30%, #5280ff 65%, #7652f5 100%);
+  --eig-blue-purple-gradient: linear-gradient(135deg, #00f5ff 0%, #1d9cff 28%, #6c4dff 65%, #c026d3 90%, #f43f5e 100%);
 
   /* Transparent overlay gradients */
   --gradient-blue-purple-glass: linear-gradient(135deg, rgba(0, 232, 255, 0.15), rgba(20, 181, 255, 0.1), rgba(121, 82, 245, 0.15));
@@ -99,6 +107,7 @@
   --glass-border: rgba(255, 255, 255, 0.12);
   --glass-border-bright: rgba(20, 181, 255, 0.3);
   --glass-blur: blur(12px);
+  --graph-bg: rgba(3, 7, 18, 0.85);
 
   /* Shadows */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.25);
@@ -570,4 +579,198 @@ img, svg, video, canvas {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* ------------------------------------------------------------------------------
+ * 🌌 Dynamic App Shell & Ambient Backgrounds
+ * ------------------------------------------------------------------------------ */
+.app-shell {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  background:
+    radial-gradient(circle at 8% 12%, rgba(121, 82, 245, 0.28), transparent 48%),
+    radial-gradient(circle at 92% 88%, rgba(20, 181, 255, 0.25), transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.14), transparent 55%),
+    linear-gradient(135deg, rgba(5, 10, 25, 0.72), rgba(2, 6, 23, 0.85));
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+/* ------------------------------------------------------------------------------
+ * 📈 Metric Summary & KPI Cards
+ * ------------------------------------------------------------------------------ */
+.metric-card {
+  background: var(--glass-bg-elevated);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--glass-border-bright);
+  box-shadow: var(--shadow-md);
+}
+
+.metric-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.metric-value {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--color-text-bright);
+  line-height: 1.2;
+}
+
+.metric-value.cyan { color: var(--color-primary-light); }
+.metric-value.violet { color: var(--color-secondary-light); }
+.metric-value.green { color: var(--color-tertiary-light); }
+.metric-value.coral { color: var(--color-quaternary); }
+
+/* ------------------------------------------------------------------------------
+ * 🪟 Interactive Plotly & Chart Container Cards
+ * ------------------------------------------------------------------------------ */
+.chart-card {
+  background: var(--graph-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.chart-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: var(--color-text-bright);
+  margin: 0;
+}
+
+/* ------------------------------------------------------------------------------
+ * 📂 Collapsible Glass Accordion Panels
+ * ------------------------------------------------------------------------------ */
+.accordion-panel {
+  background: var(--glass-bg-elevated);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-sm);
+  overflow: hidden;
+  transition: border-color var(--transition-fast);
+}
+
+.accordion-header {
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.02);
+  user-select: none;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  color: var(--color-text-bright);
+  transition: background var(--transition-fast);
+}
+
+.accordion-header:hover {
+  background: rgba(20, 181, 255, 0.06);
+}
+
+.accordion-body {
+  padding: var(--space-md);
+  border-top: 1px solid var(--glass-border);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* ------------------------------------------------------------------------------
+ * 🎛️ Parameter Sliders & Interactive Form Elements
+ * ------------------------------------------------------------------------------ */
+.slider-group {
+  margin-bottom: var(--space-md);
+}
+
+.slider-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2xs);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.slider-label {
+  color: var(--color-text-muted);
+}
+
+.slider-value {
+  color: var(--color-primary-light);
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------------------------
+ * ⏯️ Simulation Playback & Timeline Scrubber
+ * ------------------------------------------------------------------------------ */
+.playback-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--glass-bg-elevated);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill);
+  padding: var(--space-xs) var(--space-md);
+  backdrop-filter: var(--glass-blur);
+}
+
+.playback-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-text-bright);
+  cursor: pointer;
+  padding: var(--space-2xs) var(--space-xs);
+  border-radius: var(--radius-xs);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.playback-btn:hover {
+  color: var(--color-primary-light);
+  transform: scale(1.1);
+}
+
+.playback-btn.primary {
+  background: var(--color-primary);
+  color: var(--color-bg);
+  border-radius: var(--radius-pill);
+  padding: var(--space-xs) var(--space-md);
+}
+
+.playback-btn.primary:hover {
+  background: var(--color-primary-light);
+  box-shadow: var(--shadow-button);
 }
