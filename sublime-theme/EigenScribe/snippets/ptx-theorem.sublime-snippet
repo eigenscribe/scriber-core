@@ -1,0 +1,11 @@
+<snippet>
+  <content><![CDATA[
+<theorem xml:id="thm-${1:name}">
+    <title>${2:Theorem Title}</title>
+    <p>${3:Statement}</p>
+</theorem>
+]]></content>
+  <tabTrigger>ptxthm</tabTrigger>
+  <scope>text.xml, source.ptx</scope>
+  <description>PreTeXt Theorem</description>
+</snippet>

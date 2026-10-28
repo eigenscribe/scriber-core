@@ -1,0 +1,12 @@
+<snippet>
+  <content><![CDATA[
+<section xml:id="sec-${1:section-name}">
+    <title>${2:Section Title}</title>
+    <tag>${3:tag1, tag2}</tag>
+    <p>${4:Content}</p>
+</section>
+]]></content>
+  <tabTrigger>ptxsec</tabTrigger>
+  <scope>text.xml, source.ptx</scope>
+  <description>PreTeXt Section</description>
+</snippet>

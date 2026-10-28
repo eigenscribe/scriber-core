@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  EigenScribe Color Scheme for Sublime Text 4
+  =============================================
+  Based on the There and Back Again PreTeXt project palette.
+  Cyan-to-purple gradient aesthetic with glassmorphic dark surfaces.
+  Uses Aclonica for UI headings and Fira Code for code.
+-->
+<scheme>
+
+  <author>Sofia (EigenScribe)</author>
+  <name>EigenScribe</name>
+
+  <!-- ============================================================ -->
+  <!--  COLOR PALETTE — extracted from theme-variables.css          -->
+  <!-- ============================================================ -->
+  <color name="bg"                 value="#0d1117"/>
+  <color name="bg-surface"        value="#161b22"/>
+  <color name="bg-code"           value="#1a1d24"/>
+  <color name="bg-panel"          value="#232830"/>
+  <color name="bg-gutter"         value="#0d1117"/>
+  <color name="bg-line-highlight" value="rgba(20, 181, 255, 0.06)"/>
+  <color name="bg-selection"      value="rgba(20, 181, 255, 0.20)"/>
+  <color name="bg-selection-inop" value="rgba(20, 181, 255, 0.10)"/>
+  <color name="bg-find-highlight" value="rgba(254, 181, 56, 0.30)"/>
+  <color name="bg-find-range"     value="rgba(254, 181, 56, 0.12)"/>
+  <color name="bg-bracket-fg"     value="#14b5ff"/>
+  <color name="bg-bracket-bg"     value="rgba(20, 181, 255, 0.25)"/>
+  <color name="bg-tag"            value="rgba(121, 82, 245, 0.15)"/>
+
+  <color name="fg"                value="#C5F8FF"/>
+  <color name="fg-muted"          value="#8b949e"/>
+  <color name="fg-comment"        value="#4c739c"/>
+  <color name="fg-cyan"           value="#14b5ff"/>
+  <color name="fg-bright-cyan"    value="#00e8ff"/>
+  <color name="fg-purple"         value="#7952f5"/>
+  <color name="fg-light-purple"   value="#9b7dff"/>
+  <color name="fg-magenta"        value="#ff75c3"/>
+  <color name="fg-green"          value="#00e000"/>
+  <color name="fg-bright-green"   value="#38fe52"/>
+  <color name="fg-yellow"         value="#feb538"/>
+  <color name="fg-number-purple"  value="#be58f9"/>
+  <color name="fg-pink"           value="#fe38e4"/>
+  <color name="fg-indigo"         value="#6f78fa"/>
+  <color name="fg-operator"       value="#939af8"/>
+  <color name="fg-inline-code"    value="#ff75c3"/>
+
+  <color name="border"            value="rgba(255, 255, 255, 0.08)"/>
+  <color name="border-accent"     value="rgba(20, 181, 255, 0.35)"/>
+  <color name="border-active"     value="#14b5ff"/>
+
+  <!-- ============================================================ -->
+  <!--  SYNTAX SCOPE STYLES                                        -->
+  <!-- ============================================================ -->
+
+  <!-- Default / plain text -->
+  <rules>
+    <rule foreground="fg" settings="default"/>
+
+    <!-- Comments — muted blue, italic -->
+    <rule foreground="fg-comment" font_style="italic" scope="comment"/>
+    <rule foreground="fg-comment" font_style="italic" scope="comment.line"/>
+    <rule foreground="fg-comment" font_style="italic" scope="comment.block"/>
+    <rule foreground="fg-comment" font_style="italic" scope="comment.block.documentation"/>
+    <rule foreground="fg-comment" font_style="italic" scope="punctuation.definition.comment"/>
+
+    <!-- Prolog, DOCTYPE, XML declaration — bright green -->
+    <rule foreground="fg-bright-green" scope="meta.tag.sgml.doctype, meta.tag.sgml.declaration, meta.tag.preprocessor"/>
+
+    <!-- Keywords — cyan (matches XML tags, HTML tags, CSS selectors) -->
+    <rule foreground="fg-cyan" scope="keyword, keyword.control, storage, storage.type, storage.modifier"/>
+    <rule foreground="fg-cyan" scope="keyword.other.doctype, keyword.other.doctype.html"/>
+
+    <!-- Built-in functions, constants — bright cyan -->
+    <rule foreground="fg-bright-cyan" scope="support.function, support.type, variable.language, constant.language"/>
+
+    <!-- Variables — green -->
+    <rule foreground="fg-green" scope="variable, variable.other, variable.parameter"/>
+
+    <!-- Types, class names, parameters — yellow/amber -->
+    <rule foreground="fg-yellow" scope="entity.name.type, entity.name.class, support.class, meta.type"/>
+
+    <!-- Functions, methods — blue -->
+    <rule foreground="fg-cyan" scope="entity.name.function, support.function, meta.function-call"/>
+
+    <!-- Strings — magenta/pink -->
+    <rule foreground="fg-magenta" scope="string, string.quoted, string.unquoted, string.interpolated, string.other"/>
+    <rule foreground="fg-magenta" scope="punctuation.definition.string"/>
+
+    <!-- Numbers — purple -->
+    <rule foreground="fg-number-purple" scope="constant.numeric, constant.number"/>
+
+    <!-- Constants, booleans — pink -->
+    <rule foreground="fg-pink" scope="constant, constant.language.boolean, constant.language.symbol, constant.other"/>
+
+    <!-- Operators, punctuation — light indigo -->
+    <rule foreground="fg-operator" font_style="bold" scope="keyword.operator, punctuation"/>
+
+    <!-- Attributes, XML attribute names — indigo/purple -->
+    <rule foreground="fg-indigo" scope="entity.other.attribute-name, meta.attribute-with-value"/>
+
+    <!-- XML/HTML tags — cyan -->
+    <rule foreground="fg-cyan" scope="punctuation.definition.tag, entity.name.tag"/>
+
+    <!-- XML/HTML attribute values — magenta -->
+    <rule foreground="fg-magenta" scope="meta.attribute-with-value string"/>
+
+    <!-- Preprocessor, decorators — bright green -->
+    <rule foreground="fg-bright-green" scope="meta.preprocessor, meta.decorator, punctuation.definition.decorator"/>
+
+    <!-- URLs — blue -->
+    <rule foreground="fg-cyan" scope="constant.other.reference.link, markup.underline.link"/>
+
+    <!-- Markdown-specific -->
+    <rule foreground="fg-cyan" font_style="bold" scope="markup.heading, markup.heading.entity, markup.heading.markdown punctuation.definition.heading"/>
+    <rule foreground="fg-bright-cyan" font_style="bold" scope="markup.heading.1"/>
+    <rule foreground="fg-cyan" font_style="bold" scope="markup.heading.2"/>
+    <rule foreground="fg-light-purple" font_style="bold" scope="markup.heading.3"/>
+    <rule foreground="fg-purple" font_style="bold" scope="markup.heading.4"/>
+    <rule foreground="fg-magenta" font_style="italic" scope="markup.italic"/>
+    <rule foreground="fg-magenta" font_style="bold" scope="markup.bold"/>
+    <rule foreground="fg-magenta" font_style="bold italic" scope="markup.bold markup.italic"/>
+    <rule foreground="fg-inline-code" scope="markup.inline.raw, markup.raw"/>
+    <rule foreground="fg-cyan" scope="markup.link, markup.underline.link"/>
+    <rule foreground="fg-comment" font_style="italic" scope="markup.strikethrough"/>
+    <rule foreground="fg-green" scope="markup.list"/>
+    <rule foreground="fg-yellow" scope="markup.quote"/>
+    <rule foreground="fg-muted" scope="meta.separator"/>
+
+    <!-- LaTeX / MathJax math -->
+    <rule foreground="fg-light-purple" scope="variable.other.math, support.function.math, constant.character.math"/>
+    <rule foreground="fg-bright-cyan" scope="support.class.math"/>
+
+    <!-- Diff -->
+    <rule foreground="fg-pink" background="rgba(255, 118, 161, 0.10)" scope="markup.deleted"/>
+    <rule foreground="fg-bright-green" background="rgba(56, 254, 82, 0.10)" scope="markup.inserted"/>
+    <rule foreground="fg-yellow" background="rgba(254, 181, 56, 0.10)" scope="markup.changed"/>
+    <rule foreground="fg-muted" scope="meta.diff.header"/>
+
+    <!-- Regex -->
+    <rule foreground="fg-magenta" scope="string.regexp, constant.character.escape"/>
+
+    <!-- Invalid / errors -->
+    <rule foreground="fg" background="rgba(255, 64, 161, 0.30)" scope="invalid"/>
+    <rule foreground="fg" background="rgba(255, 118, 161, 0.20)" scope="invalid.deprecated"/>
+
+    <!-- Regions / fold markers -->
+    <rule foreground="fg-bright-green" scope="comment.line.region, punctuation.definition.comment region"/>
+
+    <!-- YAML (for PreTeXt frontmatter-like metadata) -->
+    <rule foreground="fg-indigo" scope="keyword.other.yaml"/>
+    <rule foreground="fg-cyan" scope="string.unquoted.yaml, support.type.yaml"/>
+
+    <!-- JSON -->
+    <rule foreground="fg-indigo" scope="support.type.property-name.json"/>
+    <rule foreground="fg-magenta" scope="string.quoted.json"/>
+    <rule foreground="fg-number-purple" scope="constant.json"/>
+
+    <!-- Python -->
+    <rule foreground="fg-cyan" scope="keyword.control.python, storage.type.function.python"/>
+    <rule foreground="fg-bright-cyan" scope="support.function.builtin.python"/>
+    <rule foreground="fg-yellow" scope="support.type.python, storage.type.class.python"/>
+    <rule foreground="fg-green" scope="variable.parameter.python"/>
+    <rule foreground="fg-bright-green" scope="meta.function.decorator.python, punctuation.definition.decorator.python"/>
+
+    <!-- CSS -->
+    <rule foreground="fg-cyan" scope="entity.name.tag.css, entity.name.tag.css punctuation.definition.tag"/>
+    <rule foreground="fg-indigo" scope="support.type.property-name.css"/>
+    <rule foreground="fg-number-purple" scope="constant.numeric.css, support.constant"/>
+    <rule foreground="fg-magenta" scope="string.quoted.css, support.function"/>
+    <rule foreground="fg-yellow" scope="entity.other.attribute-name.class.css, entity.other.attribute-name.id.css"/>
+
+    <!-- Shell / Bash -->
+    <rule foreground="fg-cyan" scope="keyword.control, storage.type.function.shell"/>
+    <rule foreground="fg-green" scope="variable.other.normal.shell, variable.other.shell"/>
+    <rule foreground="fg-yellow" scope="support.function.builtin.shell"/>
+  </rules>
+
+  <!-- ============================================================ -->
+  <!--  UI / LAYOUT COLORS                                         -->
+  <!-- ============================================================ -->
+  <defaults>
+    <attr name="background" value="bg"/>
+    <attr name="foreground" value="fg"/>
+    <attr name="caret" value="fg-bright-cyan"/>
+    <attr name="lineHighlight" value="bg-line-highlight"/>
+    <attr name="selection" value="bg-selection"/>
+    <attr name="selectionBorder" value="border-accent"/>
+    <attr name="selectionBorderWidth" value="1.0"/>
+    <attr name="inactiveSelection" value="bg-selection-inop"/>
+    <attr name="findHighlight" value="bg-find-highlight"/>
+    <attr name="findHighlightForeground" value="bg"/>
+    <attr name="bracketForeground" value="bg-bracket-fg"/>
+    <attr name="bracketContentsOptions" value="match_adjacent"/>
+    <attr name="bracketContentsForeground" value="fg-cyan"/>
+    <attr name="bracketContentsBackground" value="bg-bracket-bg"/>
+    <attr name="gutterForeground" value="fg-muted"/>
+    <attr name="gutterBackground" value="bg-gutter"/>
+    <attr name="firstColumnGuide" value="border-accent"/>
+    <attr name="activeGuide" value="fg-cyan"/>
+    <attr name="magnifiedGuide" value="fg-bright-cyan"/>
+    <attr name="indentGuide" value="rgba(255, 255, 255, 0.04)"/>
+    <attr name="indentGuideActive" value="rgba(20, 181, 255, 0.20)"/>
+    <attr name="stackGuideWidth" value="1"/>
+    <attr name="stackGuideColour" value="border"/>
+    <attr name="caretstyle" value="block"/>
+    <attr name="fontface" value="Fira Code"/>
+    <attr name="fontsize" value="14"/>
+  </defaults>
+
+</scheme>

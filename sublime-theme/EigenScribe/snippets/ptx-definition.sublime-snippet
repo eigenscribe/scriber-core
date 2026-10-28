@@ -1,0 +1,11 @@
+<snippet>
+  <content><![CDATA[
+<definition xml:id="def-${1:name}">
+    <title>${2:Definition Title}</title>
+    <p>${3:Definition body}</p>
+</definition>
+]]></content>
+  <tabTrigger>ptxdef</tabTrigger>
+  <scope>text.xml, source.ptx</scope>
+  <description>PreTeXt Definition</description>
+</snippet>

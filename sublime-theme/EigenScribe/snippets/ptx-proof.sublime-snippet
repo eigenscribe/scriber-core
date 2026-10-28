@@ -1,0 +1,11 @@
+<snippet>
+  <content><![CDATA[
+<proof xml:id="pf-${1:name}">
+    <p>${2:Proof body}</p>
+    ∎
+</proof>
+]]></content>
+  <tabTrigger>ptxpf</tabTrigger>
+  <scope>text.xml, source.ptx</scope>
+  <description>PreTeXt Proof</description>
+</snippet>
