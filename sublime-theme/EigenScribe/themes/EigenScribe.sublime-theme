@@ -156,7 +156,7 @@
   },
 
   // ---- Glassmorphic panel overrides ----
-  "classes": [
+  "rules": [
     // Sidebar glass panel
     {
       "attributes": {
