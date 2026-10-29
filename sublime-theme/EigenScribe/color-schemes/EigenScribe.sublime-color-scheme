@@ -53,7 +53,7 @@
   // ============================================================
   "rules": [
     // Default / plain text
-    {"foreground": "fg", "settings": "default"},
+    {"foreground": "fg", "scope": "text"},
 
     // Comments — muted blue, italic
     {"foreground": "fg-comment", "font_style": "italic", "scope": "comment"},
