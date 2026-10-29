@@ -18,6 +18,11 @@ Welcome to the canonical environment index for autonomous development agents. Th
 │   └── python/
 │       ├── gold-standard-boilerplate.py # Gold standard numeric integration script template
 │       └── visualization_boilerplate.py # Generalizable visualization bootstrap for Matplotlib/Pyplot/Seaborn
+├── sublime-theme/
+│   ├── EigenScribe/           # Sublime Text 4 package (theme, color scheme, PreTeXt syntax & snippets)
+│   ├── install.sh             # Bash installer (macOS / Linux, copy or symlink mode)
+│   ├── install.ps1            # PowerShell installer (Windows)
+│   └── README.md              # Package documentation, installation, and configuration guide
 ├── .junie/
 │   └── AGENTS.md              # Canonical agent guidelines & workspace directives
 ├── pyproject.toml             # uv environment dependencies and locks
