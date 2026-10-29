@@ -1,0 +1,6 @@
+<snippet>
+  <content><![CDATA[<xref ref="${1:xml-id}"/>]]></content>
+  <tabTrigger>ptxxref</tabTrigger>
+  <scope>text.xml, source.ptx</scope>
+  <description>PreTeXt Cross-Reference</description>
+</snippet>

@@ -1,0 +1,8 @@
+<snippet>
+  <content><![CDATA[<me>
+    ${1:expression}
+</me>]]></content>
+  <tabTrigger>ptxme</tabTrigger>
+  <scope>text.xml, source.ptx</scope>
+  <description>PreTeXt Display Math</description>
+</snippet>

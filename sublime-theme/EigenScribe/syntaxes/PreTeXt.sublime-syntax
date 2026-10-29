@@ -1,0 +1,148 @@
+%YAML 1.2
+---
+# PreTeXt syntax highlighting for Sublime Text 4
+# ================================================
+# Extends built-in XML with PreTeXt-specific element awareness.
+# Save as PreTeXt.sublime-syntax in Packages/User/
+# Then: View → Syntax → Open All with Current Extension as... → PreTeXt
+
+name: PreTeXt
+scope: source.ptx
+extensions:
+  - ptx
+first-line: '(<?xml|<!DOCTYPE pretext)'
+hidden_file: true
+
+contexts:
+  main:
+    - include: xml.prolog
+    - include: xml.doctype
+    - include: xml.tag
+    - include: xml.cdata
+    - include: xml.comment
+    - include: xml.entity
+    - include: xml.pcdata
+
+  xml.prolog:
+    - match: '<\?xml\b'
+      captures:
+        0: punctuation.definition.tag.begin.xml
+      push:
+        - meta_scope: meta.tag.preprocessor.xml
+        - match: '\?>'
+          scope: punctuation.definition.tag.end.xml
+          pop: true
+        - include: tag-attributes
+
+  xml.doctype:
+    - match: '<!DOCTYPE\b'
+      scope: keyword.other.doctype.xml
+      push:
+        - meta_scope: meta.tag.sgml.doctype.xml
+        - match: '>'
+          scope: punctuation.definition.tag.end.xml
+          pop: true
+        - match: '"[^"]*"'
+          scope: string.quoted.double.doctype.identifiers.xml
+
+  xml.tag:
+    - match: '<\s*/\s*'
+      captures:
+        0: punctuation.definition.tag.begin.xml
+      push:
+        - meta_scope: meta.tag.xml
+        - meta_content_scope: meta.tag.string.xml
+        - match: '\w+'
+          scope: entity.name.tag.xml
+        - match: '\s*/?\s*>'
+          scope: punctuation.definition.tag.end.xml
+          pop: true
+
+    - match: '<\s*(?!/?\s*[\w:]+|!|\?|/)'
+      captures:
+        0: invalid.illegal.bad-angle-bracket.xml
+
+    - match: '<\s*([\w:]+)'
+      captures:
+        0: punctuation.definition.tag.begin.xml
+        1: entity.name.tag.xml
+      push:
+        - meta_scope: meta.tag.xml
+        - match: '\s*/?\s*>'
+          scope: punctuation.definition.tag.end.xml
+          pop: true
+        - match: '\s*/'
+          scope: punctuation.definition.tag.end.xml
+          pop: true
+        - match: '(?<=<)(section|chapter|part|book|document|appendix|exercise|exercises|solution|solutions|glossary|index|preface|abstract|acknowledgements|contributors|cover|titlepage|toc|bibliography|colophon|dedication|errata|foreword|half-title|imprint|inside-front-cover|inside-back-cover|titlepage|titlepages|backmatter|frontmatter|body|content|sidebar|p|li|ol|ul|dl|dt|dd|table|figure|video|audio|iframe|hr|br|span|em|strong|i|b|code|pre|sub|sup|q|cite|abbr|time|mark|small|big|blockquote|div|center|math|me|md|mrow|mfrac|msqrt|mroot|msup|msub|mn|mi|mo|mtext|mtable|mtr|td|th|matrix|pmatrix|bmatrix|vmatrix|cases|align|aligned|gather|gathered|multline|split|equation|displaymath|array|binom|frac|sqrt|sum|prod|int|lim|infty|partial|nabla|cdot|times|oplus|otimes|cup|cap|setminus|subset|supset|subseteq|supseteq|in|notin|forall|exists|nexists|implies|iff|land|lor|lnot|neg|vdash|models|equiv|sim|approx|cong|prec\succ|preceq|succeq|ll|gg|leq|geq|neq|pm|mp|pmatrix|bmatrix|vmatrix|nonterminal|terminal|produces|startsymbol|element|start|about|tag|idx|term|see|seealso|xref|role|label|source|alt|width|height|href|class|id|style|name|number|type|ref|xml:id|data-type|data-role|data-label|data-source|data-alt|data-width|data-height|data-href|data-class|data-id|data-style|data-name|data-number|data-type|data-ref)(\s*=\s*)'
+          captures:
+            1: entity.other.attribute-name.support.ptx
+            3: punctuation.definition.string.xml
+          push: tag-attribute-value
+        - include: tag-attributes
+
+  xml.cdata:
+    - match: '<!\[CDATA\['
+      captures:
+        0: punctuation.definition.string.begin.xml
+      push:
+        - meta_scope: string.unquoted.cdata.xml
+        - match: '\]\]>'
+          scope: punctuation.definition.string.end.xml
+          pop: true
+
+  xml.comment:
+    - match: '<!--'
+      captures:
+        0: punctuation.definition.comment.begin.xml
+      push:
+        - meta_scope: comment.block.xml
+        - match: '-->'
+          scope: punctuation.definition.comment.end.xml
+          pop: true
+
+  xml.entity:
+    - match: '&([a-zA-Z_:][a-zA-Z0-9_:.]*|#[0-9]+|#x[0-9a-fA-F]+);'
+      scope: constant.character.entity.xml
+
+  xml.pcdata:
+    - match: '(?=<)(?!</|(?:\?xml|<!))'
+      push:
+        - meta_scope: meta.tag.string.xml
+        - meta_content_scope: meta.tag.ptx
+        - match: '(?=<)'
+          pop: true
+
+  tag-attributes:
+    - match: '(\s+)(xml:id)(\s*=\s*)'
+      captures:
+        1: punctuation.whitespace.xml
+        2: entity.other.attribute-name.id.xml
+        3: punctuation.definition.string.xml
+      push: tag-attribute-value
+
+    - match: '(\s+)(ref)(\s*=\s*)'
+      captures:
+        1: punctuation.whitespace.xml
+        2: entity.other.attribute-name.reference.xml
+        3: punctuation.definition.string.xml
+      push: tag-attribute-value
+
+    - match: '(\s+)([a-zA-Z_][a-zA-Z0-9_:-]*)(\s*=\s*)'
+      captures:
+        1: punctuation.whitespace.xml
+        2: entity.other.attribute-name.xml
+        3: punctuation.definition.string.xml
+      push: tag-attribute-value
+
+    - match: '(\s+)([a-zA-Z_][a-zA-Z0-9_:-]*)'
+      captures:
+        2: entity.other.attribute-name.xml
+
+  tag-attribute-value:
+    - match: '"([^"]*)"'
+      scope: string.quoted.double.xml
+      pop: true
+    - match: "'([^']*)'"
+      scope: string.quoted.single.xml
+      pop: true

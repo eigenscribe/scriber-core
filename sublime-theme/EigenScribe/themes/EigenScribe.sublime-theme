@@ -1,0 +1,387 @@
+{
+  // EigenScribe UI Theme for Sublime Text 4
+  // ==========================================
+  // Glassmorphic dark theme based on the There and Back Again PreTeXt project.
+  // Cyan-to-purple gradient accents, Aclonica font for UI elements, Fira Code for editor.
+
+  "settings": {
+    // ---- Global colors ----
+    "theme_color": "#14b5ff",
+    "caret_style": "block",
+
+    // ---- Fonts ----
+    "font_face": "Fira Code",
+    "font_size": 14,
+    "ui_font_face": "Aclonica",
+    "ui_font_size": 14,
+
+    // ---- Backgrounds ----
+    "background": "#0d1117",
+    "panel_background": "#161b22",
+    "sidebar_background": "#161b22",
+    "tab_active_background": "#161b22",
+    "tab_inactive_background": "#0d1117",
+    "tab_hover_background": "rgba(20, 181, 255, 0.08)",
+
+    // ---- Foreground / text ----
+    "foreground": "#C5F8FF",
+    "tab_inactive_foreground": "#8b949e",
+    "tab_hover_foreground": "#C5F8FF",
+    "sidebar_foreground": "#C5F8FF",
+    "sidebar_tree_row_foreground": "#C5F8FF",
+
+    // ---- Accents ----
+    "accent": "#14b5ff",
+    "accent_foreground": "#ffffff",
+
+    // ---- Borders ----
+    "border": "rgba(255, 255, 255, 0.08)",
+    "panel_border": "rgba(20, 181, 255, 0.25)",
+    "sidebar_border": "rgba(255, 255, 255, 0.06)",
+
+    // ---- Sidebar / tree ----
+    "sidebar_tree_row_background": "transparent",
+    "sidebar_tree_row_selected": "rgba(20, 181, 255, 0.15)",
+    "sidebar_tree_row_hover": "rgba(255, 255, 255, 0.05)",
+    "sidebar_tree_row_selected_foreground": "#14b5ff",
+    "sidebar_tree_row_hover_foreground": "#C5F8FF",
+
+    // ---- Tabs ----
+    "tab_font_style": "normal",
+    "tab_close_button_color": "#8b949e",
+    "tab_close_button_color_hover": "#ff75c3",
+
+    // ---- Status bar ----
+    "status_bar_background": "#161b22",
+    "status_bar_foreground": "#8b949e",
+    "status_bar_accent": "#14b5ff",
+
+    // ---- Find / replace panel ----
+    "find_highlight_background": "rgba(254, 181, 56, 0.30)",
+    "find_highlight_foreground": "#0d1117",
+
+    // ---- Minimap ----
+    "minimap_border_color": "rgba(20, 181, 255, 0.15)",
+
+    // ---- Scrollbar ----
+    "scrollbar_color": "rgba(20, 181, 255, 0.30)",
+    "scrollbar_color_hover": "rgba(0, 232, 255, 0.50)",
+    "scrollbar_color_drag": "rgba(0, 232, 255, 0.60)",
+    "scrollbar_page_control_color": "rgba(255, 255, 255, 0.04)",
+    "scrolltrack_color": "rgba(0, 0, 0, 0.3)",
+
+    // ---- Popup / autocomplete ----
+    "auto_completeBG": "#161b22",
+    "auto_complete_forground": "#C5F8FF",
+    "auto_complete_highlightBG": "rgba(20, 181, 255, 0.20)",
+    "auto_complete_highlight_foreground": "#00e8ff",
+
+    // ---- Tooltip ----
+    "balloon_border_color": "rgba(20, 181, 255, 0.35)",
+    "balloon_color": "#161b22",
+    "balloon_color_highlight": "rgba(20, 181, 255, 0.15)",
+    "balloon_color_error": "rgba(255, 64, 161, 0.20)",
+
+    // ---- Bracket highlight ----
+    "bracket_foreground": "#14b5ff",
+    "bracket_contents_foreground": "#14b5ff",
+    "bracket_contents_options": "match_adjacent",
+
+    // ---- Line numbers / gutter ----
+    "line_num_foreground": "#8b949e",
+    "line_num_overlay_foreground": "#14b5ff",
+    "line_num_bg": "#0d1117",
+
+    // ---- Fold markers ----
+    "fold_color": "rgba(20, 181, 255, 0.30)",
+    "fold_marker_color": "rgba(20, 181, 255, 0.40)",
+    "fold_marker_color_error": "#ff75c3",
+
+    // ---- Command palette ----
+    "command_paletteBG": "#161b22",
+    "command_palette_border": "rgba(20, 181, 255, 0.35)",
+    "command_palette_fg": "#C5F8FF",
+    "command_palette_match": "#00e8ff",
+
+    // ---- Quick panel ----
+    "quick_panel_bg": "#161b22",
+    "quick_panel_fg": "#C5F8FF",
+    "quick_panel_match": "#00e8ff",
+    "quick_panel_scrubber_bg": "rgba(20, 181, 255, 0.15)",
+
+    // ---- Dialog ----
+    "sheet_titleBG": "#161b22",
+    "sheet_title_border": "rgba(20, 181, 255, 0.35)",
+    "sheet_title_fg": "#C5F8FF",
+
+    // ---- Input ----
+    "inputBG": "#1a1d24",
+    "input_border": "rgba(20, 181, 255, 0.25)",
+    "input_fg": "#C5F8FF",
+
+    // ---- Button ----
+    "button_face": "linear-gradient(135deg, rgba(0, 232, 255, 0.12), rgba(121, 82, 245, 0.15))",
+    "button_border": "rgba(20, 181, 255, 0.35)",
+    "button_face_hover": "linear-gradient(135deg, rgba(0, 232, 255, 0.20), rgba(121, 82, 245, 0.25))",
+    "button_border_hover": "rgba(0, 232, 255, 0.60)",
+    "button_fg": "#C5F8FF",
+
+    // ---- Checkbox / radio ----
+    "checkbox_checked": "#14b5ff",
+    "checkbox_border": "rgba(20, 181, 255, 0.35)",
+
+    // ---- Slider ----
+    "slider_channel": "rgba(255, 255, 255, 0.08)",
+    "slider_channel_highlight": "rgba(20, 181, 255, 0.30)",
+    "slider_pip": "#14b5ff",
+
+    // ---- Tree / file icon colors ----
+    "tree_row_icon_color": "#14b5ff",
+    "tree_row_icon_color_selected": "#00e8ff",
+
+    // ---- Git / diff colors ----
+    "git_modified": "#feb538",
+    "git_added": "#38fe52",
+    "git_deleted": "#ff75c3",
+    "git_renamed": "#9b7dff",
+    "git_untracked": "#8b949e",
+    "git_ignored": "#4c739c",
+
+    // ---- PreTeXt / XML specific ----
+    "xml_tag": "#14b5ff",
+    "xml_attribute": "#6f78fa",
+    "xml_string": "#ff75c3",
+    "xml_comment": "#4c739c",
+    "xml_doctype": "#38fe52"
+  },
+
+  // ---- Glassmorphic panel overrides ----
+  "rules": [
+    // Sidebar glass panel
+    {
+      "attributes": {
+        "class": "sidebar_container",
+        "color": "#C5F8FF",
+        "content_margin": 4
+      },
+      "children": [
+        {
+          "class": "sidebar_tree",
+          "content_margin": [8, 4, 8, 8]
+        }
+      ]
+    },
+
+    // Sidebar row hover effect
+    {
+      "class": "tree_row",
+      "attributes": {
+        "color": "#C5F8FF",
+        "content_margin": [4, 8, 4, 8]
+      },
+      "parents": [
+        {
+          "class": "sidebar_tree"
+        }
+      ]
+    },
+
+    // Sidebar row selected
+    {
+      "class": "tree_row selected",
+      "attributes": {
+        "color": "#14b5ff",
+        "bright_bold": true
+      }
+    },
+
+    // Tab styling
+    {
+      "class": "tab_control",
+      "attributes": {
+        "color": "#8b949e",
+        "content_margin": [6, 16, 6, 16]
+      }
+    },
+    {
+      "class": "tab_control active",
+      "attributes": {
+        "color": "#C5F8FF",
+        "bright": true
+      }
+    },
+
+    // Status bar
+    {
+      "class": "status_bar",
+      "attributes": {
+        "color": "#8b949e",
+        "content_margin": [4, 12, 4, 12]
+      }
+    },
+
+    // Panel (output/console)
+    {
+      "class": "panel",
+      "attributes": {
+        "face": "#161b22",
+        "content_margin": [8, 12, 8, 12]
+      }
+    },
+
+    // Find panel
+    {
+      "class": "find",
+      "attributes": {
+        "face": "#161b22",
+        "content_margin": [6, 10, 6, 10]
+      }
+    },
+
+    // Button styling with glassmorphic gradient
+    {
+      "class": "button",
+      "attributes": {
+        "color": "#C5F8FF",
+        "content_margin": [6, 16, 6, 16],
+        "font.face": "Aclonica"
+      }
+    },
+    {
+      "class": "button hover",
+      "attributes": {
+        "color": "#00e8ff",
+        "bright": true
+      }
+    },
+
+    // Input fields
+    {
+      "class": "input",
+      "attributes": {
+        "face": "#1a1d24",
+        "content_margin": [4, 8, 4, 8]
+      }
+    },
+
+    // Autocomplete popup
+    {
+      "class": "auto_complete",
+      "attributes": {
+        "face": "#161b22",
+        "content_margin": [4, 8, 4, 8]
+      }
+    },
+    {
+      "class": "auto_complete_label",
+      "attributes": {
+        "color": "#C5F8FF"
+      }
+    },
+    {
+      "class": "auto_complete_label highlight",
+      "attributes": {
+        "color": "#00e8ff",
+        "bright_bold": true
+      }
+    },
+
+    // Command palette
+    {
+      "class": "command_palette",
+      "attributes": {
+        "face": "#161b22",
+        "content_margin": [8, 12, 8, 12]
+      }
+    },
+
+    // Quick panel
+    {
+      "class": "quick_panel",
+      "attributes": {
+        "face": "#161b22",
+        "content_margin": [6, 10, 6, 10]
+      }
+    },
+    {
+      "class": "quick_panel_label",
+      "attributes": {
+        "color": "#C5F8FF"
+      }
+    },
+    {
+      "class": "quick_panel_label highlight",
+      "attributes": {
+        "color": "#00e8ff",
+        "bright_bold": true
+      }
+    },
+
+    // Line numbers
+    {
+      "class": "line_num",
+      "attributes": {
+        "color": "#8b949e",
+        "content_margin": [0, 8, 0, 8]
+      }
+    },
+    {
+      "class": "line_num overlay",
+      "attributes": {
+        "color": "#14b5ff"
+      }
+    },
+
+    // Fold markers
+    {
+      "class": "fold_marker",
+      "attributes": {
+        "color": "rgba(20, 181, 255, 0.40)"
+      }
+    },
+
+    // Git status indicators in sidebar
+    {
+      "class": "git_modified",
+      "attributes": {
+        "color": "#feb538"
+      }
+    },
+    {
+      "class": "git_added",
+      "attributes": {
+        "color": "#38fe52"
+      }
+    },
+    {
+      "class": "git_deleted",
+      "attributes": {
+        "color": "#ff75c3"
+      }
+    },
+    {
+      "class": "git_untracked",
+      "attributes": {
+        "color": "#8b949e"
+      }
+    },
+
+    // Scrollbar styling
+    {
+      "class": "scroll_area",
+      "attributes": {
+        "layer0.tint": "#0d1117",
+        "layer0.opacity": 0.5
+      }
+    },
+
+    // Title bar
+    {
+      "class": "titlebar",
+      "attributes": {
+        "color": "#8b949e",
+        "face": "#161b22"
+      }
+    }
+  ]
+}

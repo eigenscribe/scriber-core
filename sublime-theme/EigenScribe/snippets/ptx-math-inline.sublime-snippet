@@ -1,0 +1,6 @@
+<snippet>
+  <content><![CDATA[<m>${1:expression}</m>]]></content>
+  <tabTrigger>ptxm</tabTrigger>
+  <scope>text.xml, source.ptx</scope>
+  <description>PreTeXt Inline Math</description>
+</snippet>

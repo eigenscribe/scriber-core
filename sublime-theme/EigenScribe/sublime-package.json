@@ -1,0 +1,26 @@
+{
+  "contributions": {
+    "color_schemes": [
+      {
+        "path": "color-schemes/EigenScribe.sublime-color-scheme",
+        "label": "EigenScribe"
+      }
+    ],
+    "themes": [
+      {
+        "path": "themes/EigenScribe.sublime-theme",
+        "label": "EigenScribe"
+      }
+    ],
+    "syntaxes": [
+      {
+        "path": "syntaxes/PreTeXt.sublime-syntax",
+        "scope": "source.ptx",
+        "first_line": "(<?xml|<!DOCTYPE pretext)",
+        "extensions": [
+          "ptx"
+        ]
+      }
+    ]
+  }
+}
