@@ -65,12 +65,15 @@ __all__: list[str] = [
 # Eigenscribe brand palette mapped to ANSI 256-color indices
 # Blues (primary), Purples (secondary), Pinks (accents), Greens (success), Oranges (warnings)
 EIGENSCRIBE_PALETTE: Final[dict[str, int]] = {
-    # --- Blues (Primary domain) ---
+    # --- Blues & Cosmic Foundations (Primary domain) ---
+    "eigen_cosmic_void": 16,     # Deep cosmic void black (#000000)
+    "eigen_cosmic_navy": 17,     # Deep cosmic navy (#0a0f1f)
     "eigen_blue_dark": 25,       # Deep navy blue
     "eigen_blue": 27,            # Core Eigenscribe blue
     "eigen_blue_bright": 33,     # Bright electric blue
     "eigen_cyan": 51,            # Electric cyan for info
     "eigen_cyan_light": 81,      # Light cyan accent
+    "eigen_sephirah_cyan": 123,  # Luminous Sephirah ice-cyan (#c8f8ff)
 
     # --- Purples (Secondary domain) ---
     "eigen_purple_dark": 55,     # Deep violet

@@ -16,6 +16,7 @@ Welcome to the canonical environment index for autonomous development agents. Th
 │   ├── notebooks/
 │   │   └── visuals-boilerplate.ipynb    # Visualizations, NetworkX topologies & color palettes template
 │   └── python/
+│       ├── cli_style_boilerplate.py     # ANSI 256-color terminal palette and message styling
 │       ├── gold-standard-boilerplate.py # Gold standard numeric integration script template
 │       └── visualization_boilerplate.py # Generalizable visualization bootstrap for Matplotlib/Pyplot/Seaborn
 ├── sublime-theme/
@@ -24,7 +25,9 @@ Welcome to the canonical environment index for autonomous development agents. Th
 │   ├── install.ps1            # PowerShell installer (Windows)
 │   └── README.md              # Package documentation, installation, and configuration guide
 ├── .junie/
-│   └── AGENTS.md              # Canonical agent guidelines & workspace directives
+│   ├── AGENTS.md              # Canonical agent guidelines & workspace directives
+│   └── skills/
+│       └── cosmic-visual-styling/       # Workspace skill for Sephirah / cosmic visual themes & styling
 ├── pyproject.toml             # uv environment dependencies and locks
 └── README.md                  # Master onboarding index (This file)
 ```

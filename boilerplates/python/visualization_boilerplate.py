@@ -45,11 +45,25 @@ COLOR_SURFACE_ELEVATED: Final[str] = "#21262d"
 COLOR_SURFACE_OVERLAY: Final[str] = "rgba(22, 27, 34, 0.75)"
 COLOR_GRAPH_BG: Final[str] = "rgba(3, 7, 18, 0.85)"
 
+# Cosmic Deep Radial Foundations
+COLOR_BG_COSMIC_CENTER: Final[str] = "#0a0f1f"
+COLOR_BG_COSMIC: Final[str] = "#050812"
+COLOR_BG_COSMIC_VOID: Final[str] = "#000000"
+
 COLOR_TEXT: Final[str] = "#f0f6fc"
 COLOR_TEXT_BRIGHT: Final[str] = "#ffffff"
 COLOR_TEXT_MUTED: Final[str] = "#8b949e"
 COLOR_TEXT_SUBTLE: Final[str] = "#6e7681"
-COLOR_TEXT_ACCENT: Final[str] = "#c5f8ff"
+COLOR_TEXT_ACCENT: Final[str] = "#c8f8ff"
+COLOR_TEXT_SEPHIRAH: Final[str] = "#c8f8ff"
+
+# Glassmorphic Overlays & Sephirah Accents
+COLOR_SEPHIRAH_CYAN: Final[str] = "#c8f8ff"
+COLOR_SEPHIRAH_BG: Final[str] = "rgba(0, 232, 255, 0.08)"
+COLOR_SEPHIRAH_GLOW: Final[str] = "rgba(0, 232, 255, 0.25)"
+COLOR_SEPHIRAH_BORDER: Final[str] = "rgba(255, 255, 255, 0.08)"
+COLOR_TOOLTIP_BG: Final[str] = "rgba(0, 0, 0, 0.7)"
+COLOR_TOOLTIP_BORDER: Final[str] = "rgba(255, 255, 255, 0.1)"
 
 COLOR_BORDER: Final[str] = "#30363d"
 COLOR_GRID: Final[str] = "#21262d"
@@ -78,18 +92,28 @@ COLOR_PERNARY_DARK: Final[str] = "#be185d"
 
 # Full token map for Scriber Labs projects
 THEME_TOKENS: Final[Dict[str, str]] = {
-    # Surfaces
+    # Surfaces & Cosmic Foundations
     "bg": COLOR_BG,
     "surface": COLOR_SURFACE,
     "surface_elevated": COLOR_SURFACE_ELEVATED,
+    "bg_cosmic_center": COLOR_BG_COSMIC_CENTER,
+    "bg_cosmic": COLOR_BG_COSMIC,
+    "bg_cosmic_void": COLOR_BG_COSMIC_VOID,
     "border": COLOR_BORDER,
     "grid": COLOR_GRID,
-    # Typography
+    # Typography & Overlays
     "text": COLOR_TEXT,
     "text_bright": COLOR_TEXT_BRIGHT,
     "text_muted": COLOR_TEXT_MUTED,
     "text_subtle": COLOR_TEXT_SUBTLE,
     "text_accent": COLOR_TEXT_ACCENT,
+    "text_sephirah": COLOR_TEXT_SEPHIRAH,
+    "sephirah_cyan": COLOR_SEPHIRAH_CYAN,
+    "sephirah_bg": COLOR_SEPHIRAH_BG,
+    "sephirah_glow": COLOR_SEPHIRAH_GLOW,
+    "sephirah_border": COLOR_SEPHIRAH_BORDER,
+    "tooltip_bg": COLOR_TOOLTIP_BG,
+    "tooltip_border": COLOR_TOOLTIP_BORDER,
     "math": COLOR_MATH,
     # Semantic Spectrum
     "primary_light": COLOR_PRIMARY_LIGHT,
@@ -206,6 +230,18 @@ HEATMAP_CYCLIC_PHASE: Final[LinearSegmentedColormap] = create_eigenscribe_colorm
     ["#0070eb", "#0a95eb", "#14b5ff", "#00f0ff", "#a855f7", "#5e17eb", "#0070eb"],
 )
 
+# Heatmap style 5: Deep Cosmic to Sephirah Ice-Cyan (Luminous Ethereal Gradient)
+HEATMAP_COSMIC_SEPHIRAH: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
+    "eigenscribe_cosmic_sephirah",
+    [COLOR_BG_COSMIC_VOID, COLOR_BG_COSMIC, COLOR_PRIMARY_DARK, COLOR_PRIMARY, COLOR_PRIMARY_LIGHT, COLOR_SEPHIRAH_CYAN],
+)
+
+# Heatmap style 6: Cosmic Void to Electric Cyan
+HEATMAP_COSMIC_VOID_TO_CYAN: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
+    "eigenscribe_cosmic_void_to_cyan",
+    [COLOR_BG_COSMIC, COLOR_PRIMARY_DARK, COLOR_PRIMARY_LIGHT, COLOR_SEPHIRAH_CYAN],
+)
+
 # Plotly Format Cyclic Phase Colorscale (for Dash / Plotly heatmaps & circle graphs)
 PLOTLY_CYCLIC_PHASE_COLORSCALE: Final[List[List[Any]]] = [
     [0.0, "#0070eb"],
@@ -224,6 +260,8 @@ SEMANTIC_COLORMAPS: Final[Dict[str, LinearSegmentedColormap]] = {
         [COLOR_PRIMARY_LIGHT, COLOR_PRIMARY, COLOR_SECONDARY, COLOR_TERTIARY],
     ),
     "Cyclic Phase": HEATMAP_CYCLIC_PHASE,
+    "Cosmic Sephirah": HEATMAP_COSMIC_SEPHIRAH,
+    "Cosmic Void to Cyan": HEATMAP_COSMIC_VOID_TO_CYAN,
     "Order Parameter [0, 1]": create_eigenscribe_colormap(
         "eigenscribe_order_param",
         [COLOR_SURFACE, COLOR_PRIMARY, COLOR_PRIMARY_LIGHT],
@@ -248,6 +286,8 @@ EIGENSCRIBE_COLORMAPS: Final[Dict[str, LinearSegmentedColormap]] = {
     "light_blue_to_dark_blue": HEATMAP_LIGHT_BLUE_TO_DARK_BLUE,
     "light_green_to_dark_green": HEATMAP_LIGHT_GREEN_TO_DARK_GREEN,
     "cyclic_phase": HEATMAP_CYCLIC_PHASE,
+    "cosmic_sephirah": HEATMAP_COSMIC_SEPHIRAH,
+    "cosmic_void_to_cyan": HEATMAP_COSMIC_VOID_TO_CYAN,
     **{k.lower().split()[0]: v for k, v in SEMANTIC_COLORMAPS.items()},
 }
 
@@ -266,24 +306,33 @@ def register_colormaps() -> None:
             mpl.colormaps.register(cmap_obj, name=alias_name, force=False)
 
 
-def get_eigenscribe_rcparams() -> Dict[str, Any]:
+def get_eigenscribe_rcparams(cosmic: bool = False) -> Dict[str, Any]:
     """Generate the canonical matplotlib rcParams dictionary for The Scriber Experience.
+
+    Parameters
+    ----------
+    cosmic : bool, default=False
+        If True, applies deep cosmic void foundations (#050812 / #0a0f1f) instead
+        of standard dark slate (#0d1117 / #161b22).
 
     Returns
     -------
     Dict[str, Any]
         Dictionary of rcParams properties configuring figure, axes, grid, fonts, and colors.
     """
+    fig_bg = COLOR_BG_COSMIC if cosmic else COLOR_BG
+    axes_bg = COLOR_BG_COSMIC_CENTER if cosmic else COLOR_SURFACE
+
     return {
         # Style & Foundations
-        "figure.facecolor": COLOR_BG,
-        "figure.edgecolor": COLOR_BG,
+        "figure.facecolor": fig_bg,
+        "figure.edgecolor": fig_bg,
         "figure.dpi": 100,
-        "savefig.facecolor": COLOR_BG,
-        "savefig.edgecolor": COLOR_BG,
+        "savefig.facecolor": fig_bg,
+        "savefig.edgecolor": fig_bg,
         
         # Axes & Frames
-        "axes.facecolor": COLOR_SURFACE,
+        "axes.facecolor": axes_bg,
         "axes.edgecolor": COLOR_BORDER,
         "axes.linewidth": 1.0,
         "axes.labelcolor": COLOR_TEXT,
@@ -318,7 +367,7 @@ def get_eigenscribe_rcparams() -> Dict[str, Any]:
         "mathtext.fontset": "cm",
         
         # Legends
-        "legend.facecolor": COLOR_SURFACE,
+        "legend.facecolor": axes_bg,
         "legend.edgecolor": COLOR_BORDER,
         "legend.labelcolor": COLOR_TEXT,
         "legend.fontsize": 9.0,
@@ -335,7 +384,8 @@ def get_eigenscribe_rcparams() -> Dict[str, Any]:
 
 def apply_theme(
     seaborn: bool = True, 
-    custom_rc: Optional[Mapping[str, Any]] = None
+    custom_rc: Optional[Mapping[str, Any]] = None,
+    cosmic: bool = False,
 ) -> None:
     """Bootstrap and activate the Eigenscribe dark high-contrast visual theme.
 
@@ -348,9 +398,11 @@ def apply_theme(
         Whether to configure Seaborn theme settings if Seaborn is installed.
     custom_rc : Optional[Mapping[str, Any]], optional
         Optional dictionary of additional or overriding rcParams.
+    cosmic : bool, default=False
+        If True, applies deep cosmic void styling with luminous Sephirah accents.
     """
     register_colormaps()
-    rc_params = get_eigenscribe_rcparams()
+    rc_params = get_eigenscribe_rcparams(cosmic=cosmic)
     
     if custom_rc:
         rc_params.update(custom_rc)
@@ -364,6 +416,25 @@ def apply_theme(
             rc=rc_params,
             palette=HIGH_CONTRAST_CYCLE
         )
+
+
+def apply_cosmic_theme(
+    seaborn: bool = True, 
+    custom_rc: Optional[Mapping[str, Any]] = None,
+) -> None:
+    """Bootstrap and activate the Eigenscribe deep cosmic visual theme with Sephirah styling.
+
+    Applies deep cosmic void (#050812 / #0a0f1f) background rcParams to Matplotlib/Pyplot
+    and configures Seaborn context and palettes with luminous Sephirah accents.
+
+    Parameters
+    ----------
+    seaborn : bool, default=True
+        Whether to configure Seaborn theme settings if Seaborn is installed.
+    custom_rc : Optional[Mapping[str, Any]], optional
+        Optional dictionary of additional or overriding rcParams.
+    """
+    apply_theme(seaborn=seaborn, custom_rc=custom_rc, cosmic=True)
 
 
 def plot_eigenscribe_heatmap(
@@ -517,6 +588,8 @@ def _resolve_heatmap_colormap(style: str) -> Colormap:
         "light_blue_to_dark_blue": HEATMAP_LIGHT_BLUE_TO_DARK_BLUE,
         "light_green_to_dark_green": HEATMAP_LIGHT_GREEN_TO_DARK_GREEN,
         "cyclic_phase": HEATMAP_CYCLIC_PHASE,
+        "cosmic_sephirah": HEATMAP_COSMIC_SEPHIRAH,
+        "cosmic_void_to_cyan": HEATMAP_COSMIC_VOID_TO_CYAN,
     }
     
     if style in style_map:
@@ -528,7 +601,7 @@ def _resolve_heatmap_colormap(style: str) -> Colormap:
     else:
         raise ValueError(
             f"Unknown heatmap style '{style}'. Choose from 'pink_to_blue', "
-            f"'light_blue_to_dark_blue', 'light_green_to_dark_green', 'cyclic_phase', or registered colormaps."
+            f"'light_blue_to_dark_blue', 'light_green_to_dark_green', 'cyclic_phase', 'cosmic_sephirah', 'cosmic_void_to_cyan', or registered colormaps."
         )
 
 
@@ -552,6 +625,13 @@ def run_smoke_test() -> bool:
     assert "eigenscribe_light_blue_to_dark_blue" in mpl.colormaps, "Colormap registration failed."
     assert "eigenscribe_light_green_to_dark_green" in mpl.colormaps, "Colormap registration failed."
     assert "eigenscribe_cyclic_phase" in mpl.colormaps, "Cyclic phase colormap registration failed."
+    assert "eigenscribe_cosmic_sephirah" in mpl.colormaps, "Cosmic Sephirah colormap registration failed."
+    assert "eigenscribe_cosmic_void_to_cyan" in mpl.colormaps, "Cosmic Void to Cyan colormap registration failed."
+    
+    # Verify cosmic theme mode
+    apply_cosmic_theme()
+    assert plt.rcParams["figure.facecolor"] == COLOR_BG_COSMIC, "Cosmic figure facecolor mismatch."
+    assert plt.rcParams["axes.facecolor"] == COLOR_BG_COSMIC_CENTER, "Cosmic axes facecolor mismatch."
     
     # 2. Multi-curve line plot contrast & array validation
     x = np.linspace(0, 10, 100)
@@ -582,7 +662,7 @@ def run_smoke_test() -> bool:
     )
     
     # Test remaining colormaps without error
-    for style_name in ["light_blue_to_dark_blue", "light_green_to_dark_green", "cyclic_phase"]:
+    for style_name in ["light_blue_to_dark_blue", "light_green_to_dark_green", "cyclic_phase", "cosmic_sephirah", "cosmic_void_to_cyan"]:
         fig_sub, ax_sub = plt.subplots(figsize=(4, 4))
         plot_eigenscribe_heatmap(matrix_data, style=style_name, ax=ax_sub, title=style_name)
         plt.close(fig_sub)

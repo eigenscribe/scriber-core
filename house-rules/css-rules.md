@@ -34,8 +34,8 @@ Following the Eigenscribe architectural standard (*"What exists → what you're 
      - **Pernary Vibrant Pink / Magenta (`#ec4899` / `#ff40a1`):** Special modes, accents, and producer overrides.
 3. **Golden Ratio Scaling ($\phi \approx 1.618$):**
    - Applied for typography scale steps, component proportions, and transition intervals (e.g., `61.8%` gradient stops, `1.618rem` rhythmic spacing) when it reinforces visual balance without sacrificing readability or mobile responsiveness.
-4. **The Scriber Glassmorphism Baseline:**
-   - Dark mode first (`#0d1117` / `#161b22`), layered with `rgba(0, 0, 0, 0.5)` to `rgba(22, 27, 34, 0.75)` frosted glass backdrops (`backdrop-filter: blur(12px)`), crisp light borders (`rgba(255, 255, 255, 0.1)`), and colored specular glow highlights.
+4. **The Scriber Glassmorphism Baseline & Cosmic Void Palette:**
+   - Dark mode first (`#0d1117` / `#161b22`), deep cosmic void radial gradients (`radial-gradient(circle at center, #0a0f1f 0%, #050812 60%, #000000 100%)`), layered with `rgba(0, 0, 0, 0.5)` to `rgba(22, 27, 34, 0.75)` frosted glass backdrops (`backdrop-filter: blur(12px)`), crisp light borders (`rgba(255, 255, 255, 0.1)`), and luminous Sephirah ice-cyan specular highlights (`#c8f8ff`, `rgba(0, 232, 255, 0.25)` glow).
 
 ---
 
@@ -44,8 +44,10 @@ Following the Eigenscribe architectural standard (*"What exists → what you're 
 ### Layer 1: CSS Custom Properties & Tokens
 - **Color System:**
   - Dark surface foundations (`--color-bg: #0d1117`, `--color-surface: #161b22`, `--color-surface-elevated: #21262d`).
-  - Text hierarchy (`--color-text: #f0f6fc`, `--color-text-muted: #8b949e`, `--color-text-accent: #c5f8ff`).
-  - Vibrant signatures & multi-stop gradients (`--gradient-eigenscribe`, `--gradient-multi`, `--gradient-cyan-to-blue`, `--gradient-blue-to-purple`).
+  - Deep cosmic void radial foundations (`--color-bg-cosmic-center: #0a0f1f`, `--color-bg-cosmic: #050812`, `--color-bg-cosmic-void: #000000`, `--gradient-cosmic-radial`).
+  - Text hierarchy (`--color-text: #f0f6fc`, `--color-text-muted: #8b949e`, `--color-text-accent: #c8f8ff`, `--color-sephirah-cyan: #c8f8ff`).
+  - Luminous Sephirah and tooltip tokens (`--color-sephirah-bg: rgba(0, 232, 255, 0.08)`, `--color-sephirah-glow: rgba(0, 232, 255, 0.25)`, `--color-tooltip-bg: rgba(0, 0, 0, 0.7)`).
+  - Vibrant signatures & multi-stop gradients (`--gradient-eigenscribe`, `--gradient-multi`, `--gradient-cyan-to-blue`, `--gradient-blue-to-purple`, `--gradient-cosmic-radial`).
 - **Typography Tokens:**
   - Display/Headings: `'Aclonica', sans-serif`
   - Body/Editorial: `'Merriweather', Georgia, serif`
@@ -75,8 +77,10 @@ Following the Eigenscribe architectural standard (*"What exists → what you're 
 - **Buttons (`.btn`, `.btn-primary`, `.btn-secondary`, `.btn-eigenscribe`, `.btn-glass`):**
   - Smooth multi-stop gradients with `background-size: 300% 100%`.
   - Specular hover translation (`transform: translateY(-2px)`), radiant box-shadow expansions, and distinct active press feedback.
-- **Glassmorphic Cards (`.card`, `.card-glass`, `.card-interactive`):**
-  - Subtle borders, frosted backgrounds, ambient glow borders on hover.
+- **Glassmorphic Cards & Tooltips (`.card`, `.card-glass`, `#tooltip`, `.tooltip-glass`):**
+  - Subtle borders, frosted backgrounds, ambient glow borders on hover, and high-z-index informational tooltips.
+- **✨ Sephirah Luminous Labels & Shimmer (`.sephirah-label`, `@keyframes shimmer`):**
+  - Center-projected coordinate markers with frosted backgrounds (`rgba(0, 232, 255, 0.08)`), multi-layer text shadows, ambient glow box-shadows, and 4s infinite shimmer breathing animations.
 - **Text Gradients & Animations (`.gradient-text`, `.gradient-text-animated`, `.gradient-shift`):**
   - Multi-stop color flows clipped with `-webkit-background-clip: text` and animated shifting keyframes.
 - **Forms & Inputs (`.input`, `.textarea`, `.select`):**
