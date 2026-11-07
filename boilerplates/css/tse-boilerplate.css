@@ -54,6 +54,46 @@
   --color-tooltip-bg: rgba(0, 0, 0, 0.75);
   --color-tooltip-border: rgba(255, 255, 255, 0.12);
 
+  /* Extended Translucent Glassmorphic & Specular Tokens (Obsidian Notes) */
+  --color-glass-indigo: rgba(99, 102, 241, 0.35);
+  --color-glass-purple: rgba(168, 85, 247, 0.25);
+  --color-glass-violet: rgba(121, 82, 245, 0.40);
+  --color-glass-cyan: rgba(0, 255, 238, 0.15);
+  --color-glass-cyan-glow: rgba(0, 232, 255, 0.40);
+  --color-glass-blue: rgba(56, 152, 255, 0.50);
+  --color-glass-sky: rgba(20, 165, 255, 0.60);
+
+  /* 4-Color Vibrant Accent Markers */
+  --color-accent-green: #38fe52;
+  --color-accent-blue: #3881fe;
+  --color-accent-magenta: #fe38e4;
+  --color-accent-amber: #feb538;
+
+  /* 5-Stop Sequential Ramps */
+  --ramp-green-0: #071a12;
+  --ramp-green-1: #064e3b;
+  --ramp-green-2: #059669;
+  --ramp-green-3: #31ff48;
+  --ramp-green-4: #b7ffcf;
+
+  --ramp-blue-0: #06152b;
+  --ramp-blue-1: #003b73;
+  --ramp-blue-2: #0070eb;
+  --ramp-blue-3: #00b8ff;
+  --ramp-blue-4: #b8f6ff;
+
+  --ramp-purple-0: #120a24;
+  --ramp-purple-1: #3b176e;
+  --ramp-purple-2: #7c3aed;
+  --ramp-purple-3: #a855f7;
+  --ramp-purple-4: #d8b4fe;
+
+  --ramp-magenta-0: #210817;
+  --ramp-magenta-1: #7c174f;
+  --ramp-magenta-2: #ad1457;
+  --ramp-magenta-3: #f72585;
+  --ramp-magenta-4: #ffb4f6;
+
   /* ----------------------------------------------------------------------------
    * 🌌 EIGEN Core Spectrum & Vibrant 10-Node Color Tokens
    * ---------------------------------------------------------------------------- */
@@ -112,8 +152,20 @@
   --color-math: #00f5db;
 
   /* ----------------------------------------------------------------------------
-   * 🔮 Signature Vibrant Multi-Stop Gradients
+   * 🔮 Signature Vibrant Multi-Stop Gradients & Obsidian Notes Sequences
    * ---------------------------------------------------------------------------- */
+  --gradient-0: linear-gradient(135deg, #00ffff 0%, #00e8ff 100%);
+  --gradient-1: linear-gradient(135deg, #00ffee 0%, #14b5ff 100%);
+  --gradient-2: linear-gradient(135deg, #00e8ff 0%, #0070eb 100%);
+  --gradient-3: linear-gradient(135deg, #03e8bd 0%, #03b4e8 50%, #0355e8 100%);
+  --gradient-4: linear-gradient(135deg, #00e8ff 0%, #14b5ff 25%, #0a95eb 50%, #0070eb 75%, #5e17eb 100%);
+  --gradient-5: linear-gradient(135deg, #00e8ff 0%, #3a98ff 25%, #0a95eb 50%, #7952f5 75%, #5e17eb 100%);
+  --gradient-6: linear-gradient(135deg, #00e8ff 0%, #14b5ff 25%, #5280ff 50%, #7952f5 75%, #ff66b3 100%);
+  --gradient-7: linear-gradient(135deg, #00e8ff 0%, #14b5ff 20%, #5280ff 40%, #7952f5 60%, #ff66b3 80%, #f78166 100%);
+  --gradient-8: linear-gradient(135deg, #4cc9f0 0%, #4361ee 25%, #3a0ca3 50%, #7209b7 75%, #f72585 100%);
+  --gradient-synthwave: linear-gradient(135deg, #f72585 0%, #7209b7 25%, #3a0ca3 50%, #4361ee 75%, #4cc9f0 100%);
+  --gradient-sunset-soft: linear-gradient(120deg, #ff6f91 0%, #ff9671 100%);
+
   --gradient-eigenscribe: linear-gradient(to right bottom, #00e8ff, #14b5ff, #5280ff, #7952f5);
   --gradient-multi: linear-gradient(135deg, #00f2ff, #3b82f6, #8b5cf6, #ec4899);
   --gradient-cyan-to-blue: linear-gradient(130deg, #00ffee, #0a95eb);

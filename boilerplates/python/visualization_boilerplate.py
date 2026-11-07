@@ -65,6 +65,32 @@ COLOR_COSMIC_BORDER: Final[str] = "rgba(255, 255, 255, 0.08)"
 COLOR_TOOLTIP_BG: Final[str] = "rgba(0, 0, 0, 0.75)"
 COLOR_TOOLTIP_BORDER: Final[str] = "rgba(255, 255, 255, 0.12)"
 
+# Extended Glassmorphic & Specular Tokens (from Obsidian design notes)
+COLOR_GLASS_INDIGO: Final[str] = "rgba(99, 102, 241, 0.35)"
+COLOR_GLASS_PURPLE: Final[str] = "rgba(168, 85, 247, 0.25)"
+COLOR_GLASS_VIOLET: Final[str] = "rgba(121, 82, 245, 0.40)"
+COLOR_GLASS_CYAN: Final[str] = "rgba(0, 255, 238, 0.15)"
+COLOR_GLASS_CYAN_GLOW: Final[str] = "rgba(0, 232, 255, 0.40)"
+COLOR_GLASS_BLUE: Final[str] = "rgba(56, 152, 255, 0.50)"
+COLOR_GLASS_SKY: Final[str] = "rgba(20, 165, 255, 0.60)"
+
+# Additional Vibrant & Accent Color Primitives
+COLOR_CYAN_PURE: Final[str] = "#00ffee"
+COLOR_BLUE_VIBRANT: Final[str] = "#0a95eb"
+COLOR_BLUE_AZURE: Final[str] = "#0596f0"
+COLOR_BLUE_SKY_LIGHT: Final[str] = "#60a5fa"
+COLOR_PURPLE_SOFT: Final[str] = "#a78bfa"
+COLOR_INDIGO_ACCENT: Final[str] = "#5280ff"
+COLOR_VIOLET_DEEP: Final[str] = "#5e17eb"
+COLOR_PINK_HOT: Final[str] = "#ff40a1"
+COLOR_ORANGE_BRIGHT: Final[str] = "#ff8855"
+COLOR_ORANGE_CORAL: Final[str] = "#ff783d"
+COLOR_AMBER_WARM: Final[str] = "#ff9d57"
+COLOR_ACCENT_GREEN: Final[str] = "#38fe52"
+COLOR_ACCENT_BLUE: Final[str] = "#3881fe"
+COLOR_ACCENT_MAGENTA: Final[str] = "#fe38e4"
+COLOR_ACCENT_AMBER: Final[str] = "#feb538"
+
 # Backwards compatibility aliases
 COLOR_SEPHIRAH_CYAN: Final[str] = COLOR_LUMINOUS_CYAN
 COLOR_SEPHIRAH_BG: Final[str] = COLOR_COSMIC_BG
@@ -243,7 +269,79 @@ THEME_TOKENS: Final[Dict[str, str]] = {
     "pernary_light": COLOR_PERNARY_LIGHT,
     "pernary": COLOR_PERNARY,
     "pernary_dark": COLOR_PERNARY_DARK,
+    # Extended Primitives & Accents (Obsidian Notes)
+    "cyan_pure": COLOR_CYAN_PURE,
+    "blue_vibrant": COLOR_BLUE_VIBRANT,
+    "blue_azure": COLOR_BLUE_AZURE,
+    "blue_sky_light": COLOR_BLUE_SKY_LIGHT,
+    "purple_soft": COLOR_PURPLE_SOFT,
+    "indigo_accent": COLOR_INDIGO_ACCENT,
+    "violet_deep": COLOR_VIOLET_DEEP,
+    "pink_hot": COLOR_PINK_HOT,
+    "orange_bright": COLOR_ORANGE_BRIGHT,
+    "orange_coral": COLOR_ORANGE_CORAL,
+    "amber_warm": COLOR_AMBER_WARM,
+    "accent_green": COLOR_ACCENT_GREEN,
+    "accent_blue": COLOR_ACCENT_BLUE,
+    "accent_magenta": COLOR_ACCENT_MAGENTA,
+    "accent_amber": COLOR_ACCENT_AMBER,
+    "glass_indigo": COLOR_GLASS_INDIGO,
+    "glass_purple": COLOR_GLASS_PURPLE,
+    "glass_violet": COLOR_GLASS_VIOLET,
+    "glass_cyan": COLOR_GLASS_CYAN,
+    "glass_cyan_glow": COLOR_GLASS_CYAN_GLOW,
+    "glass_blue": COLOR_GLASS_BLUE,
+    "glass_sky": COLOR_GLASS_SKY,
 }
+
+# -----------------------------------------------------------------------------------------------------------
+# 🔮 Signature Gradients & Palette Sequences (Obsidian Notebooks Collection)
+# -----------------------------------------------------------------------------------------------------------
+
+GRADIENT_0_CYANS: Final[List[str]] = ["#00ffff", "#00e8ff"]
+GRADIENT_1_CYAN_SKY: Final[List[str]] = ["#00ffee", "#14b5ff"]
+GRADIENT_2_CYAN_BLUE: Final[List[str]] = ["#00e8ff", "#0070eb"]
+GRADIENT_3_TEAL_BLUE: Final[List[str]] = ["#03e8bd", "#03b4e8", "#0355e8"]
+GRADIENT_4_CYAN_PURPLE: Final[List[str]] = ["#00e8ff", "#14b5ff", "#0a95eb", "#0070eb", "#5e17eb"]
+GRADIENT_5_CYAN_DEEP_PURPLE: Final[List[str]] = ["#00e8ff", "#3a98ff", "#0a95eb", "#7952f5", "#5e17eb"]
+GRADIENT_6_CYAN_PINK: Final[List[str]] = ["#00e8ff", "#14b5ff", "#5280ff", "#7952f5", "#ff66b3"]
+GRADIENT_7_FULL_FLOW: Final[List[str]] = ["#00e8ff", "#14b5ff", "#5280ff", "#7952f5", "#ff66b3", "#f78166"]
+GRADIENT_8_SYNTHWAVE: Final[List[str]] = ["#4cc9f0", "#4361ee", "#3a0ca3", "#7209b7", "#f72585"]
+GRADIENT_8_SYNTHWAVE_REV: Final[List[str]] = ["#f72585", "#7209b7", "#3a0ca3", "#4361ee", "#4cc9f0"]
+
+EIGENSCRIBE_GRADIENTS: Final[Dict[str, List[str]]] = {
+    "gradient_0": GRADIENT_0_CYANS,
+    "gradient_1": GRADIENT_1_CYAN_SKY,
+    "gradient_2": GRADIENT_2_CYAN_BLUE,
+    "gradient_3": GRADIENT_3_TEAL_BLUE,
+    "gradient_4": GRADIENT_4_CYAN_PURPLE,
+    "gradient_5": GRADIENT_5_CYAN_DEEP_PURPLE,
+    "gradient_6": GRADIENT_6_CYAN_PINK,
+    "gradient_7": GRADIENT_7_FULL_FLOW,
+    "gradient_8": GRADIENT_8_SYNTHWAVE,
+    "gradient_8_rev": GRADIENT_8_SYNTHWAVE_REV,
+}
+
+# 4-Color Vibrant Accent Set
+FOUR_COLOR_ACCENT: Final[List[str]] = ["#38fe52", "#3881fe", "#fe38e4", "#feb538"]
+
+# 5-Stop Sequential & Diverging Ramps
+RAMP_GREEN: Final[List[str]] = ["#071a12", "#064e3b", "#059669", "#31ff48", "#b7ffcf"]
+RAMP_BLUE: Final[List[str]] = ["#06152b", "#003b73", "#0070eb", "#00b8ff", "#b8f6ff"]
+RAMP_PURPLE: Final[List[str]] = ["#120a24", "#3b176e", "#7c3aed", "#a855f7", "#d8b4fe"]
+RAMP_MAGENTA: Final[List[str]] = ["#210817", "#7c174f", "#ad1457", "#f72585", "#ffb4f6"]
+
+# 5-Stop Obsidian Palette Scales
+PALETTE_PINK_AMBER: Final[List[str]] = ["#f75594", "#f7556b", "#f76755", "#f78f55", "#f7b855"]
+PALETTE_NEON_GREEN: Final[List[str]] = ["#81fe38", "#50fe38", "#38fe52", "#38fe84", "#38feb5"]
+PALETTE_CYAN_BLUE: Final[List[str]] = ["#00ff97", "#00ffd6", "#00e8ff", "#00a8ff", "#0068ff"]
+PALETTE_BLUE_VIOLET: Final[List[str]] = ["#52d6ff", "#52abff", "#5280ff", "#5255ff", "#7a52ff"]
+PALETTE_INDIGO_MAGENTA: Final[List[str]] = ["#527cf5", "#5254f5", "#7952f5", "#a252f5", "#ca52f5"]
+
+# Deep Void / Shaded Ramps
+RAMP_DEEP_PURPLE: Final[List[str]] = ["#462c96", "#33216e", "#211547", "#0f0920", "#000000"]
+RAMP_DEEP_VIOLET: Final[List[str]] = ["#371f9d", "#281673", "#190e48", "#0a061d", "#000000"]
+RAMP_SKY_BLUE: Final[List[str]] = ["#66c4ff", "#33b1ff", "#009dff", "#007ecc", "#005e99"]
 
 # High-contrast multi-curve line color cycle (optimized for distinctiveness & readability on dark surfaces)
 HIGH_CONTRAST_CYCLE: Final[List[str]] = [
@@ -281,6 +379,27 @@ STYLE_3_PALETTE: Final[Dict[str, str]] = {
     "metric_quaternary": "#a855f7",
 }
 
+# Style 4: 4-Color Vibrant Accent Palette (high-energy visual markers)
+STYLE_4_PALETTE: Final[Dict[str, str]] = {
+    "accent_green": COLOR_ACCENT_GREEN,
+    "accent_blue": COLOR_ACCENT_BLUE,
+    "accent_magenta": COLOR_ACCENT_MAGENTA,
+    "accent_amber": COLOR_ACCENT_AMBER,
+}
+
+# Obsidian 5-Color Palette Scales
+PALETTE_PINK_AMBER_MAP: Final[Dict[str, str]] = {f"p_{i}": c for i, c in enumerate(PALETTE_PINK_AMBER)}
+PALETTE_NEON_GREEN_MAP: Final[Dict[str, str]] = {f"g_{i}": c for i, c in enumerate(PALETTE_NEON_GREEN)}
+PALETTE_CYAN_BLUE_MAP: Final[Dict[str, str]] = {f"c_{i}": c for i, c in enumerate(PALETTE_CYAN_BLUE)}
+PALETTE_BLUE_VIOLET_MAP: Final[Dict[str, str]] = {f"b_{i}": c for i, c in enumerate(PALETTE_BLUE_VIOLET)}
+PALETTE_INDIGO_MAGENTA_MAP: Final[Dict[str, str]] = {f"m_{i}": c for i, c in enumerate(PALETTE_INDIGO_MAGENTA)}
+
+# 5-Stop Sequential & Diverging Ramps
+RAMP_GREEN_MAP: Final[Dict[str, str]] = {f"g_{i}": c for i, c in enumerate(RAMP_GREEN)}
+RAMP_BLUE_MAP: Final[Dict[str, str]] = {f"b_{i}": c for i, c in enumerate(RAMP_BLUE)}
+RAMP_PURPLE_MAP: Final[Dict[str, str]] = {f"p_{i}": c for i, c in enumerate(RAMP_PURPLE)}
+RAMP_MAGENTA_MAP: Final[Dict[str, str]] = {f"m_{i}": c for i, c in enumerate(RAMP_MAGENTA)}
+
 # Unified registry of generalized comparison palettes
 COMPARISON_PALETTES: Final[Dict[str, Dict[str, str]]] = {
     "eigen": EIGEN_COLORS,
@@ -289,6 +408,16 @@ COMPARISON_PALETTES: Final[Dict[str, Dict[str, str]]] = {
     "style_1": STYLE_1_PALETTE,
     "networkx_graphs": NETWORKX_GRAPHS_PALETTE,
     "style_3": STYLE_3_PALETTE,
+    "style_4_accents": STYLE_4_PALETTE,
+    "pink_amber": PALETTE_PINK_AMBER_MAP,
+    "neon_green": PALETTE_NEON_GREEN_MAP,
+    "cyan_blue": PALETTE_CYAN_BLUE_MAP,
+    "blue_violet": PALETTE_BLUE_VIOLET_MAP,
+    "indigo_magenta": PALETTE_INDIGO_MAGENTA_MAP,
+    "ramp_green": RAMP_GREEN_MAP,
+    "ramp_blue": RAMP_BLUE_MAP,
+    "ramp_purple": RAMP_PURPLE_MAP,
+    "ramp_magenta": RAMP_MAGENTA_MAP,
 }
 
 
@@ -393,6 +522,24 @@ HEATMAP_SEPHIRAH_SPECTRUM: Final[LinearSegmentedColormap] = create_eigenscribe_c
     ],
 )
 
+# Signature Obsidian Gradients Colormaps
+HEATMAP_GRADIENT_0: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_gradient_0", GRADIENT_0_CYANS)
+HEATMAP_GRADIENT_1: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_gradient_1", GRADIENT_1_CYAN_SKY)
+HEATMAP_GRADIENT_2: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_gradient_2", GRADIENT_2_CYAN_BLUE)
+HEATMAP_GRADIENT_3: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_gradient_3", GRADIENT_3_TEAL_BLUE)
+HEATMAP_GRADIENT_4: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_gradient_4", GRADIENT_4_CYAN_PURPLE)
+HEATMAP_GRADIENT_5: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_gradient_5", GRADIENT_5_CYAN_DEEP_PURPLE)
+HEATMAP_GRADIENT_6: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_gradient_6", GRADIENT_6_CYAN_PINK)
+HEATMAP_GRADIENT_7: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_gradient_7", GRADIENT_7_FULL_FLOW)
+HEATMAP_GRADIENT_8: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_gradient_8", GRADIENT_8_SYNTHWAVE)
+HEATMAP_SYNTHWAVE: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_synthwave", GRADIENT_8_SYNTHWAVE_REV)
+
+# 5-Stop Sequential Ramp Colormaps
+HEATMAP_RAMP_GREEN: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_ramp_green", RAMP_GREEN)
+HEATMAP_RAMP_BLUE: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_ramp_blue", RAMP_BLUE)
+HEATMAP_RAMP_PURPLE: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_ramp_purple", RAMP_PURPLE)
+HEATMAP_RAMP_MAGENTA: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_ramp_magenta", RAMP_MAGENTA)
+
 # Plotly Format Cyclic Phase Colorscale (for Dash / Plotly heatmaps & circle graphs)
 PLOTLY_CYCLIC_PHASE_COLORSCALE: Final[List[List[Any]]] = [
     [0.0, "#0070eb"],
@@ -431,6 +578,14 @@ SEMANTIC_COLORMAPS: Final[Dict[str, LinearSegmentedColormap]] = {
         "eigenscribe_temporal",
         [COLOR_BG, "#5280ff", "#00e8ff", COLOR_TERTIARY_LIGHT],
     ),
+    "Gradient 4 (Cyan-Purple)": HEATMAP_GRADIENT_4,
+    "Gradient 6 (Cyan-Pink)": HEATMAP_GRADIENT_6,
+    "Gradient 7 (Full Flow)": HEATMAP_GRADIENT_7,
+    "Gradient 8 (Synthwave)": HEATMAP_GRADIENT_8,
+    "Ramp Green": HEATMAP_RAMP_GREEN,
+    "Ramp Blue": HEATMAP_RAMP_BLUE,
+    "Ramp Purple": HEATMAP_RAMP_PURPLE,
+    "Ramp Magenta": HEATMAP_RAMP_MAGENTA,
 }
 
 # Canonical Colormap Registry
@@ -444,6 +599,20 @@ EIGENSCRIBE_COLORMAPS: Final[Dict[str, LinearSegmentedColormap]] = {
     "cosmic_void_to_cyan": HEATMAP_COSMIC_VOID_TO_CYAN,
     "cosmic_spectrum": HEATMAP_COSMIC_SPECTRUM,
     "sephirah_spectrum": HEATMAP_SEPHIRAH_SPECTRUM,
+    "gradient_0": HEATMAP_GRADIENT_0,
+    "gradient_1": HEATMAP_GRADIENT_1,
+    "gradient_2": HEATMAP_GRADIENT_2,
+    "gradient_3": HEATMAP_GRADIENT_3,
+    "gradient_4": HEATMAP_GRADIENT_4,
+    "gradient_5": HEATMAP_GRADIENT_5,
+    "gradient_6": HEATMAP_GRADIENT_6,
+    "gradient_7": HEATMAP_GRADIENT_7,
+    "gradient_8": HEATMAP_GRADIENT_8,
+    "synthwave": HEATMAP_SYNTHWAVE,
+    "ramp_green": HEATMAP_RAMP_GREEN,
+    "ramp_blue": HEATMAP_RAMP_BLUE,
+    "ramp_purple": HEATMAP_RAMP_PURPLE,
+    "ramp_magenta": HEATMAP_RAMP_MAGENTA,
     **{k.lower().split()[0]: v for k, v in SEMANTIC_COLORMAPS.items()},
 }
 
@@ -789,10 +958,16 @@ def run_smoke_test() -> bool:
     assert "eigenscribe_cosmic_void_to_cyan" in mpl.colormaps, "Cosmic Void to Cyan colormap registration failed."
     assert "eigenscribe_cosmic_spectrum" in mpl.colormaps, "Cosmic Spectrum colormap registration failed."
     assert "eigenscribe_sephirah_spectrum" in mpl.colormaps, "Sephirah Spectrum colormap registration failed."
+    assert "eigenscribe_gradient_4" in mpl.colormaps, "Gradient 4 colormap registration failed."
+    assert "eigenscribe_gradient_8" in mpl.colormaps, "Gradient 8 colormap registration failed."
+    assert "eigenscribe_ramp_green" in mpl.colormaps, "Ramp Green colormap registration failed."
+    assert "eigenscribe_ramp_magenta" in mpl.colormaps, "Ramp Magenta colormap registration failed."
     assert len(EIGEN_NODES) == 10, "EIGEN nodes count mismatch."
     assert len(EIGEN_NODE_COLORS) == 10, "EIGEN node colors count mismatch."
     assert len(EIGEN_LABEL_COLORS) == 10, "EIGEN label colors count mismatch."
     assert len(EIGEN_COLORS) == 4, "EIGEN colors count mismatch."
+    assert len(EIGENSCRIBE_GRADIENTS) >= 9, "Eigenscribe gradients count mismatch."
+    assert len(FOUR_COLOR_ACCENT) == 4, "Four-color accent count mismatch."
     
     # Verify cosmic theme mode
     apply_cosmic_theme()

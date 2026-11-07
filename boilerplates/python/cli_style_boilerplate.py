@@ -71,8 +71,10 @@ EIGENSCRIBE_PALETTE: Final[dict[str, int]] = {
     "eigen_blue_dark": 25,       # Deep navy blue
     "eigen_blue": 27,            # Core Eigenscribe blue
     "eigen_blue_bright": 33,     # Bright electric blue
+    "eigen_azure": 32,           # Azure blue (#0a95eb / #0596f0)
     "eigen_cyan": 51,            # Electric cyan for info
     "eigen_cyan_light": 81,      # Light cyan accent
+    "eigen_cyan_pure": 51,       # Pure cyan (#00ffee)
     "eigen_luminous_cyan": 123,  # Luminous ice-cyan (#c8f8ff)
     "eigen_sephirah_cyan": 123,  # Legacy alias
     "eigen_sky": 39,             # EIGEN Sky Blue (#14b5ff)
@@ -101,15 +103,23 @@ EIGENSCRIBE_PALETTE: Final[dict[str, int]] = {
     "sephirah_yesod": 205,
     "sephirah_malkuth": 40,
 
+    # --- 4-Color Vibrant Accent Set ---
+    "eigen_accent_green": 83,    # Bright lime-green (#38fe52)
+    "eigen_accent_blue": 33,     # Cobalt accent blue (#3881fe)
+    "eigen_accent_magenta": 206, # Vivid magenta (#fe38e4)
+    "eigen_accent_amber": 215,   # Warm amber (#feb538)
+
     # --- Purples (Secondary domain) ---
     "eigen_purple_dark": 55,     # Deep violet
     "eigen_purple": 129,         # Core Eigenscribe purple
     "eigen_purple_bright": 141,  # Bright magenta-purple
     "eigen_magenta": 163,        # Magenta for highlights
+    "eigen_synthwave_purple": 99, # Synthwave indigo-violet
 
     # --- Pinks (Accent domain) ---
     "eigen_pink": 212,           # Soft pink accent
     "eigen_pink_bright": 199,    # Bright pink for emphasis
+    "eigen_hot_pink": 198,       # Hot neon pink (#ff40a1)
 
     # --- Greens (Success domain) ---
     "eigen_green_dark": 22,      # Deep forest green
@@ -121,6 +131,7 @@ EIGENSCRIBE_PALETTE: Final[dict[str, int]] = {
     "eigen_amber": 214,          # Amber warning
     "eigen_orange": 208,         # Core orange
     "eigen_orange_bright": 202,  # Bright orange accent
+    "eigen_coral": 209,          # Coral orange (#ff783d / #f78166)
 
     # --- Reds (Error domain) ---
     "eigen_red": 160,            # Soft red for errors

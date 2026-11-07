@@ -49,6 +49,19 @@ Use this skill whenever designing, styling, or updating figures, scientific plot
 - **Tertiary Neon Green (`#22f792` / `#10b981`):** Success metrics, verified states, STEM/tech indicators, math constants (`#00f5db`).
 - **Quaternary Coral / Amber (`#f78166` / `#ff783d`):** Warnings, dynamic parameters, auxiliary data, high-attention flags.
 - **Pernary Hot Pink (`#ec4899` / `#ff40a1`):** Special modes, accents, and producer overrides.
+- **4-Color Vibrant Accent Set:** Green (`#38fe52`), Blue (`#3881fe`), Magenta (`#fe38e4`), Amber (`#feb538`).
+
+#### 🔮 Signature Gradient Sequences (Obsidian Notes Series)
+- **`gradient_0` (Pure Cyan Flow):** `#00ffff` → `#00e8ff`
+- **`gradient_1` (Cyan to Sky):** `#00ffee` → `#14b5ff`
+- **`gradient_2` (Cyan to Royal Blue):** `#00e8ff` → `#0070eb`
+- **`gradient_3` (Teal to Royal Blue):** `#03e8bd` → `#03b4e8` → `#0355e8`
+- **`gradient_4` (Cyan to Deep Purple):** `#00e8ff` → `#14b5ff` → `#0a95eb` → `#0070eb` → `#5e17eb`
+- **`gradient_5` (Cobalt to Violet):** `#00e8ff` → `#3a98ff` → `#0a95eb` → `#7952f5` → `#5e17eb`
+- **`gradient_6` (Cyan to Hot Pink):** `#00e8ff` → `#14b5ff` → `#5280ff` → `#7952f5` → `#ff66b3`
+- **`gradient_7` (Full Spectrum Flow):** `#00e8ff` → `#14b5ff` → `#5280ff` → `#7952f5` → `#ff66b3` → `#f78166`
+- **`gradient_8` (Synthwave / Retrowave):** `#4cc9f0` → `#4361ee` → `#3a0ca3` → `#7209b7` → `#f72585`
+- **`gradient_synthwave` (Reverse Synthwave):** `#f72585` → `#7209b7` → `#3a0ca3` → `#4361ee` → `#4cc9f0`
 
 ---
 

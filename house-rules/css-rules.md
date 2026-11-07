@@ -50,7 +50,10 @@ Following the Eigenscribe architectural standard (*"What exists → what you're 
   - Deep cosmic void radial foundations (`--color-bg-cosmic-center: #0a0f1f`, `--color-bg-cosmic: #050812`, `--color-bg-cosmic-void: #000000`, `--gradient-cosmic-radial`).
   - Text hierarchy (`--color-text: #f0f6fc`, `--color-text-muted: #8b949e`, `--color-text-accent: #c8f8ff`, `--color-luminous-cyan: #c8f8ff`).
   - Luminous cosmic and tooltip tokens (`--color-cosmic-bg: rgba(0, 232, 255, 0.08)`, `--color-cosmic-glow: rgba(0, 232, 255, 0.30)`, `--color-tooltip-bg: rgba(0, 0, 0, 0.75)`).
-  - Vibrant signatures & multi-stop gradients (`--gradient-eigenscribe`, `--gradient-multi`, `--gradient-cyan-to-blue`, `--gradient-blue-to-purple`, `--gradient-cosmic-radial`).
+  - Extended translucent glass tokens (`--color-glass-indigo`, `--color-glass-purple`, `--color-glass-violet`, `--color-glass-cyan`, `--color-glass-blue`).
+  - 4-Color Vibrant Accent Markers (`--color-accent-green: #38fe52`, `--color-accent-blue: #3881fe`, `--color-accent-magenta: #fe38e4`, `--color-accent-amber: #feb538`).
+  - 5-Stop Sequential Ramps (`--ramp-green-0..4`, `--ramp-blue-0..4`, `--ramp-purple-0..4`, `--ramp-magenta-0..4`).
+  - Vibrant signatures & multi-stop gradients (`--gradient-0` through `--gradient-8`, `--gradient-synthwave`, `--gradient-sunset-soft`, `--gradient-eigenscribe`, `--gradient-multi`, `--gradient-cyan-to-blue`, `--gradient-blue-to-purple`, `--gradient-cosmic-radial`).
 - **Typography Tokens:**
   - Display/Headings: `'Aclonica', sans-serif`
   - Body/Editorial: `'Merriweather', Georgia, serif`
