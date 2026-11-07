@@ -45,15 +45,35 @@
   --color-text-muted: #8b949e;
   --color-text-subtle: #6e7681;
   --color-text-accent: #c8f8ff;
-  --color-text-sephirah: #c8f8ff;
 
-  /* ✨ Sephirah Luminous Ice-Cyan & Tooltip Tokens ✨ */
-  --color-sephirah-cyan: #c8f8ff;
-  --color-sephirah-bg: rgba(0, 232, 255, 0.08);
-  --color-sephirah-border: rgba(255, 255, 255, 0.08);
-  --color-sephirah-glow: rgba(0, 232, 255, 0.25);
-  --color-tooltip-bg: rgba(0, 0, 0, 0.7);
-  --color-tooltip-border: rgba(255, 255, 255, 0.1);
+  /* ✨ Cosmic Luminous Ice-Cyan & Tooltip Tokens ✨ */
+  --color-luminous-cyan: #c8f8ff;
+  --color-cosmic-bg: rgba(0, 232, 255, 0.08);
+  --color-cosmic-border: rgba(255, 255, 255, 0.08);
+  --color-cosmic-glow: rgba(0, 232, 255, 0.30);
+  --color-tooltip-bg: rgba(0, 0, 0, 0.75);
+  --color-tooltip-border: rgba(255, 255, 255, 0.12);
+
+  /* ----------------------------------------------------------------------------
+   * 🌌 EIGEN Core Spectrum & Vibrant 10-Node Color Tokens
+   * ---------------------------------------------------------------------------- */
+  /* Core 4-Spectrum EIGEN Colors */
+  --color-eigen-cyan: #00e8ff;
+  --color-eigen-sky: #14b5ff;
+  --color-eigen-blue: #3a98ff;
+  --color-eigen-purple: #7952f5;
+
+  /* Vibrant 10-Node Spectrum */
+  --color-eigen-node-0: #fff9d6;   /* 0. Divine Light / White-Gold */
+  --color-eigen-node-1: #00ffff;   /* 1. Electric Cyan */
+  --color-eigen-node-2: #00e8ff;   /* 2. Bright Cyan */
+  --color-eigen-node-3: #14b5ff;   /* 3. Sky Blue */
+  --color-eigen-node-4: #0070eb;   /* 4. Royal Cobalt */
+  --color-eigen-node-5: #ffd94a;   /* 5. Radiant Amber Gold */
+  --color-eigen-node-6: #7952f5;   /* 6. Electric Violet */
+  --color-eigen-node-7: #5e17eb;   /* 7. Deep Purple */
+  --color-eigen-node-8: #ff66b3;   /* 8. Vibrant Neon Pink */
+  --color-eigen-node-9: #00c853;   /* 9. Vivid Emerald Green */
 
   /* ----------------------------------------------------------------------------
    * 🌈 ADHD High-Contrast Semantic Palette & Variable Coding System
@@ -128,10 +148,10 @@
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.25);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
   --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.5);
-  --shadow-glow-cyan: 0 0 20px rgba(0, 232, 255, 0.3);
-  --shadow-glow-purple: 0 0 20px rgba(121, 82, 245, 0.3);
-  --shadow-glow-sephirah: 0 0 8px rgba(0, 232, 255, 0.25), inset 0 0 8px rgba(255, 255, 255, 0.04);
-  --text-shadow-sephirah: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 20px currentColor;
+  --shadow-glow-cyan: 0 0 20px rgba(0, 232, 255, 0.4);
+  --shadow-glow-purple: 0 0 20px rgba(121, 82, 245, 0.4);
+  --shadow-glow-cosmic: 0 0 12px rgba(0, 232, 255, 0.35), inset 0 0 8px rgba(255, 255, 255, 0.06);
+  --text-shadow-glow: 0 0 6px currentColor, 0 0 12px currentColor, 0 0 24px currentColor;
   --shadow-button: 0 4px 15px rgba(20, 181, 255, 0.4);
   --shadow-button-2: 0 4px 15px rgba(16, 185, 129, 0.4);
   --shadow-text: 0 2px 4px rgba(0, 0, 0, 0.6);
@@ -823,23 +843,24 @@ img, svg, video, canvas {
 }
 
 /* ------------------------------------------------------------------------------
- * ✨ Sephirah Luminous Labels & Shimmer Animation ✨
+ * ✨ Cosmic Luminous Labels & Shimmer Animation ✨
  * ------------------------------------------------------------------------------ */
 @keyframes shimmer {
   0% {
     filter: brightness(1);
   }
   50% {
-    filter: brightness(1.35);
+    filter: brightness(1.4);
   }
   100% {
     filter: brightness(1);
   }
 }
 
-.sephirah-label {
+.cosmic-label,
+.eigen-label {
   position: absolute;
-  color: var(--color-sephirah-cyan, #c8f8ff);
+  color: var(--color-luminous-cyan, #c8f8ff);
   font-family: var(--font-heading, "Aclonica", sans-serif);
   font-size: 14px;
   letter-spacing: 1px;
@@ -849,17 +870,35 @@ img, svg, video, canvas {
   padding: 4px 10px;
   border-radius: 14px;
   backdrop-filter: blur(4px);
-  background: var(--color-sephirah-bg, rgba(0, 232, 255, 0.08));
-  border: 1px solid var(--color-sephirah-border, rgba(255, 255, 255, 0.08));
+  background: var(--color-cosmic-bg, rgba(0, 232, 255, 0.08));
+  border: 1px solid var(--color-cosmic-border, rgba(255, 255, 255, 0.08));
   text-shadow:
-    0 0 5px currentColor,
-    0 0 10px currentColor,
-    0 0 20px currentColor;
+    0 0 6px currentColor,
+    0 0 12px currentColor,
+    0 0 24px currentColor;
   box-shadow:
-    0 0 8px rgba(0, 232, 255, 0.25),
-    inset 0 0 8px rgba(255, 255, 255, 0.04);
+    0 0 10px rgba(0, 232, 255, 0.3),
+    inset 0 0 8px rgba(255, 255, 255, 0.05);
   /* Center the label on the projected coordinate point */
   transform: translate(-50%, -50%);
   z-index: 10;
   animation: shimmer 4s infinite ease-in-out;
 }
+
+/* EIGEN Spectrum & Vibrant Node Specific Color Overrides */
+.eigen-label.node-0 { color: var(--color-eigen-node-0, #fff9d6); }
+.eigen-label.node-1 { color: var(--color-eigen-node-1, #00ffff); }
+.eigen-label.node-2 { color: var(--color-eigen-node-2, #00e8ff); }
+.eigen-label.node-3 { color: var(--color-eigen-node-3, #14b5ff); }
+.eigen-label.node-4 { color: var(--color-eigen-node-4, #0070eb); }
+.eigen-label.node-5 { color: var(--color-eigen-node-5, #ffd94a); }
+.eigen-label.node-6 { color: var(--color-eigen-node-6, #7952f5); }
+.eigen-label.node-7 { color: var(--color-eigen-node-7, #5e17eb); }
+.eigen-label.node-8 { color: var(--color-eigen-node-8, #ff66b3); }
+.eigen-label.node-9 { color: var(--color-eigen-node-9, #00c853); }
+
+/* Core 4-Color Spectrum Overrides */
+.eigen-label.cyan   { color: var(--color-eigen-cyan, #00e8ff); }
+.eigen-label.sky    { color: var(--color-eigen-sky, #14b5ff); }
+.eigen-label.blue   { color: var(--color-eigen-blue, #3a98ff); }
+.eigen-label.purple { color: var(--color-eigen-purple, #7952f5); }

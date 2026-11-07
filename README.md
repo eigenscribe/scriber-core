@@ -27,7 +27,7 @@ Welcome to the canonical environment index for autonomous development agents. Th
 ├── .junie/
 │   ├── AGENTS.md              # Canonical agent guidelines & workspace directives
 │   └── skills/
-│       └── cosmic-visual-styling/       # Workspace skill for Sephirah / cosmic visual themes & styling
+│       └── cosmic-visual-styling/       # Workspace skill for EIGEN / cosmic visual themes & styling
 ├── pyproject.toml             # uv environment dependencies and locks
 └── README.md                  # Master onboarding index (This file)
 ```

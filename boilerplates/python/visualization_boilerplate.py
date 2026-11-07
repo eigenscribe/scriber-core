@@ -57,17 +57,98 @@ COLOR_TEXT_SUBTLE: Final[str] = "#6e7681"
 COLOR_TEXT_ACCENT: Final[str] = "#c8f8ff"
 COLOR_TEXT_SEPHIRAH: Final[str] = "#c8f8ff"
 
-# Glassmorphic Overlays & Sephirah Accents
-COLOR_SEPHIRAH_CYAN: Final[str] = "#c8f8ff"
-COLOR_SEPHIRAH_BG: Final[str] = "rgba(0, 232, 255, 0.08)"
-COLOR_SEPHIRAH_GLOW: Final[str] = "rgba(0, 232, 255, 0.25)"
-COLOR_SEPHIRAH_BORDER: Final[str] = "rgba(255, 255, 255, 0.08)"
-COLOR_TOOLTIP_BG: Final[str] = "rgba(0, 0, 0, 0.7)"
-COLOR_TOOLTIP_BORDER: Final[str] = "rgba(255, 255, 255, 0.1)"
+# Glassmorphic Overlays & Luminous Accents
+COLOR_LUMINOUS_CYAN: Final[str] = "#c8f8ff"
+COLOR_COSMIC_BG: Final[str] = "rgba(0, 232, 255, 0.08)"
+COLOR_COSMIC_GLOW: Final[str] = "rgba(0, 232, 255, 0.30)"
+COLOR_COSMIC_BORDER: Final[str] = "rgba(255, 255, 255, 0.08)"
+COLOR_TOOLTIP_BG: Final[str] = "rgba(0, 0, 0, 0.75)"
+COLOR_TOOLTIP_BORDER: Final[str] = "rgba(255, 255, 255, 0.12)"
+
+# Backwards compatibility aliases
+COLOR_SEPHIRAH_CYAN: Final[str] = COLOR_LUMINOUS_CYAN
+COLOR_SEPHIRAH_BG: Final[str] = COLOR_COSMIC_BG
+COLOR_SEPHIRAH_GLOW: Final[str] = COLOR_COSMIC_GLOW
+COLOR_SEPHIRAH_BORDER: Final[str] = COLOR_COSMIC_BORDER
 
 COLOR_BORDER: Final[str] = "#30363d"
 COLOR_GRID: Final[str] = "#21262d"
 COLOR_MATH: Final[str] = "#00f5db"
+
+# --- Canonical EIGEN Spectrum ---
+EIGEN_CYAN: Final[str] = "#00e8ff"      # 0x00e8ff
+EIGEN_SKY: Final[str] = "#14b5ff"       # 0x14b5ff
+EIGEN_BLUE: Final[str] = "#3a98ff"      # 0x3a98ff
+EIGEN_PURPLE: Final[str] = "#7952f5"    # 0x7952f5
+
+EIGEN_COLORS: Final[Dict[str, str]] = {
+    "cyan": EIGEN_CYAN,
+    "sky": EIGEN_SKY,
+    "blue": EIGEN_BLUE,
+    "purple": EIGEN_PURPLE,
+}
+
+# --- Vibrant 10-Node Spectrum ---
+EIGEN_NODES: Final[Dict[str, str]] = {
+    "node_0": "#fff9d6",  # 0. Crown / Divine White-Gold (0xFFF9D6)
+    "node_1": "#00ffff",  # 1. Electric Pure Cyan (0x00FFFF)
+    "node_2": "#00e8ff",  # 2. Vibrant Cyan (0x00E8FF)
+    "node_3": "#14b5ff",  # 3. Sky Blue (0x14B5FF)
+    "node_4": "#0070eb",  # 4. Royal Cobalt (0x0070EB)
+    "node_5": "#ffd94a",  # 5. Radiant Amber Gold (0xFFD94A)
+    "node_6": "#7952f5",  # 6. Electric Purple (0x7952F5)
+    "node_7": "#5e17eb",  # 7. Deep Violet (0x5E17EB)
+    "node_8": "#ff66b3",  # 8. Neon Hot Pink (0xFF66B3)
+    "node_9": "#00c853",  # 9. Vivid Emerald Green (0x00C853)
+}
+
+EIGEN_NODE_COLORS: Final[List[str]] = [
+    "#fff9d6",  # 0. Crown / White-Gold
+    "#00ffff",  # 1. Pure Cyan
+    "#00e8ff",  # 2. Vibrant Cyan
+    "#14b5ff",  # 3. Sky Blue
+    "#0070eb",  # 4. Royal Cobalt
+    "#ffd94a",  # 5. Radiant Gold
+    "#7952f5",  # 6. Electric Purple
+    "#5e17eb",  # 7. Deep Violet
+    "#ff66b3",  # 8. Neon Pink
+    "#00c853",  # 9. Vivid Emerald Green
+]
+
+EIGEN_LABEL_COLORS: Final[List[str]] = [
+    "#fff9d6",  # 0. Crown
+    "#00ffff",  # 1. Pure Cyan
+    "#00e8ff",  # 2. Bright Cyan
+    "#14b5ff",  # 3. Sky Blue
+    "#0070eb",  # 4. Royal Cobalt
+    "#4cc9f0",  # 5. Luminous Solar Cyan
+    "#7952f5",  # 6. Electric Purple
+    "#5e17eb",  # 7. Deep Violet
+    "#ff66b3",  # 8. Neon Pink
+    "#00c853",  # 9. Vivid Emerald Green
+]
+
+EIGEN_NODE_NAMES: Final[List[str]] = [
+    "0️⃣ Keter", "1️⃣ Chokhmah", "2️⃣ Binah", "3️⃣ Chesed", "4️⃣ Gevurah",
+    "5️⃣ Tiferet", "6️⃣ Netzach", "7️⃣ Hod", "8️⃣ Yesod", "9️⃣ Malkuth"
+]
+
+# Legacy / Alternative aliases
+SEPHIRAH_NODES: Final[Dict[str, str]] = {
+    "keter": EIGEN_NODES["node_0"],
+    "chokhmah": EIGEN_NODES["node_1"],
+    "binah": EIGEN_NODES["node_2"],
+    "chesed": EIGEN_NODES["node_3"],
+    "gevurah": EIGEN_NODES["node_4"],
+    "tiferet": EIGEN_NODES["node_5"],
+    "netzach": EIGEN_NODES["node_6"],
+    "hod": EIGEN_NODES["node_7"],
+    "yesod": EIGEN_NODES["node_8"],
+    "malkuth": EIGEN_NODES["node_9"],
+}
+SEPHIRAH_NODE_COLORS: Final[List[str]] = EIGEN_NODE_COLORS
+SEPHIRAH_LABEL_COLORS: Final[List[str]] = EIGEN_LABEL_COLORS
+SEPHIRAH_NAMES: Final[List[str]] = EIGEN_NODE_NAMES
 
 # --- ADHD High-Contrast Semantic Palette ---
 COLOR_PRIMARY_LIGHT: Final[str] = "#00e8ff"
@@ -107,6 +188,10 @@ THEME_TOKENS: Final[Dict[str, str]] = {
     "text_muted": COLOR_TEXT_MUTED,
     "text_subtle": COLOR_TEXT_SUBTLE,
     "text_accent": COLOR_TEXT_ACCENT,
+    "luminous_cyan": COLOR_LUMINOUS_CYAN,
+    "cosmic_bg": COLOR_COSMIC_BG,
+    "cosmic_glow": COLOR_COSMIC_GLOW,
+    "cosmic_border": COLOR_COSMIC_BORDER,
     "text_sephirah": COLOR_TEXT_SEPHIRAH,
     "sephirah_cyan": COLOR_SEPHIRAH_CYAN,
     "sephirah_bg": COLOR_SEPHIRAH_BG,
@@ -115,6 +200,33 @@ THEME_TOKENS: Final[Dict[str, str]] = {
     "tooltip_bg": COLOR_TOOLTIP_BG,
     "tooltip_border": COLOR_TOOLTIP_BORDER,
     "math": COLOR_MATH,
+    # Core EIGEN Spectrum
+    "eigen_cyan": EIGEN_CYAN,
+    "eigen_sky": EIGEN_SKY,
+    "eigen_blue": EIGEN_BLUE,
+    "eigen_purple": EIGEN_PURPLE,
+    # Vibrant 10-Node Spectrum
+    "eigen_node_0": EIGEN_NODES["node_0"],
+    "eigen_node_1": EIGEN_NODES["node_1"],
+    "eigen_node_2": EIGEN_NODES["node_2"],
+    "eigen_node_3": EIGEN_NODES["node_3"],
+    "eigen_node_4": EIGEN_NODES["node_4"],
+    "eigen_node_5": EIGEN_NODES["node_5"],
+    "eigen_node_6": EIGEN_NODES["node_6"],
+    "eigen_node_7": EIGEN_NODES["node_7"],
+    "eigen_node_8": EIGEN_NODES["node_8"],
+    "eigen_node_9": EIGEN_NODES["node_9"],
+    # Sephirah Aliases
+    "sephirah_keter": SEPHIRAH_NODES["keter"],
+    "sephirah_chokhmah": SEPHIRAH_NODES["chokhmah"],
+    "sephirah_binah": SEPHIRAH_NODES["binah"],
+    "sephirah_chesed": SEPHIRAH_NODES["chesed"],
+    "sephirah_gevurah": SEPHIRAH_NODES["gevurah"],
+    "sephirah_tiferet": SEPHIRAH_NODES["tiferet"],
+    "sephirah_netzach": SEPHIRAH_NODES["netzach"],
+    "sephirah_hod": SEPHIRAH_NODES["hod"],
+    "sephirah_yesod": SEPHIRAH_NODES["yesod"],
+    "sephirah_malkuth": SEPHIRAH_NODES["malkuth"],
     # Semantic Spectrum
     "primary_light": COLOR_PRIMARY_LIGHT,
     "primary": COLOR_PRIMARY,
@@ -171,6 +283,9 @@ STYLE_3_PALETTE: Final[Dict[str, str]] = {
 
 # Unified registry of generalized comparison palettes
 COMPARISON_PALETTES: Final[Dict[str, Dict[str, str]]] = {
+    "eigen": EIGEN_COLORS,
+    "eigen_nodes": EIGEN_NODES,
+    "sephirah_nodes": SEPHIRAH_NODES,
     "style_1": STYLE_1_PALETTE,
     "networkx_graphs": NETWORKX_GRAPHS_PALETTE,
     "style_3": STYLE_3_PALETTE,
@@ -230,16 +345,52 @@ HEATMAP_CYCLIC_PHASE: Final[LinearSegmentedColormap] = create_eigenscribe_colorm
     ["#0070eb", "#0a95eb", "#14b5ff", "#00f0ff", "#a855f7", "#5e17eb", "#0070eb"],
 )
 
-# Heatmap style 5: Deep Cosmic to Sephirah Ice-Cyan (Luminous Ethereal Gradient)
+# Heatmap style 5: Deep Cosmic Void to Luminous Cyan
+HEATMAP_COSMIC_CYAN: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
+    "eigenscribe_cosmic_cyan",
+    [COLOR_BG_COSMIC_VOID, COLOR_BG_COSMIC, COLOR_PRIMARY_DARK, COLOR_PRIMARY, COLOR_PRIMARY_LIGHT, COLOR_LUMINOUS_CYAN],
+)
 HEATMAP_COSMIC_SEPHIRAH: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
     "eigenscribe_cosmic_sephirah",
-    [COLOR_BG_COSMIC_VOID, COLOR_BG_COSMIC, COLOR_PRIMARY_DARK, COLOR_PRIMARY, COLOR_PRIMARY_LIGHT, COLOR_SEPHIRAH_CYAN],
+    [COLOR_BG_COSMIC_VOID, COLOR_BG_COSMIC, COLOR_PRIMARY_DARK, COLOR_PRIMARY, COLOR_PRIMARY_LIGHT, COLOR_LUMINOUS_CYAN],
 )
 
 # Heatmap style 6: Cosmic Void to Electric Cyan
 HEATMAP_COSMIC_VOID_TO_CYAN: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
     "eigenscribe_cosmic_void_to_cyan",
-    [COLOR_BG_COSMIC, COLOR_PRIMARY_DARK, COLOR_PRIMARY_LIGHT, COLOR_SEPHIRAH_CYAN],
+    [COLOR_BG_COSMIC, COLOR_PRIMARY_DARK, COLOR_PRIMARY_LIGHT, COLOR_LUMINOUS_CYAN],
+)
+
+# Heatmap style 7: Vibrant 10-Node Cosmic Spectrum
+HEATMAP_COSMIC_SPECTRUM: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
+    "eigenscribe_cosmic_spectrum",
+    [
+        EIGEN_NODES["node_9"],
+        EIGEN_NODES["node_8"],
+        EIGEN_NODES["node_7"],
+        EIGEN_NODES["node_6"],
+        EIGEN_NODES["node_5"],
+        EIGEN_NODES["node_4"],
+        EIGEN_NODES["node_3"],
+        EIGEN_NODES["node_2"],
+        EIGEN_NODES["node_1"],
+        EIGEN_NODES["node_0"],
+    ],
+)
+HEATMAP_SEPHIRAH_SPECTRUM: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
+    "eigenscribe_sephirah_spectrum",
+    [
+        EIGEN_NODES["node_9"],
+        EIGEN_NODES["node_8"],
+        EIGEN_NODES["node_7"],
+        EIGEN_NODES["node_6"],
+        EIGEN_NODES["node_5"],
+        EIGEN_NODES["node_4"],
+        EIGEN_NODES["node_3"],
+        EIGEN_NODES["node_2"],
+        EIGEN_NODES["node_1"],
+        EIGEN_NODES["node_0"],
+    ],
 )
 
 # Plotly Format Cyclic Phase Colorscale (for Dash / Plotly heatmaps & circle graphs)
@@ -260,8 +411,10 @@ SEMANTIC_COLORMAPS: Final[Dict[str, LinearSegmentedColormap]] = {
         [COLOR_PRIMARY_LIGHT, COLOR_PRIMARY, COLOR_SECONDARY, COLOR_TERTIARY],
     ),
     "Cyclic Phase": HEATMAP_CYCLIC_PHASE,
+    "Cosmic Cyan": HEATMAP_COSMIC_CYAN,
     "Cosmic Sephirah": HEATMAP_COSMIC_SEPHIRAH,
     "Cosmic Void to Cyan": HEATMAP_COSMIC_VOID_TO_CYAN,
+    "Cosmic Spectrum": HEATMAP_COSMIC_SPECTRUM,
     "Order Parameter [0, 1]": create_eigenscribe_colormap(
         "eigenscribe_order_param",
         [COLOR_SURFACE, COLOR_PRIMARY, COLOR_PRIMARY_LIGHT],
@@ -286,8 +439,11 @@ EIGENSCRIBE_COLORMAPS: Final[Dict[str, LinearSegmentedColormap]] = {
     "light_blue_to_dark_blue": HEATMAP_LIGHT_BLUE_TO_DARK_BLUE,
     "light_green_to_dark_green": HEATMAP_LIGHT_GREEN_TO_DARK_GREEN,
     "cyclic_phase": HEATMAP_CYCLIC_PHASE,
+    "cosmic_cyan": HEATMAP_COSMIC_CYAN,
     "cosmic_sephirah": HEATMAP_COSMIC_SEPHIRAH,
     "cosmic_void_to_cyan": HEATMAP_COSMIC_VOID_TO_CYAN,
+    "cosmic_spectrum": HEATMAP_COSMIC_SPECTRUM,
+    "sephirah_spectrum": HEATMAP_SEPHIRAH_SPECTRUM,
     **{k.lower().split()[0]: v for k, v in SEMANTIC_COLORMAPS.items()},
 }
 
@@ -588,8 +744,11 @@ def _resolve_heatmap_colormap(style: str) -> Colormap:
         "light_blue_to_dark_blue": HEATMAP_LIGHT_BLUE_TO_DARK_BLUE,
         "light_green_to_dark_green": HEATMAP_LIGHT_GREEN_TO_DARK_GREEN,
         "cyclic_phase": HEATMAP_CYCLIC_PHASE,
+        "cosmic_cyan": HEATMAP_COSMIC_CYAN,
         "cosmic_sephirah": HEATMAP_COSMIC_SEPHIRAH,
         "cosmic_void_to_cyan": HEATMAP_COSMIC_VOID_TO_CYAN,
+        "cosmic_spectrum": HEATMAP_COSMIC_SPECTRUM,
+        "sephirah_spectrum": HEATMAP_SEPHIRAH_SPECTRUM,
     }
     
     if style in style_map:
@@ -601,7 +760,7 @@ def _resolve_heatmap_colormap(style: str) -> Colormap:
     else:
         raise ValueError(
             f"Unknown heatmap style '{style}'. Choose from 'pink_to_blue', "
-            f"'light_blue_to_dark_blue', 'light_green_to_dark_green', 'cyclic_phase', 'cosmic_sephirah', 'cosmic_void_to_cyan', or registered colormaps."
+            f"'light_blue_to_dark_blue', 'light_green_to_dark_green', 'cyclic_phase', 'cosmic_cyan', 'cosmic_void_to_cyan', 'cosmic_spectrum', or registered colormaps."
         )
 
 
@@ -625,8 +784,15 @@ def run_smoke_test() -> bool:
     assert "eigenscribe_light_blue_to_dark_blue" in mpl.colormaps, "Colormap registration failed."
     assert "eigenscribe_light_green_to_dark_green" in mpl.colormaps, "Colormap registration failed."
     assert "eigenscribe_cyclic_phase" in mpl.colormaps, "Cyclic phase colormap registration failed."
+    assert "eigenscribe_cosmic_cyan" in mpl.colormaps, "Cosmic Cyan colormap registration failed."
     assert "eigenscribe_cosmic_sephirah" in mpl.colormaps, "Cosmic Sephirah colormap registration failed."
     assert "eigenscribe_cosmic_void_to_cyan" in mpl.colormaps, "Cosmic Void to Cyan colormap registration failed."
+    assert "eigenscribe_cosmic_spectrum" in mpl.colormaps, "Cosmic Spectrum colormap registration failed."
+    assert "eigenscribe_sephirah_spectrum" in mpl.colormaps, "Sephirah Spectrum colormap registration failed."
+    assert len(EIGEN_NODES) == 10, "EIGEN nodes count mismatch."
+    assert len(EIGEN_NODE_COLORS) == 10, "EIGEN node colors count mismatch."
+    assert len(EIGEN_LABEL_COLORS) == 10, "EIGEN label colors count mismatch."
+    assert len(EIGEN_COLORS) == 4, "EIGEN colors count mismatch."
     
     # Verify cosmic theme mode
     apply_cosmic_theme()
@@ -662,7 +828,7 @@ def run_smoke_test() -> bool:
     )
     
     # Test remaining colormaps without error
-    for style_name in ["light_blue_to_dark_blue", "light_green_to_dark_green", "cyclic_phase", "cosmic_sephirah", "cosmic_void_to_cyan"]:
+    for style_name in ["light_blue_to_dark_blue", "light_green_to_dark_green", "cyclic_phase", "cosmic_cyan", "cosmic_sephirah", "cosmic_void_to_cyan", "cosmic_spectrum", "sephirah_spectrum"]:
         fig_sub, ax_sub = plt.subplots(figsize=(4, 4))
         plot_eigenscribe_heatmap(matrix_data, style=style_name, ax=ax_sub, title=style_name)
         plt.close(fig_sub)

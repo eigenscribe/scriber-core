@@ -73,7 +73,33 @@ EIGENSCRIBE_PALETTE: Final[dict[str, int]] = {
     "eigen_blue_bright": 33,     # Bright electric blue
     "eigen_cyan": 51,            # Electric cyan for info
     "eigen_cyan_light": 81,      # Light cyan accent
-    "eigen_sephirah_cyan": 123,  # Luminous Sephirah ice-cyan (#c8f8ff)
+    "eigen_luminous_cyan": 123,  # Luminous ice-cyan (#c8f8ff)
+    "eigen_sephirah_cyan": 123,  # Legacy alias
+    "eigen_sky": 39,             # EIGEN Sky Blue (#14b5ff)
+
+    # --- Vibrant 10-Node Spectrum ---
+    "eigen_node_0": 230,         # 0. Crown / White-Gold (#fff9d6)
+    "eigen_node_1": 51,          # 1. Electric Cyan (#00ffff)
+    "eigen_node_2": 45,          # 2. Bright Cyan (#00e8ff)
+    "eigen_node_3": 39,          # 3. Sky Blue (#14b5ff)
+    "eigen_node_4": 27,          # 4. Royal Cobalt (#0070eb)
+    "eigen_node_5": 220,         # 5. Radiant Amber Gold (#ffd94a)
+    "eigen_node_6": 129,         # 6. Electric Purple (#7952f5)
+    "eigen_node_7": 93,          # 7. Deep Violet (#5e17eb)
+    "eigen_node_8": 205,         # 8. Vibrant Neon Pink (#ff66b3)
+    "eigen_node_9": 40,          # 9. Vivid Emerald Green (#00c853)
+
+    # Legacy node aliases
+    "sephirah_keter": 230,
+    "sephirah_chokhmah": 51,
+    "sephirah_binah": 45,
+    "sephirah_chesed": 39,
+    "sephirah_gevurah": 27,
+    "sephirah_tiferet": 220,
+    "sephirah_netzach": 129,
+    "sephirah_hod": 93,
+    "sephirah_yesod": 205,
+    "sephirah_malkuth": 40,
 
     # --- Purples (Secondary domain) ---
     "eigen_purple_dark": 55,     # Deep violet
