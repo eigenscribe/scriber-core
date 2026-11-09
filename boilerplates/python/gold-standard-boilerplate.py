@@ -4,9 +4,15 @@ gold-standard-boilerplate.py
 Gold Standard script template for scientific computing, theoretical modeling,
 and physical system simulations.
 
-Author: Scriber Labs
-Date: 2026-10-13
+The conceptual story follows the repository's 'Rule of Thumb':
+What exists -> what you're allowed to call -> how it works -> proof it works.
+
+Author: Eigenscribe
+Review status: Reviewed and maintained by Eigenscribe.
+Date: May 2026
 """
+
+from __future__ import annotations
 
 import numpy as np
 from numpy.typing import NDArray

@@ -40,8 +40,9 @@ example.py
 
 Script description and theoretical summary.
 
-Author: Scriber Labs
-Date: 2026-10-23
+Author: Eigenscribe
+Review status: Reviewed and maintained by Eigenscribe.
+Date: May 2026
 """
 from __future__ import annotations
 
