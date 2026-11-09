@@ -14,9 +14,10 @@ Date: May 2026
 
 from __future__ import annotations
 
+from typing import Final, Protocol, TypeAlias
+
 import numpy as np
 from numpy.typing import NDArray
-from typing import Final, Protocol, TypeAlias
 
 # Define typing aliases for clear mathematical intent
 ArrayOrFloat: TypeAlias = float | NDArray[np.float64]
