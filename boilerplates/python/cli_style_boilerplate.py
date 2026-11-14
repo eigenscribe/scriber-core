@@ -31,14 +31,51 @@ if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 elif sys.platform == "win32":
     import io
+
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
 # Try to import click; fall back to raw print if not available
 try:
     import click
+
     _HAS_CLICK = True
 except ImportError:
     _HAS_CLICK = False
+
+# Import gradient engine components (fallback to local or inline if needed)
+try:
+    from cli_gradient_boilerplate import (
+        PRESETS,
+        RGB,
+        Color,
+        hex_to_rgb,
+        multi_gradient,
+    )
+except ImportError:
+    try:
+        from .cli_gradient_boilerplate import (
+            PRESETS,
+            RGB,
+            Color,
+            hex_to_rgb,
+            multi_gradient,
+        )
+    except ImportError:
+        PRESETS = {
+            "electric": ("#00a6ff", "#a855f7", "#ff00c3"),
+        }
+        RGB = tuple[int, int, int]
+        Color = str | RGB
+
+        def hex_to_rgb(hex_color: str) -> RGB:
+            v = hex_color.removeprefix("#")
+            return int(v[0:2], 16), int(v[2:4], 16), int(v[4:6], 16)
+
+        def multi_gradient(
+            text: str, colors: any = PRESETS["electric"], *, bold: bool = True
+        ) -> str:
+            return text
+
 
 __all__: list[str] = [
     # Core messaging
@@ -52,6 +89,12 @@ __all__: list[str] = [
     "cli_warning",
     "cli_error",
     "cli_highlight",
+    # Gradients & Colors
+    "multi_gradient",
+    "PRESETS",
+    "Color",
+    "RGB",
+    "hex_to_rgb",
     # Color palette access
     "EIGENSCRIBE_PALETTE",
     "ansi_256",
@@ -66,31 +109,29 @@ __all__: list[str] = [
 # Blues (primary), Purples (secondary), Pinks (accents), Greens (success), Oranges (warnings)
 EIGENSCRIBE_PALETTE: Final[dict[str, int]] = {
     # --- Blues & Cosmic Foundations (Primary domain) ---
-    "eigen_cosmic_void": 16,     # Deep cosmic void black (#000000)
-    "eigen_cosmic_navy": 17,     # Deep cosmic navy (#0a0f1f)
-    "eigen_blue_dark": 25,       # Deep navy blue
-    "eigen_blue": 27,            # Core Eigenscribe blue
-    "eigen_blue_bright": 33,     # Bright electric blue
-    "eigen_azure": 32,           # Azure blue (#0a95eb / #0596f0)
-    "eigen_cyan": 51,            # Electric cyan for info
-    "eigen_cyan_light": 81,      # Light cyan accent
-    "eigen_cyan_pure": 51,       # Pure cyan (#00ffee)
+    "eigen_cosmic_void": 16,  # Deep cosmic void black (#000000)
+    "eigen_cosmic_navy": 17,  # Deep cosmic navy (#0a0f1f)
+    "eigen_blue_dark": 25,  # Deep navy blue
+    "eigen_blue": 27,  # Core Eigenscribe blue
+    "eigen_blue_bright": 33,  # Bright electric blue
+    "eigen_azure": 32,  # Azure blue (#0a95eb / #0596f0)
+    "eigen_cyan": 51,  # Electric cyan for info
+    "eigen_cyan_light": 81,  # Light cyan accent
+    "eigen_cyan_pure": 51,  # Pure cyan (#00ffee)
     "eigen_luminous_cyan": 123,  # Luminous ice-cyan (#c8f8ff)
     "eigen_sephirah_cyan": 123,  # Legacy alias
-    "eigen_sky": 39,             # EIGEN Sky Blue (#14b5ff)
-
+    "eigen_sky": 39,  # EIGEN Sky Blue (#14b5ff)
     # --- Vibrant 10-Node Spectrum ---
-    "eigen_node_0": 230,         # 0. Crown / White-Gold (#fff9d6)
-    "eigen_node_1": 51,          # 1. Electric Cyan (#00ffff)
-    "eigen_node_2": 45,          # 2. Bright Cyan (#00e8ff)
-    "eigen_node_3": 39,          # 3. Sky Blue (#14b5ff)
-    "eigen_node_4": 27,          # 4. Royal Cobalt (#0070eb)
-    "eigen_node_5": 220,         # 5. Radiant Amber Gold (#ffd94a)
-    "eigen_node_6": 129,         # 6. Electric Purple (#7952f5)
-    "eigen_node_7": 93,          # 7. Deep Violet (#5e17eb)
-    "eigen_node_8": 205,         # 8. Vibrant Neon Pink (#ff66b3)
-    "eigen_node_9": 40,          # 9. Vivid Emerald Green (#00c853)
-
+    "eigen_node_0": 230,  # 0. Crown / White-Gold (#fff9d6)
+    "eigen_node_1": 51,  # 1. Electric Cyan (#00ffff)
+    "eigen_node_2": 45,  # 2. Bright Cyan (#00e8ff)
+    "eigen_node_3": 39,  # 3. Sky Blue (#14b5ff)
+    "eigen_node_4": 27,  # 4. Royal Cobalt (#0070eb)
+    "eigen_node_5": 220,  # 5. Radiant Amber Gold (#ffd94a)
+    "eigen_node_6": 129,  # 6. Electric Purple (#7952f5)
+    "eigen_node_7": 93,  # 7. Deep Violet (#5e17eb)
+    "eigen_node_8": 205,  # 8. Vibrant Neon Pink (#ff66b3)
+    "eigen_node_9": 40,  # 9. Vivid Emerald Green (#00c853)
     # Legacy node aliases
     "sephirah_keter": 230,
     "sephirah_chokhmah": 51,
@@ -102,45 +143,38 @@ EIGENSCRIBE_PALETTE: Final[dict[str, int]] = {
     "sephirah_hod": 93,
     "sephirah_yesod": 205,
     "sephirah_malkuth": 40,
-
     # --- 4-Color Vibrant Accent Set ---
-    "eigen_accent_green": 83,    # Bright lime-green (#38fe52)
-    "eigen_accent_blue": 33,     # Cobalt accent blue (#3881fe)
-    "eigen_accent_magenta": 206, # Vivid magenta (#fe38e4)
-    "eigen_accent_amber": 215,   # Warm amber (#feb538)
-
+    "eigen_accent_green": 83,  # Bright lime-green (#38fe52)
+    "eigen_accent_blue": 33,  # Cobalt accent blue (#3881fe)
+    "eigen_accent_magenta": 206,  # Vivid magenta (#fe38e4)
+    "eigen_accent_amber": 215,  # Warm amber (#feb538)
     # --- Purples (Secondary domain) ---
-    "eigen_purple_dark": 55,     # Deep violet
-    "eigen_purple": 129,         # Core Eigenscribe purple
+    "eigen_purple_dark": 55,  # Deep violet
+    "eigen_purple": 129,  # Core Eigenscribe purple
     "eigen_purple_bright": 141,  # Bright magenta-purple
-    "eigen_magenta": 163,        # Magenta for highlights
-    "eigen_synthwave_purple": 99, # Synthwave indigo-violet
-
+    "eigen_magenta": 163,  # Magenta for highlights
+    "eigen_synthwave_purple": 99,  # Synthwave indigo-violet
     # --- Pinks (Accent domain) ---
-    "eigen_pink": 212,           # Soft pink accent
-    "eigen_pink_bright": 199,    # Bright pink for emphasis
-    "eigen_hot_pink": 198,       # Hot neon pink (#ff40a1)
-
+    "eigen_pink": 212,  # Soft pink accent
+    "eigen_pink_bright": 199,  # Bright pink for emphasis
+    "eigen_hot_pink": 198,  # Hot neon pink (#ff40a1)
     # --- Greens (Success domain) ---
-    "eigen_green_dark": 22,      # Deep forest green
-    "eigen_green": 35,           # Core green
-    "eigen_green_bright": 41,    # Bright success green
-    "eigen_mint": 121,           # Mint green accent
-
+    "eigen_green_dark": 22,  # Deep forest green
+    "eigen_green": 35,  # Core green
+    "eigen_green_bright": 41,  # Bright success green
+    "eigen_mint": 121,  # Mint green accent
     # --- Oranges/Ambers (Warning domain) ---
-    "eigen_amber": 214,          # Amber warning
-    "eigen_orange": 208,         # Core orange
+    "eigen_amber": 214,  # Amber warning
+    "eigen_orange": 208,  # Core orange
     "eigen_orange_bright": 202,  # Bright orange accent
-    "eigen_coral": 209,          # Coral orange (#ff783d / #f78166)
-
+    "eigen_coral": 209,  # Coral orange (#ff783d / #f78166)
     # --- Reds (Error domain) ---
-    "eigen_red": 160,            # Soft red for errors
-    "eigen_red_bright": 196,     # Bright red for critical errors
-
+    "eigen_red": 160,  # Soft red for errors
+    "eigen_red_bright": 196,  # Bright red for critical errors
     # --- Neutrals ---
-    "eigen_white": 189,          # Soft white
-    "eigen_gray": 145,           # Medium gray
-    "eigen_gray_dark": 102,      # Dark gray for dimmed text
+    "eigen_white": 189,  # Soft white
+    "eigen_gray": 145,  # Medium gray
+    "eigen_gray_dark": 102,  # Dark gray for dimmed text
 }
 
 # Semantic style map: maps message levels to palette keys
@@ -457,18 +491,39 @@ def _run_smoke_test() -> None:
 
     # Palette showcase
     cli_rule()
-    cli_echo("🎨 Eigenscribe 256-Color Palette Showcase:", color="eigen_white", bold=True)
+    cli_echo(
+        "🎨 Eigenscribe 256-Color Palette Showcase:", color="eigen_white", bold=True
+    )
+    cli_rule()
+
+    # Gradient Engine Showcase
+    _echo(
+        f"  🌈 Gradient (Electric): {multi_gradient('EIGENSCRIBE TRUECOLOR GRADIENT ENGINE', PRESETS.get('electric', ('#00a6ff', '#a855f7', '#ff00c3')))}"
+    )
     cli_rule()
 
     if supports_256_color():
         groups = {
-            "🔵 Blues": ["eigen_blue_dark", "eigen_blue", "eigen_blue_bright",
-                         "eigen_cyan", "eigen_cyan_light"],
-            "🟣 Purples": ["eigen_purple_dark", "eigen_purple",
-                           "eigen_purple_bright", "eigen_magenta"],
+            "🔵 Blues": [
+                "eigen_blue_dark",
+                "eigen_blue",
+                "eigen_blue_bright",
+                "eigen_cyan",
+                "eigen_cyan_light",
+            ],
+            "🟣 Purples": [
+                "eigen_purple_dark",
+                "eigen_purple",
+                "eigen_purple_bright",
+                "eigen_magenta",
+            ],
             "🩷 Pinks": ["eigen_pink", "eigen_pink_bright"],
-            "🟢 Greens": ["eigen_green_dark", "eigen_green",
-                          "eigen_green_bright", "eigen_mint"],
+            "🟢 Greens": [
+                "eigen_green_dark",
+                "eigen_green",
+                "eigen_green_bright",
+                "eigen_mint",
+            ],
             "🟠 Oranges": ["eigen_amber", "eigen_orange", "eigen_orange_bright"],
             "🔴 Reds": ["eigen_red", "eigen_red_bright"],
             "⚪ Neutrals": ["eigen_white", "eigen_gray", "eigen_gray_dark"],

@@ -16,6 +16,7 @@ Welcome to the canonical environment index for autonomous development agents. Th
 │   ├── notebooks/
 │   │   └── visuals-boilerplate.ipynb    # Visualizations, NetworkX topologies & color palettes template
 │   └── python/
+│       ├── cli_gradient_boilerplate.py  # ANSI TrueColor multi-stop linear RGB gradient engine
 │       ├── cli_style_boilerplate.py     # ANSI 256-color terminal palette and message styling
 │       ├── gold-standard-boilerplate.py # Gold standard numeric integration script template
 │       └── visualization_boilerplate.py # Generalizable visualization bootstrap for Matplotlib/Pyplot/Seaborn

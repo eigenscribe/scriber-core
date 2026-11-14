@@ -18,6 +18,7 @@ from numpy.typing import NDArray
 
 try:
     import seaborn as sns
+
     HAS_SEABORN = True
 except ImportError:
     sns = None
@@ -25,6 +26,7 @@ except ImportError:
 
 try:
     import plotly.graph_objects as go
+
     HAS_PLOTLY = True
 except ImportError:
     go = None
@@ -102,10 +104,10 @@ COLOR_GRID: Final[str] = "#21262d"
 COLOR_MATH: Final[str] = "#00f5db"
 
 # --- Canonical EIGEN Spectrum ---
-EIGEN_CYAN: Final[str] = "#00e8ff"      # 0x00e8ff
-EIGEN_SKY: Final[str] = "#14b5ff"       # 0x14b5ff
-EIGEN_BLUE: Final[str] = "#3a98ff"      # 0x3a98ff
-EIGEN_PURPLE: Final[str] = "#7952f5"    # 0x7952f5
+EIGEN_CYAN: Final[str] = "#00e8ff"  # 0x00e8ff
+EIGEN_SKY: Final[str] = "#14b5ff"  # 0x14b5ff
+EIGEN_BLUE: Final[str] = "#3a98ff"  # 0x3a98ff
+EIGEN_PURPLE: Final[str] = "#7952f5"  # 0x7952f5
 
 EIGEN_COLORS: Final[Dict[str, str]] = {
     "cyan": EIGEN_CYAN,
@@ -155,8 +157,16 @@ EIGEN_LABEL_COLORS: Final[List[str]] = [
 ]
 
 EIGEN_NODE_NAMES: Final[List[str]] = [
-    "0️⃣ Keter", "1️⃣ Chokhmah", "2️⃣ Binah", "3️⃣ Chesed", "4️⃣ Gevurah",
-    "5️⃣ Tiferet", "6️⃣ Netzach", "7️⃣ Hod", "8️⃣ Yesod", "9️⃣ Malkuth"
+    "0️⃣ Keter",
+    "1️⃣ Chokhmah",
+    "2️⃣ Binah",
+    "3️⃣ Chesed",
+    "4️⃣ Gevurah",
+    "5️⃣ Tiferet",
+    "6️⃣ Netzach",
+    "7️⃣ Hod",
+    "8️⃣ Yesod",
+    "9️⃣ Malkuth",
 ]
 
 # Legacy / Alternative aliases
@@ -302,12 +312,49 @@ GRADIENT_0_CYANS: Final[List[str]] = ["#00ffff", "#00e8ff"]
 GRADIENT_1_CYAN_SKY: Final[List[str]] = ["#00ffee", "#14b5ff"]
 GRADIENT_2_CYAN_BLUE: Final[List[str]] = ["#00e8ff", "#0070eb"]
 GRADIENT_3_TEAL_BLUE: Final[List[str]] = ["#03e8bd", "#03b4e8", "#0355e8"]
-GRADIENT_4_CYAN_PURPLE: Final[List[str]] = ["#00e8ff", "#14b5ff", "#0a95eb", "#0070eb", "#5e17eb"]
-GRADIENT_5_CYAN_DEEP_PURPLE: Final[List[str]] = ["#00e8ff", "#3a98ff", "#0a95eb", "#7952f5", "#5e17eb"]
-GRADIENT_6_CYAN_PINK: Final[List[str]] = ["#00e8ff", "#14b5ff", "#5280ff", "#7952f5", "#ff66b3"]
-GRADIENT_7_FULL_FLOW: Final[List[str]] = ["#00e8ff", "#14b5ff", "#5280ff", "#7952f5", "#ff66b3", "#f78166"]
-GRADIENT_8_SYNTHWAVE: Final[List[str]] = ["#4cc9f0", "#4361ee", "#3a0ca3", "#7209b7", "#f72585"]
-GRADIENT_8_SYNTHWAVE_REV: Final[List[str]] = ["#f72585", "#7209b7", "#3a0ca3", "#4361ee", "#4cc9f0"]
+GRADIENT_4_CYAN_PURPLE: Final[List[str]] = [
+    "#00e8ff",
+    "#14b5ff",
+    "#0a95eb",
+    "#0070eb",
+    "#5e17eb",
+]
+GRADIENT_5_CYAN_DEEP_PURPLE: Final[List[str]] = [
+    "#00e8ff",
+    "#3a98ff",
+    "#0a95eb",
+    "#7952f5",
+    "#5e17eb",
+]
+GRADIENT_6_CYAN_PINK: Final[List[str]] = [
+    "#00e8ff",
+    "#14b5ff",
+    "#5280ff",
+    "#7952f5",
+    "#ff66b3",
+]
+GRADIENT_7_FULL_FLOW: Final[List[str]] = [
+    "#00e8ff",
+    "#14b5ff",
+    "#5280ff",
+    "#7952f5",
+    "#ff66b3",
+    "#f78166",
+]
+GRADIENT_8_SYNTHWAVE: Final[List[str]] = [
+    "#4cc9f0",
+    "#4361ee",
+    "#3a0ca3",
+    "#7209b7",
+    "#f72585",
+]
+GRADIENT_8_SYNTHWAVE_REV: Final[List[str]] = [
+    "#f72585",
+    "#7209b7",
+    "#3a0ca3",
+    "#4361ee",
+    "#4cc9f0",
+]
 
 EIGENSCRIBE_GRADIENTS: Final[Dict[str, List[str]]] = {
     "gradient_0": GRADIENT_0_CYANS,
@@ -332,27 +379,75 @@ RAMP_PURPLE: Final[List[str]] = ["#120a24", "#3b176e", "#7c3aed", "#a855f7", "#d
 RAMP_MAGENTA: Final[List[str]] = ["#210817", "#7c174f", "#ad1457", "#f72585", "#ffb4f6"]
 
 # 5-Stop Obsidian Palette Scales
-PALETTE_PINK_AMBER: Final[List[str]] = ["#f75594", "#f7556b", "#f76755", "#f78f55", "#f7b855"]
-PALETTE_NEON_GREEN: Final[List[str]] = ["#81fe38", "#50fe38", "#38fe52", "#38fe84", "#38feb5"]
-PALETTE_CYAN_BLUE: Final[List[str]] = ["#00ff97", "#00ffd6", "#00e8ff", "#00a8ff", "#0068ff"]
-PALETTE_BLUE_VIOLET: Final[List[str]] = ["#52d6ff", "#52abff", "#5280ff", "#5255ff", "#7a52ff"]
-PALETTE_INDIGO_MAGENTA: Final[List[str]] = ["#527cf5", "#5254f5", "#7952f5", "#a252f5", "#ca52f5"]
+PALETTE_PINK_AMBER: Final[List[str]] = [
+    "#f75594",
+    "#f7556b",
+    "#f76755",
+    "#f78f55",
+    "#f7b855",
+]
+PALETTE_NEON_GREEN: Final[List[str]] = [
+    "#81fe38",
+    "#50fe38",
+    "#38fe52",
+    "#38fe84",
+    "#38feb5",
+]
+PALETTE_CYAN_BLUE: Final[List[str]] = [
+    "#00ff97",
+    "#00ffd6",
+    "#00e8ff",
+    "#00a8ff",
+    "#0068ff",
+]
+PALETTE_BLUE_VIOLET: Final[List[str]] = [
+    "#52d6ff",
+    "#52abff",
+    "#5280ff",
+    "#5255ff",
+    "#7a52ff",
+]
+PALETTE_INDIGO_MAGENTA: Final[List[str]] = [
+    "#527cf5",
+    "#5254f5",
+    "#7952f5",
+    "#a252f5",
+    "#ca52f5",
+]
 
 # Deep Void / Shaded Ramps
-RAMP_DEEP_PURPLE: Final[List[str]] = ["#462c96", "#33216e", "#211547", "#0f0920", "#000000"]
-RAMP_DEEP_VIOLET: Final[List[str]] = ["#371f9d", "#281673", "#190e48", "#0a061d", "#000000"]
-RAMP_SKY_BLUE: Final[List[str]] = ["#66c4ff", "#33b1ff", "#009dff", "#007ecc", "#005e99"]
+RAMP_DEEP_PURPLE: Final[List[str]] = [
+    "#462c96",
+    "#33216e",
+    "#211547",
+    "#0f0920",
+    "#000000",
+]
+RAMP_DEEP_VIOLET: Final[List[str]] = [
+    "#371f9d",
+    "#281673",
+    "#190e48",
+    "#0a061d",
+    "#000000",
+]
+RAMP_SKY_BLUE: Final[List[str]] = [
+    "#66c4ff",
+    "#33b1ff",
+    "#009dff",
+    "#007ecc",
+    "#005e99",
+]
 
 # High-contrast multi-curve line color cycle (optimized for distinctiveness & readability on dark surfaces)
 HIGH_CONTRAST_CYCLE: Final[List[str]] = [
-    COLOR_PRIMARY_LIGHT,     # #00e8ff Electric Cyan
-    COLOR_PERNARY,           # #ec4899 Hot Magenta / Pink
-    COLOR_TERTIARY_LIGHT,    # #22f792 Neon Emerald
-    COLOR_QUATERNARY,        # #f78166 Coral Orange
-    COLOR_SECONDARY,         # #9b7dff Cosmic Purple / Violet
+    COLOR_PRIMARY_LIGHT,  # #00e8ff Electric Cyan
+    COLOR_PERNARY,  # #ec4899 Hot Magenta / Pink
+    COLOR_TERTIARY_LIGHT,  # #22f792 Neon Emerald
+    COLOR_QUATERNARY,  # #f78166 Coral Orange
+    COLOR_SECONDARY,  # #9b7dff Cosmic Purple / Violet
     COLOR_QUATERNARY_LIGHT,  # #fef08a Radiant Yellow
-    COLOR_PRIMARY,           # #14b5ff Electric Blue
-    COLOR_MATH,              # #00f5db Turquoise / Math Accent
+    COLOR_PRIMARY,  # #14b5ff Electric Blue
+    COLOR_MATH,  # #00f5db Turquoise / Math Accent
 ]
 
 # --- Generalized Multi-Plot Style Palettes (Styles 1, 2, 3, NetworkX Graphs, Metrics) ---
@@ -388,17 +483,31 @@ STYLE_4_PALETTE: Final[Dict[str, str]] = {
 }
 
 # Obsidian 5-Color Palette Scales
-PALETTE_PINK_AMBER_MAP: Final[Dict[str, str]] = {f"p_{i}": c for i, c in enumerate(PALETTE_PINK_AMBER)}
-PALETTE_NEON_GREEN_MAP: Final[Dict[str, str]] = {f"g_{i}": c for i, c in enumerate(PALETTE_NEON_GREEN)}
-PALETTE_CYAN_BLUE_MAP: Final[Dict[str, str]] = {f"c_{i}": c for i, c in enumerate(PALETTE_CYAN_BLUE)}
-PALETTE_BLUE_VIOLET_MAP: Final[Dict[str, str]] = {f"b_{i}": c for i, c in enumerate(PALETTE_BLUE_VIOLET)}
-PALETTE_INDIGO_MAGENTA_MAP: Final[Dict[str, str]] = {f"m_{i}": c for i, c in enumerate(PALETTE_INDIGO_MAGENTA)}
+PALETTE_PINK_AMBER_MAP: Final[Dict[str, str]] = {
+    f"p_{i}": c for i, c in enumerate(PALETTE_PINK_AMBER)
+}
+PALETTE_NEON_GREEN_MAP: Final[Dict[str, str]] = {
+    f"g_{i}": c for i, c in enumerate(PALETTE_NEON_GREEN)
+}
+PALETTE_CYAN_BLUE_MAP: Final[Dict[str, str]] = {
+    f"c_{i}": c for i, c in enumerate(PALETTE_CYAN_BLUE)
+}
+PALETTE_BLUE_VIOLET_MAP: Final[Dict[str, str]] = {
+    f"b_{i}": c for i, c in enumerate(PALETTE_BLUE_VIOLET)
+}
+PALETTE_INDIGO_MAGENTA_MAP: Final[Dict[str, str]] = {
+    f"m_{i}": c for i, c in enumerate(PALETTE_INDIGO_MAGENTA)
+}
 
 # 5-Stop Sequential & Diverging Ramps
 RAMP_GREEN_MAP: Final[Dict[str, str]] = {f"g_{i}": c for i, c in enumerate(RAMP_GREEN)}
 RAMP_BLUE_MAP: Final[Dict[str, str]] = {f"b_{i}": c for i, c in enumerate(RAMP_BLUE)}
-RAMP_PURPLE_MAP: Final[Dict[str, str]] = {f"p_{i}": c for i, c in enumerate(RAMP_PURPLE)}
-RAMP_MAGENTA_MAP: Final[Dict[str, str]] = {f"m_{i}": c for i, c in enumerate(RAMP_MAGENTA)}
+RAMP_PURPLE_MAP: Final[Dict[str, str]] = {
+    f"p_{i}": c for i, c in enumerate(RAMP_PURPLE)
+}
+RAMP_MAGENTA_MAP: Final[Dict[str, str]] = {
+    f"m_{i}": c for i, c in enumerate(RAMP_MAGENTA)
+}
 
 # Unified registry of generalized comparison palettes
 COMPARISON_PALETTES: Final[Dict[str, Dict[str, str]]] = {
@@ -425,10 +534,9 @@ COMPARISON_PALETTES: Final[Dict[str, Dict[str, str]]] = {
 # 1️⃣ Core definitions
 # -----------------------------------------------------------------------------------------------------------
 
+
 def create_eigenscribe_colormap(
-    name: str, 
-    colors: Sequence[str], 
-    n_bins: int = 256
+    name: str, colors: Sequence[str], n_bins: int = 256
 ) -> LinearSegmentedColormap:
     """Construct a clean, high-contrast LinearSegmentedColormap.
 
@@ -457,15 +565,19 @@ HEATMAP_PINK_TO_BLUE: Final[LinearSegmentedColormap] = create_eigenscribe_colorm
 )
 
 # Heatmap style 2: Light Blue-to-Dark Blue Gradient (Sequential High Dynamic Range)
-HEATMAP_LIGHT_BLUE_TO_DARK_BLUE: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
-    "eigenscribe_light_blue_to_dark_blue",
-    [COLOR_PRIMARY_LIGHT, COLOR_PRIMARY, COLOR_PRIMARY_DARK],
+HEATMAP_LIGHT_BLUE_TO_DARK_BLUE: Final[LinearSegmentedColormap] = (
+    create_eigenscribe_colormap(
+        "eigenscribe_light_blue_to_dark_blue",
+        [COLOR_PRIMARY_LIGHT, COLOR_PRIMARY, COLOR_PRIMARY_DARK],
+    )
 )
 
 # Heatmap style 3: Light Green-to-Dark Green Gradient (Sequential STEM / Coherence Metric)
-HEATMAP_LIGHT_GREEN_TO_DARK_GREEN: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
-    "eigenscribe_light_green_to_dark_green",
-    [COLOR_TERTIARY_LIGHT, COLOR_TERTIARY, COLOR_TERTIARY_DARK],
+HEATMAP_LIGHT_GREEN_TO_DARK_GREEN: Final[LinearSegmentedColormap] = (
+    create_eigenscribe_colormap(
+        "eigenscribe_light_green_to_dark_green",
+        [COLOR_TERTIARY_LIGHT, COLOR_TERTIARY, COLOR_TERTIARY_DARK],
+    )
 )
 
 # Heatmap style 4: High-Contrast Cyclic Phase Colormap (0 to 2π Continuous)
@@ -477,17 +589,33 @@ HEATMAP_CYCLIC_PHASE: Final[LinearSegmentedColormap] = create_eigenscribe_colorm
 # Heatmap style 5: Deep Cosmic Void to Luminous Cyan
 HEATMAP_COSMIC_CYAN: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
     "eigenscribe_cosmic_cyan",
-    [COLOR_BG_COSMIC_VOID, COLOR_BG_COSMIC, COLOR_PRIMARY_DARK, COLOR_PRIMARY, COLOR_PRIMARY_LIGHT, COLOR_LUMINOUS_CYAN],
+    [
+        COLOR_BG_COSMIC_VOID,
+        COLOR_BG_COSMIC,
+        COLOR_PRIMARY_DARK,
+        COLOR_PRIMARY,
+        COLOR_PRIMARY_LIGHT,
+        COLOR_LUMINOUS_CYAN,
+    ],
 )
 HEATMAP_COSMIC_SEPHIRAH: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
     "eigenscribe_cosmic_sephirah",
-    [COLOR_BG_COSMIC_VOID, COLOR_BG_COSMIC, COLOR_PRIMARY_DARK, COLOR_PRIMARY, COLOR_PRIMARY_LIGHT, COLOR_LUMINOUS_CYAN],
+    [
+        COLOR_BG_COSMIC_VOID,
+        COLOR_BG_COSMIC,
+        COLOR_PRIMARY_DARK,
+        COLOR_PRIMARY,
+        COLOR_PRIMARY_LIGHT,
+        COLOR_LUMINOUS_CYAN,
+    ],
 )
 
 # Heatmap style 6: Cosmic Void to Electric Cyan
-HEATMAP_COSMIC_VOID_TO_CYAN: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
-    "eigenscribe_cosmic_void_to_cyan",
-    [COLOR_BG_COSMIC, COLOR_PRIMARY_DARK, COLOR_PRIMARY_LIGHT, COLOR_LUMINOUS_CYAN],
+HEATMAP_COSMIC_VOID_TO_CYAN: Final[LinearSegmentedColormap] = (
+    create_eigenscribe_colormap(
+        "eigenscribe_cosmic_void_to_cyan",
+        [COLOR_BG_COSMIC, COLOR_PRIMARY_DARK, COLOR_PRIMARY_LIGHT, COLOR_LUMINOUS_CYAN],
+    )
 )
 
 # Heatmap style 7: Vibrant 10-Node Cosmic Spectrum
@@ -523,22 +651,50 @@ HEATMAP_SEPHIRAH_SPECTRUM: Final[LinearSegmentedColormap] = create_eigenscribe_c
 )
 
 # Signature Obsidian Gradients Colormaps
-HEATMAP_GRADIENT_0: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_gradient_0", GRADIENT_0_CYANS)
-HEATMAP_GRADIENT_1: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_gradient_1", GRADIENT_1_CYAN_SKY)
-HEATMAP_GRADIENT_2: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_gradient_2", GRADIENT_2_CYAN_BLUE)
-HEATMAP_GRADIENT_3: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_gradient_3", GRADIENT_3_TEAL_BLUE)
-HEATMAP_GRADIENT_4: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_gradient_4", GRADIENT_4_CYAN_PURPLE)
-HEATMAP_GRADIENT_5: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_gradient_5", GRADIENT_5_CYAN_DEEP_PURPLE)
-HEATMAP_GRADIENT_6: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_gradient_6", GRADIENT_6_CYAN_PINK)
-HEATMAP_GRADIENT_7: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_gradient_7", GRADIENT_7_FULL_FLOW)
-HEATMAP_GRADIENT_8: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_gradient_8", GRADIENT_8_SYNTHWAVE)
-HEATMAP_SYNTHWAVE: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_synthwave", GRADIENT_8_SYNTHWAVE_REV)
+HEATMAP_GRADIENT_0: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
+    "eigenscribe_gradient_0", GRADIENT_0_CYANS
+)
+HEATMAP_GRADIENT_1: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
+    "eigenscribe_gradient_1", GRADIENT_1_CYAN_SKY
+)
+HEATMAP_GRADIENT_2: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
+    "eigenscribe_gradient_2", GRADIENT_2_CYAN_BLUE
+)
+HEATMAP_GRADIENT_3: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
+    "eigenscribe_gradient_3", GRADIENT_3_TEAL_BLUE
+)
+HEATMAP_GRADIENT_4: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
+    "eigenscribe_gradient_4", GRADIENT_4_CYAN_PURPLE
+)
+HEATMAP_GRADIENT_5: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
+    "eigenscribe_gradient_5", GRADIENT_5_CYAN_DEEP_PURPLE
+)
+HEATMAP_GRADIENT_6: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
+    "eigenscribe_gradient_6", GRADIENT_6_CYAN_PINK
+)
+HEATMAP_GRADIENT_7: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
+    "eigenscribe_gradient_7", GRADIENT_7_FULL_FLOW
+)
+HEATMAP_GRADIENT_8: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
+    "eigenscribe_gradient_8", GRADIENT_8_SYNTHWAVE
+)
+HEATMAP_SYNTHWAVE: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
+    "eigenscribe_synthwave", GRADIENT_8_SYNTHWAVE_REV
+)
 
 # 5-Stop Sequential Ramp Colormaps
-HEATMAP_RAMP_GREEN: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_ramp_green", RAMP_GREEN)
-HEATMAP_RAMP_BLUE: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_ramp_blue", RAMP_BLUE)
-HEATMAP_RAMP_PURPLE: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_ramp_purple", RAMP_PURPLE)
-HEATMAP_RAMP_MAGENTA: Final[LinearSegmentedColormap] = create_eigenscribe_colormap("eigenscribe_ramp_magenta", RAMP_MAGENTA)
+HEATMAP_RAMP_GREEN: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
+    "eigenscribe_ramp_green", RAMP_GREEN
+)
+HEATMAP_RAMP_BLUE: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
+    "eigenscribe_ramp_blue", RAMP_BLUE
+)
+HEATMAP_RAMP_PURPLE: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
+    "eigenscribe_ramp_purple", RAMP_PURPLE
+)
+HEATMAP_RAMP_MAGENTA: Final[LinearSegmentedColormap] = create_eigenscribe_colormap(
+    "eigenscribe_ramp_magenta", RAMP_MAGENTA
+)
 
 # Plotly Format Cyclic Phase Colorscale (for Dash / Plotly heatmaps & circle graphs)
 PLOTLY_CYCLIC_PHASE_COLORSCALE: Final[List[List[Any]]] = [
@@ -621,6 +777,7 @@ EIGENSCRIBE_COLORMAPS: Final[Dict[str, LinearSegmentedColormap]] = {
 # 2️⃣ Public API (functions users are meant to call)
 # -----------------------------------------------------------------------------------------------------------
 
+
 def register_colormaps() -> None:
     """Register all Eigenscribe signature colormaps into matplotlib's global colormap registry."""
     for cmap_name, cmap_obj in EIGENSCRIBE_COLORMAPS.items():
@@ -655,7 +812,6 @@ def get_eigenscribe_rcparams(cosmic: bool = False) -> Dict[str, Any]:
         "figure.dpi": 100,
         "savefig.facecolor": fig_bg,
         "savefig.edgecolor": fig_bg,
-        
         # Axes & Frames
         "axes.facecolor": axes_bg,
         "axes.edgecolor": COLOR_BORDER,
@@ -668,7 +824,6 @@ def get_eigenscribe_rcparams(cosmic: bool = False) -> Dict[str, Any]:
         "axes.titlecolor": COLOR_TEXT_BRIGHT,
         "axes.titlepad": 10.0,
         "axes.prop_cycle": mpl.cycler(color=HIGH_CONTRAST_CYCLE),
-        
         # Grid System
         "axes.grid": True,
         "axes.axisbelow": True,
@@ -676,7 +831,6 @@ def get_eigenscribe_rcparams(cosmic: bool = False) -> Dict[str, Any]:
         "grid.alpha": 0.7,
         "grid.linestyle": "--",
         "grid.linewidth": 0.8,
-        
         # Ticks & Markers
         "xtick.color": COLOR_TEXT_MUTED,
         "ytick.color": COLOR_TEXT_MUTED,
@@ -684,13 +838,18 @@ def get_eigenscribe_rcparams(cosmic: bool = False) -> Dict[str, Any]:
         "ytick.labelsize": 9.0,
         "xtick.direction": "out",
         "ytick.direction": "out",
-        
         # Text & Fonts
         "text.color": COLOR_TEXT,
         "font.family": "sans-serif",
-        "font.sans-serif": ["Segoe UI", "SF Pro Display", "Inter", "DejaVu Sans", "Arial", "sans-serif"],
+        "font.sans-serif": [
+            "Segoe UI",
+            "SF Pro Display",
+            "Inter",
+            "DejaVu Sans",
+            "Arial",
+            "sans-serif",
+        ],
         "mathtext.fontset": "cm",
-        
         # Legends
         "legend.facecolor": axes_bg,
         "legend.edgecolor": COLOR_BORDER,
@@ -698,7 +857,6 @@ def get_eigenscribe_rcparams(cosmic: bool = False) -> Dict[str, Any]:
         "legend.fontsize": 9.0,
         "legend.framealpha": 0.85,
         "legend.fancybox": True,
-        
         # Lines & Scatters
         "lines.linewidth": 2.0,
         "lines.solid_capstyle": "round",
@@ -708,7 +866,7 @@ def get_eigenscribe_rcparams(cosmic: bool = False) -> Dict[str, Any]:
 
 
 def apply_theme(
-    seaborn: bool = True, 
+    seaborn: bool = True,
     custom_rc: Optional[Mapping[str, Any]] = None,
     cosmic: bool = False,
 ) -> None:
@@ -728,23 +886,19 @@ def apply_theme(
     """
     register_colormaps()
     rc_params = get_eigenscribe_rcparams(cosmic=cosmic)
-    
+
     if custom_rc:
         rc_params.update(custom_rc)
-        
+
     plt.style.use("dark_background")
     plt.rcParams.update(rc_params)
-    
+
     if seaborn and HAS_SEABORN and sns is not None:
-        sns.set_theme(
-            style="darkgrid",
-            rc=rc_params,
-            palette=HIGH_CONTRAST_CYCLE
-        )
+        sns.set_theme(style="darkgrid", rc=rc_params, palette=HIGH_CONTRAST_CYCLE)
 
 
 def apply_cosmic_theme(
-    seaborn: bool = True, 
+    seaborn: bool = True,
     custom_rc: Optional[Mapping[str, Any]] = None,
 ) -> None:
     """Bootstrap and activate the Eigenscribe deep cosmic visual theme with Sephirah styling.
@@ -771,7 +925,7 @@ def plot_eigenscribe_heatmap(
     cbar_label: Optional[str] = None,
     annot: bool = False,
     fmt: str = ".2f",
-    **kwargs: Any
+    **kwargs: Any,
 ) -> plt.Axes:
     """Render a generalizable, high-contrast heatmap using Matplotlib or Seaborn.
 
@@ -801,18 +955,20 @@ def plot_eigenscribe_heatmap(
     plt.Axes
         The Matplotlib Axes containing the generated heatmap.
     """
-    assert data.ndim == 2, f"Expected 2D matrix data for heatmap, got shape {data.shape}"
-    
+    assert (
+        data.ndim == 2
+    ), f"Expected 2D matrix data for heatmap, got shape {data.shape}"
+
     cmap = _resolve_heatmap_colormap(style)
-    
+
     if ax is None:
         ax = plt.gca()
-        
+
     if HAS_SEABORN and sns is not None:
         cbar_kws = kwargs.pop("cbar_kws", {})
         if cbar_label:
             cbar_kws["label"] = cbar_label
-            
+
         sns.heatmap(
             data,
             ax=ax,
@@ -821,7 +977,7 @@ def plot_eigenscribe_heatmap(
             annot=annot,
             fmt=fmt,
             cbar_kws=cbar_kws,
-            **kwargs
+            **kwargs,
         )
     else:
         im = ax.imshow(data, cmap=cmap, aspect=kwargs.get("aspect", "auto"), **kwargs)
@@ -831,17 +987,27 @@ def plot_eigenscribe_heatmap(
                 cb.set_label(cbar_label, color=COLOR_TEXT)
             cb.ax.yaxis.set_tick_params(color=COLOR_TEXT_MUTED)
             plt.setp(cb.ax.yaxis.get_ticklabels(), color=COLOR_TEXT_MUTED)
-            
+
         if annot:
             nrows, ncols = data.shape
             for i in range(nrows):
                 for j in range(ncols):
                     val = data[i, j]
-                    ax.text(j, i, format(val, fmt.lstrip(".")), ha="center", va="center", color=COLOR_TEXT_BRIGHT, fontsize=8)
+                    ax.text(
+                        j,
+                        i,
+                        format(val, fmt.lstrip(".")),
+                        ha="center",
+                        va="center",
+                        color=COLOR_TEXT_BRIGHT,
+                        fontsize=8,
+                    )
 
     if title:
-        ax.set_title(title, fontsize=12, fontweight="bold", color=COLOR_TEXT_BRIGHT, pad=10)
-        
+        ax.set_title(
+            title, fontsize=12, fontweight="bold", color=COLOR_TEXT_BRIGHT, pad=10
+        )
+
     return ax
 
 
@@ -895,6 +1061,7 @@ def create_plotly_base_figure(title: str = "", height: int = 340) -> Any:
 # 3️⃣ Private helpers
 # -----------------------------------------------------------------------------------------------------------
 
+
 def _resolve_heatmap_colormap(style: str) -> Colormap:
     """Resolve a colormap instance from a style name or colormap object.
 
@@ -919,7 +1086,7 @@ def _resolve_heatmap_colormap(style: str) -> Colormap:
         "cosmic_spectrum": HEATMAP_COSMIC_SPECTRUM,
         "sephirah_spectrum": HEATMAP_SEPHIRAH_SPECTRUM,
     }
-    
+
     if style in style_map:
         return style_map[style]
     elif style in EIGENSCRIBE_COLORMAPS:
@@ -937,6 +1104,7 @@ def _resolve_heatmap_colormap(style: str) -> Colormap:
 # 4️⃣ Smoke tests / example usage
 # -----------------------------------------------------------------------------------------------------------
 
+
 def run_smoke_test() -> bool:
     """Run comprehensive verification on theme bootstrapping, colormaps, and plots.
 
@@ -946,83 +1114,131 @@ def run_smoke_test() -> bool:
         True if all invariants, registrations, and plot generation checks pass.
     """
     rng = np.random.default_rng(DEFAULT_SEED)
-    
+
     # 1. Verification of theme application & registration
     apply_theme()
     assert "eigenscribe_pink_to_blue" in mpl.colormaps, "Colormap registration failed."
-    assert "eigenscribe_light_blue_to_dark_blue" in mpl.colormaps, "Colormap registration failed."
-    assert "eigenscribe_light_green_to_dark_green" in mpl.colormaps, "Colormap registration failed."
-    assert "eigenscribe_cyclic_phase" in mpl.colormaps, "Cyclic phase colormap registration failed."
-    assert "eigenscribe_cosmic_cyan" in mpl.colormaps, "Cosmic Cyan colormap registration failed."
-    assert "eigenscribe_cosmic_sephirah" in mpl.colormaps, "Cosmic Sephirah colormap registration failed."
-    assert "eigenscribe_cosmic_void_to_cyan" in mpl.colormaps, "Cosmic Void to Cyan colormap registration failed."
-    assert "eigenscribe_cosmic_spectrum" in mpl.colormaps, "Cosmic Spectrum colormap registration failed."
-    assert "eigenscribe_sephirah_spectrum" in mpl.colormaps, "Sephirah Spectrum colormap registration failed."
-    assert "eigenscribe_gradient_4" in mpl.colormaps, "Gradient 4 colormap registration failed."
-    assert "eigenscribe_gradient_8" in mpl.colormaps, "Gradient 8 colormap registration failed."
-    assert "eigenscribe_ramp_green" in mpl.colormaps, "Ramp Green colormap registration failed."
-    assert "eigenscribe_ramp_magenta" in mpl.colormaps, "Ramp Magenta colormap registration failed."
+    assert (
+        "eigenscribe_light_blue_to_dark_blue" in mpl.colormaps
+    ), "Colormap registration failed."
+    assert (
+        "eigenscribe_light_green_to_dark_green" in mpl.colormaps
+    ), "Colormap registration failed."
+    assert (
+        "eigenscribe_cyclic_phase" in mpl.colormaps
+    ), "Cyclic phase colormap registration failed."
+    assert (
+        "eigenscribe_cosmic_cyan" in mpl.colormaps
+    ), "Cosmic Cyan colormap registration failed."
+    assert (
+        "eigenscribe_cosmic_sephirah" in mpl.colormaps
+    ), "Cosmic Sephirah colormap registration failed."
+    assert (
+        "eigenscribe_cosmic_void_to_cyan" in mpl.colormaps
+    ), "Cosmic Void to Cyan colormap registration failed."
+    assert (
+        "eigenscribe_cosmic_spectrum" in mpl.colormaps
+    ), "Cosmic Spectrum colormap registration failed."
+    assert (
+        "eigenscribe_sephirah_spectrum" in mpl.colormaps
+    ), "Sephirah Spectrum colormap registration failed."
+    assert (
+        "eigenscribe_gradient_4" in mpl.colormaps
+    ), "Gradient 4 colormap registration failed."
+    assert (
+        "eigenscribe_gradient_8" in mpl.colormaps
+    ), "Gradient 8 colormap registration failed."
+    assert (
+        "eigenscribe_ramp_green" in mpl.colormaps
+    ), "Ramp Green colormap registration failed."
+    assert (
+        "eigenscribe_ramp_magenta" in mpl.colormaps
+    ), "Ramp Magenta colormap registration failed."
     assert len(EIGEN_NODES) == 10, "EIGEN nodes count mismatch."
     assert len(EIGEN_NODE_COLORS) == 10, "EIGEN node colors count mismatch."
     assert len(EIGEN_LABEL_COLORS) == 10, "EIGEN label colors count mismatch."
     assert len(EIGEN_COLORS) == 4, "EIGEN colors count mismatch."
     assert len(EIGENSCRIBE_GRADIENTS) >= 9, "Eigenscribe gradients count mismatch."
     assert len(FOUR_COLOR_ACCENT) == 4, "Four-color accent count mismatch."
-    
+
     # Verify cosmic theme mode
     apply_cosmic_theme()
-    assert plt.rcParams["figure.facecolor"] == COLOR_BG_COSMIC, "Cosmic figure facecolor mismatch."
-    assert plt.rcParams["axes.facecolor"] == COLOR_BG_COSMIC_CENTER, "Cosmic axes facecolor mismatch."
-    
+    assert (
+        plt.rcParams["figure.facecolor"] == COLOR_BG_COSMIC
+    ), "Cosmic figure facecolor mismatch."
+    assert (
+        plt.rcParams["axes.facecolor"] == COLOR_BG_COSMIC_CENTER
+    ), "Cosmic axes facecolor mismatch."
+
     # 2. Multi-curve line plot contrast & array validation
     x = np.linspace(0, 10, 100)
     fig, (ax_line, ax_heat) = plt.subplots(1, 2, figsize=(12, 4.5))
-    
+
     n_curves = 4
-    curves = np.array([np.sin(x + i * 0.5) * np.exp(-0.05 * x) for i in range(n_curves)])
+    curves = np.array(
+        [np.sin(x + i * 0.5) * np.exp(-0.05 * x) for i in range(n_curves)]
+    )
     assert curves.shape == (n_curves, len(x)), "Curves matrix shape mismatch."
-    
+
     for i in range(n_curves):
         ax_line.plot(x, curves[i], label=f"Signal {i+1}")
-        
+
     ax_line.set_title("Multi-Curve Contrast Test")
     ax_line.set_xlabel("Time ($t$)")
     ax_line.set_ylabel("Amplitude")
     ax_line.legend()
-    
+
     # 3. Heatmap verification with core styles
     matrix_data = rng.uniform(0.0, 1.0, size=(8, 8))
     assert matrix_data.ndim == 2, "Heatmap matrix must be 2D."
-    
+
     plot_eigenscribe_heatmap(
         matrix_data,
         style="pink_to_blue",
         ax=ax_heat,
         title="Pink-to-Blue Heatmap",
-        cbar_label="Intensity"
+        cbar_label="Intensity",
     )
-    
+
     # Test remaining colormaps without error
-    for style_name in ["light_blue_to_dark_blue", "light_green_to_dark_green", "cyclic_phase", "cosmic_cyan", "cosmic_sephirah", "cosmic_void_to_cyan", "cosmic_spectrum", "sephirah_spectrum"]:
+    for style_name in [
+        "light_blue_to_dark_blue",
+        "light_green_to_dark_green",
+        "cyclic_phase",
+        "cosmic_cyan",
+        "cosmic_sephirah",
+        "cosmic_void_to_cyan",
+        "cosmic_spectrum",
+        "sephirah_spectrum",
+    ]:
         fig_sub, ax_sub = plt.subplots(figsize=(4, 4))
-        plot_eigenscribe_heatmap(matrix_data, style=style_name, ax=ax_sub, title=style_name)
+        plot_eigenscribe_heatmap(
+            matrix_data, style=style_name, ax=ax_sub, title=style_name
+        )
         plt.close(fig_sub)
-        
+
     plt.close(fig)
 
     # 4. Verification of Plotly base figure if Plotly is installed
     if HAS_PLOTLY:
         plotly_fig = create_plotly_base_figure("Test Glassmorphic Chart")
-        assert plotly_fig.layout.plot_bgcolor == COLOR_GRAPH_BG, "Plotly plot background mismatch."
-        assert len(PLOTLY_CYCLIC_PHASE_COLORSCALE) == 7, "Plotly cyclic colorscale stop count mismatch."
+        assert (
+            plotly_fig.layout.plot_bgcolor == COLOR_GRAPH_BG
+        ), "Plotly plot background mismatch."
+        assert (
+            len(PLOTLY_CYCLIC_PHASE_COLORSCALE) == 7
+        ), "Plotly cyclic colorscale stop count mismatch."
 
-    print("[Verification] Smoke tests passed: Theme applied, colormaps registered, and plots verified.")
+    print(
+        "[Verification] Smoke tests passed: Theme applied, colormaps registered, and plots verified."
+    )
     return True
 
 
 # -----------------------------------------------------------------------------------------------------------
 # 🔥 Entry point
 # -----------------------------------------------------------------------------------------------------------
+
 
 def main() -> None:
     """Orchestrate visualization bootstrapping smoke tests and demonstration verification."""
