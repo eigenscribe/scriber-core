@@ -16,10 +16,17 @@ Welcome to the canonical environment index for autonomous development agents. Th
 │   ├── notebooks/
 │   │   └── visuals-boilerplate.ipynb    # Visualizations, NetworkX topologies & color palettes template
 │   └── python/
-│       ├── cli_gradient_boilerplate.py  # ANSI TrueColor multi-stop linear RGB gradient engine
-│       ├── cli_style_boilerplate.py     # ANSI 256-color terminal palette and message styling
-│       ├── gold-standard-boilerplate.py # Gold standard numeric integration script template
-│       └── visualization_boilerplate.py # Generalizable visualization bootstrap for Matplotlib/Pyplot/Seaborn
+│       ├── gold-standard-boilerplate.py    # Gold standard numeric integration template
+│       └── styles/                         # 🎨 Dedicated Styling Subpackage
+│           ├── __init__.py
+│           ├── colors.py                       # Design tokens, palettes, hex_to_go 
+│           ├── cli/
+│           │    ├── __init__.py
+│           │    ├── gradients.py   # TrueColor multi-stop gradient engine
+│           │    └── messaging.py   # ANSI 256 formatting, banners, and semantic logs│
+│           └── plots/
+│                ├── __init__.py
+│                └── theme.py            # Theme engine for Matplotlib/Pyplot/Seaborn
 ├── sublime-theme/
 │   ├── EigenScribe/           # Sublime Text 4 package (theme, color scheme, PreTeXt syntax & snippets)
 │   ├── install.sh             # Bash installer (macOS / Linux, copy or symlink mode)

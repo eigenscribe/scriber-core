@@ -14,15 +14,17 @@ Usage
 
 Author: Eigenscribe
 Date: October 2026
+Last Updated: November 14 2026
 """
 
 from __future__ import annotations
 
 import argparse
 import re
-import sys
 from collections.abc import Sequence
 from typing import Final, TypeAlias
+
+import sys
 
 if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
     try:
@@ -33,6 +35,8 @@ if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
 __all__: list[str] = [
     "RGB",
     "Color",
+    "COLORS",
+    "CLI_COLORS",
     "PRESETS",
     "hex_to_rgb",
     "multi_gradient",
@@ -45,11 +49,93 @@ __all__: list[str] = [
 RGB: TypeAlias = tuple[int, int, int]
 Color: TypeAlias = str | RGB
 
+# 🎨 Single Named Color Palette
+COLORS: Final[dict[str, str]] = {
+    # 💚🩵 Greens & Teals
+    "deep_pine": "#071a12",
+    "forest_teal": "#064e38",
+    "emerald": "#059669",
+    "success_emerald": "#10b981",           # ✨ cli status color: success
+    "deep_green": "#038b00",
+    "neon_green": "#31ff40",
+    "bright_chartreuse": "#70e000",
+    "pale_mint": "#b4ffcf",
+    "tropical_teal": "#03e8bd",
+
+    # 🩵💙 Cyans & Light Blues
+    "pure_cyan": "#00ffff",
+    "electric_cyan": "#00ffee",
+    "vivid_cyan": "#00e8ff",
+    "bright_cerulean": "#03b4e8",
+    "bright_azure": "#00b8ff",
+    "sky_cyan": "4cc9f0",
+    "vivid_sky_blue": "14b5ff",
+    "ice_blue": "#b8f6ff",
+
+    # 💙💜 Blues
+    "midnight_navy": "#06152b",
+    "deep_ocean_blue": "003b73",
+    "strong_blue": "#0355e8",
+    "vivid_blue": "#0070eb",
+    "sky_blue": "#3a98ff",
+    "sky_info": "#38bdf8",                     # ✨ cli status color: info
+    "periwinkle_blue": "#5280ff",
+    "indigo_blue": "#4361ee",
+
+    # 💜🩷 Purples & Violets
+    "deep_plum": "#120A24",
+    "dark_violet": "#3b176e",
+    "deep_indigo": "#3a0ca3",
+    "royal_purple": "#7209b7",
+    "electric_violet": "#5e17eb",
+    "bright_violet": "7c3aed",
+    "bright_purple": "#a855f7",
+    "pale_lilac": "#d8b4fe",
+
+    # 🩷❤️ Pink & Berries
+    "error_crimson": "#d7263d",             # ✨ cli status color: error
+    "black_cherry": "#210817",
+    "dark_berry": "#7c174f",
+    "deep_rose": "#ad1457",
+    "vivid_pink": "#f72585",
+    "bright_pink": "#ff40a1",
+    "rose_pink": "#ff66b3",
+    "soft_rose": "#ff76a1",
+    "pale_orchid_pink": "#ffb4f6",
+
+    # 🩷🧡💛
+    "dusty_peach": "e7a697",
+    "coral": "#f78166",
+    "soft_coral": "#f77f64",
+    "peach_coral": "#f79764",
+    "tangerine": "#ff8855",
+    "coral_orange": "#ff783d",
+    "apricot": "#ff9d57",
+    "golden_amber": "#feb639",
+    "warning_amber": "#f7c548",           # ✨ cli status color: warning
+
+    # 🖤🤍 Neutrals
+    "charcoal": "#1e293b",
+    "slate": "#64748b",
+    "ghost_white": "#f8fafc",
+}
+
+# ⌨️ CLI Status Colors
+CLI_COLORS: Final[dict[str, str]] = {
+    "success": "success_emerald",
+    "info": "sky_info",
+    "error": "error_crimson",
+    "warning": "warning_amber",
+}
+
 PRESETS: Final[dict[str, tuple[str, ...]]] = {
-    # 🌟 Signature Eigenscribe: Blue (#00a6ff) -> Purple (#a855f7) -> Magenta (#ff00c3)
+    # 🐉 Signature Eigenscribe (without pink): Blue (#0a95eb) -> Periwinkle (#5280ff) -> Purple (#a855f7)
+    "eigenscribe-1": ("#38bdf8", "#0A95EB", "#5280ff", "#5e17eb"),
+    # 🌟 Signature Eigenscribe (with pink): Blue (#00a6ff) -> Purple (#a855f7) -> Magenta (#ff00c3)
+    "eigenscribe-2": ("#00a6ff", "#a855f7", "#ff00c3"),
     "electric": ("#00a6ff", "#a855f7", "#ff00c3"),
     # 🌅 Solar Sunset: Orange (#ff6b35) -> Amber (#f7c548) -> Crimson (#d7263d)
-    "sunset": ("#ff6b35", "#f7c548", "#d7263d"),
+    "sunset": ("#ff6b35", "#f7c548", "#ff40a1"),
     # 🌲 Deep Forest: Olive (#a7c957) -> Teal (#2a9d8f) -> Pine (#264653)
     "forest": ("#a7c957", "#2a9d8f", "#264653"),
     # 🌌 Midnight Cosmic: Sky Cyan (#38bdf8) -> Lavender (#818cf8) -> Rose (#f43f5e)
@@ -58,6 +144,8 @@ PRESETS: Final[dict[str, tuple[str, ...]]] = {
     "aurora": ("#06b6d4", "#10b981", "#84cc16"),
     # ⚡ Cyberpunk Neon: Electric Cyan (#00f0ff) -> Deep Violet (#7000ff) -> Hot Pink (#ff007b)
     "cyberpunk": ("#00f0ff", "#7000ff", "#ff007b"),
+    # 💜 Purple Gradient: Purple-2 (#7209b7) -> Warm purple (#a855f7) -> Purple-1 (#7952f5)
+    "purple_gradient": ("#7209b7", "#a855f7", "#7952f5"),
 }
 
 

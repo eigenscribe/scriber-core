@@ -25,8 +25,9 @@ Last Updated: November 14, 2026
 from __future__ import annotations
 
 import os
-import sys
 from typing import Final
+
+import sys
 
 # Force UTF-8 stdout on Windows to support emoji and Unicode chars
 if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
@@ -46,7 +47,7 @@ except ImportError:
 
 # Import gradient engine components (fallback to local or inline if needed)
 try:
-    from cli_gradient_boilerplate import (
+    from src.style.cli.gradients import (
         PRESETS,
         RGB,
         Color,
@@ -55,7 +56,7 @@ try:
     )
 except ImportError:
     try:
-        from .cli_gradient_boilerplate import (
+        from src.style.cli.gradients import (
             PRESETS,
             RGB,
             Color,
