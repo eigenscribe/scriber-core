@@ -25,9 +25,8 @@ Last Updated: November 14, 2026
 from __future__ import annotations
 
 import os
-from typing import Final
-
 import sys
+from typing import Final
 
 # Force UTF-8 stdout on Windows to support emoji and Unicode chars
 if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
