@@ -9,8 +9,8 @@ forest, midnight, aurora, cyberpunk).
 Usage
 -----
 >>> from cli_gradient_boilerplate import multi_gradient, PRESETS
->>> print(multi_gradient("Electric Gradient", PRESETS["electric"]))
->>> print(multi_gradient("Custom Stops", ["#00a6ff", "#a855f7", "#ff00c3"]))
+>>> print(multi_gradient("Electric Gradient", PRESETS["electric"]))  # doctest: +SKIP
+>>> print(multi_gradient("Custom Stops", ["#00a6ff", "#a855f7", "#ff00c3"]))  # doctest: +SKIP
 
 Author: Eigenscribe
 Date: October 2026
