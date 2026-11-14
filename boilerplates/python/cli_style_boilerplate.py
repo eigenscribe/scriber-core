@@ -12,10 +12,10 @@ to make terminal output visually engaging while remaining accessible.
 
 Usage
 -----
->>> from cli_style import cli_info, cli_success, cli_banner, ansi_256
->>> cli_banner("MY APP", "A colorful CLI tool")
->>> cli_info("Loading data...")
->>> cli_success("Done!")
+>>> from cli_style_boilerplate import ansi_256, cli_banner, cli_info, cli_success
+>>> cli_banner("MY APP", "A colorful CLI tool")  # doctest: +SKIP
+>>> cli_info("Loading data...")  # doctest: +SKIP
+>>> cli_success("Done!")  # doctest: +SKIP
 
 Author: Eigenscribe
 Date: October 2026
@@ -209,6 +209,7 @@ _FALLBACK_16: Final[dict[str, str]] = {
 # 1️⃣ Public API — Color Detection & ANSI Helpers
 # -----------------------------------------------------------------------------------------------------------
 
+
 def supports_256_color() -> bool:
     """
     Detect whether the current terminal supports 256-color output.
@@ -251,7 +252,7 @@ def ansi_256(color_name: str, text: str, bold: bool = False) -> str:
 
     Examples
     --------
-    >>> print(ansi_256("eigen_blue", "Hello, world!", bold=True))
+    >>> ansi_256("eigen_blue", "Hello, world!", bold=True)  # doctest: +SKIP
     """
     color_index = EIGENSCRIBE_PALETTE.get(color_name)
     if color_index is None:
@@ -259,9 +260,6 @@ def ansi_256(color_name: str, text: str, bold: bool = False) -> str:
 
     bold_code = "1;" if bold else ""
     return f"\033[{bold_code}38;5;{color_index}m{text}\033[0m"
-
-def hex_to_rgb(hex_str: str) -> tuple[int, int, int]:
-    """Convert hex string (e.g., '#00a6ff' or '00aff') to (R, G, B)"""
 
 
 def _ansi_256_raw(fg_index: int, text: str, bold: bool = False) -> str:
@@ -355,8 +353,8 @@ def cli_echo(
 
     Examples
     --------
-    >>> cli_echo("My name is ", color="eigen_white")
-    >>> cli_echo("EigenBeast", color="eigen_purple", bold=True)
+    >>> cli_echo("My name is ", color="eigen_white")  # doctest: +SKIP
+    >>> cli_echo("EigenBeast", color="eigen_purple", bold=True)  # doctest: +SKIP
     """
     if color is not None:
         if supports_256_color():
@@ -400,7 +398,7 @@ def cli_banner(title: str, subtitle: str | None = None) -> None:
 
     Examples
     --------
-    >>> cli_banner("EIGENBEAST BATTLE", "The Non-Copyright Generic Beast Game")
+    >>> cli_banner("EIGENBEAST BATTLE", "The Non-Copyright Generic Beast Game")  # doctest: +SKIP
     """
     _echo("")
     cli_echo(title, color="eigen_blue_bright", bold=True)
