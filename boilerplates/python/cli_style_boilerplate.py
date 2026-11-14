@@ -1,3 +1,4 @@
+# ../boilerplates/python/cli_style_boilerplate.py
 """
 cli_style_boilerplate.py
 
@@ -18,13 +19,15 @@ Usage
 
 Author: Eigenscribe
 Date: October 2026
+Last Updated: November 14, 2026
 """
 
 from __future__ import annotations
 
 import os
-import sys
 from typing import Final
+
+import sys
 
 # Force UTF-8 stdout on Windows to support emoji and Unicode chars
 if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
@@ -172,7 +175,6 @@ _FALLBACK_16: Final[dict[str, str]] = {
 # 1️⃣ Public API — Color Detection & ANSI Helpers
 # -----------------------------------------------------------------------------------------------------------
 
-
 def supports_256_color() -> bool:
     """
     Detect whether the current terminal supports 256-color output.
@@ -223,6 +225,9 @@ def ansi_256(color_name: str, text: str, bold: bool = False) -> str:
 
     bold_code = "1;" if bold else ""
     return f"\033[{bold_code}38;5;{color_index}m{text}\033[0m"
+
+def hex_to_rgb(hex_str: str) -> tuple[int, int, int]:
+    """Convert hex string (e.g., '#00a6ff' or '00aff') to (R, G, B)"""
 
 
 def _ansi_256_raw(fg_index: int, text: str, bold: bool = False) -> str:
