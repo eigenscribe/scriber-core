@@ -8,11 +8,10 @@ Verifies command invocation, arguments, styling output, diagnostics, and exit co
 
 from __future__ import annotations
 
-import click
-from click.testing import CliRunner
 import pytest
+from click.testing import CliRunner
 
-from frontend.the_scriber_experience.cli.main import cli_group
+from frontend.THE_SCRIBER_EXPERIENCE.cli.main import cli_group
 
 
 @pytest.fixture

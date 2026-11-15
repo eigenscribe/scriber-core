@@ -40,7 +40,7 @@ env/
 *.npy
 *.h5
 *.hdf5
-plots/
+/plots/
+!src/**/plots/
 *.log
 benchmark.log
-!/src/the-scriber-experience/plots/
