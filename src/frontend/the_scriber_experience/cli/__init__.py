@@ -16,6 +16,10 @@ from .gradients import (
     hex_to_rgb,
     multi_gradient,
 )
+from .main import (
+    cli_group,
+    main,
+)
 from .messaging import (
     EIGENSCRIBE_PALETTE,
     ansi_256,
@@ -32,6 +36,9 @@ from .messaging import (
 )
 
 __all__: list[str] = [
+    # Main CLI Entry Point
+    "main",
+    "cli_group",
     # Semantic Messaging & Elements
     "cli_message",
     "cli_echo",

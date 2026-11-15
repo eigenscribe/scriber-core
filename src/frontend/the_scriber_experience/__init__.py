@@ -6,7 +6,7 @@ Unifies style design tokens, terminal CLI utilities, and scientific plot themes.
 
 from __future__ import annotations
 
-from . import cli, plots, style
+from . import cli, mermaid, plots, style
 from .cli import (
     EIGENSCRIBE_PALETTE,
     ansi_256,
@@ -20,6 +20,17 @@ from .cli import (
     cli_success,
     cli_warning,
     supports_256_color,
+)
+from .mermaid import (
+    EIGENSCRIBE_MERMAID_CLASSES,
+    EIGENSCRIBE_MERMAID_THEME_VARIABLES,
+    generate_mermaid_flowchart,
+    get_mermaid_class_defs,
+    get_mermaid_init_directive,
+    get_mermaid_theme_variables,
+    render_html_preview,
+    save_mermaid_diagram,
+    wrap_mermaid_diagram,
 )
 from .plots import (
     apply_cosmic_theme,
@@ -52,6 +63,7 @@ __all__: list[str] = [
     "cli",
     "plots",
     "style",
+    "mermaid",
     # Style & Tokens
     "RGB",
     "Color",

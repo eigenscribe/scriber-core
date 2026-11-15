@@ -43,3 +43,4 @@ env/
 plots/
 *.log
 benchmark.log
+!/src/the-scriber-experience/plots/

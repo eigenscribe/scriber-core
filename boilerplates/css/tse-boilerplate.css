@@ -1,956 +1,235 @@
 /**
- * ==============================================================================
- * 📦 EIGENSCRIBE SIGNATURE BOILERPLATE STYLESHEET
- * ==============================================================================
- * Project: The Scriber Experience / Scriber Labs
- * Purpose: Unified high-contrast, glassmorphic, ADHD-structured styling boilerplate
- * Author: Eigenscribe
- * Version: 1.0.0
- *
- * ------------------------------------------------------------------------------
- * Architectural Flow:
+ * tse-boilerplate.css
+ * 
+ * The Scriber Experience (TSE) Gold Standard CSS Blueprint.
+ * 4-Layer Architecture:
  * 0️⃣ What Exists              -> Layer 1: CSS Custom Properties & Design Tokens
- * 1️⃣ What You're Allowed to Call -> Layer 2: Base Element Resets & Typography
- * 2️⃣ How It Works             -> Layer 3: Layout Scaffolding & Responsive Grids
- * 3️⃣ Proof It Works           -> Layer 4: Core Reusable UI Component Classes
- * ==============================================================================
+ * 1️⃣ What You're Allowed to Call -> Layer 2: Base Element Resets & Normalize
+ * 2️⃣ How It Works             -> Layer 3: Layout Scaffolding (Grid, Flexbox, Golden Ratio)
+ * 3️⃣ Proof It Works           -> Layer 4: Reusable Component Classes
+ *
+ * Author: Eigenscribe & Scriber Labs
+ * Date: November 2026
  */
 
-/* External Typography Imports */
-@import url('https://fonts.googleapis.com/css2?family=Aclonica&family=Fira+Code:wght@300;400;500;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap');
-
-/* ==============================================================================
- * 0️⃣ WHAT EXISTS: LAYER 1 — CSS CUSTOM PROPERTIES & DESIGN TOKENS
- * ============================================================================== */
+/* ==========================================================================
+   0️⃣ LAYER 1: CSS Custom Properties & Design Tokens
+   ========================================================================== */
 
 :root {
-  /* ----------------------------------------------------------------------------
-   * 🎨 Surface & Background Foundations (Dark Mode First)
-   * ---------------------------------------------------------------------------- */
+  /* --- Foundation Dark Surfaces --- */
   --color-bg: #0d1117;
   --color-surface: #161b22;
   --color-surface-elevated: #21262d;
   --color-surface-overlay: rgba(22, 27, 34, 0.75);
+  --color-border: #30363d;
+  --color-grid: #21262d;
 
-  /* Deep Cosmic Radial Void Foundations */
+  /* --- Cosmic Deep Void Radial Foundations --- */
   --color-bg-cosmic-center: #0a0f1f;
   --color-bg-cosmic: #050812;
   --color-bg-cosmic-void: #000000;
+  --gradient-cosmic-radial: radial-gradient(circle at center, var(--color-bg-cosmic-center) 0%, var(--color-bg-cosmic) 60%, var(--color-bg-cosmic-void) 100%);
 
-  /* ----------------------------------------------------------------------------
-   * 🔤 Typography & Content Colors
-   * ---------------------------------------------------------------------------- */
+  /* --- Text & Specular Accent Tokens --- */
   --color-text: #f0f6fc;
   --color-text-bright: #ffffff;
   --color-text-muted: #8b949e;
   --color-text-subtle: #6e7681;
   --color-text-accent: #c8f8ff;
-
-  /* ✨ Cosmic Luminous Ice-Cyan & Tooltip Tokens ✨ */
   --color-luminous-cyan: #c8f8ff;
-  --color-cosmic-bg: rgba(0, 232, 255, 0.08);
-  --color-cosmic-border: rgba(255, 255, 255, 0.08);
-  --color-cosmic-glow: rgba(0, 232, 255, 0.30);
-  --color-tooltip-bg: rgba(0, 0, 0, 0.75);
-  --color-tooltip-border: rgba(255, 255, 255, 0.12);
 
-  /* Extended Translucent Glassmorphic & Specular Tokens (Obsidian Notes) */
-  --color-glass-indigo: rgba(99, 102, 241, 0.35);
-  --color-glass-purple: rgba(168, 85, 247, 0.25);
-  --color-glass-violet: rgba(121, 82, 245, 0.40);
-  --color-glass-cyan: rgba(0, 255, 238, 0.15);
-  --color-glass-cyan-glow: rgba(0, 232, 255, 0.40);
-  --color-glass-blue: rgba(56, 152, 255, 0.50);
-  --color-glass-sky: rgba(20, 165, 255, 0.60);
-
-  /* 4-Color Vibrant Accent Markers */
-  --color-accent-green: #38fe52;
-  --color-accent-blue: #3881fe;
-  --color-accent-magenta: #fe38e4;
-  --color-accent-amber: #feb538;
-
-  /* 5-Stop Sequential Ramps */
-  --ramp-green-0: #071a12;
-  --ramp-green-1: #064e3b;
-  --ramp-green-2: #059669;
-  --ramp-green-3: #31ff48;
-  --ramp-green-4: #b7ffcf;
-
-  --ramp-blue-0: #06152b;
-  --ramp-blue-1: #003b73;
-  --ramp-blue-2: #0070eb;
-  --ramp-blue-3: #00b8ff;
-  --ramp-blue-4: #b8f6ff;
-
-  --ramp-purple-0: #120a24;
-  --ramp-purple-1: #3b176e;
-  --ramp-purple-2: #7c3aed;
-  --ramp-purple-3: #a855f7;
-  --ramp-purple-4: #d8b4fe;
-
-  --ramp-magenta-0: #210817;
-  --ramp-magenta-1: #7c174f;
-  --ramp-magenta-2: #ad1457;
-  --ramp-magenta-3: #f72585;
-  --ramp-magenta-4: #ffb4f6;
-
-  /* ----------------------------------------------------------------------------
-   * 🌌 EIGEN Core Spectrum & Vibrant 10-Node Color Tokens
-   * ---------------------------------------------------------------------------- */
-  /* Core 4-Spectrum EIGEN Colors */
+  /* --- Canonical EIGEN Spectrum --- */
   --color-eigen-cyan: #00e8ff;
   --color-eigen-sky: #14b5ff;
   --color-eigen-blue: #3a98ff;
   --color-eigen-purple: #7952f5;
 
-  /* Vibrant 10-Node Spectrum */
-  --color-eigen-node-0: #fff9d6;   /* 0. Divine Light / White-Gold */
-  --color-eigen-node-1: #00ffff;   /* 1. Electric Cyan */
-  --color-eigen-node-2: #00e8ff;   /* 2. Bright Cyan */
-  --color-eigen-node-3: #14b5ff;   /* 3. Sky Blue */
-  --color-eigen-node-4: #0070eb;   /* 4. Royal Cobalt */
-  --color-eigen-node-5: #ffd94a;   /* 5. Radiant Amber Gold */
-  --color-eigen-node-6: #7952f5;   /* 6. Electric Violet */
-  --color-eigen-node-7: #5e17eb;   /* 7. Deep Purple */
-  --color-eigen-node-8: #ff66b3;   /* 8. Vibrant Neon Pink */
-  --color-eigen-node-9: #00c853;   /* 9. Vivid Emerald Green */
+  /* --- Semantic Status Tokens --- */
+  --color-info: #38bdf8;
+  --color-success: #10b981;
+  --color-warning: #f7c548;
+  --color-error: #d7263d;
 
-  /* ----------------------------------------------------------------------------
-   * 🌈 ADHD High-Contrast Semantic Palette & Variable Coding System
-   * ---------------------------------------------------------------------------- */
-  /* Primary: Interactive Cyan / Electric Blue */
-  --color-primary-light: #00e8ff;
-  --color-primary: #14b5ff;
-  --color-primary-dark: #0070eb;
-  --color-primary-glow: rgba(20, 181, 255, 0.35);
+  /* --- Signature Multi-Stop Gradients --- */
+  --gradient-electric: linear-gradient(135deg, #00ffff 0%, #00a6ff 35%, #7952f5 70%, #ff00c3 100%);
+  --gradient-eigenscribe: linear-gradient(135deg, #00e8ff 0%, #14b5ff 38.2%, #7952f5 61.8%, #ff66b3 100%);
+  --gradient-cyberpunk: linear-gradient(135deg, #ff00c3 0%, #a855f7 50%, #00e8ff 100%);
+  --gradient-sunset: linear-gradient(135deg, #ff40a1 0%, #ff783d 50%, #ffd94a 100%);
 
-  /* Secondary: Deep Violet / Cosmic Purple */
-  --color-secondary-light: #c4b5fd;
-  --color-secondary: #9b7dff;
-  --color-secondary-dark: #7952f5;
-  --color-secondary-glow: rgba(121, 82, 245, 0.35);
-
-  /* Tertiary: Neon Emerald Green (STEM / Tech / Success / Constants) */
-  --color-tertiary-light: #22f792;
-  --color-tertiary: #10b981;
-  --color-tertiary-dark: #059669;
-  --color-tertiary-glow: rgba(34, 247, 146, 0.35);
-
-  /* Quaternary: Amber / Coral Orange (Attention / Dynamics / Warnings) */
-  --color-quaternary-light: #fef08a;
-  --color-quaternary: #f78166;
-  --color-quaternary-dark: #ea580c;
-  --color-quaternary-glow: rgba(247, 129, 102, 0.35);
-
-  /* Pernary: Hot Pink / Magenta (Special Modes / Accents) */
-  --color-pernary-light: #f472b6;
-  --color-pernary: #ec4899;
-  --color-pernary-dark: #be185d;
-  --color-pernary-glow: rgba(236, 72, 153, 0.35);
-
-  /* Math Equation & Science Highlight */
-  --color-math: #00f5db;
-
-  /* ----------------------------------------------------------------------------
-   * 🔮 Signature Vibrant Multi-Stop Gradients & Obsidian Notes Sequences
-   * ---------------------------------------------------------------------------- */
-  --gradient-0: linear-gradient(135deg, #00ffff 0%, #00e8ff 100%);
-  --gradient-1: linear-gradient(135deg, #00ffee 0%, #14b5ff 100%);
-  --gradient-2: linear-gradient(135deg, #00e8ff 0%, #0070eb 100%);
-  --gradient-3: linear-gradient(135deg, #03e8bd 0%, #03b4e8 50%, #0355e8 100%);
-  --gradient-4: linear-gradient(135deg, #00e8ff 0%, #14b5ff 25%, #0a95eb 50%, #0070eb 75%, #5e17eb 100%);
-  --gradient-5: linear-gradient(135deg, #00e8ff 0%, #3a98ff 25%, #0a95eb 50%, #7952f5 75%, #5e17eb 100%);
-  --gradient-6: linear-gradient(135deg, #00e8ff 0%, #14b5ff 25%, #5280ff 50%, #7952f5 75%, #ff66b3 100%);
-  --gradient-7: linear-gradient(135deg, #00e8ff 0%, #14b5ff 20%, #5280ff 40%, #7952f5 60%, #ff66b3 80%, #f78166 100%);
-  --gradient-8: linear-gradient(135deg, #4cc9f0 0%, #4361ee 25%, #3a0ca3 50%, #7209b7 75%, #f72585 100%);
-  --gradient-synthwave: linear-gradient(135deg, #f72585 0%, #7209b7 25%, #3a0ca3 50%, #4361ee 75%, #4cc9f0 100%);
-  --gradient-sunset-soft: linear-gradient(120deg, #ff6f91 0%, #ff9671 100%);
-
-  --gradient-eigenscribe: linear-gradient(to right bottom, #00e8ff, #14b5ff, #5280ff, #7952f5);
-  --gradient-multi: linear-gradient(135deg, #00f2ff, #3b82f6, #8b5cf6, #ec4899);
-  --gradient-cyan-to-blue: linear-gradient(130deg, #00ffee, #0a95eb);
-  --gradient-green-to-blue: linear-gradient(135deg, #22f792, #27aaff);
-  --gradient-producer: linear-gradient(135deg, #f472b6, #8b5cf6, #3b82f6);
-  --gradient-producer-green: linear-gradient(135deg, #4ade80, #06b6d4, #3b82f6);
-  --gradient-blue: linear-gradient(to right bottom, #00c8ff, #14a5ff, #7066ff, #5e17eb);
-  --gradient-pycharm: linear-gradient(135deg, #00c6ff 0%, #0072ff 25%, #7652f5 60%, #c026d3 85%, #f43f5e 100%);
-  --gradient-pycharm-subtle: linear-gradient(135deg, #0070eb 0%, #14b5ff 30%, #7652f5 75%, #a855f7 100%);
-  --gradient-sunset: linear-gradient(135deg, #7652f5 0%, #9b7dff 35%, #ec4899 75%, #f78166 100%);
-  --gradient-emerald: linear-gradient(135deg, #00e8ff 0%, #14b5ff 35%, #7652f5 75%, #a855f7 100%);
-  --gradient-rainbow: linear-gradient(135deg, #0070eb 0%, #14b5ff 25%, #7652f5 55%, #c026d3 80%, #ec4899 100%);
-  --gradient-purple-magenta: linear-gradient(135deg, #6253e1 0%, #7652f5 35%, #a855f7 70%, #ec4899 100%);
-  --creator-gradient: linear-gradient(135deg, #00e8ff 0%, #14b5ff 30%, #5280ff 65%, #7652f5 100%);
-  --eig-blue-purple-gradient: linear-gradient(135deg, #00f5ff 0%, #1d9cff 28%, #6c4dff 65%, #c026d3 90%, #f43f5e 100%);
-  --gradient-cosmic-radial: radial-gradient(circle at center, #0a0f1f 0%, #050812 60%, #000000 100%);
-
-  /* Transparent overlay gradients */
-  --gradient-blue-purple-glass: linear-gradient(135deg, rgba(0, 232, 255, 0.15), rgba(20, 181, 255, 0.1), rgba(121, 82, 245, 0.15));
-
-  /* ----------------------------------------------------------------------------
-   * 🪟 Glassmorphism & Depth Specs
-   * ---------------------------------------------------------------------------- */
-  --glass-bg: rgba(0, 0, 0, 0.5);
-  --glass-bg-elevated: rgba(22, 27, 34, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glass-border-bright: rgba(20, 181, 255, 0.3);
-  --glass-blur: blur(12px);
-  --graph-bg: rgba(3, 7, 18, 0.85);
-
-  /* Shadows & Luminous Glows */
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.25);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.5);
-  --shadow-glow-cyan: 0 0 20px rgba(0, 232, 255, 0.4);
-  --shadow-glow-purple: 0 0 20px rgba(121, 82, 245, 0.4);
-  --shadow-glow-cosmic: 0 0 12px rgba(0, 232, 255, 0.35), inset 0 0 8px rgba(255, 255, 255, 0.06);
-  --text-shadow-glow: 0 0 6px currentColor, 0 0 12px currentColor, 0 0 24px currentColor;
-  --shadow-button: 0 4px 15px rgba(20, 181, 255, 0.4);
-  --shadow-button-2: 0 4px 15px rgba(16, 185, 129, 0.4);
-  --shadow-text: 0 2px 4px rgba(0, 0, 0, 0.6);
-
-  /* ----------------------------------------------------------------------------
-   * 🖋️ Typography Families
-   * ---------------------------------------------------------------------------- */
-  --font-heading: 'Aclonica', sans-serif;
-  --font-body: 'Merriweather', Georgia, serif;
-  --font-mono: 'Fira Code', monospace;
-  --font-math: "Times New Roman", "Computer Modern", serif;
-
-  /* ----------------------------------------------------------------------------
-   * 📐 Golden Ratio & Metric Scale Tokens (φ ≈ 1.618)
-   * ---------------------------------------------------------------------------- */
-  --space-2xs: 0.236rem;
+  /* --- Golden Ratio Spacing (phi ≈ 1.618) --- */
   --space-xs: 0.382rem;
   --space-sm: 0.618rem;
   --space-md: 1.000rem;
   --space-lg: 1.618rem;
   --space-xl: 2.618rem;
   --space-2xl: 4.236rem;
-  --space-3xl: 6.854rem;
 
-  /* Border Radii */
-  --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --radius-pill: 9999px;
+  /* --- Typography Stacks --- */
+  --font-display: 'Aclonica', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
 
-  /* Transitions */
-  --transition-fast: 0.15s ease;
-  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 0.5s ease-in-out;
+  /* --- Elevation & Glow Shadows --- */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-glow-cyan: 0 0 15px rgba(0, 232, 255, 0.35);
+  --shadow-glow-purple: 0 0 15px rgba(121, 82, 245, 0.35);
+
+  /* --- Transition Standard --- */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ==============================================================================
- * 1️⃣ WHAT YOU'RE ALLOWED TO CALL: LAYER 2 — BASE ELEMENT RESETS & NORMALIZATION
- * ============================================================================== */
+/* ==========================================================================
+   1️⃣ LAYER 2: Base Element Resets & Normalize
+   ========================================================================== */
 
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html {
-  font-size: 16px;
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
-
 body {
-  font-family: var(--font-body);
-  font-size: var(--space-md);
-  line-height: 1.618;
-  color: var(--color-text);
   background-color: var(--color-bg);
+  background-image: var(--gradient-cosmic-radial);
   background-attachment: fixed;
-  background-size: cover;
-  background-position: center top;
-  min-height: 100vh;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.618;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
-/* Deep Cosmic Radial Body / Container Option */
-body.cosmic-theme,
-.cosmic-canvas,
-.bg-cosmic-radial {
-  margin: 0;
-  overflow: hidden;
-  background: var(--gradient-cosmic-radial);
-  font-family: var(--font-heading);
-}
-
-/* Headings */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
+  font-family: var(--font-display);
   color: var(--color-text-bright);
+  font-weight: 700;
   line-height: 1.25;
-  margin-bottom: var(--space-sm);
-  letter-spacing: 0.02em;
 }
 
-h1 { font-size: calc(1rem * 1.618 * 1.618); }
-h2 { font-size: calc(1rem * 1.618 * 1.3); }
-h3 { font-size: calc(1rem * 1.618); }
-h4 { font-size: 1.25rem; }
-h5 { font-size: 1.1rem; }
-h6 { font-size: 1.0rem; }
-
-/* Paragraphs & Text */
-p {
-  margin-bottom: var(--space-md);
-  color: var(--color-text);
-}
-
-/* Links */
-a {
-  color: var(--color-primary);
-  text-decoration: none;
-  transition: color var(--transition-fast), text-shadow var(--transition-fast);
-}
-
-a:hover {
-  color: var(--color-primary-light);
-  text-shadow: 0 0 8px var(--color-primary-glow);
-}
-
-/* Code & Preformatted Text */
-code, kbd, samp, pre {
+code, pre, kbd, samp {
   font-family: var(--font-mono);
-  font-size: 0.9em;
 }
 
-/* Focus Visibility Ring */
+/* Focus Ring */
 :focus-visible {
-  outline: 2px solid var(--color-primary-light);
+  outline: 2px solid var(--color-eigen-cyan);
   outline-offset: 2px;
 }
 
-/* Images & Media */
-img, svg, video, canvas {
-  max-width: 100%;
-  height: auto;
-  vertical-align: middle;
-}
+/* ==========================================================================
+   2️⃣ LAYER 3: Layout Scaffolding
+   ========================================================================== */
 
-/* Custom Selection */
-::selection {
-  background: rgba(20, 181, 255, 0.35);
-  color: var(--color-text-bright);
-}
-
-/* ==============================================================================
- * 2️⃣ HOW IT WORKS: LAYER 3 — LAYOUT SCAFFOLDING & RESPONSIVE GRIDS
- * ============================================================================== */
-
-/* Container Bounds */
 .container {
   width: 100%;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--space-md);
-  padding-right: var(--space-md);
+  padding: var(--space-lg);
 }
 
-.max-w-3xl { max-width: 48rem; }
-.max-w-5xl { max-width: 64rem; }
-.max-w-7xl { max-width: 80rem; }
-.mx-auto { margin-left: auto; margin-right: auto; }
+.flex {
+  display: flex;
+}
 
-.min-h-screen { min-height: 100vh; }
+.flex-col {
+  flex-direction: column;
+}
 
-/* Flexbox Layout Utilities */
-.flex { display: flex; }
-.inline-flex { display: inline-flex; }
-.flex-col { flex-direction: column; }
-.flex-row { flex-direction: row; }
-.flex-wrap { flex-wrap: wrap; }
-.items-center { align-items: center; }
-.items-start { align-items: flex-start; }
-.items-end { align-items: flex-end; }
-.justify-center { justify-content: center; }
-.justify-between { justify-content: space-between; }
-.justify-start { justify-content: flex-start; }
-.justify-end { justify-content: flex-end; }
-.flex-1 { flex: 1 1 0%; }
-.gap-xs { gap: var(--space-xs); }
-.gap-sm { gap: var(--space-sm); }
-.gap-md { gap: var(--space-md); }
-.gap-lg { gap: var(--space-lg); }
-.gap-xl { gap: var(--space-xl); }
+.items-center {
+  align-items: center;
+}
 
-/* Grid Layout Utilities */
-.grid { display: grid; }
-.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
-.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.justify-center {
+  justify-content: center;
+}
 
-/* Golden Ratio Split Layout */
-.layout-golden {
+.justify-between {
+  justify-content: space-between;
+}
+
+.grid {
   display: grid;
-  grid-template-columns: 1.618fr 1fr;
   gap: var(--space-lg);
 }
 
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 @media (max-width: 768px) {
-  .grid-cols-2,
-  .grid-cols-3,
-  .grid-cols-4,
-  .layout-golden {
+  .grid-cols-2, .grid-cols-3 {
     grid-template-columns: 1fr;
   }
 }
 
-/* ==============================================================================
- * 3️⃣ PROOF IT WORKS: LAYER 4 — CORE REUSABLE UI COMPONENT CLASSES
- * ============================================================================== */
+/* ==========================================================================
+   3️⃣ LAYER 4: Core Reusable Component Classes
+   ========================================================================== */
 
-/* ------------------------------------------------------------------------------
- * 🪟 Glassmorphic Cards & Panels
- * ------------------------------------------------------------------------------ */
-.card,
+/* Glassmorphic Card */
 .card-glass {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
+  background: var(--color-surface-overlay);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
   padding: var(--space-lg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
   box-shadow: var(--shadow-md);
-  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
-  position: relative;
-  overflow: hidden;
+  transition: var(--transition-smooth);
 }
 
-.card-interactive:hover {
-  transform: translateY(-4px);
-  border-color: var(--glass-border-bright);
-  box-shadow: var(--shadow-lg), var(--shadow-glow-cyan);
-}
-
-.card-header {
-  margin-bottom: var(--space-md);
-  border-bottom: 1px solid var(--glass-border);
-  padding-bottom: var(--space-sm);
-}
-
-/* ------------------------------------------------------------------------------
- * 🔘 Sleek Buttons & Micro-Interactions
- * ------------------------------------------------------------------------------ */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-sm) var(--space-lg);
-  font-family: var(--font-heading);
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  color: var(--color-text-bright);
-  text-shadow: var(--shadow-text);
-  border: none;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  text-decoration: none;
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal), filter var(--transition-normal), background-position var(--transition-normal);
-  background-size: 200% 100%;
-  position: relative;
-  user-select: none;
-}
-
-.btn:active {
-  transform: translateY(1px);
-}
-
-/* Button Variants */
-.btn-primary {
-  background-image: var(--gradient-cyan-to-blue);
-  box-shadow: var(--shadow-button);
-}
-
-.btn-primary:hover {
-  filter: brightness(1.15);
-  box-shadow: 0 6px 20px var(--color-primary-glow);
-  transform: translateY(-2px);
-}
-
-.btn-secondary {
-  background-image: var(--gradient-blue-to-purple);
-  box-shadow: var(--shadow-button);
-}
-
-.btn-secondary:hover {
-  filter: brightness(1.15);
-  box-shadow: 0 6px 20px var(--color-secondary-glow);
-  transform: translateY(-2px);
-}
-
-.btn-eigenscribe {
-  background-image: var(--gradient-eigenscribe);
-  box-shadow: var(--shadow-button-2);
-}
-
-.btn-eigenscribe:hover {
-  filter: brightness(1.15);
-  box-shadow: 0 6px 20px var(--color-tertiary-glow);
-  transform: translateY(-2px);
-}
-
-.btn-glass {
-  background: var(--glass-bg-elevated);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  box-shadow: var(--shadow-sm);
-}
-
-.btn-glass:hover {
-  border-color: var(--color-primary);
+.card-glass:hover {
+  border-color: var(--color-eigen-cyan);
   box-shadow: var(--shadow-glow-cyan);
   transform: translateY(-2px);
 }
 
-/* ------------------------------------------------------------------------------
- * 🌈 Vibrant Text Gradients & Shimmer Keyframes
- * ------------------------------------------------------------------------------ */
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
+/* Gradient Text */
 .gradient-text {
-  background: var(--gradient-cyan-to-blue);
+  background: var(--gradient-electric);
   -webkit-background-clip: text;
-  background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: transparent;
   display: inline-block;
+  font-weight: bold;
 }
 
-.gradient-text-multi {
-  background: var(--gradient-multi);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  display: inline-block;
-}
-
-.gradient-text-animated {
-  background: var(--gradient-multi);
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  animation: gradient-shift 6s ease infinite;
-  display: inline-block;
-  text-shadow: 0 0 20px var(--color-primary-glow);
-}
-
-/* ------------------------------------------------------------------------------
- * 🏷️ High-Contrast ADHD Semantic Badges & Tags
- * ------------------------------------------------------------------------------ */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  padding: var(--space-2xs) var(--space-sm);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 700;
-  border-radius: var(--radius-pill);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border: 1px solid transparent;
-}
-
-.badge-primary {
-  background: rgba(20, 181, 255, 0.15);
-  color: var(--color-primary-light);
-  border-color: rgba(20, 181, 255, 0.4);
-}
-
-.badge-secondary {
-  background: rgba(155, 125, 255, 0.15);
-  color: var(--color-secondary-light);
-  border-color: rgba(155, 125, 255, 0.4);
-}
-
-.badge-success {
-  background: rgba(34, 247, 146, 0.15);
-  color: var(--color-tertiary-light);
-  border-color: rgba(34, 247, 146, 0.4);
-}
-
-.badge-warning {
-  background: rgba(247, 129, 102, 0.15);
-  color: var(--color-quaternary);
-  border-color: rgba(247, 129, 102, 0.4);
-}
-
-.badge-accent {
-  background: rgba(236, 72, 153, 0.15);
-  color: var(--color-pernary-light);
-  border-color: rgba(236, 72, 153, 0.4);
-}
-
-/* ------------------------------------------------------------------------------
- * 💻 Code Blocks & Syntax Display
- * ------------------------------------------------------------------------------ */
-.code-block {
-  background: rgba(13, 17, 23, 0.85);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-sm);
-  padding: var(--space-md);
-  margin: var(--space-md) 0;
-  overflow-x: auto;
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
-  line-height: 1.5;
-  color: #c9d1d9;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.code-inline {
-  background: rgba(20, 181, 255, 0.1);
-  color: var(--color-primary-light);
-  border: 1px solid rgba(20, 181, 255, 0.2);
-  padding: 0.15em 0.4em;
-  border-radius: var(--radius-xs);
-  font-family: var(--font-mono);
-  font-size: 0.875em;
-}
-
-/* ------------------------------------------------------------------------------
- * 📝 Inputs & Form Controls
- * ------------------------------------------------------------------------------ */
-.input,
-.textarea,
-.select {
-  width: 100%;
-  background: var(--glass-bg-elevated);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-sm);
-  padding: var(--space-sm) var(--space-md);
-  color: var(--color-text-bright);
-  font-family: var(--font-body);
-  font-size: 1rem;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-  backdrop-filter: var(--glass-blur);
-}
-
-.input:focus,
-.textarea:focus,
-.select:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 10px var(--color-primary-glow);
-}
-
-/* ------------------------------------------------------------------------------
- * 🧭 Glassmorphic Navigation Bar
- * ------------------------------------------------------------------------------ */
-.navbar-glass {
-  background: rgba(13, 17, 23, 0.75);
-  border-bottom: 1px solid var(--glass-border);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: var(--space-sm) var(--space-md);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: var(--shadow-md);
-}
-
-/* ------------------------------------------------------------------------------
- * 📊 Mermaid & Data App Scaffolding
- * ------------------------------------------------------------------------------ */
-.mermaid-wrapper {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
-  padding: var(--space-lg);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* ------------------------------------------------------------------------------
- * 🌌 Dynamic App Shell & Ambient Backgrounds
- * ------------------------------------------------------------------------------ */
-.app-shell {
-  min-height: 100vh;
-  background-color: var(--color-bg);
-  background:
-    radial-gradient(circle at 8% 12%, rgba(121, 82, 245, 0.28), transparent 48%),
-    radial-gradient(circle at 92% 88%, rgba(20, 181, 255, 0.25), transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.14), transparent 55%),
-    linear-gradient(135deg, rgba(5, 10, 25, 0.72), rgba(2, 6, 23, 0.85));
-  color: var(--color-text);
-  font-family: var(--font-body);
-}
-
-/* ------------------------------------------------------------------------------
- * 📈 Metric Summary & KPI Cards
- * ------------------------------------------------------------------------------ */
-.metric-card {
-  background: var(--glass-bg-elevated);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
-  padding: var(--space-md);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2xs);
-}
-
-.metric-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--glass-border-bright);
-  box-shadow: var(--shadow-md);
-}
-
-.metric-label {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-text-muted);
-}
-
-.metric-value {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  color: var(--color-text-bright);
-  line-height: 1.2;
-}
-
-.metric-value.cyan { color: var(--color-primary-light); }
-.metric-value.violet { color: var(--color-secondary-light); }
-.metric-value.green { color: var(--color-tertiary-light); }
-.metric-value.coral { color: var(--color-quaternary); }
-
-/* ------------------------------------------------------------------------------
- * 🪟 Interactive Plotly & Chart Container Cards
- * ------------------------------------------------------------------------------ */
-.chart-card {
-  background: var(--graph-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
-  padding: var(--space-md);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  box-shadow: var(--shadow-md);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.chart-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--space-sm);
-  padding-bottom: var(--space-xs);
-  border-bottom: 1px solid var(--glass-border);
-}
-
-.chart-title {
-  font-family: var(--font-heading);
-  font-size: 1rem;
-  color: var(--color-text-bright);
-  margin: 0;
-}
-
-/* ------------------------------------------------------------------------------
- * 📂 Collapsible Glass Accordion Panels
- * ------------------------------------------------------------------------------ */
-.accordion-panel {
-  background: var(--glass-bg-elevated);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-sm);
-  margin-bottom: var(--space-sm);
-  overflow: hidden;
-  transition: border-color var(--transition-fast);
-}
-
-.accordion-header {
-  padding: var(--space-sm) var(--space-md);
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.02);
-  user-select: none;
-  font-family: var(--font-heading);
-  font-size: 0.9rem;
-  color: var(--color-text-bright);
-  transition: background var(--transition-fast);
-}
-
-.accordion-header:hover {
-  background: rgba(20, 181, 255, 0.06);
-}
-
-.accordion-body {
-  padding: var(--space-md);
-  border-top: 1px solid var(--glass-border);
-  background: rgba(0, 0, 0, 0.2);
-}
-
-/* ------------------------------------------------------------------------------
- * 🎛️ Parameter Sliders & Interactive Form Elements
- * ------------------------------------------------------------------------------ */
-.slider-group {
-  margin-bottom: var(--space-md);
-}
-
-.slider-label-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--space-2xs);
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-}
-
-.slider-label {
-  color: var(--color-text-muted);
-}
-
-.slider-value {
-  color: var(--color-primary-light);
-  font-weight: 700;
-}
-
-/* ------------------------------------------------------------------------------
- * ⏯️ Simulation Playback & Timeline Scrubber
- * ------------------------------------------------------------------------------ */
-.playback-bar {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  background: var(--glass-bg-elevated);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-pill);
-  padding: var(--space-xs) var(--space-md);
-  backdrop-filter: var(--glass-blur);
-}
-
-.playback-btn {
-  background: transparent;
-  border: none;
-  color: var(--color-text-bright);
-  cursor: pointer;
-  padding: var(--space-2xs) var(--space-xs);
-  border-radius: var(--radius-xs);
-  transition: color var(--transition-fast), transform var(--transition-fast);
+/* Action Buttons */
+.btn-eigenscribe {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-}
-
-.playback-btn:hover {
-  color: var(--color-primary-light);
-  transform: scale(1.1);
-}
-
-.playback-btn.primary {
-  background: var(--color-primary);
+  background: var(--gradient-eigenscribe);
   color: var(--color-bg);
-  border-radius: var(--radius-pill);
-  padding: var(--space-xs) var(--space-md);
+  font-weight: 700;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
 }
 
-.playback-btn.primary:hover {
-  background: var(--color-primary-light);
-  box-shadow: var(--shadow-button);
+.btn-eigenscribe:hover {
+  box-shadow: var(--shadow-glow-cyan);
+  transform: translateY(-2px);
 }
 
-/* ------------------------------------------------------------------------------
- * 🔍 Floating Tooltips & Glass Overlays
- * ------------------------------------------------------------------------------ */
-#tooltip,
-.tooltip-glass {
-  position: absolute;
-  color: var(--color-text-bright, #ffffff);
-  background: var(--color-tooltip-bg, rgba(0, 0, 0, 0.7));
-  padding: 6px 10px;
-  border-radius: var(--radius-sm, 6px);
-  font-family: var(--font-heading, 'Aclonica', sans-serif);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  z-index: 1000;
-  font-size: 12px;
-  border: 1px solid var(--color-tooltip-border, rgba(255, 255, 255, 0.1));
-  backdrop-filter: var(--glass-blur, blur(4px));
+/* Code Snippet */
+.code-block {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: var(--space-md);
+  overflow-x: auto;
+  font-size: 0.875rem;
 }
-
-/* ------------------------------------------------------------------------------
- * ✨ Cosmic Luminous Labels & Shimmer Animation ✨
- * ------------------------------------------------------------------------------ */
-@keyframes shimmer {
-  0% {
-    filter: brightness(1);
-  }
-  50% {
-    filter: brightness(1.4);
-  }
-  100% {
-    filter: brightness(1);
-  }
-}
-
-.cosmic-label,
-.eigen-label {
-  position: absolute;
-  color: var(--color-luminous-cyan, #c8f8ff);
-  font-family: var(--font-heading, "Aclonica", sans-serif);
-  font-size: 14px;
-  letter-spacing: 1px;
-  text-align: center;
-  pointer-events: none;
-  user-select: none;
-  padding: 4px 10px;
-  border-radius: 14px;
-  backdrop-filter: blur(4px);
-  background: var(--color-cosmic-bg, rgba(0, 232, 255, 0.08));
-  border: 1px solid var(--color-cosmic-border, rgba(255, 255, 255, 0.08));
-  text-shadow:
-    0 0 6px currentColor,
-    0 0 12px currentColor,
-    0 0 24px currentColor;
-  box-shadow:
-    0 0 10px rgba(0, 232, 255, 0.3),
-    inset 0 0 8px rgba(255, 255, 255, 0.05);
-  /* Center the label on the projected coordinate point */
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  animation: shimmer 4s infinite ease-in-out;
-}
-
-/* EIGEN Spectrum & Vibrant Node Specific Color Overrides */
-.eigen-label.node-0 { color: var(--color-eigen-node-0, #fff9d6); }
-.eigen-label.node-1 { color: var(--color-eigen-node-1, #00ffff); }
-.eigen-label.node-2 { color: var(--color-eigen-node-2, #00e8ff); }
-.eigen-label.node-3 { color: var(--color-eigen-node-3, #14b5ff); }
-.eigen-label.node-4 { color: var(--color-eigen-node-4, #0070eb); }
-.eigen-label.node-5 { color: var(--color-eigen-node-5, #ffd94a); }
-.eigen-label.node-6 { color: var(--color-eigen-node-6, #7952f5); }
-.eigen-label.node-7 { color: var(--color-eigen-node-7, #5e17eb); }
-.eigen-label.node-8 { color: var(--color-eigen-node-8, #ff66b3); }
-.eigen-label.node-9 { color: var(--color-eigen-node-9, #00c853); }
-
-/* Core 4-Color Spectrum Overrides */
-.eigen-label.cyan   { color: var(--color-eigen-cyan, #00e8ff); }
-.eigen-label.sky    { color: var(--color-eigen-sky, #14b5ff); }
-.eigen-label.blue   { color: var(--color-eigen-blue, #3a98ff); }
-.eigen-label.purple { color: var(--color-eigen-purple, #7952f5); }

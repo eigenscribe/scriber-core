@@ -39,11 +39,18 @@ dependencies = [
     "click>=8.0.0",
 ]
 
+[project.scripts]
+eigenscribe = "frontend.the_scriber_experience.cli.main:main"
+
 [project.optional-dependencies]
 dev = [
     "pytest>=8.0.0",
     "ipykernel>=6.0.0",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
 
 [tool.uv]
 managed = true

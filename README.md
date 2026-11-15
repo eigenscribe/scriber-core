@@ -14,10 +14,14 @@ Welcome to the canonical environment index for autonomous development agents. Th
 ├── boilerplates/
 │   ├── css/
 │   │   └── tse-boilerplate.css         # Eigenscribe signature high-contrast layout blueprint
+│   ├── mermaid/
+│   │   └── boilerplate_diagram.mmd     # Dark-mode Mermaid diagram architecture template
 │   ├── notebooks/
 │   │   └── visuals-boilerplate.ipynb   # Visualizations, NetworkX topologies & color palettes template
 │   └── python/
-│       └── gold-standard.py            # Gold standard numeric integration template
+│       ├── gold-standard.py            # Gold standard numeric integration template
+│       ├── gold-standard-boilerplate.py # Submodule canonical alias for numeric template
+│       └── visualization_boilerplate.py # Matplotlib, Seaborn & Plotly theme bootstrap template
 ├── src/
 │   ├── __init__.py                   # Scriber Core root namespace
 │   └── frontend/                     # 🎨 Frontend, design tokens & styling subsystem
@@ -32,13 +36,17 @@ Welcome to the canonical environment index for autonomous development agents. Th
 │           │   ├── tse_gradients.py  # TSE multi-stop gradient sequences & presets
 │           │   ├── tse-colors.py     # Hyphenated alias forwarding to tse_colors.py
 │           │   └── tse-gradients.py  # Hyphenated alias forwarding to tse_gradients.py
-│           ├── cli/                  # Terminal CLI formatting & banners
+│           ├── cli/                  # Terminal CLI formatting, gradients & banners
 │           │   ├── __init__.py
+│           │   ├── main.py           # Unified `eigenscribe` CLI entry point & subcommands
 │           │   ├── gradients.py      # CLI TrueColor gradient engine & CLI commands
 │           │   └── messaging.py      # ANSI 256 formatting, banners, and semantic logs
-│           └── plots/                # Scientific plotting themes & colormaps
+│           ├── plots/                # Scientific plotting themes & colormaps
+│           │   ├── __init__.py
+│           │   └── theme.py          # Theme engine for Matplotlib, Pyplot, Seaborn, Plotly
+│           └── mermaid/              # Dark-mode Mermaid.js diagram theme engine & preview
 │               ├── __init__.py
-│               └── theme.py          # Theme engine for Matplotlib, Pyplot, Seaborn, Plotly
+│               └── theme.py          # Class definitions, directives & HTML preview renderer
 ├── sublime-theme/
 │   ├── EigenScribe/                  # Sublime Text 4 package (theme, color scheme, PreTeXt syntax & snippets)
 │   ├── install.sh                    # Bash installer (macOS / Linux, copy or symlink mode)
@@ -57,6 +65,42 @@ Welcome to the canonical environment index for autonomous development agents. Th
 - **Package & Environment Manager**: `uv` (Deterministic synchronization via `uv sync`).
 - **Target Runtime Engine**: Python 3.11+
 - **Primary IDE Workspace**: JetBrains PyCharm Professional / IntelliJ IDEA.
+
+## 🔱 Eigenscribe CLI (`eigenscribe`)
+
+`scriber-core` includes a self-contained baseline CLI executable via `eigenscribe` (or `uv run eigenscribe`):
+
+```bash
+# Sync dependencies and install CLI
+uv sync --extra dev
+
+# Run CLI root help & signature banner
+uv run eigenscribe --help
+
+# Run full workspace health and token consistency diagnostics
+uv run eigenscribe doctor
+
+# Display architecture overview and active token statistics
+uv run eigenscribe info
+
+# Render multi-stop TrueColor gradient text
+uv run eigenscribe gradient "Deterministic Workspace Suite" --preset cyberpunk
+uv run eigenscribe gradient --list-presets
+
+# Inspect color palettes, status roles, and 256-color table
+uv run eigenscribe colors --all-256 --spectrum
+
+# Render formatted headers and banners
+uv run eigenscribe banner "SCRIBER CORE" --subtitle "Design Tokens & Telemetry"
+
+# Export Matplotlib rcParams or CSS variables
+uv run eigenscribe theme --format summary
+uv run eigenscribe theme --format css
+
+# Generate or preview dark-mode Mermaid diagrams
+uv run eigenscribe mermaid --sample
+uv run eigenscribe mermaid --html-preview --output diagram.html
+```
 
 ## 📦 Cross-Project Distribution & Package Setup
 

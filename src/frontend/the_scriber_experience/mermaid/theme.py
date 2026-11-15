@@ -298,8 +298,8 @@ def wrap_mermaid_diagram(
 
 
 def generate_mermaid_flowchart(
-    nodes: list[tuple[str, str, str | None]],
-    edges: list[tuple[str, str, str | None]],
+    nodes: list[tuple[str, str, str | None]] | None = None,
+    edges: list[tuple[str, str, str | None]] | None = None,
     direction: str = "TD",
     title: str | None = None,
     variant: str = "dark",
@@ -309,11 +309,12 @@ def generate_mermaid_flowchart(
 
     Parameters
     ----------
-    nodes : list[tuple[str, str, str | None]]
+    nodes : list[tuple[str, str, str | None]] | None, optional
         List of nodes formatted as (node_id, label, class_name_or_None).
-        e.g., `[("A", "Data Input", "eigenCyan"), ("B", "Compute ODE", "eigenPurple")]`
-    edges : list[tuple[str, str, str | None]]
+        If None, generates a default canonical architecture sample.
+    edges : list[tuple[str, str, str | None]] | None, optional
         List of edges formatted as (source_id, target_id, edge_label_or_None).
+        If None, connects default sample nodes.
     direction : str, default="TD"
         Flowchart direction: "TD", "LR", "BT", "RL".
     title : str | None, optional
@@ -326,6 +327,20 @@ def generate_mermaid_flowchart(
     str
         Complete styled Mermaid flowchart.
     """
+    if nodes is None:
+        nodes = [
+            ("A", "System Ingest", "eigenCyan"),
+            ("B", "Deterministic Core", "eigenBlue"),
+            ("C", "Visualization Engine", "eigenPurple"),
+            ("D", "Telemetry Output", "eigenPink"),
+        ]
+    if edges is None:
+        edges = [
+            ("A", "B", "Ingest"),
+            ("B", "C", "Process"),
+            ("C", "D", "Render"),
+        ]
+
     lines = [f"flowchart {direction}"]
 
     # Nodes
