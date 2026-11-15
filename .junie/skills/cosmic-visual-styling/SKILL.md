@@ -67,7 +67,7 @@ Use this skill whenever designing, styling, or updating figures, scientific plot
 
 ### 🐍 2. Python (Matplotlib, Pyplot & Seaborn) Recipes
 
-Import and apply the centralized styling utilities from `../../../src/style`:
+Import and apply the centralized styling utilities from `frontend.the_scriber_experience`:
 
 ```python
 import matplotlib.pyplot as plt
@@ -203,7 +203,7 @@ All web layouts and dashboards must follow the 4-layer taxonomy defined in `hous
 
 ### 💻 5. CLI 256-Color & ANSI Palettes
 
-Use `../../../src/style` for terminal color formatting:
+Use `frontend.the_scriber_experience.cli` for terminal color formatting:
 
 - `eigen_cosmic_navy` (ANSI 17)
 - `eigen_cosmic_void` (ANSI 16)

@@ -47,37 +47,57 @@ except ImportError:
 
 # Import gradient engine components (fallback to local or inline if needed)
 try:
-    from src.style.cli.gradients import (
-        PRESETS,
-        RGB,
+    from frontend.gradients import (
+        GRADIENT_PRESETS,
         Color,
+        RGB,
         hex_to_rgb,
         multi_gradient,
     )
+    PRESETS = GRADIENT_PRESETS
 except ImportError:
     try:
-        from src.style.cli.gradients import (
-            PRESETS,
-            RGB,
+        from src.frontend.gradients import (
+            GRADIENT_PRESETS,
             Color,
+            RGB,
             hex_to_rgb,
             multi_gradient,
         )
+        PRESETS = GRADIENT_PRESETS
     except ImportError:
-        PRESETS = {
-            "electric": ("#00a6ff", "#a855f7", "#ff00c3"),
-        }
-        RGB = tuple[int, int, int]
-        Color = str | RGB
+        try:
+            from .gradients import (
+                PRESETS,
+                Color,
+                RGB,
+                hex_to_rgb,
+                multi_gradient,
+            )
+        except ImportError:
+            try:
+                from gradients import (
+                    PRESETS,
+                    Color,
+                    RGB,
+                    hex_to_rgb,
+                    multi_gradient,
+                )
+            except ImportError:
+                PRESETS = {
+                    "electric": ("#00a6ff", "#a855f7", "#ff00c3"),
+                }
+                RGB = tuple[int, int, int]
+                Color = str | RGB
 
-        def hex_to_rgb(hex_color: str) -> RGB:
-            v = hex_color.removeprefix("#")
-            return int(v[0:2], 16), int(v[2:4], 16), int(v[4:6], 16)
+                def hex_to_rgb(hex_color: str) -> RGB:
+                    v = hex_color.removeprefix("#")
+                    return int(v[0:2], 16), int(v[2:4], 16), int(v[4:6], 16)
 
-        def multi_gradient(
-            text: str, colors: any = PRESETS["electric"], *, bold: bool = True
-        ) -> str:
-            return text
+                def multi_gradient(
+                    text: str, colors: any = PRESETS["electric"], *, bold: bool = True
+                ) -> str:
+                    return text
 
 
 __all__: list[str] = [

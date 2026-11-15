@@ -6,38 +6,50 @@ Welcome to the canonical environment index for autonomous development agents. Th
 
 ```text
 ├── docs/
-│   └── workspace-setup-guide.md # Multi-project distribution & setup guide (Submodules / Templates / Packaging)
+│   └── workspace-setup-guide.md        # Multi-project distribution & setup guide (Submodules / Templates / Packaging)
 ├── house-rules/
-│   ├── python-rules.md        # Mathematical typography, packaging hygiene & consistency rules
-│   └── css-rules.md           # Glassmorphic visual layout layering standards
+│   ├── python-rules.md               # Mathematical typography, packaging hygiene & consistency rules
+│   ├── python-rules_v1.md            # Reference version 1 rules archive
+│   └── css-rules.md                  # Glassmorphic visual layout layering standards
 ├── boilerplates/
 │   ├── css/
-│   │   └── tse-boilerplate.css          # Eigenscribe signature high-contrast layout blueprint
+│   │   └── tse-boilerplate.css         # Eigenscribe signature high-contrast layout blueprint
 │   ├── notebooks/
-│   │   └── visuals-boilerplate.ipynb    # Visualizations, NetworkX topologies & color palettes template
+│   │   └── visuals-boilerplate.ipynb   # Visualizations, NetworkX topologies & color palettes template
 │   └── python/
-│       ├── gold-standard-boilerplate.py    # Gold standard numeric integration template
-│       └── styles/                         # 🎨 Dedicated Styling Subpackage
+│       └── gold-standard.py            # Gold standard numeric integration template
+├── src/
+│   ├── __init__.py                   # Scriber Core root namespace
+│   └── frontend/                     # 🎨 Frontend, design tokens & styling subsystem
+│       ├── __init__.py
+│       ├── colors.py                 # Primitive named color palette (COLOR_PALETTE), RGB, hex_to_rgb
+│       ├── gradients.py              # ANSI TrueColor multi-stop gradient engine (GRADIENT_PRESETS)
+│       └── the_scriber_experience/   # 🔱 The Scriber Experience (TSE) styling subsystems
 │           ├── __init__.py
-│           ├── colors.py                       # Design tokens, palettes, hex_to_go 
-│           ├── cli/
-│           │    ├── __init__.py
-│           │    ├── gradients.py   # TrueColor multi-stop gradient engine
-│           │    └── messaging.py   # ANSI 256 formatting, banners, and semantic logs│
-│           └── plots/
-│                ├── __init__.py
-│                └── theme.py            # Theme engine for Matplotlib/Pyplot/Seaborn
+│           ├── style/                # Design tokens, TSE palettes & gradient presets
+│           │   ├── __init__.py
+│           │   ├── tse_colors.py     # TSE semantic colors, CLI status roles, EIGEN spectrum
+│           │   ├── tse_gradients.py  # TSE multi-stop gradient sequences & presets
+│           │   ├── tse-colors.py     # Hyphenated alias forwarding to tse_colors.py
+│           │   └── tse-gradients.py  # Hyphenated alias forwarding to tse_gradients.py
+│           ├── cli/                  # Terminal CLI formatting & banners
+│           │   ├── __init__.py
+│           │   ├── gradients.py      # CLI TrueColor gradient engine & CLI commands
+│           │   └── messaging.py      # ANSI 256 formatting, banners, and semantic logs
+│           └── plots/                # Scientific plotting themes & colormaps
+│               ├── __init__.py
+│               └── theme.py          # Theme engine for Matplotlib, Pyplot, Seaborn, Plotly
 ├── sublime-theme/
-│   ├── EigenScribe/           # Sublime Text 4 package (theme, color scheme, PreTeXt syntax & snippets)
-│   ├── install.sh             # Bash installer (macOS / Linux, copy or symlink mode)
-│   ├── install.ps1            # PowerShell installer (Windows)
-│   └── README.md              # Package documentation, installation, and configuration guide
+│   ├── EigenScribe/                  # Sublime Text 4 package (theme, color scheme, PreTeXt syntax & snippets)
+│   ├── install.sh                    # Bash installer (macOS / Linux, copy or symlink mode)
+│   ├── install.ps1                   # PowerShell installer (Windows)
+│   └── README.md                     # Package documentation, installation, and configuration guide
 ├── .junie/
-│   ├── AGENTS.md              # Canonical agent guidelines & workspace directives
+│   ├── AGENTS.md                     # Canonical agent guidelines & workspace directives
 │   └── skills/
-│       └── cosmic-visual-styling/       # Workspace skill for EIGEN / cosmic visual themes & styling
-├── pyproject.toml             # uv environment dependencies and locks
-└── README.md                  # Master onboarding index (This file)
+│       └── cosmic-visual-styling/    # Workspace skill for EIGEN / cosmic visual themes & styling
+├── pyproject.toml                    # PyPI packaging & uv dependency configuration (v1.0.0)
+└── README.md                         # Master onboarding index (This file)
 ```
 
 ## 🛠️ Infrastructure & Tooling Lock-ins

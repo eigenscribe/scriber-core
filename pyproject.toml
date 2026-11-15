@@ -1,24 +1,56 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "scriber-core"
-version = "0.1.0"
-description = "Deterministic workspace baseline and rules for scientific and visualization agents."
+version = "1.0.0"
+description = "Deterministic workspace baseline, styling tokens, and visualization rules for scientific and development agents."
 readme = "README.md"
-requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+    { name = "Scriber Labs & Eigenscribe Inc." }
+]
+keywords = [
+    "visualization",
+    "cli",
+    "styling",
+    "gradients",
+    "design-tokens",
+    "scientific-computing",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Visualization",
+]
+requires-python = ">=3.10"
 dependencies = [
     "numpy>=2.0.0",
     "scipy>=1.11.0",
     "matplotlib>=3.8.0",
     "seaborn>=0.13.0",
     "networkx>=3.2.0",
-    "ipykernel>=7.4.0",
+    "click>=8.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
     "pytest>=8.0.0",
+    "ipykernel>=6.0.0",
 ]
 
 [tool.uv]
-# Tells uv to keep a local, project-scoped virtual environment
 managed = true
-package = false
+package = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/frontend"]
 
 [tool.uv.pip]
-# Forces strict tracking of explicit dependencies
 universal = true

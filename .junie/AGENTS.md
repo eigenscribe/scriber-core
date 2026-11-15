@@ -12,10 +12,10 @@ Agents must consult and adhere to the source reference specifications and gold s
 | :--- | :--- | :--- |
 | `../house-rules` | `../house-rules/python-rules.md` | Core rules for Python development: mathematical typography, modern RNG, typing, package hygiene, docstrings, and script flow. |
 | `../house-rules` | `../house-rules/css-rules.md` | The Scriber Experience design system: 4-layer token hierarchy, glassmorphism baseline, ADHD semantic color coding, and golden ratio spacing. |
-| `../boilerplates` | `../src/style` | ANSI TrueColor multi-stop linear RGB gradient engine and color-stop presets. |
-| `../boilerplates` | `../src/style` | ANSI 256-color terminal palette, semantic level messaging, and CLI styling helpers. |
+| `../src/frontend` | `../src/frontend/the_scriber_experience/cli/gradients.py` | ANSI TrueColor multi-stop linear RGB gradient engine and color-stop presets. |
+| `../src/frontend` | `../src/frontend/the_scriber_experience/cli/messaging.py` | ANSI 256-color terminal palette, semantic level messaging, and CLI styling helpers. |
 | `../boilerplates` | `../boilerplates/python/gold-standard.py` | Gold standard reference script template implementing mathematical simulation, explicit type annotations, shape assertions, deterministic RNG, and smoke testing. |
-| `../boilerplates` | `../src/style` | Generalizable visualization bootstrapping script for Matplotlib, Pyplot, and Seaborn with high-contrast curves, deep cosmic void palettes, and 6-style heatmaps. |
+| `../src/frontend` | `../src/frontend/the_scriber_experience/plots/theme.py` | Generalizable visualization bootstrapping script for Matplotlib, Pyplot, and Seaborn with high-contrast curves, deep cosmic void palettes, and 6-style heatmaps. |
 | `../boilerplates` | `../boilerplates/css` | Gold standard reference stylesheet implementing the full 4-layer taxonomy, CSS tokens, cosmic radial gradients, Sephirah labels, glassmorphism components, and responsive layouts. |
 | `../boilerplates` | `../boilerplates/notebooks/visuals-boilerplate.ipynb` | Gold standard reference notebook template for scientific visualization, NetworkX graph topologies, dashboards, and design token / colormap palettes. |
 | `.junie/skills` | `.junie/skills/cosmic-visual-styling/SKILL.md` | Workspace skill for applying the Sephirah / cosmic visual themes, color tokens, and glassmorphic UI components. |
