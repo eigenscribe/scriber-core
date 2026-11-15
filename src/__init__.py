@@ -15,7 +15,7 @@ from .frontend import (
     colors,
     gradients,
     multi_gradient,
-    the_scriber_experience,
+    THE_SCRIBER_EXPERIENCE,
 )
 
 __all__: list[str] = [

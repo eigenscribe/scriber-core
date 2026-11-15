@@ -6,19 +6,8 @@ Provides centralized color definitions, gradient rendering engines, and The Scri
 
 from __future__ import annotations
 
-from . import colors, gradients, the_scriber_experience
-from .colors import (
-    COLOR_PALETTE,
-    Color,
-    RGB,
-    hex_to_rgb,
-)
-from .gradients import (
-    GRADIENT_PRESETS,
-    TSE_GRADIENTS,
-    multi_gradient,
-)
-from .the_scriber_experience import (
+from . import colors, gradients, THE_SCRIBER_EXPERIENCE
+from .THE_SCRIBER_EXPERIENCE import (
     CLI_COLORS,
     EIGEN_COLORS,
     EIGEN_LABEL_COLORS,
@@ -44,6 +33,17 @@ from .the_scriber_experience import (
     plot_eigenscribe_heatmap,
     register_colormaps,
     supports_256_color,
+)
+from .colors import (
+    COLOR_PALETTE,
+    Color,
+    RGB,
+    hex_to_rgb,
+)
+from .gradients import (
+    GRADIENT_PRESETS,
+    TSE_GRADIENTS,
+    multi_gradient,
 )
 
 __all__: list[str] = [

@@ -1,6 +1,6 @@
 # ../boilerplates/python/cli_style_boilerplate.py
 """
-cli_style_boilerplate.py
+message.py
 
 Boilerplate CLI styling module for Scriber Core projects.
 Provides a ready-to-use Eigenscribe 256-color terminal palette with automatic

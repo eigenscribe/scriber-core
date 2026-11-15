@@ -8,6 +8,9 @@ and ANSI TrueColor gradient engine.
 
 from __future__ import annotations
 
+from frontend.THE_SCRIBER_EXPERIENCE.cli import cli_banner, cli_info, cli_success
+from frontend.THE_SCRIBER_EXPERIENCE.plots import get_eigenscribe_rcparams
+
 from frontend import (
     COLOR_PALETTE,
     GRADIENT_PRESETS,
@@ -17,8 +20,6 @@ from frontend import (
     hex_to_rgb,
     multi_gradient,
 )
-from frontend.the_scriber_experience.cli import cli_banner, cli_info, cli_success
-from frontend.the_scriber_experience.plots import get_eigenscribe_rcparams
 
 
 def test_color_palette_validity() -> None:
