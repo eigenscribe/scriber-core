@@ -1,28 +1,21 @@
+# src/frontend/gradients.py
 """
-cli_gradient_boilerplate.py
+gradients.py
 
-ANSI TrueColor multi-stop linear RGB gradient engine for terminal output.
+ANSI TrueColor multi-stop linear RGB gradient engine and canonical presets.
 Provides multi-keyframe color interpolation across six-digit hex codes and RGB
-tuples, along with curated Eigenscribe brand gradient presets (electric, sunset,
-forest, midnight, aurora, cyberpunk).
+tuples for CLI terminals, dashboards, and visual outputs.
 
-Usage
------
->>> from cli_gradient_boilerplate import multi_gradient, PRESETS
->>> print(multi_gradient("Electric Gradient", PRESETS["electric"]))  # doctest: +SKIP
->>> print(multi_gradient("Custom Stops", ["#00a6ff", "#a855f7", "#ff00c3"]))  # doctest: +SKIP
-
-Author: Eigenscribe
-Date: October 2026
+Author: Eigenscribe & Scriber Labs
+Date: November 14, 2026
 """
 
 from __future__ import annotations
 
-import argparse
-import re
-import sys
 from collections.abc import Sequence
-from typing import Final, TypeAlias
+from typing import Final
+
+import sys
 
 if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
     try:
@@ -30,10 +23,22 @@ if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
+try:
+    from frontend.colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
+except ImportError:
+    try:
+        from src.frontend.colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
+    except ImportError:
+        try:
+            from .colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
+        except ImportError:
+            from colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
+
 __all__: list[str] = [
     "RGB",
     "Color",
-    "PRESETS",
+    "GRADIENT_PRESETS",
+    "TSE_GRADIENTS",
     "hex_to_rgb",
     "multi_gradient",
 ]
@@ -42,14 +47,31 @@ __all__: list[str] = [
 # 0️⃣ / 🎭 Definitions, Constants & Types
 # -----------------------------------------------------------------------------------------------------------
 
-RGB: TypeAlias = tuple[int, int, int]
-Color: TypeAlias = str | RGB
-
-PRESETS: Final[dict[str, tuple[str, ...]]] = {
-    # 🌟 Signature Eigenscribe: Blue (#00a6ff) -> Purple (#a855f7) -> Magenta (#ff00c3)
+GRADIENT_PRESETS: Final[dict[str, tuple[str, ...]]] = {
+    # 🐉 Signature Eigenscribe Gradient:
+    "eigenscribe": (
+        COLOR_PALETTE["sky_info"],
+        COLOR_PALETTE["skyline_blue"],
+        COLOR_PALETTE["periwinkle_blue"],
+        COLOR_PALETTE["electric_violet"],
+    ),
+    # 🔱 Signature TSE Gradients:
+    "tse-gradient-1": (
+        COLOR_PALETTE["electric_cyan"],
+        COLOR_PALETTE["vivid_cyan"],
+        COLOR_PALETTE["vivid_sky_blue"],
+    ),
+    "tse-gradient-2": (
+        COLOR_PALETTE["vivid_cyan"],
+        COLOR_PALETTE["vivid_sky_blue"],
+        COLOR_PALETTE["skyline_blue"],
+        COLOR_PALETTE["vivid_blue"],
+        COLOR_PALETTE["electric_violet"],
+    ),
+    # 🌟 Eigenscribe signature:
     "electric": ("#00a6ff", "#a855f7", "#ff00c3"),
     # 🌅 Solar Sunset: Orange (#ff6b35) -> Amber (#f7c548) -> Crimson (#d7263d)
-    "sunset": ("#ff6b35", "#f7c548", "#d7263d"),
+    "sunset": ("#ff6b35", "#f7c548", "#ff40a1"),
     # 🌲 Deep Forest: Olive (#a7c957) -> Teal (#2a9d8f) -> Pine (#264653)
     "forest": ("#a7c957", "#2a9d8f", "#264653"),
     # 🌌 Midnight Cosmic: Sky Cyan (#38bdf8) -> Lavender (#818cf8) -> Rose (#f43f5e)
@@ -58,6 +80,20 @@ PRESETS: Final[dict[str, tuple[str, ...]]] = {
     "aurora": ("#06b6d4", "#10b981", "#84cc16"),
     # ⚡ Cyberpunk Neon: Electric Cyan (#00f0ff) -> Deep Violet (#7000ff) -> Hot Pink (#ff007b)
     "cyberpunk": ("#00f0ff", "#7000ff", "#ff007b"),
+    # 💜 Purple Gradient: Purple-2 (#7209b7) -> Warm purple (#a855f7) -> Purple-1 (#7952f5)
+    "purple_gradient": ("#7209b7", "#a855f7", "#7952f5"),
+}
+
+TSE_GRADIENTS: Final[dict[str, tuple[str, ...]]] = {
+    "tse-gradient-1": GRADIENT_PRESETS["tse-gradient-1"],
+    "tse-gradient-2": GRADIENT_PRESETS["tse-gradient-2"],
+    "eigenscribe": GRADIENT_PRESETS["eigenscribe"],
+    "electric": GRADIENT_PRESETS["electric"],
+    "sunset": GRADIENT_PRESETS["sunset"],
+    "forest": GRADIENT_PRESETS["forest"],
+    "midnight": GRADIENT_PRESETS["midnight"],
+    "aurora": GRADIENT_PRESETS["aurora"],
+    "cyberpunk": GRADIENT_PRESETS["cyberpunk"],
 }
 
 
@@ -66,39 +102,9 @@ PRESETS: Final[dict[str, tuple[str, ...]]] = {
 # -----------------------------------------------------------------------------------------------------------
 
 
-def hex_to_rgb(hex_color: str) -> RGB:
-    """
-    Convert a six-digit hex color string, with or without leading '#', to an (R, G, B) tuple.
-
-    Parameters
-    ----------
-    hex_color : str
-        Hex color string (e.g. '#00a6ff' or '00a6ff').
-
-    Returns
-    -------
-    RGB
-        Tuple of three integer color channels (0 to 255).
-
-    Raises
-    ------
-    ValueError
-        If hex_color is not a valid 6-digit hexadecimal color string.
-    """
-    value = hex_color.removeprefix("#")
-    if re.fullmatch(r"[0-9a-fA-F]{6}", value) is None:
-        raise ValueError(f"Expected a six-digit hex color, got {hex_color!r}")
-
-    return (
-        int(value[0:2], 16),
-        int(value[2:4], 16),
-        int(value[4:6], 16),
-    )
-
-
 def multi_gradient(
     text: str,
-    colors: Sequence[Color] = PRESETS["electric"],
+    colors: Sequence[Color] = GRADIENT_PRESETS["electric"],
     *,
     bold: bool = True,
 ) -> str:
@@ -109,7 +115,7 @@ def multi_gradient(
     ----------
     text : str
         The input text to colorize.
-    colors : Sequence[Color], default=PRESETS["electric"]
+    colors : Sequence[Color], default=GRADIENT_PRESETS["electric"]
         A sequence of at least two color stops, specified as six-digit hex strings
         or (R, G, B) tuples.
     bold : bool, default=True
@@ -200,16 +206,19 @@ def _normalize_color(color: Color) -> RGB:
 
 
 def _run_smoke_test() -> None:
-    """Sanity checks for gradient engine and presets."""
-    print("💨 Running cli_gradient_boilerplate smoke tests...")
-
+    """Validate all presets and gradient rendering."""
+    print("💨 Running gradients.py smoke tests...")
     # 1. Hex to RGB conversion
     assert hex_to_rgb("#00a6ff") == (0, 166, 255)
     assert hex_to_rgb("a855f7") == (168, 85, 247)
 
     # 2. Multi-gradient rendering across presets
-    for name, stops in PRESETS.items():
-        rendered = multi_gradient(f"Test preset {name}", stops)
+    for preset_name, stops in GRADIENT_PRESETS.items():
+        assert len(stops) >= 2, f"Preset {preset_name} has fewer than 2 stops"
+        for stop in stops:
+            rgb = hex_to_rgb(stop)
+            assert len(rgb) == 3
+        rendered = multi_gradient(f"Test preset {preset_name}", stops)
         assert len(rendered) > 0
         assert "\033[0m" in rendered
 
@@ -220,7 +229,7 @@ def _run_smoke_test() -> None:
     custom_rendered = multi_gradient("Custom RGB", [(0, 0, 0), (255, 255, 255)])
     assert "\033[0m" in custom_rendered
 
-    print("✅ cli_gradient_boilerplate smoke tests passed.")
+    print("✅ gradients.py smoke tests passed.")
 
 
 # -----------------------------------------------------------------------------------------------------------
@@ -228,38 +237,10 @@ def _run_smoke_test() -> None:
 # -----------------------------------------------------------------------------------------------------------
 
 
-def main() -> int:
-    """Print text using one of the built-in gradient presets or run smoke test."""
-    parser = argparse.ArgumentParser(
-        description="Print text with an ANSI TrueColor gradient."
-    )
-    parser.add_argument("text", nargs="?", default=None, help="Text to color")
-    parser.add_argument(
-        "--preset",
-        choices=list(PRESETS.keys()),
-        default="electric",
-        help="Gradient preset to use (default: electric)",
-    )
-    parser.add_argument(
-        "--no-bold",
-        action="store_true",
-        help="Print without bold styling",
-    )
-    parser.add_argument(
-        "--smoke",
-        action="store_true",
-        help="Run smoke test suite",
-    )
-    args = parser.parse_args()
-
-    if args.smoke or args.text is None:
-        _run_smoke_test()
-        if args.text is None:
-            return 0
-
-    print(multi_gradient(args.text, PRESETS[args.preset], bold=not args.no_bold))
-    return 0
+def main() -> None:
+    """Execute module smoke tests."""
+    _run_smoke_test()
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    main()

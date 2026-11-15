@@ -67,12 +67,12 @@ Use this skill whenever designing, styling, or updating figures, scientific plot
 
 ### 🐍 2. Python (Matplotlib, Pyplot & Seaborn) Recipes
 
-Import and apply the centralized styling utilities from `boilerplates/python/visualization_boilerplate.py`:
+Import and apply the centralized styling utilities from `frontend.the_scriber_experience`:
 
 ```python
 import matplotlib.pyplot as plt
 import numpy as np
-from boilerplates.python.visualization_boilerplate import (
+from boilerplates.python import (
     THEME_TOKENS,
     HIGH_CONTRAST_CYCLE,
     apply_cosmic_theme,
@@ -112,7 +112,7 @@ plt.show()
 ### 📊 3. Plotly & Dash Dashboard Recipes
 
 ```python
-from boilerplates.python.visualization_boilerplate import (
+from boilerplates.python import (
     COLOR_BG_COSMIC,
     COLOR_SEPHIRAH_CYAN,
     COLOR_TEXT_BRIGHT,
@@ -203,7 +203,7 @@ All web layouts and dashboards must follow the 4-layer taxonomy defined in `hous
 
 ### 💻 5. CLI 256-Color & ANSI Palettes
 
-Use `boilerplates/python/cli_style_boilerplate.py` for terminal color formatting:
+Use `frontend.the_scriber_experience.cli` for terminal color formatting:
 
 - `eigen_cosmic_navy` (ANSI 17)
 - `eigen_cosmic_void` (ANSI 16)
