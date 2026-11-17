@@ -8,8 +8,8 @@ and ANSI TrueColor gradient engine.
 
 from __future__ import annotations
 
-from frontend.THE_SCRIBER_EXPERIENCE.cli import cli_banner, cli_info, cli_success
-from frontend.THE_SCRIBER_EXPERIENCE.plots import get_eigenscribe_rcparams
+from frontend.the_scriber_experience.cli import cli_banner, cli_info, cli_success
+from frontend.the_scriber_experience.plots import get_eigenscribe_rcparams
 
 from frontend import (
     COLOR_PALETTE,
@@ -20,6 +20,7 @@ from frontend import (
     SEMANTIC_COLORS,
     TSE_COLORS,
     TSE_GRADIENTS,
+    compute_golden_ratio_stop_positions,
     generate_golden_ratio_gradient,
     hex_to_rgb,
     interpolate_rgb,
@@ -48,13 +49,31 @@ def test_tse_colors_and_semantics() -> None:
 
 
 def test_gradient_engine() -> None:
-    """Verify multi_gradient output formatting and presets."""
+    """Verify multi_gradient output formatting, presets, and golden ratio proportioning."""
     assert len(GRADIENT_PRESETS) >= 6
     assert len(TSE_GRADIENTS) >= 5
 
-    out = multi_gradient("Test Hello", GRADIENT_PRESETS["electric"])
+    # 1. Test golden ratio stop positions
+    stops_4 = compute_golden_ratio_stop_positions(4)
+    assert len(stops_4) == 4
+    assert stops_4[0] == 0.0
+    assert stops_4[-1] == 1.0
+    # Verify segment proportions decrease from left to right (blue -> purple -> pink)
+    seg1 = stops_4[1] - stops_4[0]
+    seg2 = stops_4[2] - stops_4[1]
+    seg3 = stops_4[3] - stops_4[2]
+    assert seg1 > seg2 > seg3
+    assert abs((seg2 / seg1) - GOLDEN_RATIO_INVERSE) < 1e-6
+    assert abs((seg3 / seg2) - GOLDEN_RATIO_INVERSE) < 1e-6
+
+    # 2. Test multi_gradient with golden ratio scaling
+    out = multi_gradient("Test Hello", GRADIENT_PRESETS["electric"], golden_ratio_scale=True)
     assert "\033[0m" in out
     assert len(out) > len("Test Hello")
+
+    # 3. Test multi_gradient without golden ratio scaling
+    out_linear = multi_gradient("Test Hello", GRADIENT_PRESETS["electric"], golden_ratio_scale=False)
+    assert "\033[0m" in out_linear
 
     # Empty string handling
     assert multi_gradient("") == ""

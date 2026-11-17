@@ -115,6 +115,8 @@ __all__: list[str] = [
     # Gradients & Colors
     "multi_gradient",
     "PRESETS",
+    "PRIMARY_GRADIENT",
+    "SECONDARY_GRADIENT",
     "Color",
     "RGB",
     "hex_to_rgb",
@@ -127,6 +129,16 @@ __all__: list[str] = [
 # -----------------------------------------------------------------------------------------------------------
 # 0️⃣ / 🎭 Definitions, Constants & Types — Eigenscribe 256-Color Palette
 # -----------------------------------------------------------------------------------------------------------
+
+PRIMARY_GRADIENT: Final[tuple[str, ...]] = PRESETS.get(
+    "eigenscribe", ("#00e8ff", "#008eff", "#6f78fa", "#5e17eb")
+)
+SECONDARY_GRADIENT: Final[tuple[str, ...]] = (
+    "#00a6ff",
+    "#7952f5",
+    "#a855f7",
+    "#ff28a2",
+)
 
 # Eigenscribe brand palette mapped to ANSI 256-color indices
 # Blues (primary), Purples (secondary), Pinks (accents), Greens (success), Oranges (warnings)
@@ -407,7 +419,7 @@ def cli_rule(char: str = "─", width: int = 60, level: str = "rule") -> None:
 
 def cli_banner(title: str, subtitle: str | None = None) -> None:
     """
-    Print a styled banner header with Eigenscribe brand colors.
+    Print a styled banner header with Eigenscribe PRIMARY_GRADIENT colors.
 
     Parameters
     ----------
@@ -421,10 +433,10 @@ def cli_banner(title: str, subtitle: str | None = None) -> None:
     >>> cli_banner("EIGENBEAST BATTLE", "The Non-Copyright Generic Beast Game")  # doctest: +SKIP
     """
     _echo("")
-    cli_echo(title, color="eigen_blue_bright", bold=True)
+    _echo(multi_gradient(title, colors=PRIMARY_GRADIENT, bold=True))
 
     if subtitle:
-        cli_echo(subtitle, color="eigen_purple", bold=False)
+        _echo(multi_gradient(subtitle, colors=SECONDARY_GRADIENT, bold=False))
 
     cli_rule(level="rule")
     _echo("")

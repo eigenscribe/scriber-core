@@ -357,8 +357,8 @@ def render_commands_list(
         categories.setdefault(cmd.category, []).append(cmd)
 
     for category, cat_cmds in categories.items():
-        # Category header
-        cat_styled = ansi_color(HEADER_CATEGORY_COLOR, f"  {category}", bold=True)
+        # Category header styled with PRIMARY_GRADIENT
+        cat_styled = multi_gradient(f"  {category}", colors=PRIMARY_GRADIENT, bold=True)
         lines.append(cat_styled)
 
         for cmd in cat_cmds:

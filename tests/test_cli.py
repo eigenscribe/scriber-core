@@ -64,53 +64,61 @@ def test_cli_info_command(runner: CliRunner) -> None:
     """Verify eigenscribe info outputs architecture and design token stack."""
     result = runner.invoke(cli_group, ["info"])
     assert result.exit_code == 0
-    assert "SCRIBER CORE ARCHITECTURAL OVERVIEW" in result.output
-    assert "4-Layer Design Token Stack" in result.output
+    plain = re.sub(r"\x1b\[[0-9;]*m", "", result.output)
+    assert "SCRIBER CORE ARCHITECTURAL OVERVIEW" in plain
+    assert "4-Layer Design Token Stack" in plain
 
 
 def test_cli_gradient_command(runner: CliRunner) -> None:
     """Verify eigenscribe gradient generates multi-stop gradient outputs."""
     res_default = runner.invoke(cli_group, ["gradient", "Testing Eigenscribe", "-p", "cyberpunk"])
     assert res_default.exit_code == 0
-    assert "Testing Eigenscribe" in res_default.output
+    assert "Testing Eigenscribe" in re.sub(r"\x1b\[[0-9;]*m", "", res_default.output)
+    assert "\033[" in res_default.output
 
     res_stops = runner.invoke(cli_group, ["gradient", "Custom Stops", "-s", "#00ffff", "-s", "#ff00c3"])
     assert res_stops.exit_code == 0
-    assert "Custom Stops" in res_stops.output
+    assert "Custom Stops" in re.sub(r"\x1b\[[0-9;]*m", "", res_stops.output)
 
     res_list = runner.invoke(cli_group, ["gradient", "--list-presets"])
     assert res_list.exit_code == 0
-    assert "GRADIENT PRESETS" in res_list.output
-    assert "electric" in res_list.output
-    assert "eigenscribe" in res_list.output
-    assert "#00e8ff" in res_list.output
-    assert "#008eff" in res_list.output
-    assert "#6f78fa" in res_list.output
-    assert "#5e17eb" in res_list.output
+    plain_list = re.sub(r"\x1b\[[0-9;]*m", "", res_list.output)
+    assert "GRADIENT PRESETS" in plain_list
+    assert "electric" in plain_list
+    assert "eigenscribe" in plain_list
+    assert "#00e8ff" in plain_list
+    assert "#008eff" in plain_list
+    assert "#6f78fa" in plain_list
+    assert "#5e17eb" in plain_list
 
 
 def test_cli_colors_command(runner: CliRunner) -> None:
     """Verify eigenscribe colors displays palettes, status roles, and 256 index."""
     result = runner.invoke(cli_group, ["colors", "--all-256", "--spectrum"])
     assert result.exit_code == 0
-    assert "Signature TSE Palette" in result.output
-    assert "Semantic Status Roles" in result.output
-    assert "Vibrant 10-Node Spectrum" in result.output
+    plain = re.sub(r"\x1b\[[0-9;]*m", "", result.output)
+    assert "Signature TSE Palette" in plain
+    assert "Semantic Status Roles" in plain
+    assert "Vibrant 10-Node Spectrum" in plain
 
 
 def test_cli_banner_command(runner: CliRunner) -> None:
     """Verify eigenscribe banner creates formatted rule-bordered banners."""
     result = runner.invoke(cli_group, ["banner", "MY EXPERIMENT", "--subtitle", "Trial Run 01"])
     assert result.exit_code == 0
-    assert "MY EXPERIMENT" in result.output
-    assert "Trial Run 01" in result.output
+    plain = re.sub(r"\x1b\[[0-9;]*m", "", result.output)
+    assert "MY EXPERIMENT" in plain
+    assert "Trial Run 01" in plain
+    assert "\033[1;38;2;" in result.output  # Styled with PRIMARY_GRADIENT
 
 
 def test_cli_theme_command(runner: CliRunner) -> None:
     """Verify eigenscribe theme exports summary, rcParams, and CSS variables."""
     res_summary = runner.invoke(cli_group, ["theme", "-f", "summary"])
     assert res_summary.exit_code == 0
-    assert "PLOTTING & GRAPHICS THEME" in res_summary.output
+    plain_summary = re.sub(r"\x1b\[[0-9;]*m", "", res_summary.output)
+    assert "PLOTTING & GRAPHICS THEME" in plain_summary
+    assert "Theme Engine Parameters" in plain_summary
 
     res_rc = runner.invoke(cli_group, ["theme", "-f", "rcparams"])
     assert res_rc.exit_code == 0
@@ -137,9 +145,10 @@ def test_cli_doctor_command(runner: CliRunner) -> None:
     """Verify eigenscribe doctor performs and passes all diagnostics."""
     result = runner.invoke(cli_group, ["doctor"])
     assert result.exit_code == 0
-    assert "EIGENSCRIBE DOCTOR" in result.output
-    assert "[PASS]" in result.output
-    assert "checks passed successfully" in result.output
+    plain = re.sub(r"\x1b\[[0-9;]*m", "", result.output)
+    assert "EIGENSCRIBE DOCTOR" in plain
+    assert "[PASS]" in plain
+    assert "checks passed successfully" in plain
 
 
 def test_cli_colors_table_direct_command(runner: CliRunner) -> None:

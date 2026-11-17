@@ -34,30 +34,41 @@ if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
 
 try:
     from frontend.gradients import (
+        GOLDEN_RATIO,
+        GOLDEN_RATIO_INVERSE,
         GRADIENT_PRESETS,
+        PHI,
         TSE_GRADIENTS,
         Color,
         RGB,
         _normalize_color,
+        compute_golden_ratio_stop_positions,
         hex_to_rgb,
         multi_gradient,
     )
-    from frontend.THE_SCRIBER_EXPERIENCE.style.tse_colors import CLI_COLORS
+    from frontend.the_scriber_experience.style.tse_colors import CLI_COLORS
 except ImportError:
     try:
         from src.frontend.gradients import (
+            GOLDEN_RATIO,
+            GOLDEN_RATIO_INVERSE,
             GRADIENT_PRESETS,
+            PHI,
             TSE_GRADIENTS,
             Color,
             RGB,
             _normalize_color,
+            compute_golden_ratio_stop_positions,
             hex_to_rgb,
             multi_gradient,
         )
-        from src.frontend.THE_SCRIBER_EXPERIENCE.style.tse_colors import CLI_COLORS
+        from src.frontend.the_scriber_experience.style.tse_colors import CLI_COLORS
     except ImportError:
         RGB: TypeAlias = tuple[int, int, int]
         Color: TypeAlias = str | RGB
+        GOLDEN_RATIO: Final[float] = (1.0 + 5.0 ** 0.5) / 2.0
+        GOLDEN_RATIO_INVERSE: Final[float] = 1.0 / GOLDEN_RATIO
+        PHI: Final[float] = GOLDEN_RATIO
         CLI_COLORS: Final[dict[str, str]] = {
             "success": "success_emerald",
             "info": "sky_info",
@@ -82,23 +93,52 @@ except ImportError:
         def _normalize_color(color: Color) -> RGB:
             return hex_to_rgb(color) if isinstance(color, str) else color
 
+        def compute_golden_ratio_stop_positions(num_stops: int) -> list[float]:
+            if num_stops <= 2:
+                return [0.0, 1.0]
+            segments = num_stops - 1
+            inv_phi = GOLDEN_RATIO_INVERSE
+            weights = [inv_phi ** k for k in range(segments)]
+            total_weight = sum(weights)
+            positions = [0.0]
+            cumulative = 0.0
+            for w in weights:
+                cumulative += w / total_weight
+                positions.append(cumulative)
+            positions[-1] = 1.0
+            return positions
+
         def multi_gradient(
             text: str,
             colors: Sequence[Color] = GRADIENT_PRESETS["electric"],
             *,
             bold: bool = True,
+            golden_ratio_scale: bool = True,
         ) -> str:
             if not text:
                 return ""
             rgb_colors = [_normalize_color(c) for c in colors]
             style = "1;" if bold else ""
-            segments = len(rgb_colors) - 1
+            num_stops = len(rgb_colors)
+            segments = num_stops - 1
+            if golden_ratio_scale and num_stops > 2:
+                stop_positions = compute_golden_ratio_stop_positions(num_stops)
+            else:
+                stop_positions = [i / segments for i in range(num_stops)]
             out = []
+            text_len = len(text)
             for i, ch in enumerate(text):
-                pos = i / (len(text) - 1) if len(text) > 1 else 0.0
-                sc = pos * segments
-                seg = min(int(sc), segments - 1)
-                sp = sc - seg
+                pos = i / (text_len - 1) if text_len > 1 else 0.0
+                seg = 0
+                for s in range(segments):
+                    if pos <= stop_positions[s + 1] or s == segments - 1:
+                        seg = s
+                        break
+                t_start = stop_positions[seg]
+                t_end = stop_positions[seg + 1]
+                span = t_end - t_start
+                sp = (pos - t_start) / span if span > 0 else 0.0
+                sp = max(0.0, min(1.0, sp))
                 st, en = rgb_colors[seg], rgb_colors[seg + 1]
                 r = round(st[0] + sp * (en[0] - st[0]))
                 g = round(st[1] + sp * (en[1] - st[1]))
@@ -111,9 +151,13 @@ __all__: list[str] = [
     "RGB",
     "Color",
     "CLI_COLORS",
+    "GOLDEN_RATIO",
+    "GOLDEN_RATIO_INVERSE",
+    "PHI",
     "PRESETS",
     "GRADIENT_PRESETS",
     "TSE_GRADIENTS",
+    "compute_golden_ratio_stop_positions",
     "hex_to_rgb",
     "multi_gradient",
 ]

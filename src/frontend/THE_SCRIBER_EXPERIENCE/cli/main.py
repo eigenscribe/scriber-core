@@ -31,7 +31,7 @@ from frontend.gradients import (
     GRADIENT_PRESETS,
     multi_gradient,
 )
-from frontend.THE_SCRIBER_EXPERIENCE.cli.messaging import (
+from frontend.the_scriber_experience.cli.messaging import (
     ansi_256,
     cli_banner,
     cli_error,
@@ -41,15 +41,15 @@ from frontend.THE_SCRIBER_EXPERIENCE.cli.messaging import (
     cli_success,
     supports_256_color,
 )
-from frontend.THE_SCRIBER_EXPERIENCE.mermaid.theme import (
+from frontend.the_scriber_experience.mermaid.theme import (
     generate_mermaid_flowchart,
     get_mermaid_init_directive,
     render_html_preview,
 )
-from frontend.THE_SCRIBER_EXPERIENCE.plots.theme import (
+from frontend.the_scriber_experience.plots.theme import (
     get_eigenscribe_rcparams,
 )
-from frontend.THE_SCRIBER_EXPERIENCE.style.tse_colors import (
+from frontend.the_scriber_experience.style.tse_colors import (
     CLI_COLORS,
     EIGEN_COLORS,
     EIGEN_LABEL_COLORS,
@@ -141,7 +141,7 @@ def info_cmd() -> None:
     """Display Scriber Core architectural index, active design tokens, and guidelines."""
     _print_brand_header()
     click.echo("")
-    cli_highlight("🏛️  SCRIBER CORE ARCHITECTURAL OVERVIEW")
+    click.echo(multi_gradient("🏛️  SCRIBER CORE ARCHITECTURAL OVERVIEW", colors=PRIMARY_GRADIENT, bold=True))
     click.echo("")
     click.echo("  • " + ansi_256("eigen_cyan", "Package Name: ") + "scriber-core (frontend / the_scriber_experience)")
     click.echo("  • " + ansi_256("eigen_cyan", "CLI Entry:    ") + "eigenscribe")
@@ -150,7 +150,7 @@ def info_cmd() -> None:
     click.echo("")
     cli_rule(char="─", width=80, level="rule")
     click.echo("")
-    cli_info("🎨  4-Layer Design Token Stack:")
+    click.echo(multi_gradient("🎨  4-Layer Design Token Stack:", colors=PRIMARY_GRADIENT, bold=True))
     click.echo("  1. " + ansi_256("eigen_blue_bright", "Primitive Colors:") + f" {len(COLOR_PALETTE)} named hex codes in COLOR_PALETTE")
     click.echo("  2. " + ansi_256("eigen_purple_bright", "Semantic Roles:  ") + f" {len(SEMANTIC_COLORS)} status roles, {len(CLI_COLORS)} CLI levels")
     click.echo("  3. " + ansi_256("eigen_pink_bright", "Gradient Engine: ") + f" {len(GRADIENT_PRESETS)} multi-stop TrueColor gradient presets")
@@ -180,14 +180,14 @@ def gradient_cmd(text: str, preset: str, stops: tuple[str, ...], bold: bool, lis
         for name, preset_stops in GRADIENT_PRESETS.items():
             sample_text = f"  [{name:16s}]  ██████████████  " + "  ".join(preset_stops)
             rendered = multi_gradient(sample_text, colors=preset_stops, bold=True)
-            click.echo(rendered)
+            click.echo(rendered, color=True)
         click.echo("")
         cli_rule(char="─", width=80, level="rule")
         return
 
     color_stops: Sequence[str] = stops if stops else GRADIENT_PRESETS.get(preset, GRADIENT_PRESETS["electric"])
     rendered = multi_gradient(text, colors=color_stops, bold=bold)
-    click.echo(rendered)
+    click.echo(rendered, color=True)
 
 
 # -----------------------------------------------------------------------------------------------------------
@@ -211,21 +211,21 @@ def colors_cmd(all_256: bool, spectrum: bool, table: bool) -> None:
     click.echo("")
 
     # 1. Signature TSE Colors
-    cli_highlight("🔱  Signature TSE Palette:")
+    click.echo(multi_gradient("🔱  Signature TSE Palette:", colors=PRIMARY_GRADIENT, bold=True))
     for name, hex_code in TSE_COLORS.items():
         block = _render_color_block(hex_code)
         click.echo(f"  {block}  {name:18s} {hex_code}")
     click.echo("")
 
     # 2. Semantic Roles
-    cli_highlight("🚦  Semantic Status Roles:")
+    click.echo(multi_gradient("🚦  Semantic Status Roles:", colors=PRIMARY_GRADIENT, bold=True))
     for name, hex_code in SEMANTIC_COLORS.items():
         block = _render_color_block(hex_code)
         click.echo(f"  {block}  {name:18s} {hex_code}")
     click.echo("")
 
     # 3. Canonical EIGEN Spectrum
-    cli_highlight("🐉  Canonical EIGEN Spectrum:")
+    click.echo(multi_gradient("🐉  Canonical EIGEN Spectrum:", colors=PRIMARY_GRADIENT, bold=True))
     for name, hex_code in EIGEN_COLORS.items():
         block = _render_color_block(hex_code)
         click.echo(f"  {block}  {name:18s} {hex_code}")
@@ -233,7 +233,7 @@ def colors_cmd(all_256: bool, spectrum: bool, table: bool) -> None:
 
     # 4. Vibrant 10-Node Spectrum
     if spectrum or True:
-        cli_highlight("🌌  Vibrant 10-Node Spectrum (0-9):")
+        click.echo(multi_gradient("🌌  Vibrant 10-Node Spectrum (0-9):", colors=PRIMARY_GRADIENT, bold=True))
         node_names = [
             "0. Crown Gold",
             "1. Electric Cyan",
@@ -254,7 +254,7 @@ def colors_cmd(all_256: bool, spectrum: bool, table: bool) -> None:
 
     # 5. Full ANSI 256 preview if requested
     if all_256:
-        cli_highlight("💻  ANSI 256-Color Palette Table:")
+        click.echo(multi_gradient("💻  ANSI 256-Color Palette Table:", colors=PRIMARY_GRADIENT, bold=True))
         for row in range(0, 256, 16):
             line_parts = []
             for col in range(16):
@@ -294,7 +294,7 @@ def theme_cmd(fmt: str) -> None:
     if fmt == "summary":
         cli_banner("PLOTTING & GRAPHICS THEME", "Matplotlib, Seaborn & Plotly Design Presets")
         click.echo("")
-        cli_info("Theme Engine Parameters:")
+        click.echo(multi_gradient("Theme Engine Parameters:", colors=PRIMARY_GRADIENT, bold=True))
         click.echo("  • Dark Surface BG:      #0d1117 (COLOR_BG)")
         click.echo("  • Surface Elevated:     #161b22 (COLOR_SURFACE)")
         click.echo("  • Luminous Accent:      #c8f8ff (COLOR_TEXT_ACCENT)")

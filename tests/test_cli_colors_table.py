@@ -260,3 +260,27 @@ def test_relative_luminance_and_hue_calculations() -> None:
     assert abs(_compute_hue((0, 255, 0)) - 120.0) < 1e-4  # Green = 120 deg
     assert abs(_compute_hue((0, 0, 255)) - 240.0) < 1e-4  # Blue = 240 deg
     assert abs(_compute_hue((0, 255, 255)) - 180.0) < 1e-4  # Cyan = 180 deg
+
+
+def test_golden_ratio_proportions_and_header_gradients() -> None:
+    """Verify golden ratio stop position decay and header gradient styling."""
+    from frontend.gradients import compute_golden_ratio_stop_positions, multi_gradient
+
+    # Verify decay across 4 stops (blue -> cyan -> indigo -> violet/pink)
+    stops = compute_golden_ratio_stop_positions(4)
+    assert len(stops) == 4
+    w1 = stops[1] - stops[0]
+    w2 = stops[2] - stops[1]
+    w3 = stops[3] - stops[2]
+    assert w1 > w2 > w3
+    assert abs(w1 - 0.5) < 1e-6
+
+    # Verify primary gradient applied to headers
+    banner_str = render_brand_header()
+    assert "\033[1;38;2;0;232;255m" in banner_str or "\033[38;2;0;232;255m" in banner_str
+
+    commands_str = render_commands_list()
+    assert "\033[1;38;2;0;232;255m" in commands_str or "\033[38;2;0;232;255m" in commands_str
+
+    table_str = render_colors_table()
+    assert "\033[1;38;2;0;232;255m" in table_str or "\033[38;2;0;232;255m" in table_str
