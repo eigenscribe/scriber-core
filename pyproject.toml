@@ -37,6 +37,7 @@ dependencies = [
     "seaborn>=0.13.0",
     "networkx>=3.2.0",
     "click>=8.0.0",
+    "ipykernel>=7.3.0",
 ]
 
 [project.scripts]

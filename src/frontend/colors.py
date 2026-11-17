@@ -467,7 +467,7 @@ def run_smoke_test() -> bool:
     print(f"  [Scale 1.000             | {len_md:2d} cols]: {grad_md}")
     print(f"  [Scale φ¹  ≈ {GOLDEN_RATIO:.3f} | {len_lg:2d} cols]: {gradient_str}\n")
 
-    print("✅ colors.py smoke tests passed.")
+    print("✅💨 colors.py smoke tests passed.")
     return True
 
 
