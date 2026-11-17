@@ -182,7 +182,15 @@ For each repository, establish:
 
 ## 🏛️ Standards & References
 
-- Packaging, versioning, branching, and testing standards adapted from the [COOP Gold Standard](https://cerfacs.fr/coop/coop-standard-on-python-pkges) (CERFACS) and detailed in [`docs/workspace-setup-guide.md`](docs/workspace-setup-guide.md).
+Packaging, versioning, branching, CLI architecture, and scientific parameter validation standards are synthesized from modern PEP 517/518/621 declarative tooling (`uv`, `hatchling`) and the CERFACS COOP software engineering standards:
+
+- **COOP Gold Standard**: Dauptain, Antoine. *"Python packages: the COOP gold standard"*, The COOP Blog, CERFACS (Feb 21, 2022). [Web](https://cerfacs.fr/coop/coop-standard-on-python-pkges) | Local: [`docs/COOP_blog/Python packages_ the COOP gold standard · The COOP Blog.html`](docs/COOP_blog/Python%20packages_%20the%20COOP%20gold%C2%A0standard%20%C2%B7%20The%20COOP%20Blog.html)
+- **COOP Packaging Guide**: *"Packaging guide"*, The COOP Blog, CERFACS. [Web](https://cerfacs.fr/coop/packaging-guide) | Local: [`docs/COOP_blog/Packaging guide · The COOP Blog.html`](docs/COOP_blog/Packaging%C2%A0guide%20%C2%B7%20The%20COOP%20Blog.html)
+- **COOP Click CLI Architecture**: *"The COOP Click Command line interfaces"*, The COOP Blog, CERFACS. [Web](https://cerfacs.fr/coop/the-coop-click-command-line-interfaces) | Local: [`docs/COOP_blog/The COOP Click Command line interfaces · The COOP Blog.html`](docs/COOP_blog/The%20COOP%20Click%20Command%20line%C2%A0interfaces%20%C2%B7%20The%20COOP%20Blog.html)
+- **COOP Cactus Branching Model**: *"The Coop Cactus branching model"*, The COOP Blog, CERFACS. [Web](https://cerfacs.fr/coop/the-coop-cactus-branching-model) | Local: [`docs/COOP_blog/The Coop Cactus branching model · The COOP Blog.html`](docs/COOP_blog/The%20Coop%20Cactus%20branching%C2%A0model%20%C2%B7%20The%20COOP%20Blog.html)
+- **JSON Schema for Scientific Applications**: *"Using the json-SCHEMA standard for scientific applications"*, The COOP Blog, CERFACS. [Web](https://cerfacs.fr/coop/using-the-json-schema-standard-for-scientific-applications) | Local: [`docs/COOP_blog/Using the json-SCHEMA standard for scientific applications_ · The COOP Blog.html`](docs/COOP_blog/Using%20the%20json-SCHEMA%20standard%20for%20scientific%C2%A0applications_%20%C2%B7%20The%20COOP%20Blog.html)
+
+For exhaustive architecture specifications and step-by-step guides, consult [`docs/workspace-setup-guide.md`](docs/workspace-setup-guide.md).
 
 ---
 🔬 *Eigenscribe Inc. 2025-2026. Part of the Scriber Labs Research Framework.*

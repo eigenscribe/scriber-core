@@ -111,8 +111,41 @@ All packages adhere strictly to Semantic Versioning (`MAJOR.MINOR.PATCH`, e.g., 
 - **MINOR**: Backward-compatible functionality additions or new public API methods.
 - **PATCH**: Backward-compatible bug fixes, numerical stability enhancements, or documentation updates.
 
-### 2️⃣ Cactus Branching Model
-For research frameworks and packages under 5,000 lines of code, development proceeds on a **single main branch (`main`)** using short-lived topic branches for atomic merges. This eliminates synchronization overhead while preserving history cleanliness.
+### 2️⃣ The COOP Cactus Branching Model
+Research software and scientific packages under active development adhere to the **COOP Cactus Branching Model** (CERFACS standard). Cactus standardizes a high-velocity, single-trunk workflow designed for continuous integration, eliminating the stale divergence and merge overhead of traditional multi-branch models like GitFlow.
+
+```text
+                    ┌── feature/solver-optimization ──┐ (PR merge)
+                    │                                 ▼
+───●────────●───────●────────●────────────────────────●────────●───────► main (trunk)
+   │                         │                                 │
+   │ (Release tag v1.0.0)    └──► release/v1.1.0 ──────────────┤ (Release tag v1.1.0)
+   │                               │ (Version bump & fixes)    │
+   │                               ▼                           │
+   │                               ● ──────────────────────────┘
+   │
+   └──► hotfix/v1.0.1 ─────────────┐ (Tag v1.0.1 & backport to main)
+             │                     ▼
+             └─────────────────────● ──────────────────────────► (Merged to main)
+```
+
+#### Core Cactus Principles:
+1. **Single Trunk Development (`main`)**:
+   - The `main` branch is the continuous integration backbone. All new development originates from and merges back into `main`.
+2. **Short-Lived Topic / Feature Branches**:
+   - Feature additions (`feature/<name>`), bug fixes (`fix/<name>`), and maintenance (`chore/<name>`) occur in short-lived branches.
+   - Merges into `main` require passing automated CI pipelines (testing, linting, docs) and peer review.
+3. **Release Branch Lifecycle (`release/vX.Y.Z` or `release/X.Y`)**:
+   - When preparing a release, branch `release/vX.Y.Z` directly from `main`.
+   - On the release branch, execute strictly release-specific stabilization: version bumps in `pyproject.toml` and `__init__.py`, `CHANGELOG.md` finalization, and minor documentation touch-ups.
+   - Once validated, tag the release commit with an annotated git tag (`vX.Y.Z`) and publish distribution wheels.
+   - Merge the release branch back into `main` to ensure any stabilization commits propagate to trunk.
+4. **Hotfix Workflow**:
+   - If a critical defect is identified in an existing release, create a branch (`hotfix/vX.Y.Z+1`) directly from the corresponding release tag (`vX.Y.Z`).
+   - Apply the minimal fix, update `CHANGELOG.md`, bump the patch version, tag the new release (`vX.Y.Z+1`), and merge the hotfix branch back into `main`.
+5. **Architectural Advantages over GitFlow**:
+   - Eliminates the long-lived, divergent `develop` branch that frequently causes merge conflicts.
+   - Retains simple branch graphs and transparent provenance for continuous integration and research software reproducibility.
 
 ### 3️⃣ In-Code Version Export
 The package version must always be accessible in Python runtime via `package_name.__version__`:
@@ -301,28 +334,137 @@ universal = true
 
 ## 💻 7. Command Line Interface (CLI) & Color-Coded Architecture
 
-1. **Fast-Start Click CLI & Self-Discovery**:
-   - Implement entry-point command line interfaces using `click` or standalone execution routers (`python -m cli`).
-   - Running the base command (e.g., `my-cli`, `python -m cli`, or `my-cli --help`) must immediately present all available subcommands, parameters, and documentation.
-2. **ADHD High-Contrast Semantic Color Spectrum**:
-   - CLI interfaces must use semantic color-coding to structure cognitive load and eliminate reading fatigue:
-     - **`PRIMARY_GRADIENT` (`#00e8ff` → `#008eff` → `#6f78fa` → `#5e17eb`)**: Section headers, category titles, and diagnostic summaries.
-     - **`SECONDARY_GRADIENT` (`#00a6ff` → `#7952f5` → `#a855f7` → `#ff28a2`)**: Signature block banners and decorative framing.
-     - **Electric Cyan (`#00e8ff`) & Sky Blue (`#14b5ff`)**: Actionable command names and primary interactive focal points.
-     - **Pale Lilac (`#d8b4fe`)**: Syntax flags, options, and parameters.
-     - **Ice Blue (`#b8f6ff`)**: High-luminance, low-fatigue descriptive text and documentation.
-     - **Periwinkle Blue (`#5280ff`)**: Structural frame dividers and table borders.
-     - **Semantic Status Badges**: `success_emerald` (`#10b981`), `midwest_indigo` (`#6f78fa`), `vivid_pink` (`#f72585`), and `warning_amber` (`#f7c548`).
-3. **Golden Ratio Multi-Stop Gradient Scaling**:
-   - Multi-stop TrueColor gradient text computed via `multi_gradient()` scales color segment proportions according to the Golden Ratio ($\phi \approx 1.618$, $w_k = (1/\phi)^k$).
-   - Gives greater visual weight to starting blue/cyan hues on the left and smoothly tapers into purple/pink on the right.
-4. **Console Script Registration & Smoke Testing**:
-   - Bind CLI entry points in `pyproject.toml` under `[project.scripts]`.
-   - Every CLI suite must provide a built-in smoke test subcommand (e.g., `python -m cli smoke-test`) verifying terminal ANSI processing and subtool execution.
+All repositories and packages in Eigenscribe Inc. and Scriber Labs provide ergonomic, self-discovering command line interfaces adhering to the **COOP Click Standard** enhanced with the **Scriber TrueColor Cognitive Load Design System**:
+
+### 1️⃣ The COOP Click Architecture ("Thin Wrapper" Philosophy)
+1. **Thin Wrapper Principle**:
+   - Command line callbacks must act strictly as thin entry-point wrappers. All mathematical operations, file I/O pipelines, and domain logic must live in core library modules (e.g., `core.py`, `solver.py`), never inside CLI command functions.
+   - This ensures full testability, clean library imports, and API reusability in external scripts and Jupyter notebooks without spawning subprocesses.
+2. **Command Grouping & Routing**:
+   - Use `@click.group()` as the root coordinator, branching subcommands with `@cli.command()`.
+   - Organize parameters using typed `@click.option()` and positional `@click.argument()` declarations with explicit help strings.
+3. **Context Passing**:
+   - Share global runtime configuration (e.g., verbosity levels, deterministic RNG seeds, custom config file paths) across subcommands using `@click.pass_context` and `ctx.obj`.
+4. **Self-Discovery & Universal `--help`**:
+   - Executing the root command (e.g., `my-cli`, `python -m cli`, or `my-cli --help`) must immediately output the full catalog of available subcommands, arguments, defaults, and documentation.
+5. **Testing with Click `CliRunner`**:
+   - Every CLI command must be backed by automated unit and functional tests in `tests/unit/test_cli.py` or `tests/func/test_cli.py` using Click's isolated runner:
+     ```python
+     from click.testing import CliRunner
+     from my_package.cli import main
+
+     def test_cli_execution() -> None:
+         runner = CliRunner()
+         result = runner.invoke(main, ["--help"])
+         assert result.exit_code == 0
+         assert "Usage:" in result.output
+     ```
+
+### 2️⃣ ADHD High-Contrast Semantic Color Spectrum
+CLI interfaces implement visual cognitive scaffolding to eliminate reading fatigue and accelerate operational command scanning:
+- **`PRIMARY_GRADIENT` (`#00e8ff` → `#008eff` → `#6f78fa` → `#5e17eb`)**: Section headers, category titles, and diagnostic summaries.
+- **`SECONDARY_GRADIENT` (`#00a6ff` → `#7952f5` → `#a855f7` → `#ff28a2`)**: Signature block text banners and decorative framing.
+- **Electric Cyan (`#00e8ff`) & Sky Blue (`#14b5ff`)**: Actionable command names and primary interactive focal points.
+- **Pale Lilac (`#d8b4fe`)**: Syntax flags, options, and parameters.
+- **Ice Blue (`#b8f6ff`)**: High-luminance, low-fatigue descriptive text and documentation.
+- **Periwinkle Blue (`#5280ff`)**: Structural frame dividers and table borders.
+- **Semantic Status Badges**: `success_emerald` (`#10b981`), `midwest_indigo` (`#6f78fa`), `vivid_pink` (`#f72585`), and `warning_amber` (`#f7c548`).
+
+### 3️⃣ Golden Ratio Multi-Stop Gradient Scaling
+Multi-stop TrueColor gradient text computed via `multi_gradient()` scales color segment proportions according to the Golden Ratio ($\phi \approx 1.618$, $w_k = (1/\phi)^k$). This weights dominant blue/cyan keyframes on the left while tapering smoothly into violet and magenta on the right.
+
+### 4️⃣ Console Script Registration & Built-In Smoke Testing
+- Bind entry points in `pyproject.toml` under `[project.scripts]`.
+- Every CLI suite must provide a built-in smoke test subcommand (e.g., `python -m cli smoke-test`) verifying terminal ANSI rendering, return codes, and command registration.
 
 ---
 
-## 🎨 8. Repo-Wide Hex Color Standard & Design Token Architecture
+## 🔬 8. Scientific Configuration & Parameter Validation with JSON Schema (COOP Standard)
+
+Complex numerical simulations, parameter sweeps, and scientific pipelines require robust configuration management. Adhering to the **COOP JSON Schema Standard** (CERFACS), all scientific parameters and input decks (YAML or JSON) must be governed by formal, self-documenting JSON Schemas (Draft 7 / 2020-12).
+
+### 1️⃣ Core Motivations for JSON Schema in Scientific Computing
+1. **Fail-Fast Boundary Validation**: Validate all inputs prior to allocating heavy compute nodes, GPU memory, or numerical integration routines. Catch typo bugs and out-of-bounds parameters in milliseconds instead of hours into a simulation.
+2. **Living Self-Documentation**: Explicit `title`, `description`, and physical units embedded directly in the schema eliminate parameter ambiguity.
+3. **Editor Autocompletion & Hover Tooltips**: Modern IDEs (PyCharm, VS Code) bind JSON Schema to YAML/JSON input files, providing instantaneous linting and autocompletion for users.
+4. **Automated GUI & CLI Form Generation**: Schemas can automatically synthesize GUI forms, Web interfaces, or Click CLI flag validation.
+
+### 2️⃣ Canonical Scientific Schema Example
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://eigenscribe.com/schemas/simulation_input.json",
+  "title": "DynamicalSimulationConfig",
+  "description": "Validated input deck for numerical integration and phase synchronization.",
+  "type": "object",
+  "required": ["mesh", "fluid", "numerics"],
+  "additionalProperties": false,
+  "properties": {
+    "mesh": {
+      "type": "object",
+      "title": "Mesh & Geometry Parameters",
+      "required": ["length", "width", "resolution"],
+      "properties": {
+        "length": { "type": "number", "minimum": 0.0, "exclusiveMinimum": true, "description": "Domain length in x-direction [m]" },
+        "width": { "type": "number", "minimum": 0.0, "exclusiveMinimum": true, "description": "Domain width in y-direction [m]" },
+        "resolution": { "type": "number", "minimum": 1e-6, "description": "Spatial grid discretization [m]" }
+      }
+    },
+    "fluid": {
+      "type": "object",
+      "title": "Physical Fluid Properties",
+      "required": ["density", "viscosity", "init_speed"],
+      "properties": {
+        "density": { "type": "number", "minimum": 0.0, "description": "Fluid mass density [kg/m³]", "default": 1.2 },
+        "viscosity": { "type": "number", "minimum": 0.0, "description": "Dynamic viscosity [kg/(m·s)]", "default": 1.8e-5 },
+        "init_speed": { "type": "number", "minimum": 0.0, "description": "Initial free-stream velocity [m/s]" }
+      }
+    },
+    "numerics": {
+      "type": "object",
+      "title": "Numerical Solver Controls",
+      "required": ["solver", "dt", "max_steps"],
+      "properties": {
+        "solver": { "type": "string", "enum": ["rk4", "adaptive_dopri5", "symplectic_verlet"], "description": "Time integration algorithm" },
+        "dt": { "type": "number", "minimum": 1e-9, "description": "Time step increment [s]" },
+        "max_steps": { "type": "integer", "minimum": 1, "description": "Maximum integration step count" }
+      }
+    }
+  }
+}
+```
+
+### 3️⃣ In-Code Schema Validation Pipeline
+Incorporate `jsonschema` into numerical entry points or pre-flight checks:
+```python
+import json
+import jsonschema
+from pathlib import Path
+from typing import Any
+
+def validate_input_deck(config: dict[str, Any], schema_path: Path) -> None:
+    """Validate user configuration against the canonical JSON Schema.
+
+    Parameters
+    ----------
+    config : dict[str, Any]
+        Parsed YAML or JSON parameter dictionary.
+    schema_path : Path
+        Filesystem path to the canonical schema file.
+
+    Raises
+    ------
+    jsonschema.ValidationError
+        If configuration violates type, boundary, or required constraints.
+    """
+    with open(schema_path, "r", encoding="utf-8") as f:
+        schema = json.load(f)
+    jsonschema.validate(instance=config, schema=schema)
+```
+
+---
+
+## 🎨 9. Repo-Wide Hex Color Standard & Design Token Architecture
 
 To ensure strict visual fidelity across CLI TrueColor output, Matplotlib/Seaborn plotting themes, dark-mode Mermaid diagrams, and CSS tokens, `scriber-core` enforces a mandatory repo-wide color standard:
 
@@ -340,9 +482,9 @@ To ensure strict visual fidelity across CLI TrueColor output, Matplotlib/Seaborn
 
 ---
 
-## 🚀 9. Distribution & PyPI Publishing Protocol
+## 🚀 10. Distribution & PyPI Publishing Protocol
 
-For distributable libraries published to PyPI or internal registries, follow this 6-step release workflow:
+For distributable libraries published to PyPI or internal registries, follow this 6-step release workflow adhering to the **COOP Packaging Guide**:
 
 1. **Local Verification**:
    - Run all test suites and linters locally:
@@ -353,11 +495,11 @@ For distributable libraries published to PyPI or internal registries, follow thi
 2. **CI Pipeline Pass**:
    - Push commits to the remote repository and verify that all automated CI pipeline stages (Test, Lint, Docs) succeed.
 3. **Changelog & Version Tagging**:
-   - Update `CHANGELOG.md` with release notes and date.
+   - Update `CHANGELOG.md` with release notes and date under Keep a Changelog format.
    - Bump version in `pyproject.toml` and `src/my_package/__init__.py`.
    - Commit and tag: `git tag -a v1.0.0 -m "Release 1.0.0" && git push origin main --tags`.
 4. **Build Distribution**:
-   - Build clean binary wheel and source distribution artifacts:
+   - Build clean binary wheel (`.whl`) and source distribution (`.tar.gz`) artifacts:
      ```bash
      uv build
      ```
@@ -374,7 +516,7 @@ For distributable libraries published to PyPI or internal registries, follow thi
 
 ---
 
-## 🏷️ 10. CI/CD Automation & Status Badges
+## 🏷️ 11. CI/CD Automation & Status Badges
 
 Repositories must implement automated CI pipelines with three core verification stages:
 1. **Testing**: Runs `pytest` across supported Python versions with coverage reporting.
@@ -485,10 +627,11 @@ Every autonomous agent run or development cycle must conclude with a mandatory c
 
 The repository layout, testing philosophy, versioning discipline, and packaging governance defined in this workspace synthesize modern PEP 517/518/621 tooling (`uv`, `hatchling`) with the software engineering standards established by the CERFACS COOP team:
 
-- **Original Article**: Dauptain, Antoine. *"Python packages: the COOP gold standard"*, The COOP Blog, CERFACS (Feb 21, 2022).
+- **Original Core Standard**: Dauptain, Antoine. *"Python packages: the COOP gold standard"*, The COOP Blog, CERFACS (Feb 21, 2022).
   - **Web**: [https://cerfacs.fr/coop/coop-standard-on-python-pkges](https://cerfacs.fr/coop/coop-standard-on-python-pkges)
   - **Local Archive**: [`docs/COOP_blog/Python packages_ the COOP gold standard · The COOP Blog.html`](COOP_blog/Python%20packages_%20the%20COOP%20gold%C2%A0standard%20%C2%B7%20The%20COOP%20Blog.html)
-- **Related COOP Articles**:
+- **Canonical COOP Engineering Standards**:
+  - *"Packaging guide"* — [Web](https://cerfacs.fr/coop/packaging-guide) | Local: [`docs/COOP_blog/Packaging guide · The COOP Blog.html`](COOP_blog/Packaging%C2%A0guide%20%C2%B7%20The%20COOP%20Blog.html)
   - *"The COOP Click Command line interfaces"* — [Web](https://cerfacs.fr/coop/the-coop-click-command-line-interfaces) | Local: [`docs/COOP_blog/The COOP Click Command line interfaces · The COOP Blog.html`](COOP_blog/The%20COOP%20Click%20Command%20line%C2%A0interfaces%20%C2%B7%20The%20COOP%20Blog.html)
   - *"The Coop Cactus branching model"* — [Web](https://cerfacs.fr/coop/the-coop-cactus-branching-model) | Local: [`docs/COOP_blog/The Coop Cactus branching model · The COOP Blog.html`](COOP_blog/The%20Coop%20Cactus%20branching%C2%A0model%20%C2%B7%20The%20COOP%20Blog.html)
   - *"Using the json-SCHEMA standard for scientific applications"* — [Web](https://cerfacs.fr/coop/using-the-json-schema-standard-for-scientific-applications) | Local: [`docs/COOP_blog/Using the json-SCHEMA standard for scientific applications_ · The COOP Blog.html`](COOP_blog/Using%20the%20json-SCHEMA%20standard%20for%20scientific%C2%A0applications_%20%C2%B7%20The%20COOP%20Blog.html)

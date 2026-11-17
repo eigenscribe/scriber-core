@@ -13,7 +13,11 @@ Agents must consult and adhere to the source reference specifications and gold s
 | `../house-rules` | `../house-rules/python-rules.md` | Core rules for Python development: mathematical typography, modern RNG, typing, package hygiene, docstrings, and script flow. |
 | `../house-rules` | `../house-rules/css-rules.md` | The Scriber Experience design system: 4-layer token hierarchy, glassmorphism baseline, ADHD semantic color coding, and golden ratio spacing. |
 | `../docs` | `../docs/workspace-setup-guide.md` | Canonical workspace distribution, packaging, Diátaxis Sphinx docs, testing, and PyPI release guide. |
-| `../docs/COOP_blog` | `../docs/COOP_blog/...` | Reference archive of CERFACS COOP software engineering standards (Gold standard packaging, Click CLIs, Cactus branching, json-SCHEMA). |
+| `../docs/COOP_blog` | `../docs/COOP_blog/Python packages_ the COOP gold standard · The COOP Blog.html` | Foundational CERFACS COOP software engineering standard on Python packaging, testing, and continuous integration. |
+| `../docs/COOP_blog` | `../docs/COOP_blog/Packaging guide · The COOP Blog.html` | Step-by-step COOP packaging, sdist/wheel distribution, and PyPI release governance guide. |
+| `../docs/COOP_blog` | `../docs/COOP_blog/The COOP Click Command line interfaces · The COOP Blog.html` | Click-based CLI design, thin-wrapper command architecture, context routing, and CliRunner testing. |
+| `../docs/COOP_blog` | `../docs/COOP_blog/The Coop Cactus branching model · The COOP Blog.html` | Single-trunk Cactus branching model, release stabilization branches, hotfixes, and annotated tag governance. |
+| `../docs/COOP_blog` | `../docs/COOP_blog/Using the json-SCHEMA standard for scientific applications_ · The COOP Blog.html` | JSON Schema validation, fail-fast boundary enforcement, and parameter self-documentation for scientific input decks. |
 | `../src/frontend` | `../src/frontend/the_scriber_experience` | ANSI TrueColor multi-stop linear RGB gradient engine and color-stop presets. |
 | `../src/frontend` | `../src/frontend/the_scriber_experience` | ANSI 256-color terminal palette, semantic level messaging, and CLI styling helpers. |
 | `../boilerplates` | `../boilerplates/python/gold-standard.py` | Gold standard reference script template implementing mathematical simulation, explicit type annotations, shape assertions, deterministic RNG, and smoke testing. |
@@ -77,11 +81,19 @@ When writing or modifying Python modules, follow the rules defined in `../house-
 7. **Keep a Changelog Governance**:
    - Maintain `CHANGELOG.md` adhering to Keep a Changelog 1.0.0 (`Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`).
    - Update `CHANGELOG.md` whenever new public features, API adjustments, or bug fixes are applied.
-8. **Command Line Interface (CLI)**:
+8. **Command Line Interface (CLI) & Thin Wrapper Architecture**:
    - Provide fast-start CLI entry points using `click`.
-   - Base CLI commands must support self-discovery (`--help` displays all subcommands and parameters).
+   - Adhere strictly to the "thin wrapper" principle: CLI callbacks must parse inputs and delegate execution to core library functions (`core.py`, `solver.py`), keeping domain logic decoupled from CLI code.
+   - Base CLI commands must support self-discovery (`--help` displays all subcommands, arguments, defaults, and parameters).
+   - Use `@click.pass_context` and `ctx.obj` for global configuration sharing.
+   - Test CLI commands deterministically with Click's `CliRunner`.
    - Map CLI entry points in `pyproject.toml` under `[project.scripts]`.
-9. **Pragmatic Code Quality & Linting ("In Medio Stat Virtus")**:
+9. **Scientific Configuration & Parameter Validation with JSON Schema**:
+   - Formalize and validate numerical simulation parameter decks (YAML/JSON) using JSON Schema (Draft 7 / 2020-12).
+   - Enforce fail-fast boundary validation (`minimum`, `maximum`, `exclusiveMinimum`), type checking, and required field invariants before executing compute runs.
+   - Embed physical units and parameter descriptions directly in schema properties for self-documenting configurations and IDE autocompletion.
+   - Validate configurations in Python using `jsonschema.validate()`.
+10. **Pragmatic Code Quality & Linting ("In Medio Stat Virtus")**:
    - Maintain PEP 8 compliance via `ruff` (or `pylint` $\ge 9.0/10$).
    - Never contort or obfuscate API design solely to satisfy arbitrary linter metrics (such as strictly limiting arguments to $<5$).
    - Resolve issues directly in source code instead of relaxing linter configuration files.
@@ -151,3 +163,15 @@ When styling web pages, apps, data dashboards, or CLI outputs, adhere to `../hou
 9. **End-of-Run File Consistency & Hygiene**:
    - Every file must be updated appropriately relative to files created or modified by the agent during a given run.
    - At the conclusion of any session, perform an explicit consistency audit ensuring that all documentation (`README.md`, setup guides, `CHANGELOG.md`), configuration files (`pyproject.toml`, `.gitignore`, `.readthedocs.yaml`), tests, and source codes are completely clean, synchronized, and mutually consistent.
+
+---
+
+## 🏛️ 5. Standards & Provenance
+
+Software architecture, packaging governance, testing standards, branching discipline, and scientific parameter validation across this workspace are adapted from the CERFACS COOP engineering standards:
+
+- **COOP Gold Standard**: Dauptain, Antoine. *"Python packages: the COOP gold standard"*, The COOP Blog, CERFACS (2022). [Web](https://cerfacs.fr/coop/coop-standard-on-python-pkges) | Local: `docs/COOP_blog/Python packages_ the COOP gold standard · The COOP Blog.html`
+- **COOP Packaging Guide**: [Web](https://cerfacs.fr/coop/packaging-guide) | Local: `docs/COOP_blog/Packaging guide · The COOP Blog.html`
+- **COOP Click Command Line Interfaces**: [Web](https://cerfacs.fr/coop/the-coop-click-command-line-interfaces) | Local: `docs/COOP_blog/The COOP Click Command line interfaces · The COOP Blog.html`
+- **COOP Cactus Branching Model**: [Web](https://cerfacs.fr/coop/the-coop-cactus-branching-model) | Local: `docs/COOP_blog/The Coop Cactus branching model · The COOP Blog.html`
+- **JSON Schema for Scientific Applications**: [Web](https://cerfacs.fr/coop/using-the-json-schema-standard-for-scientific-applications) | Local: `docs/COOP_blog/Using the json-SCHEMA standard for scientific applications_ · The COOP Blog.html`
