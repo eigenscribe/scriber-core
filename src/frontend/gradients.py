@@ -50,9 +50,9 @@ __all__: list[str] = [
 GRADIENT_PRESETS: Final[dict[str, tuple[str, ...]]] = {
     # 🐉 Signature Eigenscribe Gradient:
     "eigenscribe": (
-        COLOR_PALETTE["sky_info"],
-        COLOR_PALETTE["skyline_blue"],
-        COLOR_PALETTE["periwinkle_blue"],
+        COLOR_PALETTE["vivid_cyan"],
+        COLOR_PALETTE["eigen_blue"],
+        COLOR_PALETTE["midwest_indigo"],
         COLOR_PALETTE["electric_violet"],
     ),
     # 🔱 Signature TSE Gradients:

@@ -8,10 +8,21 @@ Verifies command invocation, arguments, styling output, diagnostics, and exit co
 
 from __future__ import annotations
 
+import re
 import click
 from click.testing import CliRunner
 import pytest
 
+from cli import (
+    COLOR_PALETTE,
+    build_color_entries,
+    format_color_swatch,
+    format_colored_name,
+    print_colors_table,
+    render_colors_table,
+    run_smoke_test,
+)
+from cli.colors_table import cli as colors_table_cli
 from frontend.the_scriber_experience.cli.main import cli_group
 
 
@@ -71,6 +82,11 @@ def test_cli_gradient_command(runner: CliRunner) -> None:
     assert res_list.exit_code == 0
     assert "GRADIENT PRESETS" in res_list.output
     assert "electric" in res_list.output
+    assert "eigenscribe" in res_list.output
+    assert "#00e8ff" in res_list.output
+    assert "#008eff" in res_list.output
+    assert "#6f78fa" in res_list.output
+    assert "#5e17eb" in res_list.output
 
 
 def test_cli_colors_command(runner: CliRunner) -> None:
@@ -124,3 +140,57 @@ def test_cli_doctor_command(runner: CliRunner) -> None:
     assert "EIGENSCRIBE DOCTOR" in result.output
     assert "[PASS]" in result.output
     assert "checks passed successfully" in result.output
+
+
+def test_cli_colors_table_direct_command(runner: CliRunner) -> None:
+    """Verify colors_table CLI prints table with colored swatches and names."""
+    res = runner.invoke(colors_table_cli, [])
+    assert res.exit_code == 0
+    plain_output = re.sub(r"\x1b\[[0-9;]*m", "", res.output)
+    assert "SCRIBER CORE COLOR PALETTE TABLE" in plain_output
+    assert "\033[1;38;2;" in res.output or "\033[38;2;" in res.output
+    assert "deep_pine" in res.output
+    assert "pure_cyan" in res.output
+    assert "#00ffff" in res.output
+
+    # Test sorting and formatting options
+    res_sorted = runner.invoke(colors_table_cli, ["--sort", "name", "--reverse"])
+    assert res_sorted.exit_code == 0
+    assert "warning_amber" in res_sorted.output
+
+    # Test style options
+    res_ascii = runner.invoke(colors_table_cli, ["--style", "ascii", "--no-header"])
+    assert res_ascii.exit_code == 0
+    assert "|" in res_ascii.output
+
+    # Test smoke-test flag
+    res_smoke = runner.invoke(colors_table_cli, ["--smoke-test"])
+    assert res_smoke.exit_code == 0
+    assert "smoke tests passed" in res_smoke.output
+
+
+def test_cli_colors_table_eigenscribe_integration(runner: CliRunner) -> None:
+    """Verify eigenscribe colors --table displays the full COLOR_PALETTE table."""
+    result = runner.invoke(cli_group, ["colors", "--table"])
+    assert result.exit_code == 0
+    plain_output = re.sub(r"\x1b\[[0-9;]*m", "", result.output)
+    assert "SCRIBER CORE COLOR PALETTE TABLE" in plain_output
+    assert "Rendered" in result.output
+
+
+def test_colors_table_rendering_helpers() -> None:
+    """Verify build_color_entries, swatch formatting, and table render functions."""
+    entries = build_color_entries()
+    assert len(entries) == len(COLOR_PALETTE)
+    assert entries[0].index == 1
+
+    swatch = format_color_swatch((0, 255, 255), width=6)
+    assert "\033[38;2;0;255;255m██████\033[0m" == swatch
+
+    colored_name = format_colored_name("pure_cyan", (0, 255, 255))
+    assert "\033[1;38;2;0;255;255mpure_cyan\033[0m" == colored_name
+
+    rendered = render_colors_table()
+    plain_rendered = re.sub(r"\x1b\[[0-9;]*m", "", rendered)
+    assert "SCRIBER CORE COLOR PALETTE TABLE" in plain_rendered
+    assert run_smoke_test() is True

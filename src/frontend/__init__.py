@@ -16,9 +16,16 @@ import sys
 from . import colors, gradients, the_scriber_experience
 from .colors import (
     COLOR_PALETTE,
+    GOLDEN_RATIO,
+    PHI,
+    GOLDEN_RATIO_INVERSE,
     Color,
     RGB,
+    generate_golden_ratio_gradient,
     hex_to_rgb,
+    interpolate_rgb,
+    render_golden_ratio_gradient,
+    run_smoke_test as run_colors_smoke_test,
 )
 from .gradients import (
     GRADIENT_PRESETS,
@@ -79,7 +86,14 @@ __all__: list[str] = [
     # Types & Core
     "RGB",
     "Color",
+    "GOLDEN_RATIO",
+    "PHI",
+    "GOLDEN_RATIO_INVERSE",
     "hex_to_rgb",
+    "interpolate_rgb",
+    "generate_golden_ratio_gradient",
+    "render_golden_ratio_gradient",
+    "run_colors_smoke_test",
     # Palettes & Tokens
     "COLOR_PALETTE",
     "TSE_COLORS",

@@ -80,8 +80,8 @@ EIGENSCRIBE_ASCII_LOGO: Final[str] = r"""
   ╚══════╝╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝╚═════╝ ╚══════╝
 """
 
-PRIMARY_GRADIENT: Final[tuple[str, ...]] = ("#00ffff", "#00a6ff", "#7952f5", "#ff00c3")
-SECONDARY_GRADIENT: Final[tuple[str, ...]] = ("#00a6ff", "#a855f7", "#ff00c3")
+PRIMARY_GRADIENT: Final[tuple[str, ...]] = GRADIENT_PRESETS["eigenscribe"]
+SECONDARY_GRADIENT: Final[tuple[str, ...]] = ("#00a6ff", "#7952f5", "#a855f7", "#ff28a2")
 
 
 # -----------------------------------------------------------------------------------------------------------
@@ -206,8 +206,15 @@ def gradient_cmd(text: str, preset: str, stops: tuple[str, ...], bold: bool, lis
 @cli_group.command(name="colors")
 @click.option("--all-256", "-a", is_flag=True, help="Display the complete ANSI 256-color palette index.")
 @click.option("--spectrum", "-s", is_flag=True, help="Display the 10-Node EIGEN vibrant node spectrum.")
-def colors_cmd(all_256: bool, spectrum: bool) -> None:
+@click.option("--table", "-t", is_flag=True, help="Display the full COLOR_PALETTE table with TrueColor blocks and names.")
+def colors_cmd(all_256: bool, spectrum: bool, table: bool) -> None:
     """Inspect and display Eigenscribe color palettes with live TrueColor swatches."""
+    if table:
+        from cli.colors_table import print_colors_table
+
+        print_colors_table()
+        return
+
     cli_banner("EIGENSCRIBE DESIGN TOKENS", "Color Palettes, Semantic Roles & Node Spectra")
     click.echo("")
 

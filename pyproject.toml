@@ -57,7 +57,7 @@ managed = true
 package = true
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/frontend"]
+packages = ["src/frontend", "src/cli"]
 
 [tool.uv.pip]
 universal = true

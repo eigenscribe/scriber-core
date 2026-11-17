@@ -5,7 +5,7 @@ Scriber Core root package.
 
 from __future__ import annotations
 
-from . import frontend
+from . import cli, frontend
 from .frontend import (
     COLOR_PALETTE,
     GRADIENT_PRESETS,
@@ -19,6 +19,7 @@ from .frontend import (
 )
 
 __all__: list[str] = [
+    "cli",
     "frontend",
     "colors",
     "gradients",

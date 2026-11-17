@@ -65,6 +65,7 @@ except ImportError:
             "warning": "warning_amber",
         }
         GRADIENT_PRESETS: Final[dict[str, tuple[str, ...]]] = {
+            "eigenscribe": ("#00e8ff", "#008eff", "#6f78fa", "#5e17eb"),
             "electric": ("#00a6ff", "#a855f7", "#ff00c3"),
             "sunset": ("#ff6b35", "#f7c548", "#ff40a1"),
             "forest": ("#a7c957", "#2a9d8f", "#264653"),

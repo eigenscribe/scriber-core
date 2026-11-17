@@ -49,7 +49,7 @@ subgraph Physics_Law["3️⃣ Dynamical Physics & Algebra Generators"]
     Quantum_Physics["Quantum SCF Collective Hamiltonian<br/>H(t) = -1/2 &sum;<sub>j</sub> &Omega;<sub>j</sub>(t) &sigma;<sub>j</sub><sup>z</sup>"]:::accent
 end
 
-subgraph Integrator_Ecosystem["4️⃣ Multi-Manifold Numerical Solvers"]
+subgraph Integrator_Ecosystem["6️⃣ Multi-Manifold Numerical Solvers"]
     RK45_Int["Classical Adaptive RK45<br/>SciPy Dormand-Prince 5(4)"]:::success
     GA_Rotors["Geometric Algebra Rotor Integrators<br/>Midpoint, Embedded, Lie-RKMK4, Adaptive DOPRI 5(4)"]:::success
     Quantum_SCF["Quantum SCF Solvers<br/>Statevector, Expectation, Shot Sampling & QASM"]:::success
@@ -72,7 +72,7 @@ Phase_Physics --> RK45_Int
 GA_Physics --> GA_Rotors
 Quantum_Physics --> Quantum_SCF
 Integrator_Ecosystem --> Obs_OP
-Integrator_Ecosystem --> Coprime_Sampler
+Integrator_Ecosystem --> Coprime_Sampler1
 Obs_OP --> Obs_Lie
 Obs_Lie --> Dataset_Out
 

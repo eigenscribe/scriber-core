@@ -13,12 +13,19 @@ from frontend.THE_SCRIBER_EXPERIENCE.plots import get_eigenscribe_rcparams
 
 from frontend import (
     COLOR_PALETTE,
+    GOLDEN_RATIO,
+    GOLDEN_RATIO_INVERSE,
     GRADIENT_PRESETS,
+    PHI,
     SEMANTIC_COLORS,
     TSE_COLORS,
     TSE_GRADIENTS,
+    generate_golden_ratio_gradient,
     hex_to_rgb,
+    interpolate_rgb,
     multi_gradient,
+    render_golden_ratio_gradient,
+    run_colors_smoke_test,
 )
 
 
@@ -66,3 +73,29 @@ def test_plot_theme_rcparams() -> None:
     assert isinstance(rc, dict)
     assert "figure.facecolor" in rc
     assert rc["figure.facecolor"] == "#0d1117"
+
+
+def test_golden_ratio_gradient_and_smoke_test() -> None:
+    """Verify golden ratio constants, gradient generation, rendering, and smoke tests."""
+    assert abs(GOLDEN_RATIO - 1.618033988749895) < 1e-9
+    assert abs(PHI - GOLDEN_RATIO) < 1e-9
+    assert abs(GOLDEN_RATIO_INVERSE - (1.0 / GOLDEN_RATIO)) < 1e-9
+
+    all_colors = list(COLOR_PALETTE.values())
+    expected_len = round(len(all_colors) * GOLDEN_RATIO)
+    samples = generate_golden_ratio_gradient(all_colors)
+    assert len(samples) == expected_len
+    for rgb in samples:
+        assert len(rgb) == 3
+        assert all(0 <= ch <= 255 for ch in rgb)
+
+    rendered = render_golden_ratio_gradient(all_colors)
+    assert "\033[38;2;" in rendered
+    assert "\033[0m" in rendered
+
+    # Interpolate RGB helper check
+    mid_rgb = interpolate_rgb("#000000", "#ffffff", 0.5)
+    assert mid_rgb == (128, 128, 128)
+
+    # Smoke test execution
+    assert run_colors_smoke_test() is True
