@@ -271,17 +271,48 @@ universal = true
 
 ---
 
-## 💻 7. Command Line Interface (CLI)
+## 💻 7. Command Line Interface (CLI) & Color-Coded Architecture
 
-1. **Fast-Start Click CLI**:
-   - Implement entry-point command line interfaces using `click`.
-   - Running the base command (e.g., `my-cli` or `my-cli --help`) must immediately present all available subcommands, parameters, and documentation.
-2. **Console Script Registration**:
-   - Bind the CLI in `pyproject.toml` under `[project.scripts]`.
+1. **Fast-Start Click CLI & Self-Discovery**:
+   - Implement entry-point command line interfaces using `click` or standalone execution routers (`python -m cli`).
+   - Running the base command (e.g., `my-cli`, `python -m cli`, or `my-cli --help`) must immediately present all available subcommands, parameters, and documentation.
+2. **ADHD High-Contrast Semantic Color Spectrum**:
+   - CLI interfaces must use semantic color-coding to structure cognitive load and eliminate reading fatigue:
+     - **`PRIMARY_GRADIENT` (`#00e8ff` → `#008eff` → `#6f78fa` → `#5e17eb`)**: Section headers, category titles, and diagnostic summaries.
+     - **`SECONDARY_GRADIENT` (`#00a6ff` → `#7952f5` → `#a855f7` → `#ff28a2`)**: Signature block banners and decorative framing.
+     - **Electric Cyan (`#00e8ff`) & Sky Blue (`#14b5ff`)**: Actionable command names and primary interactive focal points.
+     - **Pale Lilac (`#d8b4fe`)**: Syntax flags, options, and parameters.
+     - **Ice Blue (`#b8f6ff`)**: High-luminance, low-fatigue descriptive text and documentation.
+     - **Periwinkle Blue (`#5280ff`)**: Structural frame dividers and table borders.
+     - **Semantic Status Badges**: `success_emerald` (`#10b981`), `midwest_indigo` (`#6f78fa`), `vivid_pink` (`#f72585`), and `warning_amber` (`#f7c548`).
+3. **Golden Ratio Multi-Stop Gradient Scaling**:
+   - Multi-stop TrueColor gradient text computed via `multi_gradient()` scales color segment proportions according to the Golden Ratio ($\phi \approx 1.618$, $w_k = (1/\phi)^k$).
+   - Gives greater visual weight to starting blue/cyan hues on the left and smoothly tapers into purple/pink on the right.
+4. **Console Script Registration & Smoke Testing**:
+   - Bind CLI entry points in `pyproject.toml` under `[project.scripts]`.
+   - Every CLI suite must provide a built-in smoke test subcommand (e.g., `python -m cli smoke-test`) verifying terminal ANSI processing and subtool execution.
 
 ---
 
-## 🚀 8. Distribution & PyPI Publishing Protocol
+## 🎨 8. Repo-Wide Hex Color Standard & Design Token Architecture
+
+To ensure strict visual fidelity across CLI TrueColor output, Matplotlib/Seaborn plotting themes, dark-mode Mermaid diagrams, and CSS tokens, `scriber-core` enforces a mandatory repo-wide color standard:
+
+1. **Single Source of Truth (`COLOR_PALETTE`)**:
+   - `COLOR_PALETTE` in `src/frontend/colors.py` is the canonical dictionary for all named color variables across the workspace.
+2. **Repo-Wide Hex Constraint**:
+   - **All color variables must be converted to / defined as canonical 6-digit hex format (`#rrggbb`)**, or reference valid key names from `COLOR_PALETTE` in `src/frontend/colors.py`.
+   - Never define raw or arbitrary RGB integer triplets across downstream modules without a canonical hex reference.
+3. **Deterministic RGB Normalization**:
+   - The `hex_to_rgb(hex_code)` utility in `src/frontend/colors.py` provides deterministic conversion from hex strings to `(R, G, B)` integer tuples for ANSI escape sequence generation (`\033[38;2;R;G;Bm`).
+4. **Cross-Subsystem Alignment**:
+   - Web / CSS design tokens: mapped directly from hex values to CSS custom properties (`--color-primary: #00e8ff`).
+   - Scientific visualization: Matplotlib `rcParams` and Seaborn colormaps use hex strings directly (`axes.prop_cycle: ['#14b5ff', '#9b7dff', '#22f792', '#f78166']`).
+   - Dark-mode Mermaid themes: hex codes map directly into diagram directives and node styling classes (`primaryColor: #14b5ff`).
+
+---
+
+## 🚀 9. Distribution & PyPI Publishing Protocol
 
 For distributable libraries published to PyPI or internal registries, follow this 6-step release workflow:
 
@@ -315,7 +346,7 @@ For distributable libraries published to PyPI or internal registries, follow thi
 
 ---
 
-## 🏷️ 9. CI/CD Automation & Status Badges
+## 🏷️ 10. CI/CD Automation & Status Badges
 
 Repositories must implement automated CI pipelines with three core verification stages:
 1. **Testing**: Runs `pytest` across supported Python versions with coverage reporting.

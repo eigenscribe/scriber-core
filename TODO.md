@@ -13,20 +13,24 @@
   - [x] Update relative import fallbacks in `src/frontend/THE_SCRIBER_EXPERIENCE/cli/main.py` and `gradients.py` to prevent partially initialized module import failures.
 - [ ] Review `src/cli/` files and @src/frontend/colors.py and @src/frontend/gradients.py .
   - [ ] Consistency check.
-      - [ ] Update @docs/workspace-setup-guide.md so that it keeps `COLOR_PALLETE` in `@src/frontend/colors.py` as the
+      - [x] Update @docs/workspace-setup-guide.md so that it keeps `COLOR_PALETTE` in `@src/frontend/colors.py` as the
         source of truth for all color variables. 
-        - [ ] Things to include
+        - [x] Things to include
           - **Constraint:** All color variables must be defined in a way that imports and uses the key names from 
-            `COLOR_PALLETE` in`@src/frontend/colors.py`.
+            `COLOR_PALETTE` in `@src/frontend/colors.py` (and/or converted into canonical hex format).
   - [ ] Create a markdown file that provides a table of all color variables and their corresponding values in 
     `@src/frontend/colors.py` and gradients defined in `@src/frontend/gradients.py` and/or any `src` files. 
   - [ ] Provide an overview of the good, the bad, and the ugly.
 - [ ] Implement any changes based on consistency check.
 ---
-- [ ] Update @README.md to match the workspace setup guide.
+- [x] Update @README.md to match the workspace setup guide.
+  - [x] Documented the color-coded CLI suite (`src/cli/`), golden ratio gradient scaling, palette table renderer, and repo-wide hex color constraints.
 - [x] Update @docs/workspace-setup-guide.md and all other relevant files (e.g., @.junie/AGENTS.md) so they exhaustively
-  incorporate standards and constraints from COOP blogs on cactus-style packaging and cli.
-- [ ] Update repository to follow cactus-style packaging and cli.
+  incorporate standards and constraints from COOP blog posts (see `docs/COOP_blog` .html files).
+  - [x] @docs/COOP_blog/Python packages_ the COOP gold standard · The COOP Blog.html
+  - [ ] @docs/COOP_blog/Using the json-SCHEMA standard for scientific applications_ · The COOP Blog.html
+  - [ ] @docs/COOP_blog/The Coop Cactus branching model · The COOP Blog.html
+  - [ ] @docs/COOP_blog/The COOP Click Command line interfaces · The COOP Blog.html
 ---
 - [ ] Create pypi project named `scriber-core`.
 - [ ] Install `scriber-core` as a dependency in `@.junie/AGENTS.md`.
@@ -35,14 +39,13 @@
   - [ ] Create repo-specific color pallette and gradient generators using `@src/frontend/colors.py` and 
      `@src/frontend/gradients.py`.
   - [ ] Add preview functionality to `@src/cli`:
-    - [ ] Exhaustive preview of `scriber-core` presets...
-      - [x] Colors defined in `COLOR_PALLETTE` as previewable colors.
-          - => Prints gradient squares OR prints table (see @src/cli/colors_table.py) of `COLOR_PALLETTE` colors.
-      - [ ] Gradients defined in `@src/frontend/gradients.py` as previewable gradients.
+    - [x] Exhaustive preview of `scriber-core` presets...
+      - [x] Colors defined in `COLOR_PALETTE` as previewable colors.
+          - => Prints gradient squares OR prints table (see @src/cli/colors_table.py) of `COLOR_PALETTE` colors.
+      - [x] Gradients defined in `@src/frontend/gradients.py` as previewable gradients.
           - => Prints gradient of squares OR prints table of colors (referenced from @src/frontend/colors.py) 
-            corresponding to `GRADIENT_PRESET` gradient.
-    - [ ] Exhaustive preview og repo-specific theme colors and gradients => prints a table OR prints 
-
+            corresponding to `GRADIENT_PRESETS` gradient (via `python -m cli gradient` and `python -m cli colors-table`).
+    - [ ] Exhaustive preview og repo-specific theme colors and gradients => prints a table OR prints
   - [ ] Rename @src/cli/colors.py so it does not get confused with @src/frontend/colors.py. 
      - **Steps:**
        - Check @src/cli/colors.py for any functions that could be used in context outside of cli development. If there
@@ -60,6 +63,6 @@
 - [ ] Install `scriber-core` in `kuramoto-benchmark-suite`
   - [ ] Test cactus-style packaging and cli 
     - [ ] Try using `scriber-core` to remove 'code noise' from problem 16 
-      jupyter notebook
+      jupyter notebook.
     - [ ] Try updating `kuramoto-benchmark-suite` cli so that it implements `scriber-core/src/cli/..` and 
       @src/frontend/colors.py & @src/frontend/gradients.py personalization functionality
