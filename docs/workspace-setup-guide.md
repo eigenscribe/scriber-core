@@ -635,3 +635,19 @@ The repository layout, testing philosophy, versioning discipline, and packaging 
   - *"The COOP Click Command line interfaces"* — [Web](https://cerfacs.fr/coop/the-coop-click-command-line-interfaces) | Local: [`docs/COOP_blog/The COOP Click Command line interfaces · The COOP Blog.html`](COOP_blog/The%20COOP%20Click%20Command%20line%C2%A0interfaces%20%C2%B7%20The%20COOP%20Blog.html)
   - *"The Coop Cactus branching model"* — [Web](https://cerfacs.fr/coop/the-coop-cactus-branching-model) | Local: [`docs/COOP_blog/The Coop Cactus branching model · The COOP Blog.html`](COOP_blog/The%20Coop%20Cactus%20branching%C2%A0model%20%C2%B7%20The%20COOP%20Blog.html)
   - *"Using the json-SCHEMA standard for scientific applications"* — [Web](https://cerfacs.fr/coop/using-the-json-schema-standard-for-scientific-applications) | Local: [`docs/COOP_blog/Using the json-SCHEMA standard for scientific applications_ · The COOP Blog.html`](COOP_blog/Using%20the%20json-SCHEMA%20standard%20for%20scientific%C2%A0applications_%20%C2%B7%20The%20COOP%20Blog.html)
+
+---
+
+## ✅ COOP Standards Compliance Checklist
+
+This repository adheres to the COOP blog post standards:
+
+- [x] **Repository Structure**: `src/` layout with proper package organization
+- [x] **Packaging**: `pyproject.toml` with `hatchling` backend and PEP 621 declarative metadata
+- [x] **Versioning**: `__version__` in `src/__init__.py` with semantic versioning
+- [x] **Changelog**: `CHANGELOG.md` following Keep a Changelog 1.0.0 standard
+- [x] **Testing**: `tests/unit/` and `tests/func/` subdirectories with `conftest.py`
+- [x] **CLI**: Click-based CLI with thin wrapper pattern
+- [x] **Documentation**: Sphinx-ready structure with Diátaxis framework
+- [x] **CI/CD**: Pytest, ruff linting, and coverage reporting
+- [x] **COOP Blog Archives**: Local HTML copies in `docs/COOP_blog/` for offline reference

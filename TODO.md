@@ -39,10 +39,14 @@
   - [x] @docs/COOP_blog/The COOP Click Command line interfaces · The COOP Blog.html
   - [x] @docs/COOP_blog/Packaging guide · The COOP Blog.html
 ---
-- [ ] Ensure repo follows COOP blog post standards and constraints. Use 
+- [x] Ensure repo follows COOP blog post standards and constraints. Use 
   @docs/COOP_blog/Packaging guide · The COOP Blog.html as you guide and make sure to put COOP blog post .html
   files somewhere according to COOP blog post standards. Update repo workspace documents after completing the task and
   update @TODO.md .
+  - [x] Added `__version__` to `src/__init__.py` for runtime version access.
+  - [x] Reorganized tests directory into `tests/unit/` and `tests/func/` subdirectories.
+  - [x] Created `tests/conftest.py` for shared pytest fixtures.
+  - [x] Verified COOP blog HTML files are properly located in `docs/COOP_blog/`.
 - [ ] Create pypi project named `scriber-core`.
 - [ ] Install `scriber-core` as a dependency in `@.junie/AGENTS.md`.
 ---
