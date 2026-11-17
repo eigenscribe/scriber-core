@@ -1,21 +1,11 @@
-- [x] Update content in `/src/cli/` and `/src/frontend/` so that it exhaustively includes all functionality of 
-  `../the_scriber_experience/cli/messaging.py`.
-  - [x] Fix circular and casing import errors between `src/frontend/__init__.py` and 
-    `src/frontend/the_scriber_experience/cli/` modules to enable clean CLI execution.
+- [x] Migrate messaging functionality from `the_scriber_experience/cli/` to `/src/cli/` and `/src/frontend/`.
+  - [x] Fix circular and casing import errors for clean CLI execution.
   - [x] Create canonical `src/cli/messaging.py` and `src/frontend/messaging.py` with full ANSI 256-color palette, semantic messaging helpers, banner generators, and smoke tests.
   - [x] Re-export all messaging functionality in `src/cli/__init__.py` and `src/frontend/__init__.py`.
   - [x] Add comprehensive test coverage in `tests/test_cli_messaging.py`.
 - [x] Remove `src/frontend/the_scriber_experience/cli/` folder from repo.
-  - **Steps:**
-    1. Update `src/cli/` and `src/frontend` folders so they include all functionality of 
-       [messaging.py](@src/frontend/the_scriber_experience/cli/messaging.py).
-    2. Remove [messaging.py](@src/frontend/the_scriber_experience/cli/messaging.py) from the repo.
-    3. Check that all `src` files that are not contained in `../the_scriber_experience/cli/` all work together so that 
-       their functionality exhaustively includes functionality of the files contained in 
-       `../the_scriber_experience/cli/`.
-    4. Delete `../the_scriber_experience/cli/` from the repository.
-  - [x] Update relative import fallbacks in `src/frontend/the_scriber_experience/cli/main.py` and `gradients.py` to 
-    prevent partially initialized module import failures.
+  - [x] Migrated all messaging functionality to `src/cli/` and `src/frontend/` before deletion.
+  - [x] Deleted `src/frontend/the_scriber_experience/cli/` from the repository.
 - [x] Review `src/cli/` files and @src/frontend/colors.py and @src/frontend/gradients.py .
   - [x] Consistency check.
       - [x] Update @docs/workspace-setup-guide.md so that it keeps `COLOR_PALETTE` in `@src/frontend/colors.py` as the

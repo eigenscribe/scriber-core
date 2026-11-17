@@ -265,7 +265,7 @@ universal = true
 
 ---
 
-## 🤖 5b. AI-Generated Content Disclosure Standard
+## 🤖 4. AI-Generated Content Disclosure Standard
 
 Any AI-generated markdown documentation files created by autonomous agents must follow these disclosure and placement standards:
 
@@ -290,7 +290,7 @@ Any AI-generated markdown documentation files created by autonomous agents must 
 
 ---
 
-## 🧪 4. Testing & Coverage Strategy ("In Medio Stat Virtus")
+## 🧪 5. Testing & Coverage Strategy ("In Medio Stat Virtus")
 
 1. **Framework & Layout**:
    - Use `pytest` for all test execution.
@@ -307,7 +307,7 @@ Any AI-generated markdown documentation files created by autonomous agents must 
 
 ---
 
-## 🔍 5. Linting, Formatting & Code Quality
+## 🔍 6. Linting, Formatting & Code Quality
 
 1. **PEP 8 Compliance & Modern Linters**:
    - Enforce strict PEP 8 compliance using `ruff` (or `pylint` with scores $\ge 9.0/10$).
@@ -319,7 +319,7 @@ Any AI-generated markdown documentation files created by autonomous agents must 
 
 ---
 
-## 📚 6. Documentation Architecture (Sphinx + Read the Docs + Diátaxis)
+## 📚 7. Documentation Architecture (Sphinx + Read the Docs + Diátaxis)
 
 1. **The Diátaxis Documentation Framework**:
    Organize `docs/source/` into four distinct cognitive quadrants:
@@ -357,7 +357,7 @@ Any AI-generated markdown documentation files created by autonomous agents must 
 
 ---
 
-## 💻 7. Command Line Interface (CLI) & Color-Coded Architecture
+## 💻 8. Command Line Interface (CLI) & Color-Coded Architecture
 
 All repositories and packages in Eigenscribe Inc. and Scriber Labs provide ergonomic, self-discovering command line interfaces adhering to the **COOP Click Standard** enhanced with the **Scriber TrueColor Cognitive Load Design System**:
 
@@ -404,7 +404,7 @@ Multi-stop TrueColor gradient text computed via `multi_gradient()` scales color 
 
 ---
 
-## 🔬 8. Scientific Configuration & Parameter Validation with JSON Schema (COOP Standard)
+## 🔬 9. Scientific Configuration & Parameter Validation with JSON Schema (COOP Standard)
 
 Complex numerical simulations, parameter sweeps, and scientific pipelines require robust configuration management. Adhering to the **COOP JSON Schema Standard** (CERFACS), all scientific parameters and input decks (YAML or JSON) must be governed by formal, self-documenting JSON Schemas (Draft 7 / 2020-12).
 
@@ -489,7 +489,7 @@ def validate_input_deck(config: dict[str, Any], schema_path: Path) -> None:
 
 ---
 
-## 🎨 9. Repo-Wide Hex Color Standard & Design Token Architecture
+## 🎨 10. Repo-Wide Hex Color Standard & Design Token Architecture
 
 To ensure strict visual fidelity across CLI TrueColor output, Matplotlib/Seaborn plotting themes, dark-mode Mermaid diagrams, and CSS tokens, `scriber-core` enforces a mandatory repo-wide color standard:
 
@@ -507,7 +507,7 @@ To ensure strict visual fidelity across CLI TrueColor output, Matplotlib/Seaborn
 
 ---
 
-## 🚀 10. Distribution & PyPI Publishing Protocol
+## 🚀 11. Distribution & PyPI Publishing Protocol
 
 For distributable libraries published to PyPI or internal registries, follow this 6-step release workflow adhering to the **COOP Packaging Guide**:
 
@@ -541,7 +541,7 @@ For distributable libraries published to PyPI or internal registries, follow thi
 
 ---
 
-## 🏷️ 11. CI/CD Automation & Status Badges
+## 🏷️ 12. CI/CD Automation & Status Badges
 
 Repositories must implement automated CI pipelines with three core verification stages:
 1. **Testing**: Runs `pytest` across supported Python versions with coverage reporting.

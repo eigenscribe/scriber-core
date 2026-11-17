@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `theme`, `mermaid`, and `doctor` subcommands in `src/cli/main.py`.
 - Re-exported `cli_group` in `src/cli/__init__.py` and `PRESETS` alias in `src/frontend/gradients.py`.
 - New standard in `docs/workspace-setup-guide.md`: mandatory rule prohibiting duplicate file/folder names (case-insensitive and separator-normalized), with exceptions for `__init__.py` and `main.py`.
+- AI-Generated Content Disclosure Standard in `docs/workspace-setup-guide.md` (section 4) — requiring disclosure notices, dedicated `docs/` placement, and README cross-references for AI-generated documentation.
 
 ### Changed
 - Renamed `src/frontend/THE_SCRIBER_EXPERIENCE/` to `src/frontend/the_scriber_experience/` (PEP 8 compliant package naming).
