@@ -141,6 +141,19 @@ GRADIENT_PRESETS: Final[dict[str, tuple[str, ...]]] = {
         COLOR_PALETTE["electric_violet"],
         COLOR_PALETTE["hot_pink"],
     ),
+    # 🩵 Blue Gradient
+    "blue_gradient": (
+        COLOR_PALETTE["vivid_cyan"],
+        COLOR_PALETTE["vivid_sky_blue"],
+        COLOR_PALETTE["eigen_blue"],
+        COLOR_PALETTE["strong_blue"],
+    ),
+    # 💚 Green Gradient
+    "green_gradient": (
+        COLOR_PALETTE["tropical_teal"],
+        COLOR_PALETTE["success_emerald"],
+        COLOR_PALETTE["neon_green"],
+    ),
     # 💜 Purple Gradient: Royal Purple (#7209b7) -> Bright Purple (#a855f7) -> Bright Violet (#7c3aed)
     "purple_gradient": (
         COLOR_PALETTE["royal_purple"],

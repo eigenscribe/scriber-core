@@ -144,18 +144,3 @@ A comprehensive utilitarian review of design token architecture and styling subs
    - Seamless cross-platform support with automatic Windows Virtual Terminal Processing enablement, 24-bit TrueColor rendering, ANSI 256-color fallback, and 16-color degradation.
 5. **Deterministic Testing Rigor**:
    - Built-in smoke testing and 100% automated test suite coverage (`pytest`) guaranteeing zero regressions during package refactoring.
-
-### ⚠️ The Bad (Resolved)
-1. **Historical Key Naming Inconsistencies (Resolved)**:
-   - All kebab-case keys (`ibm-green`, `ibm-cyan`, `junie-lime`) in `COLOR_PALETTE` have been standardized to snake_case (`ibm_green`, `ibm_cyan`, `junie_lime`). The palette now uses exclusively snake_case keys, consistent with the rest of the codebase.
-2. **Residual Hardcoded Hex Literals in Gradient Presets (Resolved)**:
-   - All hardcoded hex literals in `src/frontend/gradients.py` gradient presets (`electric`, `sunset`, `forest`, `midnight`, `aurora`, `cyberpunk`, `purple_gradient`) have been replaced with `COLOR_PALETTE` references, ensuring all gradient stops derive from the single source of truth.
-   - **Note**: `plots/theme.py` and `mermaid/theme.py` retain localized hex constants for Matplotlib rcParams, CSS-in-Mermaid class definitions, and HTML preview templates, where direct hex values are required by the target rendering engines (Matplotlib, Mermaid.js, browser CSS). These are documented design tokens rather than uncoordinated literals.
-3. **Multiple Re-Export Aliases (Resolved)**:
-   - `TSE_GRADIENTS` and `PRESETS` in `gradients.py` have been collapsed into direct aliases of `GRADIENT_PRESETS` (single canonical dict), eliminating the intermediate subset mapping while preserving backward compatibility for legacy callers.
-
-### 🛑 The Ugly (All Resolved)
-1. **Deprecated Duplicate CLI Folders (Resolved)**:
-   - Previously, duplicate CLI implementations existed in both `src/cli/` and `src/frontend/the_scriber_experience/cli/`, causing import shadowing, partially initialized module errors, and fragile relative imports. Consolidating all CLI commands into `src/cli/` and deleting the duplicate resolved these issues.
-2. **Module Casing & Path Collisions (Resolved)**:
-   - The directory was renamed from `THE_SCRIBER_EXPERIENCE` to `the_scriber_experience` (PEP 8 compliant), eliminating the need for `sys.modules` aliasing hooks and ensuring consistent cross-platform importability.

@@ -199,11 +199,21 @@ SCRIBER_CORE_BLOCK_TEXT: Final[str] = r"""
 
 # Semantic Color Token Mapping from COLOR_PALETTE
 HEADER_CATEGORY_COLOR: Final[str] = COLOR_PALETTE["vivid_cyan"]  # #00e8ff - High contrast primary focus
-CMD_NAME_COLOR: Final[str] = COLOR_PALETTE["vivid_sky_blue"]  # #14b5ff - Command identifier
+CMD_NAME_COLOR: Final[str] = COLOR_PALETTE["success_emerald"]  # #10b981 - Command names in help output
 SYNTAX_FLAG_COLOR: Final[str] = COLOR_PALETTE["pale_lilac"]  # #d8b4fe - Syntax and options
 DESC_TEXT_COLOR: Final[str] = COLOR_PALETTE["ice_blue"]  # #b8f6ff - Readable description body
 BORDER_FRAME_COLOR: Final[str] = COLOR_PALETTE["periwinkle_blue"]  # #5280ff - Structural frame borders
 SECTION_BULLET_COLOR: Final[str] = COLOR_PALETTE["sky_cyan"]  # #4cc9f0 - Bullet markers
+
+# Green gradient for CLI help section headers and item names
+CLI_HELP_GREEN_GRADIENT: Final[tuple[str, ...]] = GRADIENT_PRESETS["green_gradient"]  # tropical_teal → success_emerald → neon_green
+
+# Gradient-styled help description for the CLI group (tse-gradient-2)
+CLI_HELP_DESCRIPTION: Final[str] = multi_gradient(
+    "🔱 Eigenscribe CLI (Scriber Core) — Deterministic Workspace Baseline & Palette Tools.",
+    colors=GRADIENT_PRESETS["tse-gradient-2"],
+    bold=True,
+)
 
 # Semantic Badges mapped to COLOR_PALETTE
 BADGE_COLORS: Final[dict[str, str]] = {
@@ -610,13 +620,81 @@ def run_smoke_test() -> bool:
 # -----------------------------------------------------------------------------------------------------------
 
 
-@click.group(invoke_without_command=True)
+class _GreenHelpFormatter(click.HelpFormatter):
+    """Custom HelpFormatter that applies green gradient to section headers."""
+
+    def write_heading(self, heading: str) -> None:
+        """Write a section heading with green gradient styling."""
+        colored_heading = multi_gradient(heading, colors=CLI_HELP_GREEN_GRADIENT, bold=True)
+        self.write(f"{'':>{self.current_indent}}{colored_heading}:\n")
+
+
+class _EigenscribeGroup(click.Group):
+    """Custom Click Group that applies green gradient to help section headers and item names."""
+
+    def get_help(self, ctx: click.Context) -> str:
+        ctx.formatter_class = _GreenHelpFormatter
+        return super().get_help(ctx)
+
+    def format_commands(self, ctx: click.Context, formatter: click.HelpFormatter) -> None:
+        commands = []
+        for subcommand in self.list_commands(ctx):
+            cmd = self.get_command(ctx, subcommand)
+            if cmd is None:
+                continue
+            if cmd.hidden:
+                continue
+            commands.append((subcommand, cmd))
+
+        if len(commands):
+            limit = formatter.width - 6 - max(len(cmd[0]) for cmd in commands)
+            rows = []
+            for subcommand, cmd in commands:
+                help_text = cmd.get_short_help_str(limit)
+                # Apply green gradient to command names
+                colored_name = multi_gradient(subcommand, colors=CLI_HELP_GREEN_GRADIENT, bold=True)
+                rows.append((colored_name, help_text))
+            if rows:
+                with formatter.section("Commands"):
+                    formatter.write_dl(rows)
+
+    def format_options(self, ctx: click.Context, formatter: click.HelpFormatter) -> None:
+        """Override format_options to apply green gradient to option names, then render commands."""
+        from click import Argument
+
+        opts = []
+        for param in self.get_params(ctx):
+            rv = param.get_help_record(ctx)
+            if rv is not None and not isinstance(param, Argument):
+                opts.append(rv)
+
+        if opts:
+            # Apply green gradient to option names
+            colored_opts = []
+            for opt_names, help_text in opts:
+                colored_name = multi_gradient(opt_names, colors=CLI_HELP_GREEN_GRADIENT, bold=True)
+                colored_opts.append((colored_name, help_text))
+            with formatter.section("Options"):
+                formatter.write_dl(colored_opts)
+
+        # Group.format_options calls format_commands after super().format_options()
+        self.format_commands(ctx, formatter)
+
+
+@click.group(
+    cls=_EigenscribeGroup,
+    invoke_without_command=True,
+    help=CLI_HELP_DESCRIPTION,
+    epilog=multi_gradient(
+        "💚 Powered by Eigenscribe — Deterministic Workspace & Palette Suite",
+        colors=GRADIENT_PRESETS["tse-gradient-2"],
+        bold=True,
+    ),
+)
 @click.option("--version", "-v", is_flag=True, help="Display Scriber Core / Eigenscribe CLI version.")
 @click.pass_context
 def cli(ctx: click.Context, version: bool) -> None:
-    """
-    🔱 Eigenscribe CLI (Scriber Core) — Deterministic Workspace Baseline & Palette Tools.
-    """
+    """Eigenscribe CLI — Deterministic Workspace Baseline & Palette Tools."""
     if version:
         version_str = f"scriber-core v{CLI_VERSION} (eigenscribe v{CLI_VERSION})"
         click.echo(multi_gradient(version_str, colors=PRIMARY_GRADIENT, bold=True))
