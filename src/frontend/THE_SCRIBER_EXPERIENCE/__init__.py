@@ -6,8 +6,8 @@ Unifies style design tokens, terminal CLI utilities, and scientific plot themes.
 
 from __future__ import annotations
 
-from . import cli, mermaid, plots, style
-from .cli import (
+from .. import messaging as cli
+from ..messaging import (
     EIGENSCRIBE_PALETTE,
     ansi_256,
     cli_banner,
@@ -21,6 +21,7 @@ from .cli import (
     cli_warning,
     supports_256_color,
 )
+from . import mermaid, plots, style
 from .mermaid import (
     EIGENSCRIBE_MERMAID_CLASSES,
     EIGENSCRIBE_MERMAID_THEME_VARIABLES,

@@ -72,6 +72,7 @@ __all__: list[str] = [
     "GOLDEN_RATIO",
     "GOLDEN_RATIO_INVERSE",
     "GRADIENT_PRESETS",
+    "PRESETS",
     "PHI",
     "TSE_GRADIENTS",
     "compute_golden_ratio_stop_positions",
@@ -131,6 +132,8 @@ TSE_GRADIENTS: Final[dict[str, tuple[str, ...]]] = {
     "aurora": GRADIENT_PRESETS["aurora"],
     "cyberpunk": GRADIENT_PRESETS["cyberpunk"],
 }
+
+PRESETS: Final[dict[str, tuple[str, ...]]] = GRADIENT_PRESETS
 
 
 # -----------------------------------------------------------------------------------------------------------

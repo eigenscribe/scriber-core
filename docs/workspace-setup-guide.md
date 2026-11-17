@@ -301,7 +301,7 @@ To ensure strict visual fidelity across CLI TrueColor output, Matplotlib/Seaborn
 1. **Single Source of Truth (`COLOR_PALETTE`)**:
    - `COLOR_PALETTE` in `src/frontend/colors.py` is the canonical dictionary for all named color variables across the workspace.
 2. **Repo-Wide Hex Constraint**:
-   - **All color variables must be converted to / defined as canonical 6-digit hex format (`#rrggbb`)**, or reference valid key names from `COLOR_PALETTE` in `src/frontend/colors.py`.
+   - **Constraint:** All color variables must be defined in a way that imports and uses the key names from `COLOR_PALETTE` in `src/frontend/colors.py` (and/or converted into canonical hex format (`#rrggbb`)).
    - Never define raw or arbitrary RGB integer triplets across downstream modules without a canonical hex reference.
 3. **Deterministic RGB Normalization**:
    - The `hex_to_rgb(hex_code)` utility in `src/frontend/colors.py` provides deterministic conversion from hex strings to `(R, G, B)` integer tuples for ANSI escape sequence generation (`\033[38;2;R;G;Bm`).

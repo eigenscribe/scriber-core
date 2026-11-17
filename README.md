@@ -29,12 +29,14 @@ Welcome to the canonical environment index for autonomous development agents. Th
 │   │   ├── __init__.py               # CLI package exports & public API
 │   │   ├── __main__.py               # Package execution entry point (`python -m cli`)
 │   │   ├── main.py                   # Command router, gradient banners, and command catalog
+│   │   ├── messaging.py              # Semantic status alerts, ANSI 256 palette & banner generator
 │   │   ├── colors_table.py           # COLOR_PALETTE table renderer with TrueColor swatches
 │   │   └── colors.py                 # Direct CLI wrapper for palette inspection
 │   └── frontend/                     # 🎨 Frontend, design tokens & styling subsystem
 │       ├── __init__.py
 │       ├── colors.py                 # Canonical named color palette (COLOR_PALETTE), RGB, hex_to_rgb
 │       ├── gradients.py              # Golden ratio TrueColor multi-stop gradient engine (GRADIENT_PRESETS)
+│       ├── messaging.py              # Terminal messaging & ANSI 256-color palette engine
 │       └── the_scriber_experience/   # 🔱 The Scriber Experience (TSE) styling subsystems
 │           ├── __init__.py
 │           ├── style/                # Design tokens, TSE palettes & gradient presets

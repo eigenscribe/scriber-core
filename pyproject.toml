@@ -40,7 +40,7 @@ dependencies = [
 ]
 
 [project.scripts]
-eigenscribe = "frontend.the_scriber_experience.cli.main:main"
+eigenscribe = "cli.main:main"
 
 [project.optional-dependencies]
 dev = [

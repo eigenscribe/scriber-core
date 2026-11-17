@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import sys
 
-from . import THE_SCRIBER_EXPERIENCE, colors, gradients
+from . import THE_SCRIBER_EXPERIENCE, colors, gradients, messaging
 from .colors import (
     COLOR_PALETTE,
     GOLDEN_RATIO,
@@ -33,19 +33,10 @@ from .gradients import (
     compute_golden_ratio_stop_positions,
     multi_gradient,
 )
-from .THE_SCRIBER_EXPERIENCE import (
-    CLI_COLORS,
-    EIGEN_COLORS,
-    EIGEN_LABEL_COLORS,
-    EIGEN_NODE_COLORS,
+from .messaging import (
     EIGENSCRIBE_PALETTE,
-    PRESETS,
-    SEMANTIC_COLORS,
-    TSE_COLORS,
+    STYLE_MAP,
     ansi_256,
-    apply_cosmic_theme,
-    apply_theme,
-    cli,
     cli_banner,
     cli_echo,
     cli_error,
@@ -55,6 +46,24 @@ from .THE_SCRIBER_EXPERIENCE import (
     cli_rule,
     cli_success,
     cli_warning,
+    render_banner,
+    render_echo,
+    render_message,
+    render_rule,
+    supports_256_color,
+    run_smoke_test as run_messaging_smoke_test,
+)
+from .THE_SCRIBER_EXPERIENCE import (
+    CLI_COLORS,
+    EIGEN_COLORS,
+    EIGEN_LABEL_COLORS,
+    EIGEN_NODE_COLORS,
+    PRESETS,
+    SEMANTIC_COLORS,
+    TSE_COLORS,
+    apply_cosmic_theme,
+    apply_theme,
+    cli,
     create_eigenscribe_colormap,
     create_plotly_base_figure,
     get_eigenscribe_rcparams,
@@ -63,7 +72,6 @@ from .THE_SCRIBER_EXPERIENCE import (
     plots,
     register_colormaps,
     style,
-    supports_256_color,
 )
 
 # Export backward-compatibility and aliases
@@ -83,6 +91,7 @@ __all__: list[str] = [
     # Subpackages
     "colors",
     "gradients",
+    "messaging",
     "the_scriber_experience",
     "THE_SCRIBER_EXPERIENCE",
     "style",
@@ -109,6 +118,7 @@ __all__: list[str] = [
     "EIGEN_NODE_COLORS",
     "EIGEN_LABEL_COLORS",
     "EIGENSCRIBE_PALETTE",
+    "STYLE_MAP",
     # Gradients & Rendering
     "GRADIENT_PRESETS",
     "TSE_GRADIENTS",
@@ -125,8 +135,13 @@ __all__: list[str] = [
     "cli_warning",
     "cli_error",
     "cli_highlight",
+    "render_message",
+    "render_echo",
+    "render_rule",
+    "render_banner",
     "ansi_256",
     "supports_256_color",
+    "run_messaging_smoke_test",
     # Plots
     "apply_theme",
     "apply_cosmic_theme",

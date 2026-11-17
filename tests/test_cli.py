@@ -23,7 +23,7 @@ from cli import (
     run_smoke_test,
 )
 from cli.colors_table import cli as colors_table_cli
-from frontend.the_scriber_experience.cli.main import cli_group
+from cli.main import cli_group
 
 
 @pytest.fixture
