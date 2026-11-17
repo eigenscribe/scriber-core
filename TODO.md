@@ -1,5 +1,6 @@
 - [ ] Update content in `/src/cli/` and `/src/frontend/` so that it exhaustively includes all functionality of 
   `../THE_SCRIBER_EXPERIENCE/cli/messaging.py`.
+  - [x] Fix circular and casing import errors between `src/frontend/__init__.py` and `src/frontend/THE_SCRIBER_EXPERIENCE/cli/` modules to enable clean CLI execution.
 - [ ] Remove `src/frontend/THE_SCRIBER_EXPERIENCE/cli/` folder from repo.
   - **Steps:**
     1. Update `src/cli/` and `src/frontend` folders so they include all functionality of 
@@ -8,7 +9,8 @@
     3. Check that all `src` files that are not contained in `../THE_SCRIBER_EXPERIENCE/cli/` all work together so that 
        their functionality exhaustively includes functionality of the files contained in 
        `../THE_SCRIBER_EXPERIENCE/cli/`.
-    4. Delete `../THE_SCRIBER_EXPERIENCE/cli/` from the repository. 
+    4. Delete `../THE_SCRIBER_EXPERIENCE/cli/` from the repository.
+  - [x] Update relative import fallbacks in `src/frontend/THE_SCRIBER_EXPERIENCE/cli/main.py` and `gradients.py` to prevent partially initialized module import failures.
 - [ ] Review `src/cli/` files and @src/frontend/colors.py and @src/frontend/gradients.py .
   - [ ] Consistency check.
       - [ ] Update @docs/workspace-setup-guide.md so that it keeps `COLOR_PALLETE` in `@src/frontend/colors.py` as the
@@ -22,7 +24,7 @@
 - [ ] Implement any changes based on consistency check.
 ---
 - [ ] Update @README.md to match the workspace setup guide.
-- [ ] Update @docs/workspace-setup-guide.md and all other relevant files (e.g., @.junie/AGENTS.md) so they exhaustively
+- [x] Update @docs/workspace-setup-guide.md and all other relevant files (e.g., @.junie/AGENTS.md) so they exhaustively
   incorporate standards and constraints from COOP blogs on cactus-style packaging and cli.
 - [ ] Update repository to follow cactus-style packaging and cli.
 ---
@@ -34,7 +36,7 @@
      `@src/frontend/gradients.py`.
   - [ ] Add preview functionality to `@src/cli`:
     - [ ] Exhaustive preview of `scriber-core` presets...
-      - [ ] Colors defined in `COLOR_PALLETTE` as previewable colors.
+      - [x] Colors defined in `COLOR_PALLETTE` as previewable colors.
           - => Prints gradient squares OR prints table (see @src/cli/colors_table.py) of `COLOR_PALLETTE` colors.
       - [ ] Gradients defined in `@src/frontend/gradients.py` as previewable gradients.
           - => Prints gradient of squares OR prints table of colors (referenced from @src/frontend/colors.py) 

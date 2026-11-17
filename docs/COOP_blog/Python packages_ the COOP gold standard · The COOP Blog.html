@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://cerfacs.fr/coop/coop-standard-on-python-pkges -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Antoine Dauptain">
+
+        <meta property="og:type" content="article">
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="standards, versioning, pytho, Handbook, Pitch, ">
+
+<meta property="og:title" content="Python packages: the COOP gold&nbsp;standard ">
+<meta property="og:url" content="https://cerfacs.fr/coop/coop-standard-on-python-pkges">
+<meta property="og:description" content="Gold standard for Python packages curated at COOP">
+<meta property="og:site_name" content="The COOP Blog">
+<meta property="og:article:author" content="Antoine Dauptain">
+<meta property="og:article:published_time" content="2022-02-21T00:00:00+01:00">
+<meta name="twitter:title" content="Python packages: the COOP gold&nbsp;standard ">
+<meta name="twitter:description" content="Gold standard for Python packages curated at COOP">
+
+        <title>Python packages: the COOP gold&nbsp;standard  · The COOP Blog
+</title>
+        <link href="./Python packages_ the COOP gold&nbsp;standard · The COOP Blog_files/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="./Python packages_ the COOP gold&nbsp;standard · The COOP Blog_files/elegant.prod.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="./Python packages_ the COOP gold&nbsp;standard · The COOP Blog_files/custom.css" media="screen">
+
+        <link rel="shortcut icon" href="https://cerfacs.fr/coop/theme/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="https://cerfacs.fr/coop/theme/images/apple-touch-icon-152x152.png" type="image/png">
+        <link rel="apple-touch-icon" href="https://cerfacs.fr/coop/theme/images/apple-touch-icon.png" type="image/png">
+        <link rel="apple-touch-icon" sizes="57x57" href="https://cerfacs.fr/coop/theme/images/apple-touch-icon-57x57.png" type="image/png">
+        <link rel="apple-touch-icon" sizes="72x72" href="https://cerfacs.fr/coop/theme/images/apple-touch-icon-72x72.png" type="image/png">
+        <link rel="apple-touch-icon" sizes="76x76" href="https://cerfacs.fr/coop/theme/images/apple-touch-icon-76x76.png" type="image/png">
+        <link rel="apple-touch-icon" sizes="114x114" href="https://cerfacs.fr/coop/theme/images/apple-touch-icon-114x114.png" type="image/png">
+        <link rel="apple-touch-icon" sizes="120x120" href="https://cerfacs.fr/coop/theme/images/apple-touch-icon-120x120.png" type="image/png">
+        <link rel="apple-touch-icon" sizes="144x144" href="https://cerfacs.fr/coop/theme/images/apple-touch-icon-144x144.png" type="image/png">
+        <link rel="apple-touch-icon" sizes="152x152" href="https://cerfacs.fr/coop/theme/images/apple-touch-icon-152x152.png" type="image/png">
+        <link rel="apple-touch-icon" sizes="152x152" href="https://cerfacs.fr/coop/theme/images/apple-touch-icon-180x180.png" type="image/png">
+<!-- Old syle analytics...? -->
+<!--<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'G-QXJPD7NPPJ', 'auto');
+    ga('send', 'pageview');
+</script> -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-QXJPD7NPPJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QXJPD7NPPJ');
+</script>
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://cerfacs.fr/coop/"><span class="site-name">The COOP Blog</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li>
+                                    <a href="https://cerfacs.fr/coop">Home</a>
+                                </li>
+                                <li><a href="https://cerfacs.fr/coop/about">About</a></li>
+                                <li><a href="https://cerfacs.fr/coop/join-us">Join&nbsp;us!</a></li>
+                                <li><a href="https://cerfacs.fr/coop/categories">Categories</a></li>
+                                <li><a href="https://cerfacs.fr/coop/tags">Tags</a></li>
+                                <li><a href="https://cerfacs.fr/coop/archives">Archives</a></li>
+                                <li><form class="navbar-search" action="https://cerfacs.fr/coop/search" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope="">
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges">
+                Python packages: the <span class="caps">COOP</span> gold&nbsp;standard
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <div class="toc">
+<ul>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#versioning">Versioning</a><ul>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#cactus-model">Cactus&nbsp;Model</a></li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#changelog">Changelog</a></li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#open-source-mirrored-packages">Open-source mirrored&nbsp;packages</a></li>
+</ul>
+</li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#repository-structure">Repository Structure</a><ul>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#setup">Setup</a></li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#git-ignore">Git&nbsp;ignore</a></li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#srcnameofpkg-folder">src/nameofpkg/&nbsp;folder</a></li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#readmechangelog-license"><span class="caps">README</span>,<span class="caps">CHANGELOG</span>, <span class="caps">LICENSE</span></a></li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#version-number">Version&nbsp;number</a></li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#dockerfile-optional">Dockerfile&nbsp;(Optional)</a></li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#makefile-optional">Makefile&nbsp;(Optional)</a></li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#third-party-conf-file-optional">Third party conf. file&nbsp;(optional)</a></li>
+</ul>
+</li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#testing">Testing</a></li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#linting">Linting</a></li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#documentation">Documentation</a><ul>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#doc-structure">Doc&nbsp;structure</a></li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#add-a-package-to-read-the-docs">Add a package to Read the&nbsp;Docs</a></li>
+</ul>
+</li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#installation">Installation</a><ul>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#open-source-packages">Open-source&nbsp;packages</a></li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#pushing-to-pypi">Pushing to&nbsp;PyPI</a></li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#limited-diffusion-packages">Limited diffusion&nbsp;packages</a></li>
+</ul>
+</li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#continuous-integration">Continuous integration</a><ul>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#add-badges">Add&nbsp;badges</a></li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#ci-troubleshooting"><span class="caps">CI</span>&nbsp;troubleshooting</a></li>
+</ul>
+</li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#command-line-interface">Command Line&nbsp;Interface</a></li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#concluding-remarks">Concluding&nbsp;remarks</a></li>
+</ul>
+</div>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+            
+            <!-- markdownlint-disable MD001 -->
+
+<p><img alt="standard" src="./Python packages_ the COOP gold&nbsp;standard · The COOP Blog_files/photo-1522071820081-009f0129c71c"></p>
+<p><em>Photo <a href="https://unsplash.com/@anniespratt">Annie Spratt</a> on <a href="https://unsplash.com/">Unsplash</a></em></p>
+<p>Here is our reference on how we handle packaging at <span class="caps">COOP</span>.
+Most - but not all - of our code is done in Python. Most - but not all - of our code is&nbsp;Open-source.</p>
+<p>We try to stay close to the <a href="https://docs.python-guide.org/writing/structure/">Structuring Your Project</a> and <a href="https://packaging.python.org/tutorials/packaging-projects/#packaging-python-projects">Packaging Python Project</a> guidelines. Some elements come also from the Python Packaging Authority: <a href="https://github.com/pypa/sampleproject">Github sample project</a>.</p>
+<h2 id="versioning">Versioning<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#versioning" title="Permanent link"> </a></h2>
+<h5 id="cactus-model">Cactus Model<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#cactus-model" title="Permanent link"> </a></h5>
+<p>Our packages are co-developed using <a href="https://en.wikipedia.org/wiki/Git">Git</a>, preferably on the internal GitLab server.
+We follow the <a href="https://semver.org/spec/v2.0.0-rc.2.html">semantic versioning standard</a> using the <a href="https://cerfacs.fr/coop/coop-cactus-model"><span class="caps">COOP</span>-Cactus model</a>. There is a <a href="https://cerfacs.fr/coop/about-non-regressions">full post on the use of semver</a> to explain why we do it this&nbsp;way.</p>
+<blockquote>
+<p>In a nutshell, in semantic versioning, package version is given by three numbers: major revision, minor revision, and bugfix (e.g. <code>1.3.2</code>). The cactus model is a single main branch for developments, because our codes are usually small (&lt;5000&nbsp;lines)</p>
+</blockquote>
+<h5 id="changelog">Changelog<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#changelog" title="Permanent link"> </a></h5>
+<p>Keeping the <span class="caps">CHANGELOG</span> is mandatory. Here we stick to the reference <a href="https://keepachangelog.com/en/1.0.0/">keep a changelog</a>.</p>
+<h5 id="open-source-mirrored-packages">Open-source mirrored packages<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#open-source-mirrored-packages" title="Permanent link"> </a></h5>
+<p>Our <strong>open-source packages</strong> are mirrored in <a href="https://gitlab.com/cerfacs">Gitlab</a>. The option to mirror a repo can be found under <code>Settings -&gt; Repository -&gt; Mirroring repositories</code> (internal note: ask a senior to create the gitlab mirror to avoid future credentials issues). Mirroring a repo allows external users to easily access the code and to host the documentation in <a href="https://readthedocs.org/">Read the Docs</a>.</p>
+<h2 id="repository-structure">Repository Structure<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#repository-structure" title="Permanent link"> </a></h2>
+<p>The structure looks&nbsp;like:</p>
+<div class="highlight"><pre><span></span>.
+├── LICENSE
+├── MANIFEST.in
+├── README.md
+├── CHANGELOG.md
+├── .gitlab-ci.yml
+├── .readthedocs.yaml
+├── Dockerfile
+├── Makefile
+├── docs
+│   ├── _build &lt;-- generated by Sphinx
+│   ├── source
+│   │   ├── conf.py
+│   │   ├── index.rst
+│   │   ├── redirect.rst
+│   │   ├── api
+│   │   │   └── (...) &lt;-- generated by Sphinx
+│   │   ├── tutorials
+│   │   │   └── *.rst, *.md, *.ipynb
+│   │   ├── howto
+│   │   │   └── *.rst, *.md, *.ipynb
+│   │   └── explanations
+│   │       └── *.rst, *.md, *.ipynb
+│   ├── Makefile
+│   ├── make.bat
+├── setup.py
+├── setup.cfg
+├── src
+│  ├── nameofpkg
+│  │  ├── __init__.py
+│  │  ├── cli.py
+│  │  └── *.py
+└── tests
+    ├── conftest.py
+    ├── unit
+    │  └── test_*.py
+    └── func
+       └── test_*.py
+</pre></div>
+<h5 id="setup">Setup<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#setup" title="Permanent link"> </a></h5>
+<p>We use <code>setup.cfg</code> instead of a dynamic <code>setup.py</code> approach. The main reason supporting this choice is the declarative approach of <code>setup.cfg</code>. It assumes the existence of <code>MANIFEST.in</code> (controlled via <code>include_package_data = True</code>). The alternative is to keep <code>include_package_data = False</code> and add the following entry (in this example, the <code>yaml</code> files are shipped alongside the&nbsp;code):</p>
+<div class="highlight"><pre><span></span><span class="k">[options.package_data]</span>
+<span class="na">*</span> <span class="o">=</span> <span class="s">*.yaml</span>
+</pre></div>
+<p><code>MANIFEST.in</code> tells what should be shipped alongside the code (e.g. <code>yaml</code> files). Typically it only contains one line (<code>graft src</code>).</p>
+<p>We do not use a <code>requirements.txt</code>, since the <code>setup.cfg</code> deals with them. This not only applies to the package install requirements, but also to docs and test requirements, which can be set via <code>options.extra_requires</code> (in the installation process, the requirements to install can be specified via square brackets e.g. <code>pip install opentea [docs]</code>).</p>
+<h5 id="git-ignore">Git ignore<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#git-ignore" title="Permanent link"> </a></h5>
+<p>The <code>.gitignore</code> is&nbsp;typically:</p>
+<div class="highlight"><pre><span></span>*.pyc
+*.pvsm
+*.png
+*.pdf
+*.h5
+*.xmf
+*.swp
+*.idea*
+.coverage
+.eggs
+.DS_Store
+arnica.egg-info
+arnica.egg*
+build
+dist
+docs/_build/
+</pre></div>
+<p>Indeed we do not store builds either for the package or its&nbsp;documentation.</p>
+<h5 id="srcnameofpkg-folder"><code>src/nameofpkg/</code> folder<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#srcnameofpkg-folder" title="Permanent link"> </a></h5>
+<p>We use <code>/src/nameofpkg/</code> folder, even though this solution diverges from the Python guide and many others sources. Besides being backed up by <a href="https://github.com/pypa/sampleproject">Python Packaging Authority sample project</a>, it <strong>simplifies a lot</strong> many <span class="caps">CI</span> and shipping operations. A simple example is the running of tests from the repo’s root: without this structure, is <code>pytest</code> using directly the source code or an installed version? In other words, this structure creates <a href="https://blog.ionelmc.ro/2014/05/25/python-packaging/#the-structure">“import parity”</a>.</p>
+<h5 id="readmechangelog-license"><span class="caps">README</span>,<span class="caps">CHANGELOG</span>, <span class="caps">LICENSE</span><a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#readmechangelog-license" title="Permanent link"> </a></h5>
+<p>The <code>README</code> is compulsory. It describes the objective of the package, the way to install it, a very simple usage to illustrate, some acknowledgements with authors and contributors and funding. It can be a <code>md</code> or <code>rst</code> file (both are well rendered by gitlab). If the <code>README</code> is a <code>rst</code> file, then it can be used directly in the docs without a link file (via <code>.. include:: ../../README.rst</code>).</p>
+<p>The <code>CHANGELOG</code> is compulsory, and comply to the <a href="https://keepachangelog.com/en/1.0.0/">keep-a-changelog standard</a>.</p>
+<p>A <code>LICENSE</code> is compulsory. It is usually a <span class="caps">LGPL</span> for international projects and Cecill-B for french projects (a full post on the topic <a href="https://cerfacs.fr/coop/license_at_cerfacs">licenses at <span class="caps">CERFACS</span></a>).</p>
+<h5 id="version-number">Version number<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#version-number" title="Permanent link"> </a></h5>
+<p>The version is accessible as expected in a Python package: <code>package_name.__version__</code>. This is accomplished by creating a <code>__version__</code> variable in the main <code>__init__.py</code> file.</p>
+<h5 id="dockerfile-optional">Dockerfile (Optional)<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#dockerfile-optional" title="Permanent link"> </a></h5>
+<p>Most of our packages do not require a <code>Dockerfile</code> as they are simply installed via <code>pip</code>. On the other hand, e.g. <a href="https://pypi.org/project/pyhip/"><code>pyhip</code></a> relies in <a href="https://www.docker.com/">docker</a> to simplify its portability, as it is mainly written in&nbsp;C.</p>
+<h5 id="makefile-optional">Makefile (Optional)<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#makefile-optional" title="Permanent link"> </a></h5>
+<p>A typical <code>Makefile</code> looks&nbsp;like:</p>
+<div class="highlight"><pre><span></span>doc:
+    rm -r docs/_build
+    <span class="nb">cd</span> docs <span class="o">&amp;&amp;</span> make html
+
+test:
+    pytest --cov<span class="o">=</span>nobvisual
+
+lint:
+    pylint src/nobvisual
+
+wheel:
+    rm -rf build
+    rm -rf dist
+    python setup.py sdist bdist_wheel
+
+upload_test:
+    twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
+upload:
+    twine upload dist/*
+</pre></div>
+<h5 id="third-party-conf-file-optional">Third party conf. file (optional)<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#third-party-conf-file-optional" title="Permanent link"> </a></h5>
+<p><code>.gitlab-ci.yml</code> and <code>.readthedocs.yaml</code> contain configurations for GitLab <span class="caps">CI</span> pipelines (which are triggered every commit) and Read the Docs,&nbsp;respectively.</p>
+<h2 id="testing">Testing<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#testing" title="Permanent link"> </a></h2>
+<p>We use <a href="https://docs.pytest.org/en/latest/">pytest</a> for both unitary and functional tests.  Tests are there to <strong>reduce the charge of refactoring!</strong> (read more on <a href="https://verraes.net/2014/12/how-much-testing-is-too-much/">how much testing is too much?</a>).</p>
+<blockquote>
+<p><em>In medio stat virtus</em>: Having a good coverage is good, but rushing to 100% can backfire nastily. Too much redundant, functional tests without a proper first layer of unitary tests will augment the workload during&nbsp;refactoring.</p>
+</blockquote>
+<h2 id="linting">Linting<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#linting" title="Permanent link"> </a></h2>
+<p>We apply the <a href="https://www.python.org/dev/peps/pep-0008/"><span class="caps">PEP</span> 8</a> standard, with a minimum of 9 over 10. When we are tired, we use <a href="https://pypi.org/project/black/">black</a> to get rid of the small <code>pylint</code> stuff.</p>
+<blockquote>
+<p><em>In medio stat virtus</em>: Having a good linting is good, but rushing to 10 can backfire nastily. We had examples such as <code>tekigo/refine</code> where the <span class="caps">API</span> became unreadable to stay below 5 args. The refactoring was&nbsp;hard.</p>
+</blockquote>
+<h2 id="documentation">Documentation<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#documentation" title="Permanent link"> </a></h2>
+<p>The code is documented using docstrings compatible with <a href="https://www.python.org/dev/peps/pep-0008/"><span class="caps">PEP</span> 8</a>. The documentation is generated with <a href="https://www.sphinx-doc.org/en/master/"><code>sphinx</code></a>. A full post on <a href="https://cerfacs.fr/coop/python-docs">documenting Python code</a>.</p>
+<p>Do not add internal links to the docs (or <code>README</code> file), as they will not work for external users. This is specially relevant for links to images: the images will not render in e.g. <code>PyPI</code>.</p>
+<p>A common (but dirty) way to avoid links is to ask, in <code>conf.py</code>, to copy <span class="caps">README</span>.md in docs at the documentation&nbsp;generation.</p>
+<h5 id="doc-structure">Doc structure<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#doc-structure" title="Permanent link"> </a></h5>
+<p>The docs structure contains a <code>source</code> folder with configuration and content files (<code>rst</code>, <code>md</code>, or <code>ipynb</code>), a <code>_build</code> folder containing the built html files (<strong>this folder should not be committed</strong>, as it is generated automatically), and <code>sphinx</code> makefiles (<code>Makefile</code> and <code>make.bat</code>), which are an output of <code>sphinx-quickstart</code>. <code>changelog_link.md</code> and <code>readme_link.md</code> allow to add the <code>CHANGELOG</code> and <code>README</code> contents directly to the docs without the need of having duplicated files (this requires <a href="https://pypi.org/project/myst-parser/"><code>myst_parser</code></a>). The folder <code>API/_generated</code> should not be committed either, as it is also the output of an automatic&nbsp;process.</p>
+<h5 id="add-a-package-to-read-the-docs">Add a package to Read the Docs<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#add-a-package-to-read-the-docs" title="Permanent link"> </a></h5>
+<p>To add a project to Read the Docs, simply go to their website and import the project (internal note: ask a senior the credentials to COOPTeam-<span class="caps">CERFACS</span>&nbsp;account).</p>
+<p>A typical configuration file looks like this (more details <a href="https://docs.readthedocs.io/en/stable/config-file/v2.html">in the Read the Docs configuration documentation</a>):</p>
+<div class="highlight"><pre><span></span><span class="c1"># Required</span>
+<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+
+<span class="c1"># Build documentation in the docs/ directory with Sphinx</span>
+<span class="nt">sphinx</span><span class="p">:</span>
+   <span class="nt">configuration</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">docs/source/conf.py</span>
+
+<span class="nt">build</span><span class="p">:</span>
+  <span class="nt">apt_packages</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pandoc</span>
+
+<span class="c1"># Optionally set the version of Python and requirements required to build your docs</span>
+<span class="nt">python</span><span class="p">:</span>
+   <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3.8</span>
+   <span class="nt">install</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">method</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pip</span>
+      <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">.</span>
+      <span class="nt">extra_requirements</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">docs</span>
+</pre></div>
+<h2 id="installation">Installation<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#installation" title="Permanent link"> </a></h2>
+<p>Installation differs between open-source and limited-diffusion&nbsp;packages.</p>
+<h5 id="open-source-packages">Open-source packages<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#open-source-packages" title="Permanent link"> </a></h5>
+<p>These packages can be used as&nbsp;stand-alone.</p>
+<p>We upload our packages on <a href="https://pypi.org/">PyPI</a>. Since most of these pages is set from the <code>setup.cfg</code>, we must carefully choose our keywords, authors, website, and so&nbsp;on.</p>
+<p>A typical <code>setup.cfg</code> is the following (the docs of <a href="https://setuptools.pypa.io/en/latest/userguide/declarative_config.html"><code>setuptools</code></a>):</p>
+<div class="highlight"><pre><span></span><span class="p p-Indicator">[</span><span class="nv">metadata</span><span class="p p-Indicator">]</span>
+<span class="l l-Scalar l-Scalar-Plain">name = OpenTEA</span>
+<span class="l l-Scalar l-Scalar-Plain">version = attr</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">opentea.__version__</span>
+<span class="l l-Scalar l-Scalar-Plain">author = CoopTeam-CERFACS</span>
+<span class="l l-Scalar l-Scalar-Plain">author_email = coop@cerfacs.com</span>
+<span class="l l-Scalar l-Scalar-Plain">description = Graphical User Interface engine based upon Schema</span>
+<span class="nt">long_description = file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">README.md</span>
+<span class="l l-Scalar l-Scalar-Plain">long_description_content_type = text/markdown</span>
+<span class="l l-Scalar l-Scalar-Plain">url = https://gitlab.com/cerfacs/opentea3</span>
+<span class="l l-Scalar l-Scalar-Plain">project_urls =</span>
+    <span class="l l-Scalar l-Scalar-Plain">Homepage = https://gitlab.com/cerfacs/opentea3</span>
+    <span class="l l-Scalar l-Scalar-Plain">Documentation = https://opentea.readthedocs.io/en/latest/</span>
+    <span class="l l-Scalar l-Scalar-Plain">Bug Tracker = https://gitlab.com/cerfacs/opentea3/-/issues</span>
+<span class="l l-Scalar l-Scalar-Plain">classifiers =</span>
+    <span class="l l-Scalar l-Scalar-Plain">Programming Language :</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Python :</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">3.7</span>
+    <span class="l l-Scalar l-Scalar-Plain">Programming Language :</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Python :</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">3.8</span>
+    <span class="l l-Scalar l-Scalar-Plain">Programming Language :</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Python :</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">3.9</span>
+    <span class="l l-Scalar l-Scalar-Plain">License :</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">CeCILL-B Free Software License Agreement (CECILL-B)</span>
+<span class="l l-Scalar l-Scalar-Plain">keywords =</span>
+    <span class="l l-Scalar l-Scalar-Plain">GUI</span>
+    <span class="l l-Scalar l-Scalar-Plain">SCHEMA</span>
+    <span class="l l-Scalar l-Scalar-Plain">Tkinter</span>
+
+<span class="p p-Indicator">[</span><span class="nv">options</span><span class="p p-Indicator">]</span>
+<span class="l l-Scalar l-Scalar-Plain">package_dir =</span>
+    <span class="l l-Scalar l-Scalar-Plain">= src</span>
+<span class="nt">packages = find</span><span class="p">:</span>
+<span class="l l-Scalar l-Scalar-Plain">python_requires = &gt;= 3.7</span>
+<span class="l l-Scalar l-Scalar-Plain">install_requires =</span>
+    <span class="l l-Scalar l-Scalar-Plain">numpy&gt;=1.16.2</span>
+    <span class="l l-Scalar l-Scalar-Plain">h5py&gt;=2.6.0</span>
+    <span class="l l-Scalar l-Scalar-Plain">jsonschema</span>
+    <span class="l l-Scalar l-Scalar-Plain">markdown</span>
+    <span class="l l-Scalar l-Scalar-Plain">Pillow&gt;=5.4.1</span>
+    <span class="l l-Scalar l-Scalar-Plain">PyYAML&gt;=3.13</span>
+    <span class="l l-Scalar l-Scalar-Plain">nob&gt;=0.4.1</span>
+    <span class="l l-Scalar l-Scalar-Plain">nobvisual</span>
+    <span class="l l-Scalar l-Scalar-Plain">requests</span>
+    <span class="l l-Scalar l-Scalar-Plain">click</span>
+    <span class="l l-Scalar l-Scalar-Plain">tiny_3d_engine&gt;=0.2</span>
+<span class="l l-Scalar l-Scalar-Plain">zip_safe = False</span>
+<span class="l l-Scalar l-Scalar-Plain">include_package_data = True</span>
+
+<span class="p p-Indicator">[</span><span class="nv">options.packages.find</span><span class="p p-Indicator">]</span>
+<span class="l l-Scalar l-Scalar-Plain">where = src</span>
+
+<span class="p p-Indicator">[</span><span class="nv">options.entry_points</span><span class="p p-Indicator">]</span>
+<span class="l l-Scalar l-Scalar-Plain">console_scripts =</span>
+    <span class="l l-Scalar l-Scalar-Plain">opentea3 = opentea.cli:main_cli</span>
+
+<span class="p p-Indicator">[</span><span class="nv">options.extras_require</span><span class="p p-Indicator">]</span>
+<span class="l l-Scalar l-Scalar-Plain">tests=</span>
+    <span class="l l-Scalar l-Scalar-Plain">pytest</span>
+<span class="l l-Scalar l-Scalar-Plain">docs =</span>
+    <span class="l l-Scalar l-Scalar-Plain">myst-parser</span>
+    <span class="l l-Scalar l-Scalar-Plain">sphinx_rtd_theme</span>
+</pre></div>
+<h5 id="pushing-to-pypi">Pushing to PyPI<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#pushing-to-pypi" title="Permanent link"> </a></h5>
+<p>For open-source packages you need to put to&nbsp;PyPI:</p>
+<ol>
+<li>Check that all tests run locally and linter gives a satisfactory score: <code>&gt; make test</code> and <code>&gt; make lint</code>.</li>
+<li>Commit all your changes, push to nitrox, and <strong>check that the <span class="caps">CI</span> passes</strong>.</li>
+<li>Update the <code>CHANGELOG</code> and increment the version number. Commit this version update, and tag the commit with a tag name exactly matching the version number, and push all (commit + tag) to nitrox (<strong>needs to be improved</strong>).</li>
+<li>Build distribution: <code>&gt; make wheel</code></li>
+<li>(Optional) Upload to <a href="https://test.pypi.org/"><code>TestPyPI</code></a> (must be done if <code>setup.cfg</code> changes significantly): <code>&gt; make upload_test</code>.</li>
+<li>Upload to <code>PyPI</code>: <code>&gt; make upload</code>.</li>
+</ol>
+<h5 id="limited-diffusion-packages">Limited diffusion packages<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#limited-diffusion-packages" title="Permanent link"> </a></h5>
+<p>Refer to this page on <a href="https://cerfacs.fr/coop/coop-venvs">How to install coop packages venvs</a>.</p>
+<h2 id="continuous-integration">Continuous integration<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#continuous-integration" title="Permanent link"> </a></h2>
+<p>We use <a href="https://docs.gitlab.com/ee/ci/">gitlab-ci</a> to automate the continuous integration. Usually our pipelines include three stages: testing, linting and local documentation (or Read the Docs hosted documentation if open-source). A typical <code>.gitlab-ci.yml</code> configuration is the&nbsp;following:</p>
+<div class="highlight"><pre><span></span><span class="nt">stages</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">all</span>
+
+<span class="nt">before_script</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python -V</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip install pip --upgrade</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip install setuptools --upgrade</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip install .[docs, tests]</span>
+
+<span class="nt">test</span><span class="p">:</span>
+    <span class="nt">stage</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">devops</span>
+    <span class="nt">tags</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">docker.elmer.nitrox</span>
+    <span class="nt">script</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pytest --cov kokiy</span>
+
+<span class="nt">lint</span><span class="p">:</span>
+    <span class="nt">stage</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">devops</span>
+    <span class="nt">tags</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">docker.elmer.nitrox</span>
+    <span class="nt">script</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip install anybadge</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pylint kokiy --output-format=text --exit-zero | tee pylint.txt</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">score=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' pylint.txt)</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">anybadge -l pylint  -o --file=pylint.svg -v $score  2=red 4=orange 8=yellow 10=green</span>
+    <span class="nt">artifacts</span><span class="p">:</span>
+        <span class="nt">paths</span><span class="p">:</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pylint.svg</span>
+
+<span class="nt">pages</span><span class="p">:</span>
+    <span class="nt">stage</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">devops</span>
+    <span class="nt">tags</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">docker.elmer.nitrox</span>
+    <span class="nt">script</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">cd docs</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">make html</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mv _build/html/ ../public/</span>
+    <span class="nt">artifacts</span><span class="p">:</span>
+        <span class="nt">paths</span><span class="p">:</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">public</span>
+    <span class="nt">only</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">master</span>
+</pre></div>
+<p>Do not forget to remove <code>pages</code> for open-source packages&nbsp;configurations.</p>
+<h5 id="add-badges">Add badges<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#add-badges" title="Permanent link"> </a></h5>
+<p>Our repos have typical four badges: <code>pipeline</code>, <code>coverage</code>, <code>pylint</code>, and <code>docs</code>. These are useful to quickly get information about the repo. You can set them out by going to <code>Settings -&gt; General -&gt; Badges</code>.</p>
+<p>With exception of docs, all the badges are set with link <code>https://nitrox.cerfacs.fr/%{project_path}</code>. The corresponding image urls are <code>https://nitrox.cerfacs.fr/%{project_path}/badges/master/pipeline.svg</code>, <code>https://nitrox.cerfacs.fr/%{project_path}/badges/%{default_branch}/coverage.svg</code>, and <code>https://nitrox.cerfacs.fr/%{project_path}/-/jobs/artifacts/%{default_branch}/raw/pylint.svg?job=lint</code>  for <code>pipeline</code>, <code>coverage</code>, and <code>pylint</code>,&nbsp;respectively.</p>
+<p>The coverage information is gathered in the pipeline log by a regular expression that can be set in <code>Settings -&gt; CI/CD -&gt; Test coverage parsing</code>.</p>
+<p><code>docs</code> is set only to open-source packages and is set with both link and badge image url <code>https://readthedocs.org/projects/%{project_path}/badge/?version=latest</code>.</p>
+<h5 id="ci-troubleshooting"><span class="caps">CI</span> troubleshooting<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#ci-troubleshooting" title="Permanent link"> </a></h5>
+<p>Ordered by frequency, and&nbsp;solution:</p>
+<ul>
+<li><strong>linting</strong> Try to fix the code, and not the <code>.pylintrc</code>.</li>
+<li><strong>importing</strong> If you add a new package in your <code>setup.py</code>, the&nbsp;pipeline</li>
+</ul>
+<h2 id="command-line-interface">Command Line Interface<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#command-line-interface" title="Permanent link"> </a></h2>
+<p>We usually have a fast-start <span class="caps">CLI</span> in our packages.
+It is done with <a href="https://pypi.org/project/click/">click</a>.</p>
+<p>The idea is to type the name of the package in the terminal to discover all the implemented commands.
+Read our <a href="https://cerfacs.fr/coop/python-click">dedicated post on <span class="caps">CLI</span></a></p>
+<h2 id="concluding-remarks">Concluding remarks<a class="headerlink" href="https://cerfacs.fr/coop/coop-standard-on-python-pkges#concluding-remarks" title="Permanent link"> </a></h2>
+<p>Our standards are continuously improving (sometimes faster than our blog posts updates), so keep sure you peek into our repositories to get the most up-to-date&nbsp;information.</p>
+
+
+             
+ 
+                <p id="post-share-links">
+    Like this post? Share on:
+    <a href="https://twitter.com/intent/tweet?text=Python%20packages%3A%20the%20COOP%20gold%C2%A0standard&amp;url=https%3A//cerfacs.fr/coop/coop-standard-on-python-pkges&amp;hashtags=standards,versioning,pytho,handbook" target="_blank" rel="nofollow noopener noreferrer" title="Share on Twitter">Twitter</a>
+    ❄
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//cerfacs.fr/coop/coop-standard-on-python-pkges" target="_blank" rel="nofollow noopener noreferrer" title="Share on Facebook">Facebook</a>
+    ❄
+    <a href="mailto:?subject=Python%20packages%3A%20the%20COOP%20gold%C2%A0standard&amp;body=https%3A//cerfacs.fr/coop/coop-standard-on-python-pkges" target="_blank" rel="nofollow noopener noreferrer" title="Share via Email">Email</a>
+    </p>
+
+                <hr>
+    <div class="author_blurb">
+        <a href="https://www.linkedin.com/in/antoine-dauptain-57682a90/" target="_blank" rel="nofollow noopener noreferrer">
+            <span class="author_name">Antoine Dauptain</span>
+        </a>
+         is a research scientist on computer science and engineering for HPC. He is the assistant team leader of COOP.
+    </div>
+    <div class="author_blurb">
+        <a href="https://www.linkedin.com/in/lpereira95/" target="_blank" rel="nofollow noopener noreferrer">
+            <span class="author_name">Luís F. Pereira</span>
+        </a>
+        was an engineer that enjoys to develop science/engineering related  software. He working now at INRIA. 
+    </div>
+
+            
+
+
+
+
+
+
+            <hr>
+<section>
+    <h2>Keep Reading</h2>
+<ul class="related-posts-list">
+<li><a href="https://cerfacs.fr/coop/python-typing" title="Introduction to Python typing&nbsp;system">Introduction to Python typing&nbsp;system</a></li>
+<li><a href="https://cerfacs.fr/coop/coop-cactus-model" title="The Coop Cactus branching&nbsp;model">The Coop Cactus branching&nbsp;model</a></li>
+<li><a href="https://cerfacs.fr/coop/json-schema-for-sci-apps" title="Using the json-SCHEMA standard for scientific&nbsp;applications?">Using the json-SCHEMA standard for scientific&nbsp;applications?</a></li>
+<li><a href="https://cerfacs.fr/coop/road-scouts-semver" title="Road and Scouts, a versioning strategy for large Research software (The AVBP versioning&nbsp;system).">Road and Scouts, a versioning strategy for large Research software (The AVBP versioning&nbsp;system).</a></li>
+<li><a href="https://cerfacs.fr/coop/python-click" title="The COOP Click Command line&nbsp;interfaces">The COOP Click Command line&nbsp;interfaces</a></li>
+</ul>
+<hr>
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="https://cerfacs.fr/coop/python-click" title="Previous: The COOP Click Command line&nbsp;interfaces">The COOP Click Command line&nbsp;interfaces</a></li>
+                <li class="next-article"><a href="https://cerfacs.fr/coop/coop-packages-ecosystem" title="Next: The COOP Packages&nbsp;Ecosystem">The COOP Packages&nbsp;Ecosystem</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2022-02-21T00:00:00+01:00">Feb 21, 2022</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://cerfacs.fr/coop/categories#pitch-ref">Pitch</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://cerfacs.fr/coop/tags#handbook-ref">Handbook
+                    <span>26</span>
+</a></li>
+                <li><a href="https://cerfacs.fr/coop/tags#pytho-ref">pytho
+                    <span>1</span>
+</a></li>
+                <li><a href="https://cerfacs.fr/coop/tags#standards-ref">standards
+                    <span>9</span>
+</a></li>
+                <li><a href="https://cerfacs.fr/coop/tags#versioning-ref">versioning
+                    <span>3</span>
+</a></li>
+            </ul>
+<h4>Stay in Touch</h4>
+<div id="sidebar-social-link">
+    <a href="https://gitlab.com/cerfacs" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitLab" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#30353e"></rect><path fill="#e24329" d="M84 215l43-133c2-7 12-7 14 0l115 353L371 82c2-7 12-7 14 0l43 133"></path><path fill="#fc6d26" d="M256 435L84 215h100.4zm71.7-220H428L256 435l71.6-220z"></path><path fill="#fca326" d="M84 215l-22 67c-2 6 0 13 6 16l188 137zm344 0l22 67c2 6 0 13-6 16L256 435z"></path></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="./Python packages_ the COOP gold&nbsp;standard · The COOP Blog_files/jquery.min.js.download"></script>
+        <script src="./Python packages_ the COOP gold&nbsp;standard · The COOP Blog_files/bootstrap.min.js.download"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    
+    
+<protonpass-root-c2dc data-protonpass-role="root" data-protonpass-theme="os"><template shadowrootmode="closed"></template></protonpass-root-c2dc></body><!-- Theme: Elegant built for Pelican
+        License : MIT --></html>

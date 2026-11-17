@@ -10,12 +10,13 @@ from .frontend import (
     COLOR_PALETTE,
     GRADIENT_PRESETS,
     SEMANTIC_COLORS,
+    THE_SCRIBER_EXPERIENCE,
     TSE_COLORS,
     TSE_GRADIENTS,
     colors,
     gradients,
     multi_gradient,
-    THE_SCRIBER_EXPERIENCE,
+    the_scriber_experience,
 )
 
 __all__: list[str] = [
@@ -24,6 +25,7 @@ __all__: list[str] = [
     "colors",
     "gradients",
     "the_scriber_experience",
+    "THE_SCRIBER_EXPERIENCE",
     "COLOR_PALETTE",
     "TSE_COLORS",
     "SEMANTIC_COLORS",

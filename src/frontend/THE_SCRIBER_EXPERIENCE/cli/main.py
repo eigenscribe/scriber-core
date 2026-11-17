@@ -31,32 +31,61 @@ from frontend.gradients import (
     GRADIENT_PRESETS,
     multi_gradient,
 )
-from frontend.the_scriber_experience.cli.messaging import (
-    ansi_256,
-    cli_banner,
-    cli_error,
-    cli_highlight,
-    cli_info,
-    cli_rule,
-    cli_success,
-    supports_256_color,
-)
-from frontend.the_scriber_experience.mermaid.theme import (
-    generate_mermaid_flowchart,
-    get_mermaid_init_directive,
-    render_html_preview,
-)
-from frontend.the_scriber_experience.plots.theme import (
-    get_eigenscribe_rcparams,
-)
-from frontend.the_scriber_experience.style.tse_colors import (
-    CLI_COLORS,
-    EIGEN_COLORS,
-    EIGEN_LABEL_COLORS,
-    EIGEN_NODE_COLORS,
-    SEMANTIC_COLORS,
-    TSE_COLORS,
-)
+
+try:
+    from .messaging import (
+        ansi_256,
+        cli_banner,
+        cli_error,
+        cli_highlight,
+        cli_info,
+        cli_rule,
+        cli_success,
+        supports_256_color,
+    )
+    from ..mermaid.theme import (
+        generate_mermaid_flowchart,
+        get_mermaid_init_directive,
+        render_html_preview,
+    )
+    from ..plots.theme import (
+        get_eigenscribe_rcparams,
+    )
+    from ..style.tse_colors import (
+        CLI_COLORS,
+        EIGEN_COLORS,
+        EIGEN_LABEL_COLORS,
+        EIGEN_NODE_COLORS,
+        SEMANTIC_COLORS,
+        TSE_COLORS,
+    )
+except (ImportError, ValueError):
+    from frontend.THE_SCRIBER_EXPERIENCE.cli.messaging import (
+        ansi_256,
+        cli_banner,
+        cli_error,
+        cli_highlight,
+        cli_info,
+        cli_rule,
+        cli_success,
+        supports_256_color,
+    )
+    from frontend.THE_SCRIBER_EXPERIENCE.mermaid.theme import (
+        generate_mermaid_flowchart,
+        get_mermaid_init_directive,
+        render_html_preview,
+    )
+    from frontend.THE_SCRIBER_EXPERIENCE.plots.theme import (
+        get_eigenscribe_rcparams,
+    )
+    from frontend.THE_SCRIBER_EXPERIENCE.style.tse_colors import (
+        CLI_COLORS,
+        EIGEN_COLORS,
+        EIGEN_LABEL_COLORS,
+        EIGEN_NODE_COLORS,
+        SEMANTIC_COLORS,
+        TSE_COLORS,
+    )
 
 # -----------------------------------------------------------------------------------------------------------
 # 0️⃣ / 🎭 Definitions, Constants & Types

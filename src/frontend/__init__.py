@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import sys
 
-from . import colors, gradients, the_scriber_experience
+from . import THE_SCRIBER_EXPERIENCE, colors, gradients
 from .colors import (
     COLOR_PALETTE,
     GOLDEN_RATIO,
@@ -33,7 +33,7 @@ from .gradients import (
     compute_golden_ratio_stop_positions,
     multi_gradient,
 )
-from .the_scriber_experience import (
+from .THE_SCRIBER_EXPERIENCE import (
     CLI_COLORS,
     EIGEN_COLORS,
     EIGEN_LABEL_COLORS,
@@ -66,12 +66,17 @@ from .the_scriber_experience import (
     supports_256_color,
 )
 
-# Export backward-compatibility and uppercase alias
-THE_SCRIBER_EXPERIENCE = the_scriber_experience
+# Export backward-compatibility and aliases
+the_scriber_experience = THE_SCRIBER_EXPERIENCE
+sys.modules.setdefault("frontend.the_scriber_experience", the_scriber_experience)
 sys.modules.setdefault("frontend.THE_SCRIBER_EXPERIENCE", the_scriber_experience)
+sys.modules.setdefault("frontend.the_scriber_experience.cli", cli)
 sys.modules.setdefault("frontend.THE_SCRIBER_EXPERIENCE.cli", cli)
+sys.modules.setdefault("frontend.the_scriber_experience.plots", plots)
 sys.modules.setdefault("frontend.THE_SCRIBER_EXPERIENCE.plots", plots)
+sys.modules.setdefault("frontend.the_scriber_experience.style", style)
 sys.modules.setdefault("frontend.THE_SCRIBER_EXPERIENCE.style", style)
+sys.modules.setdefault("frontend.the_scriber_experience.mermaid", mermaid)
 sys.modules.setdefault("frontend.THE_SCRIBER_EXPERIENCE.mermaid", mermaid)
 
 __all__: list[str] = [

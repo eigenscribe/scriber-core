@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<!-- saved from url=(0036)https://cerfacs.fr/coop/python-click -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="A. Dauptain">
+
+        <meta property="og:type" content="article">
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="Python, Standards, Handbook, Pitch, ">
+
+<meta property="og:title" content="The COOP Click Command line&nbsp;interfaces ">
+<meta property="og:url" content="https://cerfacs.fr/coop/python-click">
+<meta property="og:description" content="A short introduction to Python’s Click and the way to activate it on our&nbsp;package">
+<meta property="og:site_name" content="The COOP Blog">
+<meta property="og:article:author" content="A. Dauptain">
+<meta property="og:article:published_time" content="2022-02-21T00:00:00+01:00">
+<meta name="twitter:title" content="The COOP Click Command line&nbsp;interfaces ">
+<meta name="twitter:description" content="A short introduction to Python’s Click and the way to activate it on our&nbsp;package">
+
+        <title>The COOP Click Command line&nbsp;interfaces  · The COOP Blog
+</title>
+        <link href="./The COOP Click Command line&nbsp;interfaces · The COOP Blog_files/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="./The COOP Click Command line&nbsp;interfaces · The COOP Blog_files/elegant.prod.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="./The COOP Click Command line&nbsp;interfaces · The COOP Blog_files/custom.css" media="screen">
+
+        <link rel="shortcut icon" href="https://cerfacs.fr/coop/theme/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="https://cerfacs.fr/coop/theme/images/apple-touch-icon-152x152.png" type="image/png">
+        <link rel="apple-touch-icon" href="https://cerfacs.fr/coop/theme/images/apple-touch-icon.png" type="image/png">
+        <link rel="apple-touch-icon" sizes="57x57" href="https://cerfacs.fr/coop/theme/images/apple-touch-icon-57x57.png" type="image/png">
+        <link rel="apple-touch-icon" sizes="72x72" href="https://cerfacs.fr/coop/theme/images/apple-touch-icon-72x72.png" type="image/png">
+        <link rel="apple-touch-icon" sizes="76x76" href="https://cerfacs.fr/coop/theme/images/apple-touch-icon-76x76.png" type="image/png">
+        <link rel="apple-touch-icon" sizes="114x114" href="https://cerfacs.fr/coop/theme/images/apple-touch-icon-114x114.png" type="image/png">
+        <link rel="apple-touch-icon" sizes="120x120" href="https://cerfacs.fr/coop/theme/images/apple-touch-icon-120x120.png" type="image/png">
+        <link rel="apple-touch-icon" sizes="144x144" href="https://cerfacs.fr/coop/theme/images/apple-touch-icon-144x144.png" type="image/png">
+        <link rel="apple-touch-icon" sizes="152x152" href="https://cerfacs.fr/coop/theme/images/apple-touch-icon-152x152.png" type="image/png">
+        <link rel="apple-touch-icon" sizes="152x152" href="https://cerfacs.fr/coop/theme/images/apple-touch-icon-180x180.png" type="image/png">
+<!-- Old syle analytics...? -->
+<!--<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'G-QXJPD7NPPJ', 'auto');
+    ga('send', 'pageview');
+</script> -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-QXJPD7NPPJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QXJPD7NPPJ');
+</script>
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://cerfacs.fr/coop/"><span class="site-name">The COOP Blog</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li>
+                                    <a href="https://cerfacs.fr/coop">Home</a>
+                                </li>
+                                <li><a href="https://cerfacs.fr/coop/about">About</a></li>
+                                <li><a href="https://cerfacs.fr/coop/join-us">Join&nbsp;us!</a></li>
+                                <li><a href="https://cerfacs.fr/coop/categories">Categories</a></li>
+                                <li><a href="https://cerfacs.fr/coop/tags">Tags</a></li>
+                                <li><a href="https://cerfacs.fr/coop/archives">Archives</a></li>
+                                <li><form class="navbar-search" action="https://cerfacs.fr/coop/search" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope="">
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://cerfacs.fr/coop/python-click">
+                The <span class="caps">COOP</span> Click Command line&nbsp;interfaces
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <!-- markdownlint-disable MD001 -->
+
+<p><img alt="cli" src="./The COOP Click Command line&nbsp;interfaces · The COOP Blog_files/photo-1598662779094-110c2bad80b5"></p>
+<p><em>Photo <a href="https://unsplash.com/@chrisjdavis">Chris J. Davis</a> in <a href="https://unsplash.com/">Unsplash</a></em></p>
+<p>We usually have a fast-start <span class="caps">CLI</span> in our <span class="caps">COOP</span> packages.
+It is done with <a href="https://pypi.org/project/click/">click</a>.</p>
+<p>The <span class="caps">UX</span> rationale is <em>type the name of the package in the terminal to discover all the implemented commands</em>. It looks like&nbsp;:</p>
+<div class="highlight"><pre><span></span> &gt;ms_thermo
+Usage: ms_thermo <span class="o">[</span>OPTIONS<span class="o">]</span> COMMAND <span class="o">[</span>ARGS<span class="o">]</span>...
+
+  Package ms_thermo v0.3.2
+
+  ---------------    MS_THERMO  --------------------
+
+  You are now using the Command line interface of MS-Thermo, a Python3
+  helper <span class="k">for</span> reactive multispecies computation, created at CERFACS
+  <span class="o">(</span>https://cerfacs.fr<span class="o">)</span>.
+
+  This is a python package currently installed in your python environement.
+  See the full documentation at : https://ms-
+  thermo.readthedocs.io/en/latest/.
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  fresh-gas    description of a non-reacted kero-air mixture.
+  gasout       Apply GASOUT actions to a CFD field.
+  hp-equil     HP equilibrium using Cantera.
+  tadia        adiabatic flame temperature <span class="k">for</span> Kerosene.
+  yk-from-phi  Mass fractions of a fuel-air mixture.
+</pre></div>
+
+
+<h2 id="add-the-entry-point">Add the entry point<a class="headerlink" href="https://cerfacs.fr/coop/python-click#add-the-entry-point" title="Permanent link"> </a></h2>
+<p>To enable this <span class="caps">CLI</span>, you must open an entry point, <em>i.e.</em> a command that will be added to your terminal at the&nbsp;installation.</p>
+<p>In the <code>setup.cfg</code> this&nbsp;reads:</p>
+<div class="highlight"><pre><span></span>[options.entry_points]
+console_scripts =
+    ms_thermo = ms_thermo.cli:main_cli
+</pre></div>
+
+
+<p>Here, typing the name <code>ms_thermo</code> is equivalent to call the function <code>main_cli</code> stored in the module <code>cli.py</code> of the <code>ms_thermo</code> package.</p>
+<h2 id="create-the-click-dialog-clipy">Create the click dialog <code>cli.py</code><a class="headerlink" href="https://cerfacs.fr/coop/python-click#create-the-click-dialog-clipy" title="Permanent link"> </a></h2>
+<p>The module <code>cli.py</code> is stored at the root of the sources internal to the package (here <code>src/ms-thermo/cli.py</code>).
+It looks like&nbsp;this</p>
+<h5 id="header">Header<a class="headerlink" href="https://cerfacs.fr/coop/python-click#header" title="Permanent link"> </a></h5>
+<p>First we keep a light header with <strong>the minimal amount of imports</strong>. Since these are done at each <span class="caps">CLI</span> call, make sure you do not load all the dependencies when you import the&nbsp;package.</p>
+<p>This means *keep your <code>__init__.py</code> as void as possible, no <code>from .core import *</code>.
+The drawback is the need to use only relative explicit imports inside our modules. In the long run we experienced, this is not really a drag, and help you developers to easily find the source of lower layer&nbsp;codes.</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">"""</span>
+<span class="sd">cli.py</span>
+<span class="sd">Command line interface for tools in ms_thermo</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span> <span class="nn">click</span>
+<span class="kn">import</span> <span class="nn">ms_thermo</span>
+</pre></div>
+
+
+<h5 id="version-decorator">Version decorator<a class="headerlink" href="https://cerfacs.fr/coop/python-click#version-decorator" title="Permanent link"> </a></h5>
+<p>We add this small utility function, which will help to decorate our main <span class="caps">CLI</span> with the up-to-date package&nbsp;version.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_version</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Add the version of the tool to the help heading.</span>
+<span class="sd">    :param f: function to decorate</span>
+<span class="sd">    :return: decorated function</span>
+<span class="sd">    """</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="vm">__doc__</span>
+    <span class="n">f</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">"Package "</span> <span class="o">+</span> <span class="n">ms_thermo</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">" v"</span> <span class="o">+</span> <span class="n">ms_thermo</span><span class="o">.</span><span class="n">__version__</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n\n</span><span class="s2">"</span> <span class="o">+</span> <span class="n">doc</span>
+    <span class="k">return</span> <span class="n">f</span>
+</pre></div>
+
+
+<h5 id="the-main-group">The main group<a class="headerlink" href="https://cerfacs.fr/coop/python-click#the-main-group" title="Permanent link"> </a></h5>
+<p>Here is the “landing” command, the main group of <span class="caps">CLI</span> associated to the package. In click, docstrings are the content printed to the screen, make sure they look&nbsp;good.</p>
+<div class="highlight"><pre><span></span><span class="nd">@click.group</span><span class="p">()</span>
+<span class="nd">@add_version</span>
+<span class="k">def</span> <span class="nf">main_cli</span><span class="p">():</span>
+    <span class="sd">"""---------------    MS_THERMO  --------------------</span>
+
+<span class="sd">You are now using the Command line interface of MS-Thermo,</span>
+<span class="sd">a Python3 helper for reactive multispecies computation, created at CERFACS (https://cerfacs.fr).</span>
+
+<span class="sd">This is a python package currently installed in your python environement.</span>
+<span class="sd">See the full documentation at : https://ms-thermo.readthedocs.io/en/latest/.</span>
+<span class="sd">"""</span>
+    <span class="k">pass</span>
+</pre></div>
+
+
+<h5 id="the-actual-commands">The actual commands<a class="headerlink" href="https://cerfacs.fr/coop/python-click#the-actual-commands" title="Permanent link"> </a></h5>
+<p>Here, we add two simple commands with simple args, read the click documentation for more complex&nbsp;inputs.</p>
+<div class="highlight"><pre><span></span><span class="nd">@click.command</span><span class="p">()</span>
+<span class="nd">@click.argument</span><span class="p">(</span><span class="s2">"temperature"</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nd">@click.argument</span><span class="p">(</span><span class="s2">"pressure"</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nd">@click.argument</span><span class="p">(</span><span class="s2">"phi"</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">tadia</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">phi</span><span class="p">):</span>
+    <span class="sd">"""adiabatic flame temperature for Kerosene.</span>
+
+<span class="sd">    The initial TEMPERATURE is in Kelvins.</span>
+<span class="sd">    The initial PRESURE in in Pascals.</span>
+<span class="sd">    The PHI equivalence ratio equals 1 at stoechiometry. </span>
+
+<span class="sd">    The computation is done by interpolation in a precomputed 2S_KERO_BFER table.</span>
+<span class="sd">    The system considered to build the table was a 1D flame at constant pressure.</span>
+<span class="sd">    """</span>
+    <span class="kn">from</span> <span class="nn">ms_thermo.tadia</span> <span class="kn">import</span> <span class="n">tadia_table</span>
+
+    <span class="n">burnt_temperature</span><span class="p">,</span> <span class="n">yk_</span> <span class="o">=</span> <span class="n">tadia_table</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">temperature</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">pressure</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">phi</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span>
+        <span class="s2">"</span><span class="se">\n</span><span class="s2">The adiabatic flame temperature of a mix "</span>
+        <span class="o">+</span> <span class="n">f</span><span class="s2">"C10H22-air from tables is : {burnt_temperature:.2f} K."</span>
+    <span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Species     |    Mass fraction"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"------------------------------"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">specie</span> <span class="ow">in</span> <span class="n">yk_</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">"{specie:12s}|       {yk_[specie]:.3f}"</span><span class="p">)</span>
+
+
+<span class="n">main_cli</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">tadia</span><span class="p">)</span>
+
+<span class="nd">@click.command</span><span class="p">()</span>
+<span class="nd">@click.argument</span><span class="p">(</span><span class="s2">"temperature"</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="nd">@click.argument</span><span class="p">(</span><span class="s2">"pressure"</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="nd">@click.argument</span><span class="p">(</span><span class="s2">"phi"</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fresh_gas</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">phi</span><span class="p">):</span>
+    <span class="sd">"""description of a non-reacted kero-air mixture.</span>
+
+<span class="sd">    The initial TEMPERATURE is in Kelvins.</span>
+<span class="sd">    The initial PRESURE in in Pascals.</span>
+<span class="sd">    The PHI equivalence ratio equals 1 at stoechiometry. </span>
+
+<span class="sd">    The computation is done using a 100K piecewise linear table of enthalpies.</span>
+<span class="sd">    """</span>
+    <span class="kn">from</span> <span class="nn">ms_thermo.fresh_gas</span> <span class="kn">import</span> <span class="n">fresh_gas</span> 
+
+    <span class="n">rho</span><span class="p">,</span> <span class="n">rhoE</span><span class="p">,</span> <span class="n">rhoyk</span> <span class="o">=</span> <span class="n">fresh_gas</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">rho       |  {rho:.3f} kg/m3"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">"rhoE      |  {rhoE:.3f} J.kg/m3"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"rhoYk     |"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">specie</span> <span class="ow">in</span> <span class="n">rhoyk</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">" {specie:9s}|  {rhoyk[specie]:.3f} mol.kg/m3"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"------------------------------"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"Yk        |"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">specie</span> <span class="ow">in</span> <span class="n">rhoyk</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">" {specie:9s}|  {rhoyk[specie]/rho:.3f} [-]"</span><span class="p">)</span>
+
+
+<span class="n">main_cli</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">fresh_gas</span><span class="p">)</span>
+</pre></div>
+
+
+<h5 id="deprecated-commands">Deprecated commands<a class="headerlink" href="https://cerfacs.fr/coop/python-click#deprecated-commands" title="Permanent link"> </a></h5>
+<p>At the end, we keep some deprecations messages to help people  find the new equivalent to a deprecated&nbsp;command:</p>
+<div class="highlight"><pre><span></span><span class="n">DPCTD</span> <span class="o">=</span> <span class="s2">"Deprecated command from python package ms-thermo..."</span>
+
+
+<span class="k">def</span> <span class="nf">redirect_yk_from_phi</span><span class="p">():</span>
+    <span class="sd">"""redicrection of former command"""</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">DPCTD</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">" ? Did you mean : &gt; ms_thermo yk_from_phi"</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">redirect_gasout</span><span class="p">():</span>
+    <span class="sd">"""redicrection of former command"""</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">DPCTD</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">" ? Did you mean : &gt; ms_thermo gasout"</span><span class="p">)</span>
+</pre></div>
+
+
+             
+ 
+                <p id="post-share-links">
+    Like this post? Share on:
+    <a href="https://twitter.com/intent/tweet?text=The%20COOP%20Click%20Command%20line%C2%A0interfaces&amp;url=https%3A//cerfacs.fr/coop/python-click&amp;hashtags=python,standards,handbook" target="_blank" rel="nofollow noopener noreferrer" title="Share on Twitter">Twitter</a>
+    ❄
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//cerfacs.fr/coop/python-click" target="_blank" rel="nofollow noopener noreferrer" title="Share on Facebook">Facebook</a>
+    ❄
+    <a href="mailto:?subject=The%20COOP%20Click%20Command%20line%C2%A0interfaces&amp;body=https%3A//cerfacs.fr/coop/python-click" target="_blank" rel="nofollow noopener noreferrer" title="Share via Email">Email</a>
+    </p>
+
+            
+            
+
+
+
+
+
+
+            <hr>
+<section>
+    <h2>Keep Reading</h2>
+<ul class="related-posts-list">
+<li><a href="https://cerfacs.fr/coop/python-typing" title="Introduction to Python typing&nbsp;system">Introduction to Python typing&nbsp;system</a></li>
+<li><a href="https://cerfacs.fr/coop/pylint-for-scientific-applications" title="Should scientific software be linted? A look at&nbsp;pylint">Should scientific software be linted? A look at&nbsp;pylint</a></li>
+<li><a href="https://cerfacs.fr/coop/road-scouts-semver" title="Road and Scouts, a versioning strategy for large Research software (The AVBP versioning&nbsp;system).">Road and Scouts, a versioning strategy for large Research software (The AVBP versioning&nbsp;system).</a></li>
+<li><a href="https://cerfacs.fr/coop/python-docs" title="Documenting Python&nbsp;code">Documenting Python&nbsp;code</a></li>
+<li><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges" title="Python packages: the COOP gold&nbsp;standard">Python packages: the COOP gold&nbsp;standard</a></li>
+</ul>
+<hr>
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="https://cerfacs.fr/coop/codemetrics-on-hpc" title="Previous: On the technical debt of High Performance Scientific&nbsp;Software.">On the technical debt of High Performance Scientific&nbsp;Software.</a></li>
+                <li class="next-article"><a href="https://cerfacs.fr/coop/coop-standard-on-python-pkges" title="Next: Python packages: the COOP gold&nbsp;standard">Python packages: the COOP gold&nbsp;standard</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2022-02-21T00:00:00+01:00">Feb 21, 2022</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://cerfacs.fr/coop/categories#pitch-ref">Pitch</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://cerfacs.fr/coop/tags#handbook-ref">Handbook
+                    <span>26</span>
+</a></li>
+                <li><a href="https://cerfacs.fr/coop/tags#python-ref">Python
+                    <span>41</span>
+</a></li>
+                <li><a href="https://cerfacs.fr/coop/tags#standards-ref">Standards
+                    <span>9</span>
+</a></li>
+            </ul>
+<h4>Stay in Touch</h4>
+<div id="sidebar-social-link">
+    <a href="https://gitlab.com/cerfacs" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitLab" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#30353e"></rect><path fill="#e24329" d="M84 215l43-133c2-7 12-7 14 0l115 353L371 82c2-7 12-7 14 0l43 133"></path><path fill="#fc6d26" d="M256 435L84 215h100.4zm71.7-220H428L256 435l71.6-220z"></path><path fill="#fca326" d="M84 215l-22 67c-2 6 0 13 6 16l188 137zm344 0l22 67c2 6 0 13-6 16L256 435z"></path></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="./The COOP Click Command line&nbsp;interfaces · The COOP Blog_files/jquery.min.js.download"></script>
+        <script src="./The COOP Click Command line&nbsp;interfaces · The COOP Blog_files/bootstrap.min.js.download"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    
+    
+<div><div style="display: none; position: fixed; top: 30px; width: auto; max-width: 100%; text-align: center; left: 50%; transform: translateX(-50%); z-index: 99999999;"><div style="display: inline-block; font-size: 14px; font-weight: bold; border: 1px solid rgb(240, 195, 109); background-color: rgb(249, 237, 190); padding: 0px 10px; border-radius: 2px; box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;"></div></div></div><protonpass-root-9838 data-protonpass-role="root" data-protonpass-theme="os"><template shadowrootmode="closed"></template></protonpass-root-9838></body><!-- Theme: Elegant built for Pelican
+        License : MIT --></html>

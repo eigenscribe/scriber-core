@@ -46,8 +46,8 @@ try:
         hex_to_rgb,
         multi_gradient,
     )
-    from frontend.the_scriber_experience.style.tse_colors import CLI_COLORS
-except ImportError:
+    from ..style.tse_colors import CLI_COLORS
+except (ImportError, ValueError):
     try:
         from src.frontend.gradients import (
             GOLDEN_RATIO,
@@ -62,7 +62,7 @@ except ImportError:
             hex_to_rgb,
             multi_gradient,
         )
-        from src.frontend.the_scriber_experience.style.tse_colors import CLI_COLORS
+        from frontend.THE_SCRIBER_EXPERIENCE.style.tse_colors import CLI_COLORS
     except ImportError:
         RGB: TypeAlias = tuple[int, int, int]
         Color: TypeAlias = str | RGB
