@@ -6,21 +6,6 @@ Unifies style design tokens, terminal CLI utilities, and scientific plot themes.
 
 from __future__ import annotations
 
-from .. import messaging as cli
-from ..messaging import (
-    EIGENSCRIBE_PALETTE,
-    ansi_256,
-    cli_banner,
-    cli_echo,
-    cli_error,
-    cli_highlight,
-    cli_info,
-    cli_message,
-    cli_rule,
-    cli_success,
-    cli_warning,
-    supports_256_color,
-)
 from . import mermaid, plots, style
 from .mermaid import (
     EIGENSCRIBE_MERMAID_CLASSES,
@@ -61,7 +46,6 @@ from .style import (
 
 __all__: list[str] = [
     # Submodules
-    "cli",
     "plots",
     "style",
     "mermaid",
@@ -80,19 +64,6 @@ __all__: list[str] = [
     "PRESETS",
     "hex_to_rgb",
     "multi_gradient",
-    # CLI
-    "cli_message",
-    "cli_echo",
-    "cli_rule",
-    "cli_banner",
-    "cli_info",
-    "cli_success",
-    "cli_warning",
-    "cli_error",
-    "cli_highlight",
-    "EIGENSCRIBE_PALETTE",
-    "ansi_256",
-    "supports_256_color",
     # Plots
     "apply_theme",
     "apply_cosmic_theme",

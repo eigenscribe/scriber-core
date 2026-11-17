@@ -10,7 +10,6 @@ Welcome to the canonical environment index for autonomous development agents. Th
 │   └── COOP_blog/                      # Reference archive of CERFACS COOP software standards
 ├── house-rules/
 │   ├── python-rules.md               # Mathematical typography, packaging hygiene & consistency rules
-│   ├── python-rules_v1.md            # Reference version 1 rules archive
 │   └── css-rules.md                  # Glassmorphic visual layout layering standards
 ├── boilerplates/
 │   ├── css/
@@ -21,7 +20,6 @@ Welcome to the canonical environment index for autonomous development agents. Th
 │   │   └── visuals-boilerplate.ipynb   # Visualizations, NetworkX topologies & color palettes template
 │   └── python/
 │       ├── gold-standard.py            # Gold standard numeric integration template
-│       ├── gold-standard-boilerplate.py # Submodule canonical alias for numeric template
 │       └── visualization_boilerplate.py # Matplotlib, Seaborn & Plotly theme bootstrap template
 ├── src/
 │   ├── __init__.py                   # Scriber Core root namespace
@@ -36,16 +34,12 @@ Welcome to the canonical environment index for autonomous development agents. Th
 │       ├── __init__.py
 │       ├── colors.py                 # Canonical named color palette (COLOR_PALETTE), RGB, hex_to_rgb
 │       ├── gradients.py              # Golden ratio TrueColor multi-stop gradient engine (GRADIENT_PRESETS)
-│       ├── messaging.py              # Terminal messaging & ANSI 256-color palette engine
 │       └── the_scriber_experience/   # 🔱 The Scriber Experience (TSE) styling subsystems
 │           ├── __init__.py
 │           ├── style/                # Design tokens, TSE palettes & gradient presets
 │           │   ├── __init__.py
-│           │   ├── tse_colors.py     # TSE semantic colors, CLI status roles, EIGEN spectrum
-│           │   ├── tse_gradients.py  # TSE multi-stop gradient sequences & presets
-│           │   ├── tse-colors.py     # Hyphenated alias forwarding to tse_colors.py
-│           │   └── tse-gradients.py  # Hyphenated alias forwarding to tse_gradients.py
-│           ├── cli/                  # Legacy TSE CLI formatting & messaging tools
+│           │   ├── semantic_roles.py     # TSE semantic colors, CLI status roles, EIGEN spectrum
+│           │   └── gradient_presets.py  # TSE multi-stop gradient sequences & presets
 │           ├── plots/                # Scientific plotting themes & colormaps
 │           │   ├── __init__.py
 │           │   └── theme.py          # Theme engine for Matplotlib, Pyplot, Seaborn, Plotly

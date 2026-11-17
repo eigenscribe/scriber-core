@@ -8,7 +8,7 @@ and ANSI TrueColor gradient engine.
 
 from __future__ import annotations
 
-from frontend.the_scriber_experience.cli import cli_banner, cli_info, cli_success
+from cli.messaging import cli_banner, cli_info, cli_success
 from frontend.the_scriber_experience.plots import get_eigenscribe_rcparams
 
 from frontend import (

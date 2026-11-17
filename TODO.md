@@ -1,20 +1,20 @@
 - [x] Update content in `/src/cli/` and `/src/frontend/` so that it exhaustively includes all functionality of 
-  `../THE_SCRIBER_EXPERIENCE/cli/messaging.py`.
+  `../the_scriber_experience/cli/messaging.py`.
   - [x] Fix circular and casing import errors between `src/frontend/__init__.py` and 
-    `src/frontend/THE_SCRIBER_EXPERIENCE/cli/` modules to enable clean CLI execution.
+    `src/frontend/the_scriber_experience/cli/` modules to enable clean CLI execution.
   - [x] Create canonical `src/cli/messaging.py` and `src/frontend/messaging.py` with full ANSI 256-color palette, semantic messaging helpers, banner generators, and smoke tests.
   - [x] Re-export all messaging functionality in `src/cli/__init__.py` and `src/frontend/__init__.py`.
   - [x] Add comprehensive test coverage in `tests/test_cli_messaging.py`.
-- [x] Remove `src/frontend/THE_SCRIBER_EXPERIENCE/cli/` folder from repo.
+- [x] Remove `src/frontend/the_scriber_experience/cli/` folder from repo.
   - **Steps:**
     1. Update `src/cli/` and `src/frontend` folders so they include all functionality of 
-       [messaging.py](@src/frontend/THE_SCRIBER_EXPERIENCE/cli/messaging.py).
-    2. Remove [messaging.py](@src/frontend/THE_SCRIBER_EXPERIENCE/cli/messaging.py) from the repo.
-    3. Check that all `src` files that are not contained in `../THE_SCRIBER_EXPERIENCE/cli/` all work together so that 
+       [messaging.py](@src/frontend/the_scriber_experience/cli/messaging.py).
+    2. Remove [messaging.py](@src/frontend/the_scriber_experience/cli/messaging.py) from the repo.
+    3. Check that all `src` files that are not contained in `../the_scriber_experience/cli/` all work together so that 
        their functionality exhaustively includes functionality of the files contained in 
-       `../THE_SCRIBER_EXPERIENCE/cli/`.
-    4. Delete `../THE_SCRIBER_EXPERIENCE/cli/` from the repository.
-  - [x] Update relative import fallbacks in `src/frontend/THE_SCRIBER_EXPERIENCE/cli/main.py` and `gradients.py` to 
+       `../the_scriber_experience/cli/`.
+    4. Delete `../the_scriber_experience/cli/` from the repository.
+  - [x] Update relative import fallbacks in `src/frontend/the_scriber_experience/cli/main.py` and `gradients.py` to 
     prevent partially initialized module import failures.
 - [x] Review `src/cli/` files and @src/frontend/colors.py and @src/frontend/gradients.py .
   - [x] Consistency check.

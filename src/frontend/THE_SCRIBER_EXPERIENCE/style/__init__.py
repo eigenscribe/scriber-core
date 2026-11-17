@@ -6,8 +6,8 @@ Exposes design tokens, semantic palettes, and gradient presets.
 
 from __future__ import annotations
 
-from . import plots, tse_colors, tse_gradients
-from .plots import (
+from . import semantic_roles, gradient_presets
+from ..plots import (
     apply_cosmic_theme,
     apply_theme,
     create_eigenscribe_colormap,
@@ -16,7 +16,7 @@ from .plots import (
     plot_eigenscribe_heatmap,
     register_colormaps,
 )
-from .tse_colors import (
+from .semantic_roles import (
     CLI_COLORS,
     COLOR_PALETTE,
     EIGEN_COLORS,
@@ -28,7 +28,7 @@ from .tse_colors import (
     Color,
     hex_to_rgb,
 )
-from .tse_gradients import (
+from .gradient_presets import (
     GRADIENT_PRESETS,
     PRESETS,
     TSE_GRADIENTS,
@@ -60,9 +60,7 @@ __all__: list[str] = [
     "hex_to_rgb",
     "multi_gradient",
     "plot_eigenscribe_heatmap",
-    # Subpackages
-    "plots",
     "register_colormaps",
-    "tse_colors",
-    "tse_gradients",
+    "semantic_roles",
+    "gradient_presets",
 ]

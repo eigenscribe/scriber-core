@@ -75,6 +75,34 @@ my-package/
 
 ---
 
+### 🚫 No Duplicate File Names (Case-Insensitive & Normalized)
+
+**Mandatory Rule:** Never create two files or directories whose names collide when normalized. Two names are considered duplicates if they match after applying **both** of the following normalizations:
+
+1. **Case folding**: Convert to lowercase (e.g., `Colors.py` and `colors.py` are duplicates).
+2. **Separator normalization**: Replace hyphens (`-`) with underscores (`_`) (e.g., `tse-colors.py` and `tse_colors.py` are duplicates).
+
+**Standard name exceptions:** The following filenames are exempt from this rule because they are structural conventions:
+- `__init__.py` — one per package directory is expected and required.
+- `main.py` — one per directory/module level is expected as an entry point.
+
+As long as there is only one `__init__.py` or one `main.py` per folder, they are not considered duplicates of each other across the repository.
+
+**Examples of prohibited duplicates:**
+- `src/cli/messaging.py` and `src/frontend/messaging.py` — same basename in different directories.
+- `THE_SCRIBER_EXPERIENCE/` and `the_scriber_experience/` — case-only difference.
+- `gold-standard.py` and `gold-standard-boilerplate.py` — one name is a prefixed variant of the other; use a single canonical name.
+- `python-rules.md` and `python-rules_v1.md` — versioned suffix creates a content duplicate; update the original instead.
+- `tse_colors.py` alongside `colors.py` in a parent directory — the shared stem `colors` creates naming ambiguity.
+
+**How to avoid:**
+- Before creating any new file or directory, scan the entire repository tree for existing names that would match after normalization.
+- If a similar name already exists, choose a distinctly different name that describes the unique purpose (e.g., `semantic_roles.py` instead of `tse_colors.py` when `colors.py` already exists).
+- If two files serve the same purpose, consolidate them into a single canonical file and update all imports.
+- Forwarding modules that merely re-export from another module are structural duplicates and should be eliminated unless they provide additional transformation logic.
+
+---
+
 ## 🔢 2. Versioning, Branching & Changelog Governance
 
 ### 1️⃣ Semantic Versioning (SemVer 2.0.0)
@@ -386,7 +414,7 @@ Agents must consult the linked rules and templates in `.scriber-core`:
 - **Python Rules**: `.scriber-core/house-rules/python-rules.md`
 - **CSS / UI System**: `.scriber-core/house-rules/css-rules.md`
 - **Workspace & Packaging Guide**: `.scriber-core/docs/workspace-setup-guide.md`
-- **Python Numeric Template**: `.scriber-core/boilerplates/python/gold-standard-boilerplate.py`
+- **Python Numeric Template**: `.scriber-core/boilerplates/python/gold-standard.py`
 - **Visualization Bootstrap Template**: `.scriber-core/boilerplates/python/visualization_boilerplate.py`
 - **CSS Design System Template**: `.scriber-core/boilerplates/css/tse-boilerplate.css`
 - **Visuals & Graphs Template**: `.scriber-core/boilerplates/notebooks/visuals-boilerplate.ipynb`

@@ -149,12 +149,12 @@ A comprehensive utilitarian review of design token architecture and styling subs
 1. **Historical Key Naming Inconsistencies**:
    - A minority of keys in `COLOR_PALETTE` use kebab-case (`ibm-green`, `ibm-cyan`, `junie-lime`, `tse-cyan`) while the vast majority follow canonical snake_case (`ibm_indigo`, `ibm_purple`, `vivid_cyan`, `sky_info`). Standardizing all keys to snake_case while preserving alias properties is recommended for future releases.
 2. **Residual Hardcoded Hex Literals in Plotting & Mermaid Themes**:
-   - While `src/cli/` and `src/frontend/style/` strictly reference `COLOR_PALETTE`, certain theme definitions in `src/frontend/THE_SCRIBER_EXPERIENCE/plots/theme.py` and `mermaid/theme.py` use direct hex literals (`#0d1117`, `#161b22`, `#c8f8ff`) rather than accessing `COLOR_PALETTE["midnight_navy"]` or `COLOR_PALETTE["ice_blue"]`.
+   - While `src/cli/` and `src/frontend/style/` strictly reference `COLOR_PALETTE`, certain theme definitions in `src/frontend/the_scriber_experience/plots/theme.py` and `mermaid/theme.py` use direct hex literals (`#0d1117`, `#161b22`, `#c8f8ff`) rather than accessing `COLOR_PALETTE["midnight_navy"]` or `COLOR_PALETTE["ice_blue"]`.
 3. **Multiple Re-Export Aliases**:
    - The coexistence of `GRADIENT_PRESETS`, `TSE_GRADIENTS`, and `PRESETS` across `gradients.py` increases API redundancy, though it protects legacy callers from breaking changes.
 
 ### 🛑 The Ugly
 1. **Deprecated Duplicate CLI Folders (Resolved)**:
-   - Previously, duplicate CLI implementations existed in both `src/cli/` and `src/frontend/THE_SCRIBER_EXPERIENCE/cli/`, causing import shadowing, partially initialized module errors, and fragile relative imports. Consolidating all CLI commands into `src/cli/` and deleting `src/frontend/THE_SCRIBER_EXPERIENCE/cli/` permanently eliminates this architectural debt.
-2. **Module Casing & Path Collisions**:
-   - Case-sensitivity variance across Windows NTFS and Linux ext4 with `THE_SCRIBER_EXPERIENCE` vs `the_scriber_experience` required dynamic `sys.modules` aliasing hooks to guarantee consistent cross-platform importability.
+   - Previously, duplicate CLI implementations existed in both `src/cli/` and `src/frontend/the_scriber_experience/cli/`, causing import shadowing, partially initialized module errors, and fragile relative imports. Consolidating all CLI commands into `src/cli/` and deleting the duplicate resolved these issues.
+2. **Module Casing & Path Collisions (Resolved)**:
+   - The directory was renamed from `THE_SCRIBER_EXPERIENCE` to `the_scriber_experience` (PEP 8 compliant), eliminating the need for `sys.modules` aliasing hooks and ensuring consistent cross-platform importability.

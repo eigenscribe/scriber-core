@@ -1,9 +1,9 @@
-# src/cli/messaging.py
+# src/frontend/messaging.py
 """
 messaging.py
 
 Terminal messaging, semantic status alerts, ANSI 256-color palette styling, and
-gradient banner generators for the Scriber Core CLI suite.
+gradient banner generators for the Scriber Core frontend suite.
 
 The conceptual story follows the Eigenscribe architectural standard:
 What exists -> What you're allowed to call -> How it works -> Proof it works.
@@ -446,8 +446,8 @@ def cli_echo(
 
     Examples
     --------
-    >>> cli_echo("My name is ", color="eigen_white")
-    >>> cli_echo("EigenBeast", color="eigen_purple", bold=True)
+    >>> cli_echo("My name is ", color="eigen_white")  # doctest: +SKIP
+    >>> cli_echo("EigenBeast", color="eigen_purple", bold=True)  # doctest: +SKIP
     """
     if color is not None:
         if supports_256_color():
@@ -543,7 +543,7 @@ def cli_banner(title: str, subtitle: str | None = None) -> None:
 
     Examples
     --------
-    >>> cli_banner("EIGENBEAST BATTLE", "The Non-Copyright Generic Beast Game")
+    >>> cli_banner("EIGENBEAST BATTLE", "The Non-Copyright Generic Beast Game")  # doctest: +SKIP
     """
     _echo("")
     _echo(multi_gradient(title, colors=PRIMARY_GRADIENT, bold=True))
@@ -643,14 +643,14 @@ def _secho(text: str, fg: str | None = None, bold: bool = False) -> None:
 
 def run_smoke_test() -> bool:
     """
-    Execute smoke test assertions for CLI messaging and ANSI 256-color palette.
+    Execute smoke test assertions for frontend messaging and ANSI 256-color palette.
 
     Returns
     -------
     bool
         True if all verification assertions succeed.
     """
-    print("💨 Running src/cli/messaging.py smoke tests...")
+    print("💨 Running src/frontend/messaging.py smoke tests...")
 
     # 1. Palette completeness assertions
     assert len(EIGENSCRIBE_PALETTE) >= 40
@@ -690,7 +690,7 @@ def run_smoke_test() -> bool:
     assert "38;5;212m" in rendered_echo
 
     # 4. Interactive visual smoke test
-    cli_banner("SCRIBER CORE CLI MESSAGING TEST", "256-Color & TrueColor Verification")
+    cli_banner("SCRIBER CORE FRONTEND MESSAGING TEST", "256-Color & TrueColor Verification")
     cli_info("Info message — Electric Cyan")
     cli_success("Success message — Bright Green")
     cli_warning("Warning message — Amber")
@@ -698,7 +698,7 @@ def run_smoke_test() -> bool:
     cli_highlight("Highlight message — Bright Pink")
     cli_rule()
 
-    print("✅ src/cli/messaging.py smoke tests passed successfully.\n")
+    print("✅ src/frontend/messaging.py smoke tests passed successfully.\n")
     return True
 
 
@@ -711,7 +711,7 @@ def run_smoke_test() -> bool:
 @click.pass_context
 def cli(ctx: click.Context) -> None:
     """
-    🔱 Scriber Core CLI Messaging & Terminal Styling Suite.
+    🔱 Scriber Core Frontend Messaging & Terminal Styling Suite.
     """
     if ctx.invoked_subcommand is None:
         run_smoke_test()

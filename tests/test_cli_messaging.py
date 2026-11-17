@@ -3,7 +3,7 @@
 test_cli_messaging.py
 
 Comprehensive unit and integration test suite for Scriber Core messaging modules:
-`src/cli/messaging.py`, `src/frontend/messaging.py`, `src/cli/__init__.py`,
+`src/frontend/messaging.py`, `src/cli/__init__.py`,
 and `src/frontend/__init__.py`.
 """
 
@@ -61,7 +61,7 @@ from cli import (
     supports_256_color as cli_pkg_supports_256_color,
     run_messaging_smoke_test,
 )
-from frontend.messaging import (
+from cli.messaging import (
     EIGENSCRIBE_PALETTE as FRONTEND_PALETTE,
     STYLE_MAP as FRONTEND_STYLE_MAP,
     ansi_256 as fe_ansi_256,
@@ -82,7 +82,7 @@ from frontend.messaging import (
     run_smoke_test as fe_run_smoke_test,
     supports_256_color as fe_supports_256_color,
 )
-from frontend import (
+from cli import (
     EIGENSCRIBE_PALETTE as ROOT_FE_PALETTE,
     STYLE_MAP as ROOT_FE_STYLE_MAP,
     ansi_256 as root_fe_ansi_256,

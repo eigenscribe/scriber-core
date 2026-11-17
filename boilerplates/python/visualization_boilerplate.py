@@ -29,7 +29,7 @@ except ImportError:
     go = None
     HAS_PLOTLY = False
 
-from frontend.THE_SCRIBER_EXPERIENCE.plots.theme import (
+0from frontend.the_scriber_experience.plots.theme import (
     apply_cosmic_theme,
     apply_theme,
     create_eigenscribe_colormap,

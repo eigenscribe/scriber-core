@@ -89,7 +89,7 @@ try:
         render_rule,
         supports_256_color,
     )
-except (ImportError, ValueError):
+except ImportError:
     from cli.colors_table import (
         cli as colors_table_cli,
         main as colors_table_main,
@@ -116,36 +116,20 @@ except (ImportError, ValueError):
         supports_256_color,
     )
 
-try:
-    from frontend.THE_SCRIBER_EXPERIENCE.plots.theme import get_eigenscribe_rcparams
-    from frontend.THE_SCRIBER_EXPERIENCE.mermaid.theme import (
-        generate_mermaid_flowchart,
-        get_mermaid_init_directive,
-        render_html_preview,
-    )
-    from frontend.THE_SCRIBER_EXPERIENCE.style.tse_colors import (
-        CLI_COLORS,
-        EIGEN_COLORS,
-        EIGEN_LABEL_COLORS,
-        EIGEN_NODE_COLORS,
-        SEMANTIC_COLORS,
-        TSE_COLORS,
-    )
-except ImportError:
-    from frontend.the_scriber_experience.plots.theme import get_eigenscribe_rcparams
-    from frontend.the_scriber_experience.mermaid.theme import (
-        generate_mermaid_flowchart,
-        get_mermaid_init_directive,
-        render_html_preview,
-    )
-    from frontend.the_scriber_experience.style.tse_colors import (
-        CLI_COLORS,
-        EIGEN_COLORS,
-        EIGEN_LABEL_COLORS,
-        EIGEN_NODE_COLORS,
-        SEMANTIC_COLORS,
-        TSE_COLORS,
-    )
+from frontend.the_scriber_experience.plots.theme import get_eigenscribe_rcparams
+from frontend.the_scriber_experience.mermaid.theme import (
+    generate_mermaid_flowchart,
+    get_mermaid_init_directive,
+    render_html_preview,
+)
+from frontend.the_scriber_experience.style.semantic_roles import (
+    CLI_COLORS,
+    EIGEN_COLORS,
+    EIGEN_LABEL_COLORS,
+    EIGEN_NODE_COLORS,
+    SEMANTIC_COLORS,
+    TSE_COLORS,
+)
 
 __all__: list[str] = [
     "BADGE_COLORS",
