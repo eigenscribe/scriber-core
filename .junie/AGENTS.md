@@ -163,6 +163,14 @@ When styling web pages, apps, data dashboards, or CLI outputs, adhere to `../hou
 9. **End-of-Run File Consistency & Hygiene**:
    - Every file must be updated appropriately relative to files created or modified by the agent during a given run.
    - At the conclusion of any session, perform an explicit consistency audit ensuring that all documentation (`README.md`, setup guides, `CHANGELOG.md`), configuration files (`pyproject.toml`, `.gitignore`, `.readthedocs.yaml`), tests, and source codes are completely clean, synchronized, and mutually consistent.
+10. **AI-Generated Content Disclosure Standard**:
+    - All AI-generated markdown documentation files (research notebooks, learning guides, CLI usage docs, architectural analysis, etc.) must be stored in a dedicated subdirectory under `docs/`, such as `docs/ai-generated-research-notebooks/`.
+    - Every AI-generated markdown file must begin with a prominent disclosure notice at the top, immediately following the title:
+      ```markdown
+      > ⚠️ **AI-GENERATED CONTENT NOTICE:** This [document type] was drafted with the assistance of an AI (Junie). It is intended as an [purpose: educational resource, theoretical overview, research exploration, etc.].
+      ```
+    - If a project contains AI-generated documentation, the root `README.md` should include a cross-reference pointing users to the AI-generated content directory.
+    - AI-generated content must be reviewed for accuracy, mathematical rigor, and consistency with project standards before being committed.
 
 ---
 

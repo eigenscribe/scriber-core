@@ -265,6 +265,31 @@ universal = true
 
 ---
 
+## 🤖 5b. AI-Generated Content Disclosure Standard
+
+Any AI-generated markdown documentation files created by autonomous agents must follow these disclosure and placement standards:
+
+1. **Placement in `docs/` Directory**:
+   - All AI-generated markdown files (research notebooks, learning guides, CLI usage docs, architectural analysis, etc.) must be stored in a dedicated subdirectory under `docs/`, such as `docs/ai-generated-research-notebooks/`.
+   - This keeps the production CLI and core documentation clean while allowing rapid research iteration and proof-of-concept exploration.
+2. **Mandatory AI Disclosure Notice**:
+   - Every AI-generated markdown file must begin with a prominent disclosure notice at the top of the file, immediately following the title. Use the standard format:
+     ```markdown
+     > ⚠️ **AI-GENERATED CONTENT NOTICE:** This [document type] was drafted with the assistance of an AI (Junie). It is intended as an [purpose: educational resource, theoretical overview, research exploration, etc.].
+     ```
+   - The notice should clearly state the AI's role and the intended purpose of the document.
+3. **README Cross-Reference**:
+   - If a project contains AI-generated documentation, the root `README.md` or relevant navigation docs should include a cross-reference pointing users to the AI-generated content directory:
+     ```markdown
+     - 📂 AI-Generated Demos: For interactive research and new mesoscale models, please visit: 👉 `docs/ai-generated-research-notebooks/`
+     - We store all evolving proof-of-concepts there to maintain a clean production CLI while allowing rapid research iteration.
+     ```
+4. **Content Quality & Review**:
+   - AI-generated content should be reviewed for accuracy, mathematical rigor, and consistency with project standards before being committed.
+   - Mathematical derivations, code examples, and theoretical claims must be verified against source code and established references.
+
+---
+
 ## 🧪 4. Testing & Coverage Strategy ("In Medio Stat Virtus")
 
 1. **Framework & Layout**:
