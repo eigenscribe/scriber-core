@@ -16,11 +16,11 @@ All primitive color tokens in `scriber-core` are defined in `src/frontend/colors
 | **2** | `forest_teal` | `#064e38` | `(6, 78, 56)` | 💚 Deep muted teal / secondary surface |
 | **3** | `pine` | `#059669` | `(5, 150, 105)` | 💚 Medium emerald / verified state |
 | **4** | `success_emerald` | `#10b981` | `(16, 185, 129)` | 💚 **CLI Status**: Success & STEM verified metric |
-| **5** | `ibm-green` | `#309592` | `(48, 149, 146)` | 💚 Muted cyan-green / industrial indicator |
+| **5** | `ibm_green` | `#309592` | `(48, 149, 146)` | 💚 Muted cyan-green / industrial indicator |
 | **6** | `deep_green` | `#038b00` | `(3, 139, 0)` | 💚 Pure deep green / high-saturation accent |
 | **7** | `neon_green` | `#31ff40` | `(49, 255, 64)` | 💚 High-luminance neon / attention indicator |
 | **8** | `bright_chartreuse` | `#70e000` | `(112, 224, 0)` | 💚 High-contrast lime / mathematical scalar |
-| **9** | `junie-lime` | `#a7c957` | `(167, 201, 87)` | 💚 Soft olive-lime / forest gradient stop |
+| **9** | `junie_lime` | `#a7c957` | `(167, 201, 87)` | 💚 Soft olive-lime / forest gradient stop |
 | **10** | `pale_mint` | `#b4ffcf` | `(180, 255, 207)` | 💚 Light mint / luminous accent text |
 | **11** | `tropical_teal` | `#03e8bd` | `(3, 232, 189)` | 💚 High-saturation teal / quantum indicator |
 | **12** | `electric_cyan` | `#00ffee` | `(0, 255, 238)` | 🩵 High-energy cyan / `tse-gradient-1` start |
@@ -28,7 +28,7 @@ All primitive color tokens in `scriber-core` are defined in `src/frontend/colors
 | **14** | `bright_cyan` | `#00f0ff` | `(0, 240, 255)` | 🩵 Signature `tse-cyan` / active focus |
 | **15** | `vivid_cyan` | `#00e8ff` | `(0, 232, 255)` | 🩵 **Primary Brand**: Eigenscribe core cyan |
 | **16** | `sky_cyan` | `#4cc9f0` | `(76, 201, 240)` | 🩵 Soft sky cyan / section bullet marker |
-| **17** | `ibm-cyan` | `#2ca9e6` | `(44, 169, 230)` | 🩵 Technical sky blue / documentation accent |
+| **17** | `ibm_cyan` | `#2ca9e6` | `(44, 169, 230)` | 🩵 Technical sky blue / documentation accent |
 | **18** | `sky_info` | `#38bdf8` | `(56, 189, 248)` | 🩵 **CLI Status**: Informational / interactive badge |
 | **19** | `ice_blue` | `#b8f6ff` | `(184, 246, 255)` | 🩵 Luminous low-fatigue body text token |
 | **20** | `midnight_navy` | `#06152b` | `(6, 21, 43)` | 💙 Deep cosmic background void |
@@ -94,12 +94,12 @@ All multi-stop TrueColor gradients in `src/frontend/gradients.py` support mathem
 | **`tse-gradient-1`** | `#00ffee` → `#00e8ff` → `#14b5ff` | `electric_cyan` → `vivid_cyan` → `vivid_sky_blue` | **Cyan Flow**: High-luminance interactive controls and telemetry monitors |
 | **`tse-gradient-2`** | `#00e8ff` → `#14b5ff` → `#0a95eb` → `#0070eb` → `#5e17eb` | `vivid_cyan` → `vivid_sky_blue` → `skyline_blue` → `vivid_blue` → `electric_violet` | **Deep Spectrum**: Extended 5-stop gradient for wide terminal displays and plots |
 | **`electric`** | `#00a6ff` → `#a855f7` → `#ff00c3` | `electric_blue` → `bright_purple` → `bright_magenta` | **Signature Electric**: High-contrast cybernetic headings and brand banners |
-| **`sunset`** | `#ff6b35` → `#f7c548` → `#ff40a1` | `solar_orange` → `warning_amber` → `bright_pink` | **Solar Sunset**: Dynamic execution telemetry, heat warnings, and benchmarks |
-| **`forest`** | `#a7c957` → `#2a9d8f` → `#264653` | `junie-lime` → `tropical_teal` → `granite` | **Deep Forest**: Numerical simulations, environmental metrics, and ecology models |
-| **`midnight`** | `#38bdf8` → `#818cf8` → `#f43f5e` | `sky_info` → `midwest_indigo` → `rose_pink` | **Midnight Cosmic**: Astrodynamics, phase topologies, and deep-space metrics |
-| **`aurora`** | `#06b6d4` → `#10b981` → `#84cc16` | `aqua` → `success_emerald` → `bright_chartreuse` | **Quantum Aurora**: Energy fields, spectral analysis, and optimal convergence |
-| **`cyberpunk`** | `#00f0ff` → `#7000ff` → `#ff007b` | `bright_cyan` → `deep_violet` → `hot_pink` | **Cyberpunk Neon**: High-attention diagnostic flags, overrides, and stress states |
-| **`purple_gradient`** | `#7209b7` → `#a855f7` → `#7952f5` | `royal_purple` → `bright_purple` → `bright_violet` | **Royal Violet**: Architectural submodules, structural layers, and mathematics |
+| **`sunset`** | `#ff783d` → `#f7c548` → `#ff40a1` | `coral_orange` → `warning_amber` → `bright_pink` | **Solar Sunset**: Dynamic execution telemetry, heat warnings, and benchmarks |
+| **`forest`** | `#a7c957` → `#03e8bd` → `#264653` | `junie_lime` → `tropical_teal` → `granite` | **Deep Forest**: Numerical simulations, environmental metrics, and ecology models |
+| **`midnight`** | `#38bdf8` → `#6f78fa` → `#ff66b3` | `sky_info` → `midwest_indigo` → `rose_pink` | **Midnight Cosmic**: Astrodynamics, phase topologies, and deep-space metrics |
+| **`aurora`** | `#03e8bd` → `#10b981` → `#70e000` | `tropical_teal` → `success_emerald` → `bright_chartreuse` | **Quantum Aurora**: Energy fields, spectral analysis, and optimal convergence |
+| **`cyberpunk`** | `#00f0ff` → `#5e17eb` → `#ff007b` | `bright_cyan` → `electric_violet` → `hot_pink` | **Cyberpunk Neon**: High-attention diagnostic flags, overrides, and stress states |
+| **`purple_gradient`** | `#7209b7` → `#a855f7` → `#7c3aed` | `royal_purple` → `bright_purple` → `bright_violet` | **Royal Violet**: Architectural submodules, structural layers, and mathematics |
 
 ---
 
@@ -145,15 +145,16 @@ A comprehensive utilitarian review of design token architecture and styling subs
 5. **Deterministic Testing Rigor**:
    - Built-in smoke testing and 100% automated test suite coverage (`pytest`) guaranteeing zero regressions during package refactoring.
 
-### ⚠️ The Bad
-1. **Historical Key Naming Inconsistencies**:
-   - A minority of keys in `COLOR_PALETTE` use kebab-case (`ibm-green`, `ibm-cyan`, `junie-lime`, `tse-cyan`) while the vast majority follow canonical snake_case (`ibm_indigo`, `ibm_purple`, `vivid_cyan`, `sky_info`). Standardizing all keys to snake_case while preserving alias properties is recommended for future releases.
-2. **Residual Hardcoded Hex Literals in Plotting & Mermaid Themes**:
-   - While `src/cli/` and `src/frontend/style/` strictly reference `COLOR_PALETTE`, certain theme definitions in `src/frontend/the_scriber_experience/plots/theme.py` and `mermaid/theme.py` use direct hex literals (`#0d1117`, `#161b22`, `#c8f8ff`) rather than accessing `COLOR_PALETTE["midnight_navy"]` or `COLOR_PALETTE["ice_blue"]`.
-3. **Multiple Re-Export Aliases**:
-   - The coexistence of `GRADIENT_PRESETS`, `TSE_GRADIENTS`, and `PRESETS` across `gradients.py` increases API redundancy, though it protects legacy callers from breaking changes.
+### ⚠️ The Bad (Resolved)
+1. **Historical Key Naming Inconsistencies (Resolved)**:
+   - All kebab-case keys (`ibm-green`, `ibm-cyan`, `junie-lime`) in `COLOR_PALETTE` have been standardized to snake_case (`ibm_green`, `ibm_cyan`, `junie_lime`). The palette now uses exclusively snake_case keys, consistent with the rest of the codebase.
+2. **Residual Hardcoded Hex Literals in Gradient Presets (Resolved)**:
+   - All hardcoded hex literals in `src/frontend/gradients.py` gradient presets (`electric`, `sunset`, `forest`, `midnight`, `aurora`, `cyberpunk`, `purple_gradient`) have been replaced with `COLOR_PALETTE` references, ensuring all gradient stops derive from the single source of truth.
+   - **Note**: `plots/theme.py` and `mermaid/theme.py` retain localized hex constants for Matplotlib rcParams, CSS-in-Mermaid class definitions, and HTML preview templates, where direct hex values are required by the target rendering engines (Matplotlib, Mermaid.js, browser CSS). These are documented design tokens rather than uncoordinated literals.
+3. **Multiple Re-Export Aliases (Resolved)**:
+   - `TSE_GRADIENTS` and `PRESETS` in `gradients.py` have been collapsed into direct aliases of `GRADIENT_PRESETS` (single canonical dict), eliminating the intermediate subset mapping while preserving backward compatibility for legacy callers.
 
-### 🛑 The Ugly
+### 🛑 The Ugly (All Resolved)
 1. **Deprecated Duplicate CLI Folders (Resolved)**:
    - Previously, duplicate CLI implementations existed in both `src/cli/` and `src/frontend/the_scriber_experience/cli/`, causing import shadowing, partially initialized module errors, and fragile relative imports. Consolidating all CLI commands into `src/cli/` and deleting the duplicate resolved these issues.
 2. **Module Casing & Path Collisions (Resolved)**:

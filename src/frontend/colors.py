@@ -59,11 +59,11 @@ COLOR_PALETTE: Final[dict[str, str]] = {
     "forest_teal": "#064e38",
     "pine": "#059669",
     "success_emerald": "#10b981",  # ⌨️ cli status color: success
-    "ibm-green": "#309592",
+    "ibm_green": "#309592",
     "deep_green": "#038b00",
     "neon_green": "#31ff40",
     "bright_chartreuse": "#70e000",
-    "junie-lime": "#a7c957",
+    "junie_lime": "#a7c957",
     "pale_mint": "#b4ffcf",
     "tropical_teal": "#03e8bd",
     # 🩵💙 Cyans & Light Blues
@@ -72,7 +72,7 @@ COLOR_PALETTE: Final[dict[str, str]] = {
     "bright_cyan": "#00f0ff",  # 🐉 tse-cyan
     "vivid_cyan": "#00e8ff",  # 🌈 tse-gradient-2
     "sky_cyan": "#4cc9f0",
-    "ibm-cyan": "#2ca9e6",
+    "ibm_cyan": "#2ca9e6",
     "sky_info": "#38bdf8",  # ⌨️ info
     "ice_blue": "#b8f6ff",
     # 💙💜 Blues and Indigos

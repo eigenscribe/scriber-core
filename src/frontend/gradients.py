@@ -106,33 +106,51 @@ GRADIENT_PRESETS: Final[dict[str, tuple[str, ...]]] = {
         COLOR_PALETTE["electric_violet"],
     ),
     # 🌟 Eigenscribe signature:
-    "electric": ("#00a6ff", "#a855f7", "#ff00c3"),
-    # 🌅 Solar Sunset: Orange (#ff6b35) -> Amber (#f7c548) -> Crimson (#d7263d)
-    "sunset": ("#ff6b35", "#f7c548", "#ff40a1"),
-    # 🌲 Deep Forest: Olive (#a7c957) -> Teal (#2a9d8f) -> Pine (#264653)
-    "forest": ("#a7c957", "#2a9d8f", "#264653"),
-    # 🌌 Midnight Cosmic: Sky Cyan (#38bdf8) -> Lavender (#818cf8) -> Rose (#f43f5e)
-    "midnight": ("#38bdf8", "#818cf8", "#f43f5e"),
-    # 🌿 Quantum Aurora: Aqua (#06b6d4) -> Emerald (#10b981) -> Lime (#84cc16)
-    "aurora": ("#06b6d4", "#10b981", "#84cc16"),
-    # ⚡ Cyberpunk Neon: Electric Cyan (#00f0ff) -> Deep Violet (#7000ff) -> Hot Pink (#ff007b)
-    "cyberpunk": ("#00f0ff", "#7000ff", "#ff007b"),
-    # 💜 Purple Gradient: Purple-2 (#7209b7) -> Warm purple (#a855f7) -> Purple-1 (#7952f5)
-    "purple_gradient": ("#7209b7", "#a855f7", "#7952f5"),
+    "electric": (
+        COLOR_PALETTE["electric_blue"],
+        COLOR_PALETTE["bright_purple"],
+        COLOR_PALETTE["bright_magenta"],
+    ),
+    # 🌅 Solar Sunset: Coral Orange (#ff783d) -> Amber (#f7c548) -> Bright Pink (#ff40a1)
+    "sunset": (
+        COLOR_PALETTE["coral_orange"],
+        COLOR_PALETTE["warning_amber"],
+        COLOR_PALETTE["bright_pink"],
+    ),
+    # 🌲 Deep Forest: Junie Lime (#a7c957) -> Tropical Teal (#03e8bd) -> Granite (#264653)
+    "forest": (
+        COLOR_PALETTE["junie_lime"],
+        COLOR_PALETTE["tropical_teal"],
+        COLOR_PALETTE["granite"],
+    ),
+    # 🌌 Midnight Cosmic: Sky Info (#38bdf8) -> Midwest Indigo (#6f78fa) -> Rose Pink (#ff66b3)
+    "midnight": (
+        COLOR_PALETTE["sky_info"],
+        COLOR_PALETTE["midwest_indigo"],
+        COLOR_PALETTE["rose_pink"],
+    ),
+    # 🌿 Quantum Aurora: Tropical Teal (#03e8bd) -> Success Emerald (#10b981) -> Bright Chartreuse (#70e000)
+    "aurora": (
+        COLOR_PALETTE["tropical_teal"],
+        COLOR_PALETTE["success_emerald"],
+        COLOR_PALETTE["bright_chartreuse"],
+    ),
+    # ⚡ Cyberpunk Neon: Bright Cyan (#00f0ff) -> Electric Violet (#5e17eb) -> Hot Pink (#ff007b)
+    "cyberpunk": (
+        COLOR_PALETTE["bright_cyan"],
+        COLOR_PALETTE["electric_violet"],
+        COLOR_PALETTE["hot_pink"],
+    ),
+    # 💜 Purple Gradient: Royal Purple (#7209b7) -> Bright Purple (#a855f7) -> Bright Violet (#7c3aed)
+    "purple_gradient": (
+        COLOR_PALETTE["royal_purple"],
+        COLOR_PALETTE["bright_purple"],
+        COLOR_PALETTE["bright_violet"],
+    ),
 }
 
-TSE_GRADIENTS: Final[dict[str, tuple[str, ...]]] = {
-    "tse-gradient-1": GRADIENT_PRESETS["tse-gradient-1"],
-    "tse-gradient-2": GRADIENT_PRESETS["tse-gradient-2"],
-    "eigenscribe": GRADIENT_PRESETS["eigenscribe"],
-    "electric": GRADIENT_PRESETS["electric"],
-    "sunset": GRADIENT_PRESETS["sunset"],
-    "forest": GRADIENT_PRESETS["forest"],
-    "midnight": GRADIENT_PRESETS["midnight"],
-    "aurora": GRADIENT_PRESETS["aurora"],
-    "cyberpunk": GRADIENT_PRESETS["cyberpunk"],
-}
-
+# Legacy aliases for backward compatibility — prefer GRADIENT_PRESETS directly.
+TSE_GRADIENTS: Final[dict[str, tuple[str, ...]]] = GRADIENT_PRESETS
 PRESETS: Final[dict[str, tuple[str, ...]]] = GRADIENT_PRESETS
 
 
