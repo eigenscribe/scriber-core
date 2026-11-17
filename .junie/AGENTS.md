@@ -13,6 +13,7 @@ Agents must consult and adhere to the source reference specifications and gold s
 | `../house-rules` | `../house-rules/python-rules.md` | Core rules for Python development: mathematical typography, modern RNG, typing, package hygiene, docstrings, and script flow. |
 | `../house-rules` | `../house-rules/css-rules.md` | The Scriber Experience design system: 4-layer token hierarchy, glassmorphism baseline, ADHD semantic color coding, and golden ratio spacing. |
 | `../docs` | `../docs/workspace-setup-guide.md` | Canonical workspace distribution, packaging, Diátaxis Sphinx docs, testing, and PyPI release guide. |
+| `../docs/COOP_blog` | `../docs/COOP_blog/...` | Reference archive of CERFACS COOP software engineering standards (Gold standard packaging, Click CLIs, Cactus branching, json-SCHEMA). |
 | `../src/frontend` | `../src/the-scriber-experience` | ANSI TrueColor multi-stop linear RGB gradient engine and color-stop presets. |
 | `../src/frontend` | `../src/the-scriber-experience` | ANSI 256-color terminal palette, semantic level messaging, and CLI styling helpers. |
 | `../boilerplates` | `../boilerplates/python/gold-standard.py` | Gold standard reference script template implementing mathematical simulation, explicit type annotations, shape assertions, deterministic RNG, and smoke testing. |

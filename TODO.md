@@ -28,6 +28,7 @@
 - [x] Update @docs/workspace-setup-guide.md and all other relevant files (e.g., @.junie/AGENTS.md) so they exhaustively
   incorporate standards and constraints from COOP blog posts (see `docs/COOP_blog` .html files).
   - [x] @docs/COOP_blog/Python packages_ the COOP gold standard · The COOP Blog.html
+    - [x] Cite COOP blog post and provenance across @docs/workspace-setup-guide.md, @README.md, and @.junie/AGENTS.md.
   - [ ] @docs/COOP_blog/Using the json-SCHEMA standard for scientific applications_ · The COOP Blog.html
   - [ ] @docs/COOP_blog/The Coop Cactus branching model · The COOP Blog.html
   - [ ] @docs/COOP_blog/The COOP Click Command line interfaces · The COOP Blog.html

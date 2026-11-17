@@ -450,3 +450,17 @@ Every autonomous agent run or development cycle must conclude with a mandatory c
    - Remove temporary scratchpads, stale comments, broken imports, or outdated configurations before ending any session.
 4. **Build Artifact Cleanliness**:
    - Confirm that `dist/`, `build/`, `*.egg-info`, `docs/_build/`, and auto-generated API directories remain strictly excluded from git tracking.
+
+---
+
+## 📚 References & Provenance
+
+The repository layout, testing philosophy, versioning discipline, and packaging governance defined in this workspace synthesize modern PEP 517/518/621 tooling (`uv`, `hatchling`) with the software engineering standards established by the CERFACS COOP team:
+
+- **Original Article**: Dauptain, Antoine. *"Python packages: the COOP gold standard"*, The COOP Blog, CERFACS (Feb 21, 2022).
+  - **Web**: [https://cerfacs.fr/coop/coop-standard-on-python-pkges](https://cerfacs.fr/coop/coop-standard-on-python-pkges)
+  - **Local Archive**: [`docs/COOP_blog/Python packages_ the COOP gold standard · The COOP Blog.html`](COOP_blog/Python%20packages_%20the%20COOP%20gold%C2%A0standard%20%C2%B7%20The%20COOP%20Blog.html)
+- **Related COOP Articles**:
+  - *"The COOP Click Command line interfaces"* — [Web](https://cerfacs.fr/coop/the-coop-click-command-line-interfaces) | Local: [`docs/COOP_blog/The COOP Click Command line interfaces · The COOP Blog.html`](COOP_blog/The%20COOP%20Click%20Command%20line%C2%A0interfaces%20%C2%B7%20The%20COOP%20Blog.html)
+  - *"The Coop Cactus branching model"* — [Web](https://cerfacs.fr/coop/the-coop-cactus-branching-model) | Local: [`docs/COOP_blog/The Coop Cactus branching model · The COOP Blog.html`](COOP_blog/The%20Coop%20Cactus%20branching%C2%A0model%20%C2%B7%20The%20COOP%20Blog.html)
+  - *"Using the json-SCHEMA standard for scientific applications"* — [Web](https://cerfacs.fr/coop/using-the-json-schema-standard-for-scientific-applications) | Local: [`docs/COOP_blog/Using the json-SCHEMA standard for scientific applications_ · The COOP Blog.html`](COOP_blog/Using%20the%20json-SCHEMA%20standard%20for%20scientific%C2%A0applications_%20%C2%B7%20The%20COOP%20Blog.html)

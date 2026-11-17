@@ -6,7 +6,8 @@ Welcome to the canonical environment index for autonomous development agents. Th
 
 ```text
 ├── docs/
-│   └── workspace-setup-guide.md        # Multi-project distribution & setup guide (Submodules / Templates / Packaging)
+│   ├── workspace-setup-guide.md        # Multi-project distribution & setup guide (Submodules / Templates / Packaging)
+│   └── COOP_blog/                      # Reference archive of CERFACS COOP software standards
 ├── house-rules/
 │   ├── python-rules.md               # Mathematical typography, packaging hygiene & consistency rules
 │   ├── python-rules_v1.md            # Reference version 1 rules archive
@@ -182,6 +183,10 @@ For each repository, establish:
 - What the figures and results genuinely demonstrate.
 - What remains speculative or unfinished.
 - Where the relevant mathematical reasoning lives.
+
+## 🏛️ Standards & References
+
+- Packaging, versioning, branching, and testing standards adapted from the [COOP Gold Standard](https://cerfacs.fr/coop/coop-standard-on-python-pkges) (CERFACS) and detailed in [`docs/workspace-setup-guide.md`](docs/workspace-setup-guide.md).
 
 ---
 🔬 *Eigenscribe Inc. 2025-2026. Part of the Scriber Labs Research Framework.*
