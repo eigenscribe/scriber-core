@@ -30,6 +30,7 @@ from .colors import (
 from .gradients import (
     GRADIENT_PRESETS,
     TSE_GRADIENTS,
+    compute_golden_ratio_stop_positions,
     multi_gradient,
 )
 from .the_scriber_experience import (
@@ -107,6 +108,7 @@ __all__: list[str] = [
     "GRADIENT_PRESETS",
     "TSE_GRADIENTS",
     "PRESETS",
+    "compute_golden_ratio_stop_positions",
     "multi_gradient",
     # CLI Messaging
     "cli_message",

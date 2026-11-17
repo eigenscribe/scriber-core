@@ -23,29 +23,41 @@ if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
 
 try:
     from frontend.gradients import (
+        GOLDEN_RATIO,
+        GOLDEN_RATIO_INVERSE,
         GRADIENT_PRESETS,
+        PHI,
         TSE_GRADIENTS,
         Color,
         RGB,
+        compute_golden_ratio_stop_positions,
         hex_to_rgb,
         multi_gradient,
     )
 except ImportError:
     try:
         from src.frontend.gradients import (
+            GOLDEN_RATIO,
+            GOLDEN_RATIO_INVERSE,
             GRADIENT_PRESETS,
+            PHI,
             TSE_GRADIENTS,
             Color,
             RGB,
+            compute_golden_ratio_stop_positions,
             hex_to_rgb,
             multi_gradient,
         )
     except ImportError:
         from ...gradients import (
+            GOLDEN_RATIO,
+            GOLDEN_RATIO_INVERSE,
             GRADIENT_PRESETS,
+            PHI,
             TSE_GRADIENTS,
             Color,
             RGB,
+            compute_golden_ratio_stop_positions,
             hex_to_rgb,
             multi_gradient,
         )
@@ -53,8 +65,13 @@ except ImportError:
 __all__: list[str] = [
     "RGB",
     "Color",
+    "GOLDEN_RATIO",
+    "GOLDEN_RATIO_INVERSE",
+    "PHI",
+    "PRESETS",
     "GRADIENT_PRESETS",
     "TSE_GRADIENTS",
+    "compute_golden_ratio_stop_positions",
     "hex_to_rgb",
     "multi_gradient",
 ]
