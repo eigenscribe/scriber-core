@@ -29,35 +29,27 @@ import click
 from frontend.colors import COLOR_PALETTE, hex_to_rgb
 from frontend.gradients import (
     GRADIENT_PRESETS,
-    TSE_GRADIENTS,
     multi_gradient,
 )
-from frontend.the_scriber_experience.cli.messaging import (
-    EIGENSCRIBE_PALETTE,
-    STYLE_MAP,
+from frontend.THE_SCRIBER_EXPERIENCE.cli.messaging import (
     ansi_256,
     cli_banner,
-    cli_echo,
     cli_error,
     cli_highlight,
     cli_info,
-    cli_message,
     cli_rule,
     cli_success,
-    cli_warning,
     supports_256_color,
 )
-from frontend.the_scriber_experience.mermaid.theme import (
-    EIGENSCRIBE_MERMAID_THEME_VARIABLES,
+from frontend.THE_SCRIBER_EXPERIENCE.mermaid.theme import (
     generate_mermaid_flowchart,
     get_mermaid_init_directive,
     render_html_preview,
-    wrap_mermaid_diagram,
 )
-from frontend.the_scriber_experience.plots.theme import (
+from frontend.THE_SCRIBER_EXPERIENCE.plots.theme import (
     get_eigenscribe_rcparams,
 )
-from frontend.the_scriber_experience.style.tse_colors import (
+from frontend.THE_SCRIBER_EXPERIENCE.style.tse_colors import (
     CLI_COLORS,
     EIGEN_COLORS,
     EIGEN_LABEL_COLORS,

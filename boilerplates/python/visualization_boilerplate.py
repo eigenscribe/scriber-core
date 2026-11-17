@@ -11,11 +11,9 @@ Date: November 2026
 
 from __future__ import annotations
 
-from typing import Any, Final
-
 import matplotlib.pyplot as plt
 import numpy as np
-from numpy.typing import NDArray
+from typing import Any, Final
 
 try:
     import seaborn as sns
@@ -31,7 +29,7 @@ except ImportError:
     go = None
     HAS_PLOTLY = False
 
-from frontend.the_scriber_experience.plots.theme import (
+from frontend.THE_SCRIBER_EXPERIENCE.plots.theme import (
     apply_cosmic_theme,
     apply_theme,
     create_eigenscribe_colormap,
