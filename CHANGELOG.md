@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - AI-Generated Content Disclosure Standard in `docs/workspace-setup-guide.md` (section 4) — requiring disclosure notices, dedicated `docs/` placement, and README cross-references for AI-generated documentation.
 
 ### Changed
+- Collapsed multi-path `try/except ImportError` fallback chains across `src/frontend/gradients.py`, `src/frontend/the_scriber_experience/style/gradient_presets.py`, `src/frontend/the_scriber_experience/style/semantic_roles.py`, `src/frontend/the_scriber_experience/mermaid/theme.py`, `src/cli/main.py`, `src/cli/messaging.py`, and `src/cli/__main__.py` into canonical absolute imports (`frontend.*` and `cli.*`).
+- Refactored `src/frontend/the_scriber_experience/style/gradient_presets.py` to import and re-export gradient presets directly from `frontend.gradients`.
+- Updated CLI package exports and repointed all `cli.colors` consumers to `cli.colors_table`.
 - Renamed `src/frontend/THE_SCRIBER_EXPERIENCE/` to `src/frontend/the_scriber_experience/` (PEP 8 compliant package naming).
 - Updated all imports across `src/`, `boilerplates/`, and `tests/` to use `the_scriber_experience` instead of `THE_SCRIBER_EXPERIENCE`.
 - Removed `sys.modules` aliasing hacks in `src/frontend/__init__.py` that bridged uppercase and lowercase import names.
@@ -26,6 +29,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Moved `src/frontend/messaging.py` to `src/cli/messaging.py` — all CLI-specific terminal styling now lives in `src/cli/`.
 
 ### Removed
+- Deleted duplicate `src/cli/colors.py` facade in favor of direct `cli.colors_table` imports, establishing `src/frontend/colors.py` as the single owner of the `colors` module name.
+- Deleted stray package marker `src/__init__.py` to eliminate ambiguous `src.`-prefixed imports and maintain `packages = ["src/frontend", "src/cli"]` parity.
 - Removed `src/frontend/messaging.py` (moved to `src/cli/messaging.py`) — all CLI-specific terminal styling now lives in `src/cli/`.
 - Removed deprecated `src/frontend/the_scriber_experience/cli/` directory and its contents (`__init__.py`, `gradients.py`, `main.py`, `messaging.py`), consolidating all CLI utilities into `src/cli/`.
 - Removed hyphenated alias files `src/frontend/the_scriber_experience/style/tse-colors.py` and `tse-gradients.py` (these simply forwarded to `tse_colors.py` and `tse_gradients.py`).

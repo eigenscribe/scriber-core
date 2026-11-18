@@ -63,58 +63,31 @@ import click
 from frontend.colors import COLOR_PALETTE, RGB, hex_to_rgb
 from frontend.gradients import GRADIENT_PRESETS, multi_gradient
 
-try:
-    from .colors_table import (
-        cli as colors_table_cli,
-        main as colors_table_main,
-        print_colors_table,
-        render_colors_table,
-    )
-    from .messaging import (
-        EIGENSCRIBE_PALETTE,
-        STYLE_MAP,
-        ansi_256,
-        cli_banner,
-        cli_echo,
-        cli_error,
-        cli_highlight,
-        cli_info,
-        cli_message,
-        cli_rule,
-        cli_success,
-        cli_warning,
-        render_banner,
-        render_echo,
-        render_message,
-        render_rule,
-        supports_256_color,
-    )
-except ImportError:
-    from cli.colors_table import (
-        cli as colors_table_cli,
-        main as colors_table_main,
-        print_colors_table,
-        render_colors_table,
-    )
-    from cli.messaging import (
-        EIGENSCRIBE_PALETTE,
-        STYLE_MAP,
-        ansi_256,
-        cli_banner,
-        cli_echo,
-        cli_error,
-        cli_highlight,
-        cli_info,
-        cli_message,
-        cli_rule,
-        cli_success,
-        cli_warning,
-        render_banner,
-        render_echo,
-        render_message,
-        render_rule,
-        supports_256_color,
-    )
+from cli.colors_table import (
+    cli as colors_table_cli,
+    main as colors_table_main,
+    print_colors_table,
+    render_colors_table,
+)
+from cli.messaging import (
+    EIGENSCRIBE_PALETTE,
+    STYLE_MAP,
+    ansi_256,
+    cli_banner,
+    cli_echo,
+    cli_error,
+    cli_highlight,
+    cli_info,
+    cli_message,
+    cli_rule,
+    cli_success,
+    cli_warning,
+    render_banner,
+    render_echo,
+    render_message,
+    render_rule,
+    supports_256_color,
+)
 
 from frontend.the_scriber_experience.plots.theme import get_eigenscribe_rcparams
 from frontend.the_scriber_experience.mermaid.theme import (

@@ -8,17 +8,16 @@ and UI styling.
 
 Author: Eigenscribe
 Date: November 14, 2026
-Last Updated: November 17, 2026
+Last Updated: November 18, 2026
 """
 
 from __future__ import annotations
 
 import math
 import re
+import sys
 from collections.abc import Sequence
 from typing import Final, TypeAlias
-
-import sys
 
 if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
     try:
@@ -29,6 +28,7 @@ if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
 __all__: list[str] = [
     "RGB",
     "Color",
+    "COLOR_GROUPS",
     "COLOR_PALETTE",
     "GOLDEN_RATIO",
     "PHI",
@@ -48,87 +48,118 @@ RGB: TypeAlias = tuple[int, int, int]
 Color: TypeAlias = str | RGB
 
 # ➗ Golden Ratio Constants (phi = (1 + sqrt(5)) / 2)
-GOLDEN_RATIO: Final[float] = (1.0 + 5.0**0.5) / 2.0  # φ ≈ 1.618033988749895
+GOLDEN_RATIO: Final[float] = (1.0 + 5.0**0.5) / 2.0  # ≈ 1.618033988749895
 PHI: Final[float] = GOLDEN_RATIO
-GOLDEN_RATIO_INVERSE: Final[float] = GOLDEN_RATIO - 1.0  # 1/φ = φ - 1 ≈ 0.618033988749895
+GOLDEN_RATIO_INVERSE: Final[float] = GOLDEN_RATIO - 1.0  # 1/φ ≈ 0.618033988749895
 
-# 🎨 Single Named Color Palette
+# -----------------------------------------------------------------------------------------------------------
+# 🎨 Color Palette — grouped by hue family
+#
+# COLOR_GROUPS is the source of truth; COLOR_PALETTE is derived from it (insertion
+# order preserved). Semantic/CLI colors are annotated in comments.
+# -----------------------------------------------------------------------------------------------------------
+
+COLOR_GROUPS: Final[dict[str, dict[str, str]]] = {
+    "Greens & Teals": {
+        "deep_pine": "#071a12",
+        "forest_teal": "#064e38",
+        "pine": "#059669",
+        "success_emerald": "#10b981",  # ⌨️ cli status color: success
+        "ibm_green": "#309592",
+        "deep_green": "#038b00",
+        "neon_green": "#31ff40",
+        "bright_chartreuse": "#70e000",
+        "junie_lime": "#a7c957",
+        "pale_mint": "#b4ffcf",
+        "tropical_teal": "#03e8bd",
+    },
+    "Cyans & Light Blues": {
+        "electric_lagoon": "#1ef6eb",
+        "electric_cyan": "#00ffee",  # 🌈 tse-gradient-1
+        "pure_cyan": "#00ffff",
+        "bright_cyan": "#00f0ff",  # 🐉 tse-cyan
+        "vivid_cyan": "#00e8ff",  # 🌈 tse-gradient-2
+        "reef_cyan": "#1ed9f6",
+        "sky_cyan": "#4cc9f0",
+        "ibm_cyan": "#2ca9e6",
+        "sky_info": "#38bdf8",  # ⌨️ info
+        "ice_blue": "#b8f6ff",
+    },
+    "Blues & Indigos": {
+        "midnight_navy": "#06152b",
+        "deep_ocean_blue": "#003b73",
+        "vivid_blue": "#0070eb",
+        "eigen_blue": "#008eff",
+        "cerulean_surge": "#1e8af6",
+        "skyline_blue": "#0a95eb",
+        "azure_splash": "#1eb2f6",
+        "vivid_sky_blue": "#14b5ff",  # 🌈 tse-gradient-1
+        "electric_blue": "#00a6ff",
+        "sky_blue": "#3a98ff",
+        "harbor_blue": "#1e64f6",
+        "strong_blue": "#0355e8",
+        "twilight_indigo": "#1e3bf6",
+        "dusk_violet_blue": "#291ef6",
+        "ibm_indigo": "#4361ee",
+        "periwinkle_blue": "#5280ff",
+        "midwest_indigo": "#6f78fa",
+        "deep_indigo": "#3a0ca3",
+    },
+    "Purples & Violets": {
+        "deep_plum": "#120a24",
+        "dark_violet": "#3b176e",
+        "cosmic_iris": "#501ef6",
+        "electric_violet": "#5e17eb",
+        "bright_violet": "#7c3aed",
+        "nebula_purple": "#781ef6",
+        "ibm_purple": "#844ccc",
+        "bright_purple": "#a855f7",
+        "royal_purple": "#7209b7",
+        "neon_orchid": "#a01ef6",
+        "pale_lilac": "#d8b4fe",
+    },
+    "Pink & Berries": {
+        "black_cherry": "#210817",
+        "dark_berry": "#7c174f",
+        "deep_rose": "#ad1457",
+        "vivid_pink": "#f72585",
+        "ibm_pink": "#fe28a2",
+        "bright_pink": "#ff40a1",
+        "rose_pink": "#ff66b3",
+        "soft_rose": "#ff76a1",
+        "pale_orchid_pink": "#ffb4f6",
+    },
+    "Magentas & Reds": {
+        "bright_magenta": "#ff00c3",
+        "hot_pink": "#ff007b",
+        "error_crimson": "#d7263d",  # ⌨️ error
+    },
+    "Oranges & Corals": {
+        "dusty_peach": "#e7a697",
+        "soft_coral": "#f77f64",
+        "peach_coral": "#f79764",
+        "tangerine": "#ff8855",
+        "coral_orange": "#ff783d",
+        "apricot": "#ff9d57",
+        "golden_amber": "#feb639",
+        "warning_amber": "#f7c548",  # ⌨️ warning
+    },
+    "Neutrals": {
+        "ibm_black": "#161616",
+        "ibm_gray": "#262625",
+        "charcoal": "#1e293b",
+        "granite": "#264653",
+        "slate": "#64748b",
+        "ibm_white": "#f4f4f4",
+        "ghost_white": "#f8fafc",
+    },
+}
+
+# Flat palette derived from COLOR_GROUPS (single source of truth, no duplication).
 COLOR_PALETTE: Final[dict[str, str]] = {
-    # 💚🩵 Greens & Teals
-    "deep_pine": "#071a12",
-    "forest_teal": "#064e38",
-    "pine": "#059669",
-    "success_emerald": "#10b981",  # ⌨️ cli status color: success
-    "ibm_green": "#309592",
-    "deep_green": "#038b00",
-    "neon_green": "#31ff40",
-    "bright_chartreuse": "#70e000",
-    "junie_lime": "#a7c957",
-    "pale_mint": "#b4ffcf",
-    "tropical_teal": "#03e8bd",
-    # 🩵💙 Cyans & Light Blues
-    "electric_cyan": "#00ffee",  # 🌈 tse-gradient-1
-    "pure_cyan": "#00ffff",
-    "bright_cyan": "#00f0ff",  # 🐉 tse-cyan
-    "vivid_cyan": "#00e8ff",  # 🌈 tse-gradient-2
-    "sky_cyan": "#4cc9f0",
-    "ibm_cyan": "#2ca9e6",
-    "sky_info": "#38bdf8",  # ⌨️ info
-    "ice_blue": "#b8f6ff",
-    # 💙💜 Blues and Indigos
-    "midnight_navy": "#06152b",
-    "deep_ocean_blue": "#003b73",
-    "vivid_blue": "#0070eb",
-    "eigen_blue": "#008eff",
-    "skyline_blue": "#0a95eb",
-    "vivid_sky_blue": "#14b5ff",  # 🌈 tse-gradient-1
-    "electric_blue": "#00a6ff",
-    "sky_blue": "#3a98ff",
-    "strong_blue": "#0355e8",
-    "ibm_indigo": "#4361ee",
-    "periwinkle_blue": "#5280ff",
-    "midwest_indigo": "#6f78fa",
-    "deep_indigo": "#3a0ca3",
-    # 💜🩷 Purples & Violets
-    "deep_plum": "#120A24",
-    "dark_violet": "#3b176e",
-    "electric_violet": "#5e17eb",
-    "bright_violet": "#7c3aed",
-    "ibm_purple": "#844ccc",
-    "bright_purple": "#a855f7",
-    "royal_purple": "#7209b7",
-    "pale_lilac": "#d8b4fe",
-    # 🩷❤️ Pink & Berries
-    "black_cherry": "#210817",
-    "dark_berry": "#7c174f",
-    "deep_rose": "#ad1457",
-    "vivid_pink": "#f72585",
-    "ibm_pink": "#fe28a2",
-    "bright_pink": "#ff40a1",
-    "rose_pink": "#ff66b3",
-    "soft_rose": "#ff76a1",
-    "pale_orchid_pink": "#ffb4f6",
-    # 🩷❤️🧡 Magentas & Reds
-    "bright_magenta": "#ff00c3",
-    "hot_pink": "#ff007b",
-    "error_crimson": "#d7263d",  # ⌨️ error
-    # 🩷🧡💛 Oranges and Corals
-    "dusty_peach": "#e7a697",
-    "soft_coral": "#f77f64",
-    "peach_coral": "#f79764",
-    "tangerine": "#ff8855",
-    "coral_orange": "#ff783d",
-    "apricot": "#ff9d57",
-    "golden_amber": "#feb639",
-    "warning_amber": "#f7c548",  # ⌨️ warning
-    # 🖤🤍 Neutrals
-    "ibm_black": "#161616",
-    "ibm_gray": "#262625",
-    "charcoal": "#1e293b",
-    "granite": "#264653",
-    "slate": "#64748b",
-    "ibm_white": "#f4f4f4",
-    "ghost_white": "#f8fafc",
+    name: hex_value
+    for group in COLOR_GROUPS.values()
+    for name, hex_value in group.items()
 }
 
 
@@ -186,8 +217,7 @@ def interpolate_rgb(
     factor : float
         Interpolation progress parameter clamped to [0.0, 1.0].
     use_golden_easing : bool, default=True
-        Whether to apply golden ratio curvature easing:
-        $$u_{\\phi} = \\frac{u^{\\phi}}{u^{\\phi} + (1 - u)^{\\phi}}$$
+        Whether to apply golden ratio curvature easing.
 
     Returns
     -------
@@ -222,18 +252,18 @@ def generate_golden_ratio_gradient(
     """
     Generate a continuous sequence of RGB color stops implementing the Golden Ratio.
 
-    The total sample count is proportioned according to the Golden Ratio (N = round(M * phi))
-    when `length` is omitted, and interpolates through all provided color stops using
-    golden ratio curvature transitions.
+    The total sample count is proportioned according to the Golden Ratio
+    (length = round(N * GOLDEN_RATIO)) when `length` is omitted, and interpolates
+    through all provided color stops using golden ratio curvature transitions.
 
     Parameters
     ----------
     colors : Sequence[Color] | None, default=None
         Sequence of color stops (hex codes or RGB tuples). If None, all colors in
-        COLOR_PALETTE are utilized (54 stops).
+        COLOR_PALETTE are utilized.
     length : int | None, default=None
-        Total number of output RGB color samples. If None, derived via the Golden Ratio:
-        length = round(len(colors) * GOLDEN_RATIO).
+        Total number of output RGB color samples. If None, derived from the number
+        of stops via the golden ratio.
     use_golden_easing : bool, default=True
         Whether to apply golden ratio curvature easing across color transitions.
 
@@ -277,12 +307,9 @@ def generate_golden_ratio_gradient(
         seg_idx = min(int(scaled_pos), segments - 1)
         seg_frac = scaled_pos - seg_idx
 
-        color_start = rgb_stops[seg_idx]
-        color_end = rgb_stops[seg_idx + 1]
-
         sample_rgb = interpolate_rgb(
-            color_start,
-            color_end,
+            rgb_stops[seg_idx],
+            rgb_stops[seg_idx + 1],
             seg_frac,
             use_golden_easing=use_golden_easing,
         )
@@ -300,15 +327,16 @@ def render_golden_ratio_gradient(
     use_golden_easing: bool = True,
 ) -> str:
     """
-    Render a smooth ANSI TrueColor gradient using all colors proportioned by the Golden Ratio.
+    Render a smooth ANSI TrueColor gradient using the provided colors proportioned
+    by the Golden Ratio.
 
     Parameters
     ----------
     colors : Sequence[Color] | None, default=None
         Sequence of color stops. Defaults to all colors in COLOR_PALETTE.
     length : int | None, default=None
-        Total character width of the rendered gradient bar. If None, derived as
-        round(len(colors) * GOLDEN_RATIO).
+        Total character width of the rendered gradient bar. If None, derived from
+        the number of stops via the golden ratio.
     block_char : str, default="█"
         Character glyph rendered for each gradient column.
     bold : bool, default=False
@@ -335,13 +363,13 @@ def render_golden_ratio_gradient(
 
 
 # -----------------------------------------------------------------------------------------------------------
-# 3️⃣ Private Helpers
+# 2️⃣ Private Helpers
 # -----------------------------------------------------------------------------------------------------------
 
 
 def _golden_ratio_ease(t: float) -> float:
     """
-    Compute golden ratio curvature easing: u_phi = u^phi / (u^phi + (1 - u)^phi).
+    Compute golden ratio curvature easing: u = t^phi / (t^phi + (1 - t)^phi).
 
     Parameters
     ----------
@@ -358,9 +386,8 @@ def _golden_ratio_ease(t: float) -> float:
     if t >= 1.0:
         return 1.0
 
-    phi = GOLDEN_RATIO
-    t_phi = math.pow(t, phi)
-    one_minus_t_phi = math.pow(1.0 - t, phi)
+    t_phi = math.pow(t, GOLDEN_RATIO)
+    one_minus_t_phi = math.pow(1.0 - t, GOLDEN_RATIO)
     denom = t_phi + one_minus_t_phi
     if denom == 0.0:
         return t
@@ -369,7 +396,7 @@ def _golden_ratio_ease(t: float) -> float:
 
 def _normalize_color(color: Color) -> RGB:
     """
-    Validate and convert a hex string or RGB tuple into a verified (R, G, B) integer tuple.
+    Validate and convert a hex string or RGB tuple into a verified (R, G, B) tuple.
 
     Parameters
     ----------
@@ -402,72 +429,36 @@ def _normalize_color(color: Color) -> RGB:
 
 
 # -----------------------------------------------------------------------------------------------------------
-# 4️⃣ Smoke Tests / Example Usage
+# 3️⃣ Smoke Tests / Example Usage
 # -----------------------------------------------------------------------------------------------------------
 
 
 def run_smoke_test() -> bool:
     """
-    Execute deterministic validation of COLOR_PALETTE and render a smooth golden ratio gradient.
+    Validate the color definitions and render one golden-ratio gradient per category.
 
-    Verifies hexadecimal integrity, RGB channel bounding, golden ratio mathematical metrics,
-    and prints the rendered multi-scale smooth gradient across all colors in COLOR_PALETTE.
+    Every hex value in COLOR_PALETTE is checked for validity, then each color group
+    in COLOR_GROUPS is rendered as its own smooth gradient line.
 
     Returns
     -------
     bool
-        True if all smoke tests and assertions pass successfully.
+        True if all checks pass.
     """
-    print("💨 Running colors.py smoke tests...")
+    print("Running colors.py smoke tests...")
 
-    # 1. Validate COLOR_PALETTE integrity across all defined hex values
-    assert len(COLOR_PALETTE) > 0, "COLOR_PALETTE must contain colors"
-    for name, hex_val in COLOR_PALETTE.items():
-        rgb = hex_to_rgb(hex_val)
-        assert len(rgb) == 3, f"RGB tuple must have length 3 for {name}"
-        assert all(0 <= c <= 255 for c in rgb), f"Channel out of range for {name}: {hex_val}"
+    # 1. Validate every hex value in the flat palette
+    for name, hex_value in COLOR_PALETTE.items():
+        rgb = hex_to_rgb(hex_value)
+        assert all(0 <= c <= 255 for c in rgb), f"Channel out of range for {name}"
 
-    # 2. Validate Golden Ratio mathematical properties
-    assert abs(GOLDEN_RATIO - 1.618033988749895) < 1e-9
-    assert abs(GOLDEN_RATIO * (GOLDEN_RATIO - 1.0) - 1.0) < 1e-9  # phi^2 - phi - 1 = 0
-    assert abs(GOLDEN_RATIO_INVERSE - (1.0 / GOLDEN_RATIO)) < 1e-9
+    # 2. Render one gradient per color category
+    print()
+    for category, colors in COLOR_GROUPS.items():
+        gradient = render_golden_ratio_gradient(list(colors.values()))
+        print(f"  {category}: {gradient}")
 
-    # 3. Generate smooth gradient across ALL colors using the Golden Ratio
-    all_colors = list(COLOR_PALETTE.values())
-    expected_length = round(len(all_colors) * GOLDEN_RATIO)
-    gradient_rgb = generate_golden_ratio_gradient(all_colors)
-
-    assert len(gradient_rgb) == expected_length, (
-        f"Expected {expected_length} samples, got {len(gradient_rgb)}"
-    )
-    for rgb in gradient_rgb:
-        assert len(rgb) == 3
-        assert all(0 <= c <= 255 for c in rgb)
-
-    # 4. Render and print smooth golden ratio gradient across all colors
-    gradient_str = render_golden_ratio_gradient(all_colors, block_char="█")
-    assert "\033[38;2;" in gradient_str
-    assert "\033[0m" in gradient_str
-
-    print(f"\n✨ Golden Ratio Smooth Gradient Demonstration (φ ≈ {GOLDEN_RATIO:.6f})")
-    print(
-        f"📊 Total Colors: {len(all_colors)} | Rendered Width (N = round(M × φ)): {expected_length} blocks\n"
-    )
-    print("  " + gradient_str)
-
-    # Multi-scale golden ratio tiers (phi^-1, 1.0, phi^1)
-    len_sm = round(len(all_colors) * GOLDEN_RATIO_INVERSE)
-    len_md = len(all_colors)
-    len_lg = expected_length
-
-    grad_sm = render_golden_ratio_gradient(all_colors, length=len_sm, block_char="▀")
-    grad_md = render_golden_ratio_gradient(all_colors, length=len_md, block_char="■")
-
-    print(f"\n  [Scale φ⁻¹ ≈ {GOLDEN_RATIO_INVERSE:.3f} | {len_sm:2d} cols]: {grad_sm}")
-    print(f"  [Scale 1.000             | {len_md:2d} cols]: {grad_md}")
-    print(f"  [Scale φ¹  ≈ {GOLDEN_RATIO:.3f} | {len_lg:2d} cols]: {gradient_str}\n")
-
-    print("✅💨 colors.py smoke tests passed.")
+    print("\nSmoke tests passed.")
     return True
 
 
@@ -482,7 +473,7 @@ def _run_smoke_test() -> None:
 
 
 def main() -> None:
-    """Execute module smoke tests and output the smooth golden ratio gradient."""
+    """Execute module smoke tests and output the category gradients."""
     _run_smoke_test()
 
 

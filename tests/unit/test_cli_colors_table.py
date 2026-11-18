@@ -39,8 +39,7 @@ from cli import (
     render_commands_list,
     run_smoke_test,
 )
-from cli.colors import main as colors_main
-from cli.colors_table import _compute_hue, _compute_relative_luminance
+from cli.colors_table import _compute_hue, _compute_relative_luminance, main as colors_table_main
 from cli.main import (
     cli as main_cli,
     main as scriber_main,
@@ -138,7 +137,7 @@ def test_print_colors_table_output(capsys: pytest.CaptureFixture[str]) -> None:
 
 
 def test_main_and_colors_module_entry_points(capsys: pytest.CaptureFixture[str]) -> None:
-    """Verify cli.main and cli.colors entry points execute with ANSI TrueColor codes."""
+    """Verify cli.main and cli.colors_table entry points execute with ANSI TrueColor codes."""
     from cli.main import main as main_entry
 
     # Direct function invocation of print_colors_table via main module

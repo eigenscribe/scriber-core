@@ -23,57 +23,20 @@ if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
-try:
-    from frontend.colors import (
-        COLOR_PALETTE,
-        GOLDEN_RATIO,
-        GOLDEN_RATIO_INVERSE,
-        PHI,
-        Color,
-        RGB,
-        hex_to_rgb,
-    )
-except ImportError:
-    try:
-        from src.frontend.colors import (
-            COLOR_PALETTE,
-            GOLDEN_RATIO,
-            GOLDEN_RATIO_INVERSE,
-            PHI,
-            Color,
-            RGB,
-            hex_to_rgb,
-        )
-    except ImportError:
-        try:
-            from .colors import (
-                COLOR_PALETTE,
-                GOLDEN_RATIO,
-                GOLDEN_RATIO_INVERSE,
-                PHI,
-                Color,
-                RGB,
-                hex_to_rgb,
-            )
-        except ImportError:
-            from colors import (
-                COLOR_PALETTE,
-                GOLDEN_RATIO,
-                GOLDEN_RATIO_INVERSE,
-                PHI,
-                Color,
-                RGB,
-                hex_to_rgb,
-            )
+from frontend.colors import (
+    COLOR_PALETTE,
+    Color,
+    GOLDEN_RATIO_INVERSE,
+    RGB,
+    hex_to_rgb,
+)
 
 __all__: list[str] = [
     "RGB",
     "Color",
-    "GOLDEN_RATIO",
     "GOLDEN_RATIO_INVERSE",
     "GRADIENT_PRESETS",
     "PRESETS",
-    "PHI",
     "TSE_GRADIENTS",
     "compute_golden_ratio_stop_positions",
     "hex_to_rgb",

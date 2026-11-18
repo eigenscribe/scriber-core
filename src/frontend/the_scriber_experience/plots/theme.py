@@ -27,7 +27,7 @@ try:
     import seaborn as sns
 
     HAS_SEABORN = True
-except ImportError:
+except ModuleNotFoundError:
     sns = None
     HAS_SEABORN = False
 
@@ -35,7 +35,7 @@ try:
     import plotly.graph_objects as go
 
     HAS_PLOTLY = True
-except ImportError:
+except ModuleNotFoundError:
     go = None
     HAS_PLOTLY = False
 

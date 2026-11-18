@@ -7,9 +7,11 @@ Provides terminal color table formatters, block swatch generators, and palette i
 
 from __future__ import annotations
 
+from typing import Final
+
 from frontend.colors import COLOR_PALETTE, RGB, hex_to_rgb
 
-from . import colors, colors_table, main, messaging
+from . import colors_table, main, messaging
 from .colors_table import (
     BOX_STYLES,
     DEFAULT_BLOCK_CHAR,
@@ -69,9 +71,11 @@ from .messaging import (
     run_smoke_test as run_messaging_smoke_test,
 )
 
+__version__: Final[str] = CLI_VERSION
+
 __all__: list[str] = [
+    "__version__",
     # Submodules
-    "colors",
     "colors_table",
     "main",
     "messaging",

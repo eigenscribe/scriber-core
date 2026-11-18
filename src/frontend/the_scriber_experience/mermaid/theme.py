@@ -24,37 +24,7 @@ if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
-try:
-    from frontend.colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
-except ImportError:
-    try:
-        from src.frontend.colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
-    except ImportError:
-        try:
-            from ...colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
-        except ImportError:
-            COLOR_PALETTE = {
-                "bright_cyan": "#00f0ff",
-                "vivid_cyan": "#00e8ff",
-                "electric_blue": "#00a6ff",
-                "vivid_sky_blue": "#14b5ff",
-                "periwinkle_blue": "#5280ff",
-                "bright_purple": "#a855f7",
-                "electric_violet": "#5e17eb",
-                "bright_violet": "#7c3aed",
-                "bright_magenta": "#ff00c3",
-                "vivid_pink": "#f72585",
-                "success_emerald": "#10b981",
-                "warning_amber": "#f7c548",
-                "error_crimson": "#d7263d",
-                "sky_info": "#38bdf8",
-                "charcoal": "#1e293b",
-                "ghost_white": "#f8fafc",
-            }
-
-            def hex_to_rgb(hex_color: str) -> tuple[int, int, int]:
-                v = hex_color.removeprefix("#")
-                return int(v[0:2], 16), int(v[2:4], 16), int(v[4:6], 16)
+from frontend.colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
 
 __all__: list[str] = [
     "EIGENSCRIBE_MERMAID_THEME_VARIABLES",

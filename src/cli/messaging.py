@@ -58,55 +58,16 @@ def _enable_windows_vt_mode() -> None:
 
 _enable_windows_vt_mode()
 
-try:
-    import click
+import click
 
-    _HAS_CLICK: bool = True
-except ImportError:
-    _HAS_CLICK = False
+from frontend.colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
+from frontend.gradients import (
+    GRADIENT_PRESETS,
+    TSE_GRADIENTS,
+    multi_gradient,
+)
 
-try:
-    from frontend.colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
-    from frontend.gradients import (
-        GRADIENT_PRESETS,
-        TSE_GRADIENTS,
-        multi_gradient,
-    )
-except ImportError:
-    try:
-        from src.frontend.colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
-        from src.frontend.gradients import (
-            GRADIENT_PRESETS,
-            TSE_GRADIENTS,
-            multi_gradient,
-        )
-    except ImportError:
-        RGB: TypeAlias = tuple[int, int, int]
-        Color: TypeAlias = str | RGB
-        COLOR_PALETTE: Final[dict[str, str]] = {
-            "vivid_cyan": "#00e8ff",
-            "eigen_blue": "#008eff",
-            "midwest_indigo": "#6f78fa",
-            "electric_violet": "#5e17eb",
-        }
-        GRADIENT_PRESETS: Final[dict[str, tuple[str, ...]]] = {
-            "eigenscribe": ("#00e8ff", "#008eff", "#6f78fa", "#5e17eb"),
-            "electric": ("#00a6ff", "#a855f7", "#ff00c3"),
-        }
-        TSE_GRADIENTS = GRADIENT_PRESETS
-
-        def hex_to_rgb(hex_color: str) -> RGB:
-            v = hex_color.removeprefix("#")
-            return int(v[0:2], 16), int(v[2:4], 16), int(v[4:6], 16)
-
-        def multi_gradient(
-            text: str,
-            colors: Sequence[Color] = ("#00a6ff", "#a855f7", "#ff00c3"),
-            *,
-            bold: bool = True,
-            golden_ratio_scale: bool = True,
-        ) -> str:
-            return text
+_HAS_CLICK: Final[bool] = True
 
 
 PRESETS: Final[dict[str, tuple[str, ...]]] = GRADIENT_PRESETS

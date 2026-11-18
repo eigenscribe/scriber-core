@@ -21,13 +21,7 @@ if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
-try:
-    from frontend.colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
-except ImportError:
-    try:
-        from src.frontend.colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
-    except ImportError:
-        from ...colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
+from frontend.colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
 
 __all__: list[str] = [
     "RGB",

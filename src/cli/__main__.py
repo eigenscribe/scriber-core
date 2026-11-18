@@ -2,15 +2,12 @@
 """
 __main__.py
 
-Package execution launcher for `python -m cli` or `python -m src.cli`.
+Package execution launcher for `python -m cli`.
 """
 
 from __future__ import annotations
 
-try:
-    from .main import main
-except (ImportError, ValueError):
-    from cli.main import main
+from cli.main import main
 
 if __name__ == "__main__":
     main()

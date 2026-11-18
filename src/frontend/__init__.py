@@ -11,6 +11,8 @@ Date: November 15, 2026
 
 from __future__ import annotations
 
+from typing import Final
+
 from . import colors, gradients, the_scriber_experience
 from .colors import (
     COLOR_PALETTE,
@@ -51,7 +53,10 @@ from .the_scriber_experience import (
     style,
 )
 
+__version__: Final[str] = "1.0.0"
+
 __all__: list[str] = [
+    "__version__",
     # Subpackages
     "colors",
     "gradients",
