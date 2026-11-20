@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "scriber-core"
-version = "1.0.0"
+version = "1.0.1"
 description = "Deterministic workspace baseline, styling tokens, and visualization rules for scientific and development agents."
 readme = "README.md"
 license = { text = "MIT" }

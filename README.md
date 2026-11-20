@@ -1,6 +1,6 @@
 # 🧿 Scriber Labs: Agent Workspace Index
 
-[![Publish to PyPI](https://github.com/eigenscribe/scriber-core/actions/workflows/publish.yml/badge.svg)](https://github.com/eigenscribe/scriber-core/actions/workflows/publish.yml)
+[![Publish to PyPI](https://github.com/The-Scriber-Experience/scriber-core/actions/workflows/publish.yml/badge.svg)](https://github.com/The-Scriber-Experience/scriber-core/actions/workflows/publish.yml)
 [![PyPI version](https://img.shields.io/pypi/v/scriber-core.svg)](https://pypi.org/project/scriber-core/)
 [![Python versions](https://img.shields.io/pypi/pyversions/scriber-core.svg)](https://pypi.org/project/scriber-core/)
 
