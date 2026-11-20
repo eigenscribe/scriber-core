@@ -44,3 +44,6 @@ env/
 !src/**/plots/
 *.log
 benchmark.log
+
+# PyPI upload config (contains credentials)
+.pypirc

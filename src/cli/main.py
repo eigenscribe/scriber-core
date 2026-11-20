@@ -155,7 +155,7 @@ __all__: list[str] = [
 # /* 🎭 Typing helpers / protocols / constants (if needed) */
 # -----------------------------------------------------------------------------------------------------------
 
-CLI_VERSION: Final[str] = "0.1.0"
+CLI_VERSION: Final[str] = "1.0.0"
 
 PRIMARY_GRADIENT: Final[tuple[str, ...]] = GRADIENT_PRESETS["eigenscribe"]
 SECONDARY_GRADIENT: Final[tuple[str, ...]] = ("#00a6ff", "#7952f5", "#a855f7", "#ff28a2")

@@ -92,12 +92,6 @@ GRADIENT_PRESETS: Final[dict[str, tuple[str, ...]]] = {
         COLOR_PALETTE["midwest_indigo"],
         COLOR_PALETTE["rose_pink"],
     ),
-    # 🌿 Quantum Aurora: Tropical Teal (#03e8bd) -> Success Emerald (#10b981) -> Bright Chartreuse (#70e000)
-    "aurora": (
-        COLOR_PALETTE["tropical_teal"],
-        COLOR_PALETTE["success_emerald"],
-        COLOR_PALETTE["bright_chartreuse"],
-    ),
     # ⚡ Cyberpunk Neon: Bright Cyan (#00f0ff) -> Electric Violet (#5e17eb) -> Hot Pink (#ff007b)
     "cyberpunk": (
         COLOR_PALETTE["bright_cyan"],
@@ -111,11 +105,11 @@ GRADIENT_PRESETS: Final[dict[str, tuple[str, ...]]] = {
         COLOR_PALETTE["eigen_blue"],
         COLOR_PALETTE["strong_blue"],
     ),
-    # 💚 Green Gradient
+    # 💚 Green Gradient: Tropical Teal (#01e8bd) -> Success Emerald (#10b981) -> Bright Chartreuse (#70e000)
     "green_gradient": (
         COLOR_PALETTE["tropical_teal"],
         COLOR_PALETTE["success_emerald"],
-        COLOR_PALETTE["neon_green"],
+        COLOR_PALETTE["bright_chartreuse"],
     ),
     # 💜 Purple Gradient: Royal Purple (#7209b7) -> Bright Purple (#a855f7) -> Bright Violet (#7c3aed)
     "purple_gradient": (
@@ -339,7 +333,13 @@ def _run_smoke_test() -> None:
     custom_rendered = multi_gradient("Custom RGB", [(0, 0, 0), (255, 255, 255)])
     assert "\033[0m" in custom_rendered
 
-    print("✅ gradients.py smoke tests passed.")
+    # 6. Print each gradient preset
+    print()
+    for preset_name, stops in GRADIENT_PRESETS.items():
+        gradient = multi_gradient("████████████████████████████████████████████████████████", stops)
+        print(f"  {preset_name}: {gradient}")
+
+    print("\n✅ gradients.py smoke tests passed.")
 
 
 # -----------------------------------------------------------------------------------------------------------

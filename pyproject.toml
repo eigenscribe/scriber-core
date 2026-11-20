@@ -8,7 +8,11 @@ version = "1.0.0"
 description = "Deterministic workspace baseline, styling tokens, and visualization rules for scientific and development agents."
 readme = "README.md"
 license = { text = "MIT" }
+license-files = ["LICENSE"]
 authors = [
+    { name = "Scriber Labs & Eigenscribe Inc." }
+]
+maintainers = [
     { name = "Scriber Labs & Eigenscribe Inc." }
 ]
 keywords = [
@@ -20,6 +24,9 @@ keywords = [
     "scientific-computing",
 ]
 classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -28,6 +35,7 @@ classifiers = [
     "Operating System :: OS Independent",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Scientific/Engineering :: Visualization",
+    "Topic :: Text Processing :: Linguistic",
 ]
 requires-python = ">=3.10"
 dependencies = [
@@ -46,8 +54,18 @@ eigenscribe = "cli.main:main"
 [project.optional-dependencies]
 dev = [
     "pytest>=8.0.0",
+    "pytest-cov>=4.0.0",
     "ipykernel>=6.0.0",
+    "build>=1.0.0",
+    "twine>=5.0.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/eigenscribe/scriber-core"
+Repository = "https://github.com/eigenscribe/scriber-core"
+Documentation = "https://scriber-core.readthedocs.io"
+"Bug Tracker" = "https://github.com/eigenscribe/scriber-core/issues"
+Changelog = "https://github.com/eigenscribe/scriber-core/blob/main/CHANGELOG.md"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
