@@ -57,9 +57,16 @@ GRADIENT_PRESETS: Final[dict[str, tuple[str, ...]]] = {
     ),
     # 🔱 Signature TSE Gradients:
     "tse-gradient-1": (
-        COLOR_PALETTE["electric_cyan"],
-        COLOR_PALETTE["vivid_cyan"],
-        COLOR_PALETTE["vivid_sky_blue"],
+        COLOR_PALETTE["electric_lagoon"],
+        COLOR_PALETTE["reef_cyan"],
+        COLOR_PALETTE["azure_splash"],
+        COLOR_PALETTE["cerulean_surge"],
+        COLOR_PALETTE["harbor_blue"],
+        COLOR_PALETTE["twilight_indigo"],
+        COLOR_PALETTE["dusk_violet_blue"],
+        COLOR_PALETTE["cosmic_iris"],
+        COLOR_PALETTE["nebula_purple"],
+        COLOR_PALETTE["neon_orchid"],
     ),
     "tse-gradient-2": (
         COLOR_PALETTE["vivid_cyan"],

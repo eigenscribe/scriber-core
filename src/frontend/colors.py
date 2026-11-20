@@ -80,9 +80,11 @@ COLOR_GROUPS: Final[dict[str, dict[str, str]]] = {
         "bright_cyan": "#00f0ff",  # 🐉 tse-cyan
         "vivid_cyan": "#00e8ff",  # 🌈 tse-gradient-2
         "reef_cyan": "#1ed9f6",
-        "sky_cyan": "#4cc9f0",
+        "azure_splash": "#1eb2f6",
+        "vivid_sky_blue": "#14b5ff",  # 🌈 tse-gradient-1
         "ibm_cyan": "#2ca9e6",
         "sky_info": "#38bdf8",  # ⌨️ info
+        "sky_cyan": "#4cc9f0",
         "ice_blue": "#b8f6ff",
     },
     "Blues & Indigos": {
@@ -92,14 +94,16 @@ COLOR_GROUPS: Final[dict[str, dict[str, str]]] = {
         "eigen_blue": "#008eff",
         "cerulean_surge": "#1e8af6",
         "skyline_blue": "#0a95eb",
-        "azure_splash": "#1eb2f6",
-        "vivid_sky_blue": "#14b5ff",  # 🌈 tse-gradient-1
         "electric_blue": "#00a6ff",
         "sky_blue": "#3a98ff",
+        "cornflower": "#1e7bf6",
+        "azure_sky": "#1e6ff6",
+        "royal_blue": "#1e62f6",
         "harbor_blue": "#1e64f6",
         "strong_blue": "#0355e8",
         "twilight_indigo": "#1e3bf6",
         "dusk_violet_blue": "#291ef6",
+        "midnight_indigo": "#1e22f6",
         "ibm_indigo": "#4361ee",
         "periwinkle_blue": "#5280ff",
         "midwest_indigo": "#6f78fa",
@@ -108,14 +112,19 @@ COLOR_GROUPS: Final[dict[str, dict[str, str]]] = {
     "Purples & Violets": {
         "deep_plum": "#120a24",
         "dark_violet": "#3b176e",
+        "deep_iris": "#3b1ef6",
+        "cosmic_violet": "#4b1ef6",
         "cosmic_iris": "#501ef6",
         "electric_violet": "#5e17eb",
         "bright_violet": "#7c3aed",
         "nebula_purple": "#781ef6",
-        "ibm_purple": "#844ccc",
-        "bright_purple": "#a855f7",
-        "royal_purple": "#7209b7",
+        "amethyst": "#7c1ef6",
         "neon_orchid": "#a01ef6",
+        "vivid_orchid": "#bc1ef6",
+        "bright_purple": "#a855f7",
+        "studio_purple": "#9c1ef6",
+        "royal_purple": "#7209b7",
+        "ibm_purple": "#844ccc",
         "pale_lilac": "#d8b4fe",
     },
     "Pink & Berries": {
@@ -130,6 +139,8 @@ COLOR_GROUPS: Final[dict[str, dict[str, str]]] = {
         "pale_orchid_pink": "#ffb4f6",
     },
     "Magentas & Reds": {
+        "heliotrope": "#dd1ef6",
+        "neon_magenta": "#f61eef",
         "bright_magenta": "#ff00c3",
         "hot_pink": "#ff007b",
         "error_crimson": "#d7263d",  # ⌨️ error

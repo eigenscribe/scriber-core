@@ -2,74 +2,33 @@
 """
 main.py
 
-Primary entry point for the Scriber Core CLI suite.
-Renders signature TrueColor gradient block text ("scriber-core"), branded gradient
-headers, color-coded command listings, and palette inspection tools.
+Primary entry point for the Eigenscribe CLI suite.
+Imports branding, command catalog, smoke tests, and messaging from focused
+modules, then defines the Click command group and all CLI subcommands.
 
 The conceptual story follows the Eigenscribe architectural standard:
 What exists -> What you're allowed to call -> How it works -> Proof it works.
 
 Author: Eigenscribe & Scriber Labs
-Date: November 17, 2026
+Date: November 19, 2026
 """
 
 from __future__ import annotations
 
-import re
 import sys
-from typing import Final, NamedTuple, Sequence
-
-# Force UTF-8 stdout and enable ANSI TrueColor / Virtual Terminal Processing on Windows
-def _enable_windows_vt_mode() -> None:
-    """Enable ANSI/VT100 Virtual Terminal Processing on Windows consoles."""
-    if sys.platform != "win32":
-        return
-    if hasattr(sys.stdout, "reconfigure"):
-        try:
-            sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-        except Exception:
-            pass
-    try:
-        import os
-
-        os.system("")
-    except Exception:
-        pass
-    try:
-        import ctypes
-
-        kernel32 = ctypes.windll.kernel32
-        handle = kernel32.GetStdHandle(-11)
-        mode = ctypes.c_ulong()
-        if kernel32.GetConsoleMode(handle, ctypes.byref(mode)):
-            kernel32.SetConsoleMode(handle, mode.value | 0x0004)
-    except Exception:
-        pass
-    try:
-        import colorama
-
-        if hasattr(colorama, "just_fix_windows_console"):
-            colorama.just_fix_windows_console()
-        else:
-            colorama.init(wrap=False)
-    except Exception:
-        pass
-
-
-_enable_windows_vt_mode()
 
 import click
 
-from frontend.colors import COLOR_PALETTE, RGB, hex_to_rgb
+from frontend.colors import COLOR_PALETTE, hex_to_rgb
 from frontend.gradients import GRADIENT_PRESETS, multi_gradient
 
-from cli.colors_table import (
+from .colors_table import (
     cli as colors_table_cli,
     main as colors_table_main,
     print_colors_table,
     render_colors_table,
 )
-from cli.messaging import (
+from .messaging import (
     EIGENSCRIBE_PALETTE,
     STYLE_MAP,
     ansi_256,
@@ -104,20 +63,32 @@ from frontend.the_scriber_experience.style.semantic_roles import (
     TSE_COLORS,
 )
 
+from .branding import (
+    CLI_VERSION,
+    PRIMARY_GRADIENT,
+    SECONDARY_GRADIENT,
+    ansi_color,
+    print_brand_header,
+    render_brand_header,
+)
+from .command_catalog import (
+    BADGE_COLORS,
+    CommandDescriptor,
+    REGISTERED_COMMANDS,
+    print_commands_list,
+    render_commands_list,
+)
+from .smoke_tests import run_smoke_test
+from .vt_mode import enable_vt_mode
+
+
 __all__: list[str] = [
-    "BADGE_COLORS",
-    "BORDER_FRAME_COLOR",
     "CLI_VERSION",
-    "CMD_NAME_COLOR",
     "CommandDescriptor",
-    "DESC_TEXT_COLOR",
-    "HEADER_CATEGORY_COLOR",
     "PRIMARY_GRADIENT",
     "REGISTERED_COMMANDS",
-    "SCRIBER_CORE_BLOCK_TEXT",
+    "BADGE_COLORS",
     "SECONDARY_GRADIENT",
-    "SECTION_BULLET_COLOR",
-    "SYNTAX_FLAG_COLOR",
     "ansi_color",
     "cli",
     "cli_group",
@@ -152,344 +123,20 @@ __all__: list[str] = [
 
 
 # -----------------------------------------------------------------------------------------------------------
-# /* 🎭 Typing helpers / protocols / constants (if needed) */
+# Gradient-styled help description for the CLI group (tse-gradient-2)
 # -----------------------------------------------------------------------------------------------------------
 
-CLI_VERSION: Final[str] = "1.0.0"
+CLI_HELP_GREEN_GRADIENT = GRADIENT_PRESETS["green_gradient"]  # tropical_teal → success_emerald → neon_green
 
-PRIMARY_GRADIENT: Final[tuple[str, ...]] = GRADIENT_PRESETS["eigenscribe"]
-SECONDARY_GRADIENT: Final[tuple[str, ...]] = ("#00a6ff", "#7952f5", "#a855f7", "#ff28a2")
-
-# Unicode block text rendering "scriber-core"
-SCRIBER_CORE_BLOCK_TEXT: Final[str] = r"""
-  ███████╗ ██████╗██████╗ ██╗██████╗ ███████╗██████╗        ██████╗ ██████╗ ██████╗ ███████╗
-  ██╔════╝██╔════╝██╔══██╗██║██╔══██╗██╔════╝██╔══██╗      ██╔════╝██╔═══██╗██╔══██╗██╔════╝
-  ███████╗██║     ██████╔╝██║██████╔╝█████╗  ██████╔╝█████╗██║     ██║   ██║██████╔╝█████╗  
-  ╚════██║██║     ██╔══██╗██║██╔══██╗██╔══╝  ██╔══██╗╚════╝██║     ██║   ██║██╔══██╗██╔══╝  
-  ███████║╚██████╗██║  ██║██║██████╔╝███████╗██║  ██║      ╚██████╗╚██████╔╝██║  ██║███████╗
-  ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝       ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
-"""
-
-# Semantic Color Token Mapping from COLOR_PALETTE
-HEADER_CATEGORY_COLOR: Final[str] = COLOR_PALETTE["vivid_cyan"]  # #00e8ff - High contrast primary focus
-CMD_NAME_COLOR: Final[str] = COLOR_PALETTE["success_emerald"]  # #10b981 - Command names in help output
-SYNTAX_FLAG_COLOR: Final[str] = COLOR_PALETTE["pale_lilac"]  # #d8b4fe - Syntax and options
-DESC_TEXT_COLOR: Final[str] = COLOR_PALETTE["ice_blue"]  # #b8f6ff - Readable description body
-BORDER_FRAME_COLOR: Final[str] = COLOR_PALETTE["periwinkle_blue"]  # #5280ff - Structural frame borders
-SECTION_BULLET_COLOR: Final[str] = COLOR_PALETTE["sky_cyan"]  # #4cc9f0 - Bullet markers
-
-# Green gradient for CLI help section headers and item names
-CLI_HELP_GREEN_GRADIENT: Final[tuple[str, ...]] = GRADIENT_PRESETS["green_gradient"]  # tropical_teal → success_emerald → neon_green
-
-# Gradient-styled help description for the CLI group (tse-gradient-2)
-CLI_HELP_DESCRIPTION: Final[str] = multi_gradient(
+CLI_HELP_DESCRIPTION = multi_gradient(
     "🔱 Eigenscribe CLI (Scriber Core) — Deterministic Workspace Baseline & Palette Tools.",
     colors=GRADIENT_PRESETS["tse-gradient-2"],
     bold=True,
 )
 
-# Semantic Badges mapped to COLOR_PALETTE
-BADGE_COLORS: Final[dict[str, str]] = {
-    "CORE": COLOR_PALETTE["success_emerald"],  # #10b981 - Verified core tools
-    "STYLE": COLOR_PALETTE["midwest_indigo"],  # #6f78fa - Visual styling & gradients
-    "TOKEN": COLOR_PALETTE["vivid_pink"],  # #f72585 - Color tokens and palettes
-    "DIAG": COLOR_PALETTE["warning_amber"],  # #f7c548 - Verification & diagnostics
-}
-
 
 # -----------------------------------------------------------------------------------------------------------
-# 1️⃣ Core definitions
-# -----------------------------------------------------------------------------------------------------------
-
-
-class CommandDescriptor(NamedTuple):
-    """
-    Descriptor for a CLI command within the Scriber Core workspace suite.
-
-    Attributes
-    ----------
-    name : str
-        Invocation name of the command.
-    category : str
-        Semantic section grouping.
-    badge : str
-        Short functional classification badge (e.g. 'CORE', 'STYLE', 'TOKEN', 'DIAG').
-    syntax : str
-        Command-line invocation syntax and options.
-    description : str
-        Concise summary of command functionality and outcomes.
-    """
-
-    name: str
-    category: str
-    badge: str
-    syntax: str
-    description: str
-
-
-REGISTERED_COMMANDS: Final[tuple[CommandDescriptor, ...]] = (
-    CommandDescriptor(
-        name="colors-table",
-        category="🎨 COLOR PALETTES & SWATCHES",
-        badge="CORE",
-        syntax="python -m cli.colors_table [--sort <key>] [--style <box>] [--block-char <c>]",
-        description="Render COLOR_PALETTE table with TrueColor swatch blocks, hex codes, RGB vectors, and luminance metrics.",
-    ),
-    CommandDescriptor(
-        name="colors",
-        category="🎨 COLOR PALETTES & SWATCHES",
-        badge="TOKEN",
-        syntax="eigenscribe colors [--all-256] [--spectrum] [--table]",
-        description="Inspect terminal color palettes, ANSI 256-color index, and 10-node EIGEN spectrum.",
-    ),
-    CommandDescriptor(
-        name="gradient",
-        category="🌈 TRUECOLOR GRADIENTS & BANNERS",
-        badge="STYLE",
-        syntax="eigenscribe gradient <text> [--preset <name>] [--stops <hex>...]",
-        description="Interpolate and render text with multi-stop ANSI TrueColor linear gradients.",
-    ),
-    CommandDescriptor(
-        name="banner",
-        category="🌈 TRUECOLOR GRADIENTS & BANNERS",
-        badge="STYLE",
-        syntax="python -m cli banner [--title <text>] [--subtitle <text>]",
-        description="Display signature TrueColor ASCII block banner headers and gradient rule dividers.",
-    ),
-    CommandDescriptor(
-        name="theme",
-        category="🎨 VISUAL THEMES & PLOTS",
-        badge="STYLE",
-        syntax="eigenscribe theme [--format summary|rcparams|css]",
-        description="Inspect and export Eigenscribe visualization and plotting theme settings for Matplotlib, Seaborn, and CSS.",
-    ),
-    CommandDescriptor(
-        name="mermaid",
-        category="📊 ARCHITECTURE & DIAGRAMS",
-        badge="STYLE",
-        syntax="eigenscribe mermaid [--sample] [--init] [--html-preview]",
-        description="Generate dark-mode Mermaid diagram directives, node classes, and interactive HTML previews.",
-    ),
-    CommandDescriptor(
-        name="info",
-        category="🏛️ WORKSPACE ARCHITECTURE & TOKENS",
-        badge="CORE",
-        syntax="eigenscribe info",
-        description="Display Scriber Core architectural index, 4-layer design token stack, and workspace guidelines.",
-    ),
-    CommandDescriptor(
-        name="commands",
-        category="🏛️ WORKSPACE ARCHITECTURE & TOKENS",
-        badge="CORE",
-        syntax="python -m cli [commands]",
-        description="Display the complete color-coded command index, syntax references, and tool directory.",
-    ),
-    CommandDescriptor(
-        name="doctor",
-        category="💨 DIAGNOSTICS & VERIFICATION",
-        badge="DIAG",
-        syntax="eigenscribe doctor",
-        description="Run comprehensive workspace consistency checks, token validation, and environment health tests.",
-    ),
-    CommandDescriptor(
-        name="smoke-test",
-        category="💨 DIAGNOSTICS & VERIFICATION",
-        badge="DIAG",
-        syntax="python -m cli.colors_table --smoke-test",
-        description="Execute deterministic smoke test suite, color calculations, and verification assertions.",
-    ),
-)
-
-
-# -----------------------------------------------------------------------------------------------------------
-# 2️⃣ Public API (functions users are meant to call)
-# -----------------------------------------------------------------------------------------------------------
-
-
-def ansi_color(hex_code: str, text: str, *, bold: bool = False) -> str:
-    """
-    Format a text string with ANSI 24-bit TrueColor foreground escape sequences.
-
-    Parameters
-    ----------
-    hex_code : str
-        Hexadecimal color string (e.g. '#00e8ff').
-    text : str
-        Text string to style.
-    bold : bool, default=False
-        Whether to apply bold font weight.
-
-    Returns
-    -------
-    str
-        Text string wrapped in TrueColor ANSI sequences.
-    """
-    r, g, b = hex_to_rgb(hex_code)
-    weight = "1;" if bold else ""
-    return f"\033[{weight}38;2;{r};{g};{b}m{text}\033[0m"
-
-
-def render_brand_header(
-    *,
-    title: str = "🔱 SCRIBER CORE — DETERMINISTIC WORKSPACE & PALETTE SUITE",
-    description: str = "Deterministic workspace baseline, styling tokens, and visualization rules for scientific and development agents.",
-    width: int = 88,
-) -> str:
-    """
-    Render the signature 'scriber-core' block text, gradient title, and description.
-
-    Parameters
-    ----------
-    title : str, default="🔱 SCRIBER CORE — DETERMINISTIC WORKSPACE & PALETTE SUITE"
-        Main branded title string.
-    description : str, default="..."
-        Branded subtitle / description string.
-    width : int, default=88
-        Total horizontal display width.
-
-    Returns
-    -------
-    str
-        Formatted ANSI TrueColor header block string.
-    """
-    lines: list[str] = []
-
-    # 1. Block text reading "scriber-core" with SECONDARY_GRADIENT
-    block_logo = multi_gradient(SCRIBER_CORE_BLOCK_TEXT, colors=SECONDARY_GRADIENT, bold=True)
-    lines.append(block_logo.strip("\n"))
-    lines.append("")
-
-    # 2. Branded title with PRIMARY_GRADIENT
-    styled_title = multi_gradient(f"  {title}", colors=PRIMARY_GRADIENT, bold=True)
-    lines.append(styled_title)
-
-    # 3. Branded description with SECONDARY_GRADIENT
-    styled_desc = multi_gradient(f"  {description}", colors=SECONDARY_GRADIENT, bold=False)
-    lines.append(styled_desc)
-    lines.append("")
-
-    # 4. Horizontal rule divider
-    divider = "═" * width
-    lines.append(ansi_color(BORDER_FRAME_COLOR, f"  {divider}", bold=True))
-
-    return "\n".join(lines)
-
-
-def print_brand_header(
-    *,
-    title: str = "🔱 SCRIBER CORE — DETERMINISTIC WORKSPACE & PALETTE SUITE",
-    description: str = "Deterministic workspace baseline, styling tokens, and visualization rules for scientific and development agents.",
-    width: int = 88,
-    color: bool = True,
-) -> None:
-    """
-    Print the signature brand header directly to standard output.
-
-    Parameters
-    ----------
-    title : str, optional
-        Branded title string.
-    description : str, optional
-        Branded description string.
-    width : int, default=88
-        Rule divider width.
-    color : bool, default=True
-        Whether to preserve ANSI TrueColor escape sequences.
-    """
-    click.echo(render_brand_header(title=title, description=description, width=width), color=color)
-
-
-def render_commands_list(
-    commands: Sequence[CommandDescriptor] = REGISTERED_COMMANDS,
-    *,
-    width: int = 88,
-) -> str:
-    """
-    Render a color-coded directory of CLI commands formatted with COLOR_PALETTE tokens.
-
-    Parameters
-    ----------
-    commands : Sequence[CommandDescriptor], default=REGISTERED_COMMANDS
-        Sequence of command definitions to format.
-    width : int, default=88
-        Target box width.
-
-    Returns
-    -------
-    str
-        Formatted ANSI TrueColor command directory block.
-    """
-    lines: list[str] = []
-
-    # Section Title
-    section_banner = "📋 AVAILABLE CLI COMMANDS & WORKSPACE UTILITIES"
-    lines.append(multi_gradient(f"  {section_banner}", colors=PRIMARY_GRADIENT, bold=True))
-    lines.append(ansi_color(BORDER_FRAME_COLOR, "  " + "─" * width, bold=False))
-    lines.append("")
-
-    # Group commands by category
-    categories: dict[str, list[CommandDescriptor]] = {}
-    for cmd in commands:
-        categories.setdefault(cmd.category, []).append(cmd)
-
-    for category, cat_cmds in categories.items():
-        # Category header styled with PRIMARY_GRADIENT
-        cat_styled = multi_gradient(f"  {category}", colors=PRIMARY_GRADIENT, bold=True)
-        lines.append(cat_styled)
-
-        for cmd in cat_cmds:
-            # Bullet, command name, badge, and description
-            bullet = ansi_color(SECTION_BULLET_COLOR, "•", bold=True)
-            name_str = ansi_color(CMD_NAME_COLOR, f"{cmd.name:<14}", bold=True)
-            badge_color = BADGE_COLORS.get(cmd.badge, COLOR_PALETTE["success_emerald"])
-            badge_str = ansi_color(badge_color, f"[{cmd.badge}]", bold=True)
-            desc_str = ansi_color(DESC_TEXT_COLOR, cmd.description)
-
-            lines.append(f"    {bullet} {name_str}  {badge_str}  {desc_str}")
-
-            # Syntax line
-            syntax_label = ansi_color(SECTION_BULLET_COLOR, "Syntax:", bold=False)
-            syntax_val = ansi_color(SYNTAX_FLAG_COLOR, cmd.syntax, bold=False)
-            lines.append(f"        {syntax_label} {syntax_val}")
-
-        lines.append("")
-
-    # Legend / Summary footer
-    lines.append(ansi_color(BORDER_FRAME_COLOR, "  " + "─" * width, bold=False))
-    legend_core = ansi_color(BADGE_COLORS["CORE"], "[CORE]", bold=True) + ansi_color(DESC_TEXT_COLOR, " Primary")
-    legend_style = ansi_color(BADGE_COLORS["STYLE"], "[STYLE]", bold=True) + ansi_color(DESC_TEXT_COLOR, " Gradients & Banners")
-    legend_token = ansi_color(BADGE_COLORS["TOKEN"], "[TOKEN]", bold=True) + ansi_color(DESC_TEXT_COLOR, " Palettes & Swatches")
-    legend_diag = ansi_color(BADGE_COLORS["DIAG"], "[DIAG]", bold=True) + ansi_color(DESC_TEXT_COLOR, " Diagnostics")
-
-    lines.append(f"  💡 {ansi_color(HEADER_CATEGORY_COLOR, 'Semantic Legend:', bold=True)} {legend_core}  {legend_style}  {legend_token}  {legend_diag}")
-    lines.append("")
-
-    return "\n".join(lines)
-
-
-def print_commands_list(
-    commands: Sequence[CommandDescriptor] = REGISTERED_COMMANDS,
-    *,
-    width: int = 88,
-    color: bool = True,
-) -> None:
-    """
-    Print the color-coded command directory directly to standard output.
-
-    Parameters
-    ----------
-    commands : Sequence[CommandDescriptor], default=REGISTERED_COMMANDS
-        Sequence of command descriptors.
-    width : int, default=88
-        Formatting width.
-    color : bool, default=True
-        Whether to preserve ANSI TrueColor escape sequences.
-    """
-    click.echo(render_commands_list(commands=commands, width=width), color=color)
-
-
-# -----------------------------------------------------------------------------------------------------------
-# 3️⃣ Helper Functions
+# Helper Functions
 # -----------------------------------------------------------------------------------------------------------
 
 
@@ -504,92 +151,7 @@ def _render_color_block(hex_code: str, label: str = "", width: int = 4) -> str:
 
 
 # -----------------------------------------------------------------------------------------------------------
-# 4️⃣ Smoke tests / example usage
-# -----------------------------------------------------------------------------------------------------------
-
-
-def run_smoke_test() -> bool:
-    """Execute smoke test assertions for the Scriber Core CLI suite."""
-    print("💨 Running src/cli/main.py smoke tests...")
-
-    # 1. Block text existence and gradient definition
-    assert len(SCRIBER_CORE_BLOCK_TEXT.strip()) > 0
-    assert "██" in SCRIBER_CORE_BLOCK_TEXT
-    assert len(SECONDARY_GRADIENT) == 4
-    assert len(PRIMARY_GRADIENT) == 4
-
-    # 2. Header rendering test
-    header_output = render_brand_header()
-    assert "\033[38;2;" in header_output or "\033[1;38;2;" in header_output
-    plain_header = re.sub(r"\x1b\[[0-9;]*m", "", header_output)
-    assert "SCRIBER CORE" in plain_header
-    assert "Deterministic workspace baseline" in plain_header
-
-    # 3. Command list rendering test
-    commands_output = render_commands_list()
-    assert "\033[38;2;" in commands_output
-    plain_commands = re.sub(r"\x1b\[[0-9;]*m", "", commands_output)
-    assert "AVAILABLE CLI COMMANDS" in plain_commands
-    assert "colors-table" in plain_commands
-    assert "gradient" in plain_commands
-    assert "info" in plain_commands
-
-    # 4. Color formatting helper test
-    test_str = ansi_color("#00e8ff", "test_cyan", bold=True)
-    assert "\033[1;38;2;0;232;255mtest_cyan\033[0m" == test_str
-
-    # 5. Messaging integration assertions
-    msg_rendered = render_message("Test Status", level="success", bold=True)
-    assert "Test Status" in msg_rendered
-    rule_rendered = render_rule("─", width=30)
-    assert "─" * 30 in rule_rendered
-    assert supports_256_color() in (True, False)
-    assert len(EIGENSCRIBE_PALETTE) >= 40
-
-    # 6. Verification of command registry and CLI commands
-    assert len(REGISTERED_COMMANDS) >= 7
-    names = {cmd.name for cmd in REGISTERED_COMMANDS}
-    assert "colors-table" in names
-    assert "gradient" in names
-    assert "colors" in names
-    assert "banner" in names
-    assert "theme" in names
-    assert "mermaid" in names
-    assert "doctor" in names
-    assert "info" in names
-
-    assert "info" in cli.commands
-    assert "gradient" in cli.commands
-    assert "colors" in cli.commands
-    assert "banner" in cli.commands
-    assert "theme" in cli.commands
-    assert "mermaid" in cli.commands
-    assert "doctor" in cli.commands
-    assert "commands" in cli.commands
-    assert "colors-table" in cli.commands
-
-    from click.testing import CliRunner
-
-    runner = CliRunner()
-    res_help = runner.invoke(cli, ["--help"])
-    assert res_help.exit_code == 0
-    assert "Eigenscribe CLI" in res_help.output or "Scriber Core" in res_help.output
-
-    res_info = runner.invoke(cli, ["info"])
-    assert res_info.exit_code == 0
-
-    res_grad = runner.invoke(cli, ["gradient", "Hello Eigenscribe", "--preset", "electric"])
-    assert res_grad.exit_code == 0
-
-    res_doc = runner.invoke(cli, ["doctor"])
-    assert res_doc.exit_code == 0
-
-    print("✅ src/cli/main.py smoke tests passed successfully.\n")
-    return True
-
-
-# -----------------------------------------------------------------------------------------------------------
-# 🔥 Entry Point & Click Command Group
+# Click Group & Command Definitions
 # -----------------------------------------------------------------------------------------------------------
 
 
@@ -791,7 +353,7 @@ def gradient_cmd(text: str, preset: str, stops: tuple[str, ...], bold: bool, lis
         cli_rule(char="─", width=80, level="rule")
         return
 
-    color_stops: Sequence[str] = (
+    color_stops = (
         stops if stops else GRADIENT_PRESETS.get(preset, GRADIENT_PRESETS.get("electric", PRIMARY_GRADIENT))
     )
     rendered = multi_gradient(text, colors=color_stops, bold=bold)
@@ -833,25 +395,24 @@ def colors_cmd(all_256: bool, spectrum: bool, table: bool) -> None:
     click.echo("")
 
     # 4. Vibrant 10-Node Spectrum
-    if spectrum or True:
-        cli_echo("🌌 Vibrant 10-Node EIGEN Spectrum (Vibrant 10-Node Spectrum):", color="eigen_purple_bright", bold=True)
-        node_names = [
-            "0. Crown Gold",
-            "1. Electric Cyan",
-            "2. Vivid Cyan",
-            "3. Sky Blue",
-            "4. Deep Cobalt",
-            "5. Amber Gold",
-            "6. Electric Purple",
-            "7. Deep Violet",
-            "8. Rose Pink",
-            "9. Emerald Green",
-        ]
-        for i, hex_code in enumerate(EIGEN_NODE_COLORS):
-            lbl = node_names[i] if i < len(node_names) else f"Node {i}"
-            block = _render_color_block(hex_code, label=f"Node {i}", width=10)
-            click.echo(f"  {block}  {lbl:20s} {hex_code}")
-        click.echo("")
+    cli_echo("🌌 Vibrant 10-Node EIGEN Spectrum (Vibrant 10-Node Spectrum):", color="eigen_purple_bright", bold=True)
+    node_names = [
+        "0. Crown Gold",
+        "1. Electric Cyan",
+        "2. Vivid Cyan",
+        "3. Sky Blue",
+        "4. Deep Cobalt",
+        "5. Amber Gold",
+        "6. Electric Purple",
+        "7. Deep Violet",
+        "8. Rose Pink",
+        "9. Emerald Green",
+    ]
+    for i, hex_code in enumerate(EIGEN_NODE_COLORS):
+        lbl = node_names[i] if i < len(node_names) else f"Node {i}"
+        block = _render_color_block(hex_code, label=f"Node {i}", width=10)
+        click.echo(f"  {block}  {lbl:20s} {hex_code}")
+    click.echo("")
 
     # 5. Full ANSI 256 preview if requested
     if all_256:
@@ -953,10 +514,11 @@ def doctor_cmd() -> None:
             click.echo(f"  [\033[31mFAIL\033[0m] {label}: {e}")
 
     # Check 1: Python Version
-    run_check(
-        "Python Version >= 3.10",
-        lambda: sys.version_info >= (3, 10) or (_ for _ in ()).throw(ValueError("Python >= 3.10 required")),
-    )
+    def _chk_python():
+        if sys.version_info < (3, 10):
+            raise ValueError("Python >= 3.10 required")
+
+    run_check("Python Version >= 3.10", _chk_python)
 
     # Check 2: Terminal Color Engine
     run_check("Terminal Color Engine", lambda: supports_256_color() or True)
@@ -1049,8 +611,16 @@ def smoke_test_cmd() -> None:
     run_smoke_test()
 
 
+# -----------------------------------------------------------------------------------------------------------
+# Entry Point
+# -----------------------------------------------------------------------------------------------------------
+
+
 def main() -> None:
     """Primary execution entry point."""
+    # Enable Windows VT mode at invocation time, not import time
+    enable_vt_mode()
+
     if len(sys.argv) > 1 and sys.argv[1] == "--smoke-test":
         run_smoke_test()
     else:

@@ -11,7 +11,29 @@ from typing import Final
 
 from frontend.colors import COLOR_PALETTE, RGB, hex_to_rgb
 
-from . import colors_table, main, messaging
+from . import branding, command_catalog, colors_table, main, messaging, smoke_tests, vt_mode
+from .branding import (
+    BORDER_FRAME_COLOR,
+    CLI_VERSION,
+    CMD_NAME_COLOR,
+    DESC_TEXT_COLOR,
+    EIGENSCRIBE_BLOCK_TEXT,
+    HEADER_CATEGORY_COLOR,
+    PRIMARY_GRADIENT,
+    SECONDARY_GRADIENT,
+    SECTION_BULLET_COLOR,
+    SYNTAX_FLAG_COLOR,
+    ansi_color,
+    print_brand_header,
+    render_brand_header,
+)
+from .command_catalog import (
+    BADGE_COLORS,
+    CommandDescriptor,
+    REGISTERED_COMMANDS,
+    print_commands_list,
+    render_commands_list,
+)
 from .colors_table import (
     BOX_STYLES,
     DEFAULT_BLOCK_CHAR,
@@ -29,26 +51,8 @@ from .colors_table import (
     run_smoke_test,
 )
 from .main import (
-    BADGE_COLORS,
-    BORDER_FRAME_COLOR,
-    CLI_VERSION,
-    CMD_NAME_COLOR,
-    CommandDescriptor,
-    DESC_TEXT_COLOR,
-    HEADER_CATEGORY_COLOR,
-    PRIMARY_GRADIENT,
-    REGISTERED_COMMANDS,
-    SCRIBER_CORE_BLOCK_TEXT,
-    SECONDARY_GRADIENT,
-    SECTION_BULLET_COLOR,
-    SYNTAX_FLAG_COLOR,
-    ansi_color,
     cli as main_cli,
     cli_group,
-    print_brand_header,
-    print_commands_list,
-    render_brand_header,
-    render_commands_list,
 )
 from .messaging import (
     EIGENSCRIBE_PALETTE,
@@ -70,15 +74,21 @@ from .messaging import (
     supports_256_color,
     run_smoke_test as run_messaging_smoke_test,
 )
+from .smoke_tests import run_smoke_test as run_cli_smoke_test
+from .vt_mode import enable_vt_mode
 
 __version__: Final[str] = CLI_VERSION
 
 __all__: list[str] = [
     "__version__",
     # Submodules
+    "branding",
+    "command_catalog",
     "colors_table",
     "main",
     "messaging",
+    "smoke_tests",
+    "vt_mode",
     # Re-exported Palette Data
     "COLOR_PALETTE",
     "RGB",
@@ -93,11 +103,14 @@ __all__: list[str] = [
     "format_color_swatch",
     "format_colored_name",
     "run_smoke_test",
+    "run_cli_smoke_test",
+    "run_messaging_smoke_test",
     "print_brand_header",
     "render_brand_header",
     "print_commands_list",
     "render_commands_list",
     "ansi_color",
+    "enable_vt_mode",
     # Messaging Functions
     "cli_message",
     "cli_echo",
@@ -114,7 +127,6 @@ __all__: list[str] = [
     "render_banner",
     "ansi_256",
     "supports_256_color",
-    "run_messaging_smoke_test",
     # Types & Models
     "ColorEntry",
     "CommandDescriptor",
@@ -128,7 +140,7 @@ __all__: list[str] = [
     "CLI_VERSION",
     "PRIMARY_GRADIENT",
     "SECONDARY_GRADIENT",
-    "SCRIBER_CORE_BLOCK_TEXT",
+    "EIGENSCRIBE_BLOCK_TEXT",
     "REGISTERED_COMMANDS",
     "HEADER_CATEGORY_COLOR",
     "CMD_NAME_COLOR",
