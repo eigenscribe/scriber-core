@@ -1,10 +1,13 @@
-# src/cli/smoke_tests.py
 """
-Smoke tests for the Eigenscribe CLI suite.
+smoke_tests.py
 
+Smoke tests for the Eigenscribe CLI suite.
 Executes deterministic assertions to verify core functionality: block text,
 header rendering, command list rendering, color formatting, messaging
 integration, command registry, and Click end-to-end tests.
+
+The conceptual story follows the Eigenscribe architectural standard:
+What exists -> What you're allowed to call -> How it works -> Proof it works.
 
 Author: Eigenscribe & Scriber Labs
 Date: November 19, 2026
@@ -14,28 +17,52 @@ from __future__ import annotations
 
 import re
 
-from .branding import (
-    EIGENSCRIBE_BLOCK_TEXT,
-    PRIMARY_GRADIENT,
-    SECONDARY_GRADIENT,
-    ansi_color,
-    render_brand_header,
-)
-from .command_catalog import (
-    REGISTERED_COMMANDS,
-    render_commands_list,
-)
-from .messaging import (
-    EIGENSCRIBE_PALETTE,
-    render_message,
-    render_rule,
-    supports_256_color,
-)
+try:
+    from .branding import (
+        EIGENSCRIBE_BLOCK_TEXT,
+        PRIMARY_GRADIENT,
+        SECONDARY_GRADIENT,
+        ansi_color,
+        render_brand_header,
+    )
+    from .command_catalog import (
+        REGISTERED_COMMANDS,
+        render_commands_list,
+    )
+    from .messaging import (
+        EIGENSCRIBE_PALETTE,
+        render_message,
+        render_rule,
+        supports_256_color,
+    )
+except ImportError:
+    from cli.branding import (
+        EIGENSCRIBE_BLOCK_TEXT,
+        PRIMARY_GRADIENT,
+        SECONDARY_GRADIENT,
+        ansi_color,
+        render_brand_header,
+    )
+    from cli.command_catalog import (
+        REGISTERED_COMMANDS,
+        render_commands_list,
+    )
+    from cli.messaging import (
+        EIGENSCRIBE_PALETTE,
+        render_message,
+        render_rule,
+        supports_256_color,
+    )
 
 
 __all__: list[str] = [
     "run_smoke_test",
 ]
+
+
+# -----------------------------------------------------------------------------------------------------------
+# 2️⃣ Public API (functions users are meant to call)
+# -----------------------------------------------------------------------------------------------------------
 
 
 def run_smoke_test() -> bool:
@@ -90,7 +117,10 @@ def run_smoke_test() -> bool:
 
     # 7. Click CLI integration tests
     # Import here to avoid circular imports
-    from .main import cli
+    try:
+        from .main import cli
+    except ImportError:
+        from cli.main import cli
 
     assert "info" in cli.commands
     assert "gradient" in cli.commands
@@ -120,3 +150,19 @@ def run_smoke_test() -> bool:
 
     print("✅ src/cli smoke tests passed successfully.\n")
     return True
+
+
+# -----------------------------------------------------------------------------------------------------------
+# 🔥 Entry point
+# -----------------------------------------------------------------------------------------------------------
+
+
+def main() -> None:
+    """Orchestrate CLI smoke test output."""
+    success = run_smoke_test()
+    if not success:
+        raise ValueError("CLI smoke tests failed during validation checks.")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,4 +1,3 @@
-# src/frontend/messaging.py
 """
 messaging.py
 
@@ -17,46 +16,7 @@ from __future__ import annotations
 import os
 import re
 import sys
-from typing import Final, Sequence, TypeAlias
-
-# Force UTF-8 stdout and enable ANSI TrueColor / Virtual Terminal Processing on Windows
-def _enable_windows_vt_mode() -> None:
-    """Enable ANSI/VT100 Virtual Terminal Processing on Windows consoles."""
-    if sys.platform != "win32":
-        return
-    if hasattr(sys.stdout, "reconfigure"):
-        try:
-            sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-        except Exception:
-            pass
-    try:
-        import os
-
-        os.system("")
-    except Exception:
-        pass
-    try:
-        import ctypes
-
-        kernel32 = ctypes.windll.kernel32
-        handle = kernel32.GetStdHandle(-11)
-        mode = ctypes.c_ulong()
-        if kernel32.GetConsoleMode(handle, ctypes.byref(mode)):
-            kernel32.SetConsoleMode(handle, mode.value | 0x0004)
-    except Exception:
-        pass
-    try:
-        import colorama
-
-        if hasattr(colorama, "just_fix_windows_console"):
-            colorama.just_fix_windows_console()
-        else:
-            colorama.init(wrap=False)
-    except Exception:
-        pass
-
-
-_enable_windows_vt_mode()
+from typing import Final, Sequence
 
 import click
 
@@ -66,6 +26,12 @@ from frontend.gradients import (
     TSE_GRADIENTS,
     multi_gradient,
 )
+
+try:
+    from .vt_mode import enable_vt_mode
+except ImportError:
+    from cli.vt_mode import enable_vt_mode
+
 
 _HAS_CLICK: Final[bool] = True
 
@@ -112,7 +78,7 @@ __all__: list[str] = [
 
 
 # -----------------------------------------------------------------------------------------------------------
-# /* 🎭 Typing helpers / protocols / constants (if needed) */
+# 🎭 Typing helpers / constants (define once, use Final)
 # -----------------------------------------------------------------------------------------------------------
 
 PRIMARY_GRADIENT: Final[tuple[str, ...]] = PRESETS.get(
@@ -222,7 +188,7 @@ _FALLBACK_16: Final[dict[str, str]] = {
 
 
 # -----------------------------------------------------------------------------------------------------------
-# 1️⃣ Core definitions — Color Detection & ANSI Helpers
+# 1️⃣ Core definitions (what exists) — Color Detection & ANSI Helpers
 # -----------------------------------------------------------------------------------------------------------
 
 
@@ -577,7 +543,7 @@ def cli_highlight(msg: str) -> None:
 
 
 # -----------------------------------------------------------------------------------------------------------
-# 3️⃣ Private helpers
+# 3️⃣ Private helpers (how it works)
 # -----------------------------------------------------------------------------------------------------------
 
 
@@ -598,7 +564,7 @@ def _secho(text: str, fg: str | None = None, bold: bool = False) -> None:
 
 
 # -----------------------------------------------------------------------------------------------------------
-# 4️⃣ Smoke tests / example usage
+# 4️⃣ 💨 Smoke tests / example usage (proof it works)
 # -----------------------------------------------------------------------------------------------------------
 
 
@@ -664,7 +630,7 @@ def run_smoke_test() -> bool:
 
 
 # -----------------------------------------------------------------------------------------------------------
-# 🔥 Entry point & Click Command Group
+# 🔥 Entry point
 # -----------------------------------------------------------------------------------------------------------
 
 

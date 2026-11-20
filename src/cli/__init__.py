@@ -1,8 +1,12 @@
-# src/cli/__init__.py
 """
 Scriber Core CLI Package.
 
 Provides terminal color table formatters, block swatch generators, and palette inspection tools.
+Follows the gold standard module structure: what exists, what you're allowed to call,
+how it works, and proof it works.
+
+Author: Eigenscribe & Scriber Labs
+Date: November 19, 2026
 """
 
 from __future__ import annotations
@@ -26,6 +30,7 @@ from .branding import (
     ansi_color,
     print_brand_header,
     render_brand_header,
+    run_smoke_test as run_branding_smoke_test,
 )
 from .command_catalog import (
     BADGE_COLORS,
@@ -33,6 +38,7 @@ from .command_catalog import (
     REGISTERED_COMMANDS,
     print_commands_list,
     render_commands_list,
+    run_smoke_test as run_catalog_smoke_test,
 )
 from .colors_table import (
     BOX_STYLES,
@@ -48,7 +54,7 @@ from .colors_table import (
     format_colored_name,
     print_colors_table,
     render_colors_table,
-    run_smoke_test,
+    run_smoke_test as run_colors_table_smoke_test,
 )
 from .main import (
     cli as main_cli,
@@ -75,7 +81,7 @@ from .messaging import (
     run_smoke_test as run_messaging_smoke_test,
 )
 from .smoke_tests import run_smoke_test as run_cli_smoke_test
-from .vt_mode import enable_vt_mode
+from .vt_mode import enable_vt_mode, run_smoke_test as run_vt_mode_smoke_test
 
 __version__: Final[str] = CLI_VERSION
 
@@ -102,9 +108,6 @@ __all__: list[str] = [
     "build_color_entries",
     "format_color_swatch",
     "format_colored_name",
-    "run_smoke_test",
-    "run_cli_smoke_test",
-    "run_messaging_smoke_test",
     "print_brand_header",
     "render_brand_header",
     "print_commands_list",
@@ -127,6 +130,13 @@ __all__: list[str] = [
     "render_banner",
     "ansi_256",
     "supports_256_color",
+    # Smoke test functions (module-level)
+    "run_cli_smoke_test",
+    "run_messaging_smoke_test",
+    "run_branding_smoke_test",
+    "run_catalog_smoke_test",
+    "run_colors_table_smoke_test",
+    "run_vt_mode_smoke_test",
     # Types & Models
     "ColorEntry",
     "CommandDescriptor",

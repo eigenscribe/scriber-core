@@ -1,4 +1,3 @@
-# src/cli/colors_table.py
 """
 colors_table.py
 
@@ -18,53 +17,17 @@ from __future__ import annotations
 
 import math
 import re
-import sys
-from typing import Callable, Final, Literal, NamedTuple, Sequence, TypeAlias
-
-# Force UTF-8 stdout and enable ANSI TrueColor / Virtual Terminal Processing on Windows
-def _enable_windows_vt_mode() -> None:
-    """Enable ANSI/VT100 Virtual Terminal Processing on Windows consoles."""
-    if sys.platform != "win32":
-        return
-    if hasattr(sys.stdout, "reconfigure"):
-        try:
-            sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-        except Exception:
-            pass
-    try:
-        import os
-
-        os.system("")  # Activates VT100 / ANSI escape sequence processing in Windows conhost
-    except Exception:
-        pass
-    try:
-        import ctypes
-
-        kernel32 = ctypes.windll.kernel32
-        # STD_OUTPUT_HANDLE = -11, ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004
-        handle = kernel32.GetStdHandle(-11)
-        mode = ctypes.c_ulong()
-        if kernel32.GetConsoleMode(handle, ctypes.byref(mode)):
-            kernel32.SetConsoleMode(handle, mode.value | 0x0004)
-    except Exception:
-        pass
-    try:
-        import colorama
-
-        if hasattr(colorama, "just_fix_windows_console"):
-            colorama.just_fix_windows_console()
-        else:
-            colorama.init(wrap=False)
-    except Exception:
-        pass
-
-
-_enable_windows_vt_mode()
+from typing import Final, Literal, NamedTuple, Sequence, TypeAlias
 
 import click
 
 from frontend.colors import COLOR_PALETTE, RGB, hex_to_rgb
 from frontend.gradients import GRADIENT_PRESETS, multi_gradient
+
+try:
+    from .vt_mode import enable_vt_mode
+except ImportError:
+    from cli.vt_mode import enable_vt_mode
 
 
 __all__: list[str] = [
@@ -89,7 +52,7 @@ __all__: list[str] = [
 
 
 # -----------------------------------------------------------------------------------------------------------
-# /* 🎭 Typing helpers / protocols / constants (if needed) */
+# 🎭 Typing helpers / constants (define once, use Final)
 # -----------------------------------------------------------------------------------------------------------
 
 SortKey: TypeAlias = Literal["original", "name", "hex", "hue", "luminance"]
@@ -100,8 +63,7 @@ DEFAULT_BLOCK_WIDTH: Final[int] = 8
 DEFAULT_BORDER_STYLE: Final[TableStyle] = "rounded"
 
 PRIMARY_GRADIENT: Final[tuple[str, ...]] = GRADIENT_PRESETS["eigenscribe"]
-SECONDARY_GRADIENT: Final[tuple[str, ...]] = ("#00a6ff", "#7952f5", "#a855f7", "#ff28a2")
-
+SECONDARY_GRADIENT: Final[tuple[str, ...]] = GRADIENT_PRESETS["tse-gradient-1"]
 # Unicode Box-Drawing Glyphs
 BOX_STYLES: Final[dict[TableStyle, dict[str, str]]] = {
     "rounded": {
@@ -186,7 +148,7 @@ BOX_STYLES: Final[dict[TableStyle, dict[str, str]]] = {
 
 
 # -----------------------------------------------------------------------------------------------------------
-# 1️⃣ Core definitions
+# 1️⃣ Core definitions (what exists)
 # -----------------------------------------------------------------------------------------------------------
 
 
@@ -535,7 +497,7 @@ def print_colors_table(
     color : bool, default=True
         Whether to preserve ANSI TrueColor escape sequences.
     """
-    _enable_windows_vt_mode()
+    enable_vt_mode()
     table_output = render_colors_table(
         palette=palette,
         block_char=block_char,
@@ -551,7 +513,7 @@ def print_colors_table(
 
 
 # -----------------------------------------------------------------------------------------------------------
-# 3️⃣ Private helpers
+# 3️⃣ Private helpers (how it works)
 # -----------------------------------------------------------------------------------------------------------
 
 
@@ -615,7 +577,7 @@ def _compute_hue(rgb: RGB) -> float:
 
 
 # -----------------------------------------------------------------------------------------------------------
-# 4️⃣ Smoke tests / example usage
+# 4️⃣ 💨 Smoke tests / example usage (proof it works)
 # -----------------------------------------------------------------------------------------------------------
 
 
@@ -666,7 +628,7 @@ def run_smoke_test() -> bool:
 
 
 # -----------------------------------------------------------------------------------------------------------
-# 🔥 Entry Point & Click Command
+# 🔥 Entry point
 # -----------------------------------------------------------------------------------------------------------
 
 

@@ -1,9 +1,12 @@
-# src/cli/command_catalog.py
 """
-Command registry and catalog rendering for the Eigenscribe CLI.
+command_catalog.py
 
+Command registry and catalog rendering for the Eigenscribe CLI.
 Contains the CommandDescriptor type, the REGISTERED_COMMANDS tuple, badge
 color mappings, and functions to render the color-coded command directory.
+
+The conceptual story follows the Eigenscribe architectural standard:
+What exists -> What you're allowed to call -> How it works -> Proof it works.
 
 Author: Eigenscribe & Scriber Labs
 Date: November 19, 2026
@@ -18,29 +21,28 @@ import click
 from frontend.colors import COLOR_PALETTE, hex_to_rgb
 from frontend.gradients import GRADIENT_PRESETS, multi_gradient
 
-from .branding import (
-    BORDER_FRAME_COLOR,
-    CMD_NAME_COLOR,
-    DESC_TEXT_COLOR,
-    HEADER_CATEGORY_COLOR,
-    PRIMARY_GRADIENT,
-    SECTION_BULLET_COLOR,
-    SYNTAX_FLAG_COLOR,
-    ansi_color,
-)
-
-
-# -----------------------------------------------------------------------------------------------------------
-# Constants
-# -----------------------------------------------------------------------------------------------------------
-
-# Semantic Badges mapped to COLOR_PALETTE
-BADGE_COLORS: Final[dict[str, str]] = {
-    "CORE": COLOR_PALETTE["success_emerald"],  # #10b981 - Verified core tools
-    "STYLE": COLOR_PALETTE["midwest_indigo"],  # #6f78fa - Visual styling & gradients
-    "TOKEN": COLOR_PALETTE["vivid_pink"],  # #f72585 - Color tokens and palettes
-    "DIAG": COLOR_PALETTE["warning_amber"],  # #f7c548 - Verification & diagnostics
-}
+try:
+    from .branding import (
+        BORDER_FRAME_COLOR,
+        CMD_NAME_COLOR,
+        DESC_TEXT_COLOR,
+        HEADER_CATEGORY_COLOR,
+        PRIMARY_GRADIENT,
+        SECTION_BULLET_COLOR,
+        SYNTAX_FLAG_COLOR,
+        ansi_color,
+    )
+except ImportError:
+    from cli.branding import (
+        BORDER_FRAME_COLOR,
+        CMD_NAME_COLOR,
+        DESC_TEXT_COLOR,
+        HEADER_CATEGORY_COLOR,
+        PRIMARY_GRADIENT,
+        SECTION_BULLET_COLOR,
+        SYNTAX_FLAG_COLOR,
+        ansi_color,
+    )
 
 
 __all__: list[str] = [
@@ -52,11 +54,25 @@ __all__: list[str] = [
     # Functions
     "render_commands_list",
     "print_commands_list",
+    "run_smoke_test",
 ]
 
 
 # -----------------------------------------------------------------------------------------------------------
-# Types
+# 🎭 Typing helpers / constants (define once, use Final)
+# -----------------------------------------------------------------------------------------------------------
+
+# Semantic Badges mapped to COLOR_PALETTE
+BADGE_COLORS: Final[dict[str, str]] = {
+    "CORE": COLOR_PALETTE["success_emerald"],  # #10b981 - Verified core tools
+    "STYLE": COLOR_PALETTE["midwest_indigo"],  # #6f78fa - Visual styling & gradients
+    "TOKEN": COLOR_PALETTE["vivid_pink"],  # #f72585 - Color tokens and palettes
+    "DIAG": COLOR_PALETTE["warning_amber"],  # #f7c548 - Verification & diagnostics
+}
+
+
+# -----------------------------------------------------------------------------------------------------------
+# 1️⃣ Core definitions (what exists)
 # -----------------------------------------------------------------------------------------------------------
 
 
@@ -150,6 +166,20 @@ REGISTERED_COMMANDS: Final[tuple[CommandDescriptor, ...]] = (
         description="Run comprehensive workspace consistency checks, token validation, and environment health tests.",
     ),
     CommandDescriptor(
+        name="message",
+        category="🏛️ WORKSPACE ARCHITECTURE & TOKENS",
+        badge="CORE",
+        syntax="eigenscribe message <text> [--level <info|success|warning|error|highlight>]",
+        description="Print a semantic status message with color-coded level indicators.",
+    ),
+    CommandDescriptor(
+        name="rule",
+        category="🏛️ WORKSPACE ARCHITECTURE & TOKENS",
+        badge="CORE",
+        syntax="eigenscribe rule [--char <c>] [--width <n>] [--level <level>]",
+        description="Print a horizontal divider rule with semantic coloring.",
+    ),
+    CommandDescriptor(
         name="smoke-test",
         category="💨 DIAGNOSTICS & VERIFICATION",
         badge="DIAG",
@@ -160,7 +190,7 @@ REGISTERED_COMMANDS: Final[tuple[CommandDescriptor, ...]] = (
 
 
 # -----------------------------------------------------------------------------------------------------------
-# Public API: Command list rendering
+# 2️⃣ Public API (functions users are meant to call)
 # -----------------------------------------------------------------------------------------------------------
 
 
@@ -251,3 +281,59 @@ def print_commands_list(
         Whether to preserve ANSI TrueColor escape sequences.
     """
     click.echo(render_commands_list(commands=commands, width=width), color=color)
+
+
+# -----------------------------------------------------------------------------------------------------------
+# 4️⃣ 💨 Smoke tests / example usage (proof it works)
+# -----------------------------------------------------------------------------------------------------------
+
+
+def run_smoke_test() -> bool:
+    """Validate command registry and catalog rendering.
+
+    Returns
+    -------
+    bool
+        True if all command catalog checks pass.
+    """
+    print("💨 Running src/cli/command_catalog.py smoke tests...")
+
+    # Verify badge colors
+    assert len(BADGE_COLORS) == 4
+    for color_val in BADGE_COLORS.values():
+        assert color_val in COLOR_PALETTE.values(), f"Badge color {color_val!r} not in COLOR_PALETTE"
+
+    # Verify command registry
+    assert len(REGISTERED_COMMANDS) >= 7
+    names = {cmd.name for cmd in REGISTERED_COMMANDS}
+    assert "colors-table" in names
+    assert "gradient" in names
+    assert "colors" in names
+    assert "banner" in names
+    assert "theme" in names
+    assert "mermaid" in names
+    assert "doctor" in names
+    assert "info" in names
+
+    # Verify rendering
+    commands_output = render_commands_list()
+    assert "\033[38;2;" in commands_output
+
+    print("✅ src/cli/command_catalog.py smoke tests passed successfully.\n")
+    return True
+
+
+# -----------------------------------------------------------------------------------------------------------
+# 🔥 Entry point
+# -----------------------------------------------------------------------------------------------------------
+
+
+def main() -> None:
+    """Orchestrate command catalog smoke test output."""
+    success = run_smoke_test()
+    if not success:
+        raise ValueError("Command catalog validation failed during smoke test checks.")
+
+
+if __name__ == "__main__":
+    main()

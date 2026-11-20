@@ -1,10 +1,13 @@
-# src/cli/branding.py
 """
-Branding and header rendering for the Eigenscribe CLI.
+branding.py
 
+Branding and header rendering for the Eigenscribe CLI.
 Contains the ASCII art logo, gradient helpers for block text, semantic color
 token constants, and functions to render the branded header with gradient
 styling.
+
+The conceptual story follows the Eigenscribe architectural standard:
+What exists -> What you're allowed to call -> How it works -> Proof it works.
 
 Author: Eigenscribe & Scriber Labs
 Date: November 19, 2026
@@ -20,8 +23,30 @@ from frontend.colors import COLOR_PALETTE, RGB, hex_to_rgb
 from frontend.gradients import GRADIENT_PRESETS, multi_gradient
 
 
+__all__: list[str] = [
+    # Constants
+    "CLI_VERSION",
+    "PRIMARY_GRADIENT",
+    "SECONDARY_GRADIENT",
+    "EIGENSCRIBE_BLOCK_TEXT",
+    "HEADER_CATEGORY_COLOR",
+    "CMD_NAME_COLOR",
+    "SYNTAX_FLAG_COLOR",
+    "DESC_TEXT_COLOR",
+    "BORDER_FRAME_COLOR",
+    "SECTION_BULLET_COLOR",
+    # Functions
+    "ansi_color",
+    "interpolate_gradient_color",
+    "vertical_gradient_block_text",
+    "render_brand_header",
+    "print_brand_header",
+    "run_smoke_test",
+]
+
+
 # -----------------------------------------------------------------------------------------------------------
-# Constants
+# 🎭 Typing helpers / constants (define once, use Final)
 # -----------------------------------------------------------------------------------------------------------
 
 CLI_VERSION: Final[str] = "1.0.0"
@@ -47,35 +72,13 @@ BORDER_FRAME_COLOR: Final[str] = COLOR_PALETTE["periwinkle_blue"]  # #5280ff - S
 SECTION_BULLET_COLOR: Final[str] = COLOR_PALETTE["sky_cyan"]  # #4cc9f0 - Bullet markers
 
 
-__all__: list[str] = [
-    # Constants
-    "CLI_VERSION",
-    "PRIMARY_GRADIENT",
-    "SECONDARY_GRADIENT",
-    "EIGENSCRIBE_BLOCK_TEXT",
-    "HEADER_CATEGORY_COLOR",
-    "CMD_NAME_COLOR",
-    "SYNTAX_FLAG_COLOR",
-    "DESC_TEXT_COLOR",
-    "BORDER_FRAME_COLOR",
-    "SECTION_BULLET_COLOR",
-    # Functions
-    "ansi_color",
-    "interpolate_gradient_color",
-    "vertical_gradient_block_text",
-    "render_brand_header",
-    "print_brand_header",
-]
-
-
 # -----------------------------------------------------------------------------------------------------------
-# Gradient helpers
+# 2️⃣ Public API (functions users are meant to call)
 # -----------------------------------------------------------------------------------------------------------
 
 
 def ansi_color(hex_code: str, text: str, *, bold: bool = False) -> str:
-    """
-    Format a text string with ANSI 24-bit TrueColor foreground escape sequences.
+    """Format a text string with ANSI 24-bit TrueColor foreground escape sequences.
 
     Parameters
     ----------
@@ -97,8 +100,7 @@ def ansi_color(hex_code: str, text: str, *, bold: bool = False) -> str:
 
 
 def interpolate_gradient_color(colors: Sequence[str], position: float) -> str:
-    """
-    Interpolate a hex color from a gradient at a given position [0.0, 1.0].
+    """Interpolate a hex color from a gradient at a given position [0.0, 1.0].
 
     Parameters
     ----------
@@ -144,8 +146,7 @@ def vertical_gradient_block_text(
     *,
     bold: bool = True,
 ) -> str:
-    """
-    Apply a top-to-bottom gradient to multi-line block text (ASCII art).
+    """Apply a top-to-bottom gradient to multi-line block text (ASCII art).
 
     Each non-empty row receives a single interpolated color from the gradient,
     based on its vertical position among all non-empty rows.
@@ -185,19 +186,13 @@ def vertical_gradient_block_text(
     return "\n".join(styled_rows)
 
 
-# -----------------------------------------------------------------------------------------------------------
-# Public API: Brand header rendering
-# -----------------------------------------------------------------------------------------------------------
-
-
 def render_brand_header(
     *,
     title: str = "🔱 SCRIBER CORE — DETERMINISTIC WORKSPACE & PALETTE SUITE",
     description: str = "Deterministic workspace baseline, styling tokens, and visualization rules for scientific and development agents.",
     width: int = 88,
 ) -> str:
-    """
-    Render the signature 'EIGENSCRIBE' block text, gradient title, and description.
+    """Render the signature 'EIGENSCRIBE' block text, gradient title, and description.
 
     Parameters
     ----------
@@ -243,8 +238,7 @@ def print_brand_header(
     width: int = 88,
     color: bool = True,
 ) -> None:
-    """
-    Print the signature brand header directly to standard output.
+    """Print the signature brand header directly to standard output.
 
     Parameters
     ----------
@@ -258,3 +252,63 @@ def print_brand_header(
         Whether to preserve ANSI TrueColor escape sequences.
     """
     click.echo(render_brand_header(title=title, description=description, width=width), color=color)
+
+
+# -----------------------------------------------------------------------------------------------------------
+# 4️⃣ 💨 Smoke tests / example usage (proof it works)
+# -----------------------------------------------------------------------------------------------------------
+
+
+def run_smoke_test() -> bool:
+    """Validate branding constants and header rendering.
+
+    Returns
+    -------
+    bool
+        True if all branding checks pass.
+    """
+    print("💨 Running src/cli/branding.py smoke tests...")
+
+    # Verify constants
+    assert CLI_VERSION == "1.0.0"
+    assert len(PRIMARY_GRADIENT) == 4
+    assert len(SECONDARY_GRADIENT) == 4
+    assert len(EIGENSCRIBE_BLOCK_TEXT.strip()) > 0
+
+    # Verify color tokens reference valid palette keys
+    for color_key in (
+        HEADER_CATEGORY_COLOR,
+        CMD_NAME_COLOR,
+        SYNTAX_FLAG_COLOR,
+        DESC_TEXT_COLOR,
+        BORDER_FRAME_COLOR,
+        SECTION_BULLET_COLOR,
+    ):
+        assert color_key in COLOR_PALETTE.values(), f"Color token {color_key!r} not in COLOR_PALETTE"
+
+    # Verify ansi_color produces valid ANSI codes
+    test_str = ansi_color("#00e8ff", "test_cyan", bold=True)
+    assert "\033[1;38;2;0;232;255mtest_cyan\033[0m" == test_str
+
+    # Verify header rendering
+    header_output = render_brand_header()
+    assert "\033[38;2;" in header_output or "\033[1;38;2;" in header_output
+
+    print("✅ src/cli/branding.py smoke tests passed successfully.\n")
+    return True
+
+
+# -----------------------------------------------------------------------------------------------------------
+# 🔥 Entry point
+# -----------------------------------------------------------------------------------------------------------
+
+
+def main() -> None:
+    """Orchestrate branding smoke test output."""
+    success = run_smoke_test()
+    if not success:
+        raise ValueError("Branding validation failed during smoke test checks.")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,4 +1,3 @@
-# src/cli/main.py
 """
 main.py
 
@@ -16,37 +15,65 @@ Date: November 19, 2026
 from __future__ import annotations
 
 import sys
+from typing import Final
 
 import click
 
 from frontend.colors import COLOR_PALETTE, hex_to_rgb
 from frontend.gradients import GRADIENT_PRESETS, multi_gradient
 
-from .colors_table import (
-    cli as colors_table_cli,
-    main as colors_table_main,
-    print_colors_table,
-    render_colors_table,
-)
-from .messaging import (
-    EIGENSCRIBE_PALETTE,
-    STYLE_MAP,
-    ansi_256,
-    cli_banner,
-    cli_echo,
-    cli_error,
-    cli_highlight,
-    cli_info,
-    cli_message,
-    cli_rule,
-    cli_success,
-    cli_warning,
-    render_banner,
-    render_echo,
-    render_message,
-    render_rule,
-    supports_256_color,
-)
+try:
+    from .colors_table import (
+        cli as colors_table_cli,
+        main as colors_table_main,
+        print_colors_table,
+        render_colors_table,
+    )
+    from .messaging import (
+        EIGENSCRIBE_PALETTE,
+        STYLE_MAP,
+        ansi_256,
+        cli_banner,
+        cli_echo,
+        cli_error,
+        cli_highlight,
+        cli_info,
+        cli_message,
+        cli_rule,
+        cli_success,
+        cli_warning,
+        render_banner,
+        render_echo,
+        render_message,
+        render_rule,
+        supports_256_color,
+    )
+except ImportError:
+    from cli.colors_table import (
+        cli as colors_table_cli,
+        main as colors_table_main,
+        print_colors_table,
+        render_colors_table,
+    )
+    from cli.messaging import (
+        EIGENSCRIBE_PALETTE,
+        STYLE_MAP,
+        ansi_256,
+        cli_banner,
+        cli_echo,
+        cli_error,
+        cli_highlight,
+        cli_info,
+        cli_message,
+        cli_rule,
+        cli_success,
+        cli_warning,
+        render_banner,
+        render_echo,
+        render_message,
+        render_rule,
+        supports_256_color,
+    )
 
 from frontend.the_scriber_experience.plots.theme import get_eigenscribe_rcparams
 from frontend.the_scriber_experience.mermaid.theme import (
@@ -63,23 +90,42 @@ from frontend.the_scriber_experience.style.semantic_roles import (
     TSE_COLORS,
 )
 
-from .branding import (
-    CLI_VERSION,
-    PRIMARY_GRADIENT,
-    SECONDARY_GRADIENT,
-    ansi_color,
-    print_brand_header,
-    render_brand_header,
-)
-from .command_catalog import (
-    BADGE_COLORS,
-    CommandDescriptor,
-    REGISTERED_COMMANDS,
-    print_commands_list,
-    render_commands_list,
-)
-from .smoke_tests import run_smoke_test
-from .vt_mode import enable_vt_mode
+try:
+    from .branding import (
+        CLI_VERSION,
+        PRIMARY_GRADIENT,
+        SECONDARY_GRADIENT,
+        ansi_color,
+        print_brand_header,
+        render_brand_header,
+    )
+    from .command_catalog import (
+        BADGE_COLORS,
+        CommandDescriptor,
+        REGISTERED_COMMANDS,
+        print_commands_list,
+        render_commands_list,
+    )
+    from .smoke_tests import run_smoke_test
+    from .vt_mode import enable_vt_mode
+except ImportError:
+    from cli.branding import (
+        CLI_VERSION,
+        PRIMARY_GRADIENT,
+        SECONDARY_GRADIENT,
+        ansi_color,
+        print_brand_header,
+        render_brand_header,
+    )
+    from cli.command_catalog import (
+        BADGE_COLORS,
+        CommandDescriptor,
+        REGISTERED_COMMANDS,
+        print_commands_list,
+        render_commands_list,
+    )
+    from cli.smoke_tests import run_smoke_test
+    from cli.vt_mode import enable_vt_mode
 
 
 __all__: list[str] = [
@@ -123,20 +169,32 @@ __all__: list[str] = [
 
 
 # -----------------------------------------------------------------------------------------------------------
-# Gradient-styled help description for the CLI group (tse-gradient-2)
+# 🎭 Typing helpers / constants (define once, use Final)
 # -----------------------------------------------------------------------------------------------------------
 
-CLI_HELP_GREEN_GRADIENT = GRADIENT_PRESETS["green_gradient"]  # tropical_teal → success_emerald → neon_green
+CLI_HELP_BLUE_GRADIENT = GRADIENT_PRESETS["blue_gradient"]  # vivid_cyan → vivid_sky_blue → eigen_blue → strong_blue
+
+# Per-badge solid color mapping for command names in the help output.
+# Each badge maps to a distinct TrueColor hex that reflects the command's functional type.
+COMMAND_TYPE_COLORS: Final[dict[str, str]] = {
+    "CORE": COLOR_PALETTE["success_emerald"],   # #10b981 — Emerald: workspace core tools
+    "STYLE": COLOR_PALETTE["midwest_indigo"],   # #6f78fa — Indigo: gradients & banners
+    "TOKEN": COLOR_PALETTE["vivid_pink"],       # #f72585 — Pink: palettes & swatches
+    "DIAG": COLOR_PALETTE["warning_amber"],     # #f7c548 — Amber: diagnostics & verification
+}
+
+# Fallback color for commands not found in the registry
+DEFAULT_COMMAND_COLOR: Final[str] = COLOR_PALETTE["success_emerald"]
 
 CLI_HELP_DESCRIPTION = multi_gradient(
     "🔱 Eigenscribe CLI (Scriber Core) — Deterministic Workspace Baseline & Palette Tools.",
-    colors=GRADIENT_PRESETS["tse-gradient-2"],
+    colors=GRADIENT_PRESETS["eigenscribe"],
     bold=True,
 )
 
 
 # -----------------------------------------------------------------------------------------------------------
-# Helper Functions
+# 3️⃣ Private helpers (how it works)
 # -----------------------------------------------------------------------------------------------------------
 
 
@@ -151,24 +209,46 @@ def _render_color_block(hex_code: str, label: str = "", width: int = 4) -> str:
 
 
 # -----------------------------------------------------------------------------------------------------------
-# Click Group & Command Definitions
+# 2️⃣ Public API (Click Group & Command Definitions)
 # -----------------------------------------------------------------------------------------------------------
 
 
-class _GreenHelpFormatter(click.HelpFormatter):
+class _BlueHelpFormatter(click.HelpFormatter):
     """Custom HelpFormatter that applies green gradient to section headers."""
 
     def write_heading(self, heading: str) -> None:
         """Write a section heading with green gradient styling."""
-        colored_heading = multi_gradient(heading, colors=CLI_HELP_GREEN_GRADIENT, bold=True)
+        colored_heading = multi_gradient(heading, colors=CLI_HELP_BLUE_GRADIENT, bold=True)
         self.write(f"{'':>{self.current_indent}}{colored_heading}:\n")
 
 
+def _get_command_color(command_name: str) -> str:
+    """Look up the solid color for a command based on its badge in REGISTERED_COMMANDS."""
+    for desc in REGISTERED_COMMANDS:
+        if desc.name == command_name:
+            return COMMAND_TYPE_COLORS.get(desc.badge, DEFAULT_COMMAND_COLOR)
+    return DEFAULT_COMMAND_COLOR
+
+
+def _colorize_command(name: str, hex_color: str) -> str:
+    """Wrap a command name in a bold TrueColor ANSI escape using the given hex color."""
+    r, g, b = hex_to_rgb(hex_color)
+    return f"\033[1;38;2;{r};{g};{b}m{name}\033[0m"
+
+
 class _EigenscribeGroup(click.Group):
-    """Custom Click Group that applies green gradient to help section headers and item names."""
+    """Custom Click Group that applies type-specific gradients to command names in help output."""
+
+    def __call__(self, args: list[str] | None = None, **kwargs: object) -> None:
+        """Force colors on before any help/command processing."""
+        # Make sure ctx.color is True so ANSI codes are never stripped
+        if "ctx" in kwargs:
+            kwargs["ctx"].color = True  # type: ignore[literal-required]
+        super().__call__(args, **kwargs)
 
     def get_help(self, ctx: click.Context) -> str:
-        ctx.formatter_class = _GreenHelpFormatter
+        ctx.formatter_class = _BlueHelpFormatter
+        ctx.color = True  # Ensure colors are on during help formatting
         return super().get_help(ctx)
 
     def format_commands(self, ctx: click.Context, formatter: click.HelpFormatter) -> None:
@@ -186,8 +266,9 @@ class _EigenscribeGroup(click.Group):
             rows = []
             for subcommand, cmd in commands:
                 help_text = cmd.get_short_help_str(limit)
-                # Apply green gradient to command names
-                colored_name = multi_gradient(subcommand, colors=CLI_HELP_GREEN_GRADIENT, bold=True)
+                # Apply type-specific solid color based on command's badge
+                color = _get_command_color(subcommand)
+                colored_name = _colorize_command(subcommand, color)
                 rows.append((colored_name, help_text))
             if rows:
                 with formatter.section("Commands"):
@@ -207,7 +288,7 @@ class _EigenscribeGroup(click.Group):
             # Apply green gradient to option names
             colored_opts = []
             for opt_names, help_text in opts:
-                colored_name = multi_gradient(opt_names, colors=CLI_HELP_GREEN_GRADIENT, bold=True)
+                colored_name = multi_gradient(opt_names, colors=CLI_HELP_BLUE_GRADIENT, bold=True)
                 colored_opts.append((colored_name, help_text))
             with formatter.section("Options"):
                 formatter.write_dl(colored_opts)
@@ -222,7 +303,7 @@ class _EigenscribeGroup(click.Group):
     help=CLI_HELP_DESCRIPTION,
     epilog=multi_gradient(
         "💚 Powered by Eigenscribe — Deterministic Workspace & Palette Suite",
-        colors=GRADIENT_PRESETS["tse-gradient-2"],
+        colors=GRADIENT_PRESETS["eigenscribe"],
         bold=True,
     ),
 )
@@ -230,6 +311,7 @@ class _EigenscribeGroup(click.Group):
 @click.pass_context
 def cli(ctx: click.Context, version: bool) -> None:
     """Eigenscribe CLI — Deterministic Workspace Baseline & Palette Tools."""
+    ctx.color = True  # Force colors on regardless of TTY detection
     if version:
         version_str = f"scriber-core v{CLI_VERSION} (eigenscribe v{CLI_VERSION})"
         click.echo(multi_gradient(version_str, colors=PRIMARY_GRADIENT, bold=True))
@@ -612,7 +694,7 @@ def smoke_test_cmd() -> None:
 
 
 # -----------------------------------------------------------------------------------------------------------
-# Entry Point
+# 🔥 Entry point
 # -----------------------------------------------------------------------------------------------------------
 
 
