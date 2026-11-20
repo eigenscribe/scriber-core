@@ -12,7 +12,7 @@
 #   1. Create the project on PyPI (name: `scriber-core`). For the very first upload you may need to
 #      use the "pending publisher" flow: https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/
 #   2. On PyPI → your project → Settings → Publishing → "Add a new pending/trusted publisher":
-#        • Owner:            eigenscribe
+#        • Owner:            The-Scriber-Experience
 #        • Repository name:  scriber-core
 #        • Workflow name:    publish.yml
 #        • Environment name: pypi
