@@ -86,7 +86,7 @@ def run_smoke_test() -> bool:
     bool
         True if enable_vt_mode() completes without raising.
     """
-    print("💨 Running src/cli/vt_mode.py smoke tests...")
+    print("💨 Running src/scriber_core/cli/vt_mode.py smoke tests...")
 
     # Verify enable_vt_mode does not raise
     enable_vt_mode()
@@ -94,7 +94,7 @@ def run_smoke_test() -> bool:
     # Verify platform detection
     assert sys.platform in ("win32", "linux", "darwin"), f"Unexpected platform: {sys.platform!r}"
 
-    print("✅ src/cli/vt_mode.py smoke tests passed successfully.\n")
+    print("✅ src/scriber_core/cli/vt_mode.py smoke tests passed successfully.\n")
     return True
 
 

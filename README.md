@@ -1,5 +1,9 @@
 # 🧿 Scriber Labs: Agent Workspace Index
 
+[![Publish to PyPI](https://github.com/eigenscribe/scriber-core/actions/workflows/publish.yml/badge.svg)](https://github.com/eigenscribe/scriber-core/actions/workflows/publish.yml)
+[![PyPI version](https://img.shields.io/pypi/v/scriber-core.svg)](https://pypi.org/project/scriber-core/)
+[![Python versions](https://img.shields.io/pypi/pyversions/scriber-core.svg)](https://pypi.org/project/scriber-core/)
+
 Welcome to the canonical environment index for autonomous development agents. This workspace enforces strict structural layout layering, deterministic mathematical simulation profiling, uncompromising code verification rules, and automated workspace consistency.
 
 ## 🧭 System Onboarding Directory
@@ -22,26 +26,26 @@ Welcome to the canonical environment index for autonomous development agents. Th
 │       ├── gold-standard.py            # Gold standard numeric integration template
 │       └── visualization_boilerplate.py # Matplotlib, Seaborn & Plotly theme bootstrap template
 ├── src/
-│   ├── __init__.py                   # Scriber Core root namespace
-│   ├── cli/                          # 💻 Primary Scriber Core CLI suite & TrueColor tools
-│   │   ├── __init__.py               # CLI package exports & public API
-│   │   ├── __main__.py               # Package execution entry point (`python -m cli`)
-│   │   ├── main.py                   # Command router, gradient banners, and command catalog
-│   │   ├── messaging.py              # Semantic status alerts, ANSI 256 palette & banner generator
-│   │   ├── colors_table.py           # COLOR_PALETTE table renderer with TrueColor swatches
-│   │   └── colors.py                 # Direct CLI wrapper for palette inspection
-│   └── frontend/                     # 🎨 Frontend, design tokens & styling subsystem
-│       ├── __init__.py
-│       ├── colors.py                 # Canonical palette (COLOR_PALETTE), semantic/CLI/EIGEN roles, RGB, hex_to_rgb
-│       ├── gradients.py              # Golden ratio TrueColor multi-stop gradient engine (GRADIENT_PRESETS)
-│       └── the_scriber_experience/   # 🔱 The Scriber Experience (TSE) styling subsystems
+│   └── scriber_core/                 # 📦 Single top-level package (frontend + cli subpackages)
+│       ├── __init__.py               # Exports __version__; re-exports frontend & cli subpackages
+│       ├── cli/                      # 💻 Primary Scriber Core CLI suite & TrueColor tools
+│       │   ├── __init__.py           # CLI package exports & public API
+│       │   ├── __main__.py           # Package execution entry point (`python -m scriber_core.cli`)
+│       │   ├── main.py               # Command router, gradient banners, and command catalog
+│       │   ├── messaging.py          # Semantic status alerts, ANSI 256 palette & banner generator
+│       │   └── colors_table.py       # COLOR_PALETTE table renderer with TrueColor swatches
+│       └── frontend/                 # 🎨 Frontend, design tokens & styling subsystem
 │           ├── __init__.py
-│           ├── plots/                # Scientific plotting themes & colormaps
-│           │   ├── __init__.py
-│           │   └── theme.py          # Theme engine for Matplotlib, Pyplot, Seaborn, Plotly
-│           └── mermaid/              # Dark-mode Mermaid.js diagram theme engine & preview
+│           ├── colors.py             # Canonical palette (COLOR_PALETTE), semantic/CLI/EIGEN roles, RGB, hex_to_rgb
+│           ├── gradients.py          # Golden ratio TrueColor multi-stop gradient engine (GRADIENT_PRESETS)
+│           └── the_scriber_experience/   # 🔱 The Scriber Experience (TSE) styling subsystems
 │               ├── __init__.py
-│               └── theme.py          # Class definitions, directives & HTML preview renderer
+│               ├── plots/            # Scientific plotting themes & colormaps
+│               │   ├── __init__.py
+│               │   └── theme.py      # Theme engine for Matplotlib, Pyplot, Seaborn, Plotly
+│               └── mermaid/          # Dark-mode Mermaid.js diagram theme engine & preview
+│                   ├── __init__.py
+│                   └── theme.py      # Class definitions, directives & HTML preview renderer
 ├── sublime-theme/
 │   ├── EigenScribe/                  # Sublime Text 4 package (theme, color scheme, PreTeXt syntax & snippets)
 │   ├── install.sh                    # Bash installer (macOS / Linux, copy or symlink mode)
@@ -61,35 +65,35 @@ Welcome to the canonical environment index for autonomous development agents. Th
 - **Target Runtime Engine**: Python 3.11+
 - **Primary IDE Workspace**: JetBrains PyCharm Professional / IntelliJ IDEA.
 
-## 💻 Scriber Core CLI Suite (`python -m cli`)
+## 💻 Scriber Core CLI Suite (`python -m scriber_core.cli`)
 
-`scriber-core` provides a unified, color-coded CLI suite in `src/cli/` featuring signature TrueColor gradient banners, golden ratio-proportioned gradient text, interactive palette tables, and structured command catalogs:
+`scriber-core` provides a unified, color-coded CLI suite in `src/scriber_core/cli/` featuring signature TrueColor gradient banners, golden ratio-proportioned gradient text, interactive palette tables, and structured command catalogs:
 
 ```bash
 # Sync dependencies and development tools
 uv sync --extra dev
 
 # Run default CLI entry point (prints SECONDARY_GRADIENT banner & color-coded command catalog)
-uv run python -m cli
+uv run python -m scriber_core.cli
 
 # Display the high-contrast ADHD-optimized command catalog
-uv run python -m cli commands
+uv run python -m scriber_core.cli commands
 
 # Render the signature TrueColor block text banner (or custom text)
-uv run python -m cli banner "SCRIBER-CORE"
+uv run python -m scriber_core.cli banner "SCRIBER-CORE"
 
 # Inspect the canonical COLOR_PALETTE with TrueColor swatch blocks, hex, RGB, and ANSI escapes
-uv run python -m cli colors-table
-uv run python -m cli.colors_table --block-width 6 --sort hue
+uv run python -m scriber_core.cli colors-table
+uv run python -m scriber_core.cli.colors_table --block-width 6 --sort hue
 
 # Render TrueColor multi-stop gradients with Golden Ratio keyframe scaling
-uv run python -m cli gradient "Deterministic Autonomous Agent Baseline" --preset eigenscribe
+uv run python -m scriber_core.cli gradient "Deterministic Autonomous Agent Baseline" --preset eigenscribe
 
 # Display architecture telemetry, active token counts, and gradient presets
-uv run python -m cli info
+uv run python -m scriber_core.cli info
 
 # Run built-in self-diagnostics and CLI smoke tests
-uv run python -m cli smoke-test
+uv run python -m scriber_core.cli smoke-test
 ```
 
 ### 🎯 Cognitive Load & ADHD Semantic Color Coding
@@ -110,12 +114,12 @@ The command directory and CLI outputs implement an ergonomic visual hierarchy to
 To ensure strict visual fidelity across CLI TrueColor output, Matplotlib/Seaborn plotting themes, dark-mode Mermaid diagrams, and CSS tokens, `scriber-core` enforces a mandatory repo-wide color standard:
 
 1. **Single Source of Truth (`COLOR_PALETTE`)**:
-   - `COLOR_PALETTE` in `src/frontend/colors.py` is the canonical dictionary for all named color variables across the repository.
+   - `COLOR_PALETTE` in `src/scriber_core/frontend/colors.py` is the canonical dictionary for all named color variables across the repository.
 2. **Repo-Wide Hex Constraint**:
-   - **All color variables must be converted to / defined as canonical 6-digit hex format (`#rrggbb`)**, or reference valid key names from `COLOR_PALETTE` in `src/frontend/colors.py`.
+   - **All color variables must be converted to / defined as canonical 6-digit hex format (`#rrggbb`)**, or reference valid key names from `COLOR_PALETTE` in `src/scriber_core/frontend/colors.py`.
    - Never hardcode raw or inconsistent RGB values in downstream modules without a canonical hex reference.
 3. **Deterministic RGB Normalization**:
-   - The `hex_to_rgb(hex_code)` utility in `src/frontend/colors.py` provides deterministic conversion from hex strings to `(R, G, B)` integer tuples for ANSI escape sequence generation (`\033[38;2;R;G;Bm`).
+   - The `hex_to_rgb(hex_code)` utility in `src/scriber_core/frontend/colors.py` provides deterministic conversion from hex strings to `(R, G, B)` integer tuples for ANSI escape sequence generation (`\033[38;2;R;G;Bm`).
 4. **Golden Ratio Multi-Stop Gradient Interpolation**:
    - Multi-stop gradients computed via `multi_gradient()` scale keyframe segment lengths according to the Golden Ratio ($\phi \approx 1.618$, $w_k = (1/\phi)^k$).
    - Segments taper smoothly from dominant blues and cyans on the left to violets, purples, and magentas on the right.
@@ -154,6 +158,23 @@ uv run eigenscribe mermaid --sample
      - Adopt standard layout: `src/<package_name>/__init__.py` and `src/<package_name>/core.py`.
      - Configure `pyproject.toml` with `[build-system]` (`hatchling`) and `[tool.uv]` (`package = true`).
      - Install and sync in editable mode with `uv sync` or `uv pip install -e .`.
+
+### 🚀 Automated PyPI Release & Consumption
+
+Releases are published automatically by the [`.github/workflows/publish.yml`](.github/workflows/publish.yml) GitHub Actions workflow, which tests (Python 3.10–3.12), builds with `uv build`, and uploads to PyPI via **Trusted Publishing (OIDC — no stored tokens)** whenever a `vX.Y.Z` SemVer tag is pushed. Manual `workflow_dispatch` runs can also target TestPyPI. See `docs/workspace-setup-guide.md` (Section 11) for the release protocol and the one-time PyPI Trusted Publisher setup.
+
+Once published, bootstrap any other project with the shared workspace, CLI, and styling tokens:
+
+```bash
+# Add as a dependency (uv) or install directly (pip)
+uv add scriber-core          # or: pip install scriber-core
+
+# Use the bundled CLI...
+eigenscribe --help
+
+# ...and import the canonical design tokens from your own code
+python -c "from scriber_core.frontend import COLOR_PALETTE, GRADIENT_PRESETS; print(len(COLOR_PALETTE))"
+```
 
 For detailed, step-by-step walkthroughs, see [`docs/workspace-setup-guide.md`](docs/workspace-setup-guide.md).
 

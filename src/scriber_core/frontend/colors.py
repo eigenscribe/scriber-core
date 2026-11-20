@@ -1,4 +1,4 @@
-# src/frontend/colors.py
+# src/scriber_core/frontend/colors.py
 """
 colors.py
 

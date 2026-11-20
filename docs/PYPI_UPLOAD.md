@@ -62,13 +62,13 @@ eigenscribe --version
 Before each release:
 
 1. Update `version` in `pyproject.toml`
-2. Update `__version__` in `src/frontend/__init__.py`
-3. Update `CLI_VERSION` in `src/cli/main.py`
+2. Update `__version__` in `src/scriber_core/__init__.py` (and `src/scriber_core/frontend/__init__.py`)
+3. Update `CLI_VERSION` in `src/scriber_core/cli/main.py`
 4. Update `CHANGELOG.md`
 5. Build and upload
 
 ## Notes
 
 - The package name on PyPI will be `scriber-core`
-- The import names are `frontend` and `cli`
+- The import name is `scriber_core` (with `frontend` and `cli` subpackages)
 - The CLI command is `eigenscribe`

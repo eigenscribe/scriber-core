@@ -89,7 +89,7 @@ my-package/
 As long as there is only one `__init__.py` or one `main.py` per folder, they are not considered duplicates of each other across the repository.
 
 **Examples of prohibited duplicates:**
-- `src/cli/messaging.py` and `src/frontend/messaging.py` — same basename in different directories.
+- `src/scriber_core/cli/messaging.py` and `src/scriber_core/frontend/messaging.py` — same basename in different directories.
 - `THE_SCRIBER_EXPERIENCE/` and `the_scriber_experience/` — case-only difference.
 - `gold-standard.py` and `gold-standard-boilerplate.py` — one name is a prefixed variant of the other; use a single canonical name.
 - `python-rules.md` and `python-rules_v1.md` — versioned suffix creates a content duplicate; update the original instead.
@@ -371,7 +371,7 @@ All repositories and packages in Eigenscribe Inc. and Scriber Labs provide ergon
 3. **Context Passing**:
    - Share global runtime configuration (e.g., verbosity levels, deterministic RNG seeds, custom config file paths) across subcommands using `@click.pass_context` and `ctx.obj`.
 4. **Self-Discovery & Universal `--help`**:
-   - Executing the root command (e.g., `my-cli`, `python -m cli`, or `my-cli --help`) must immediately output the full catalog of available subcommands, arguments, defaults, and documentation.
+   - Executing the root command (e.g., `my-cli`, `python -m my_package.cli`, or `my-cli --help`) must immediately output the full catalog of available subcommands, arguments, defaults, and documentation.
 5. **Testing with Click `CliRunner`**:
    - Every CLI command must be backed by automated unit and functional tests in `tests/unit/test_cli.py` or `tests/func/test_cli.py` using Click's isolated runner:
      ```python
@@ -400,7 +400,7 @@ Multi-stop TrueColor gradient text computed via `multi_gradient()` scales color 
 
 ### 4️⃣ Console Script Registration & Built-In Smoke Testing
 - Bind entry points in `pyproject.toml` under `[project.scripts]`.
-- Every CLI suite must provide a built-in smoke test subcommand (e.g., `python -m cli smoke-test`) verifying terminal ANSI rendering, return codes, and command registration.
+- Every CLI suite must provide a built-in smoke test subcommand (e.g., `python -m my_package.cli smoke-test`) verifying terminal ANSI rendering, return codes, and command registration.
 
 ---
 
@@ -494,12 +494,12 @@ def validate_input_deck(config: dict[str, Any], schema_path: Path) -> None:
 To ensure strict visual fidelity across CLI TrueColor output, Matplotlib/Seaborn plotting themes, dark-mode Mermaid diagrams, and CSS tokens, `scriber-core` enforces a mandatory repo-wide color standard:
 
 1. **Single Source of Truth (`COLOR_PALETTE`)**:
-   - `COLOR_PALETTE` in `src/frontend/colors.py` is the canonical dictionary for all named color variables across the workspace.
+   - `COLOR_PALETTE` in `src/scriber_core/frontend/colors.py` is the canonical dictionary for all named color variables across the workspace.
 2. **Repo-Wide Hex Constraint**:
-   - **Constraint:** All color variables must be defined in a way that imports and uses the key names from `COLOR_PALETTE` in `src/frontend/colors.py` (and/or converted into canonical hex format (`#rrggbb`)).
+   - **Constraint:** All color variables must be defined in a way that imports and uses the key names from `COLOR_PALETTE` in `src/scriber_core/frontend/colors.py` (and/or converted into canonical hex format (`#rrggbb`)).
    - Never define raw or arbitrary RGB integer triplets across downstream modules without a canonical hex reference.
 3. **Deterministic RGB Normalization**:
-   - The `hex_to_rgb(hex_code)` utility in `src/frontend/colors.py` provides deterministic conversion from hex strings to `(R, G, B)` integer tuples for ANSI escape sequence generation (`\033[38;2;R;G;Bm`).
+   - The `hex_to_rgb(hex_code)` utility in `src/scriber_core/frontend/colors.py` provides deterministic conversion from hex strings to `(R, G, B)` integer tuples for ANSI escape sequence generation (`\033[38;2;R;G;Bm`).
 4. **Cross-Subsystem Alignment**:
    - Web / CSS design tokens: mapped directly from hex values to CSS custom properties (`--color-primary: #00e8ff`).
    - Scientific visualization: Matplotlib `rcParams` and Seaborn colormaps use hex strings directly (`axes.prop_cycle: ['#14b5ff', '#9b7dff', '#22f792', '#f78166']`).

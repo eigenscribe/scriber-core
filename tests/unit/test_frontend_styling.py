@@ -8,10 +8,10 @@ and ANSI TrueColor gradient engine.
 
 from __future__ import annotations
 
-from cli.messaging import cli_banner, cli_info, cli_success
-from frontend.the_scriber_experience.plots import get_eigenscribe_rcparams
+from scriber_core.cli.messaging import cli_banner, cli_info, cli_success
+from scriber_core.frontend.the_scriber_experience.plots import get_eigenscribe_rcparams
 
-from frontend import (
+from scriber_core.frontend import (
     COLOR_PALETTE,
     GOLDEN_RATIO,
     GOLDEN_RATIO_INVERSE,

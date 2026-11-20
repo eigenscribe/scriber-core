@@ -3,8 +3,8 @@
 test_cli_messaging.py
 
 Comprehensive unit and integration test suite for Scriber Core messaging modules:
-`src/frontend/messaging.py`, `src/cli/__init__.py`,
-and `src/frontend/__init__.py`.
+`src/scriber_core/cli/messaging.py`, `src/scriber_core/cli/__init__.py`,
+and `src/scriber_core/frontend/__init__.py`.
 """
 
 from __future__ import annotations
@@ -15,7 +15,7 @@ import click
 from click.testing import CliRunner
 import pytest
 
-from cli.messaging import (
+from scriber_core.cli.messaging import (
     EIGENSCRIBE_PALETTE,
     PRIMARY_GRADIENT,
     SECONDARY_GRADIENT,
@@ -41,7 +41,7 @@ from cli.messaging import (
     run_smoke_test,
     supports_256_color,
 )
-from cli import (
+from scriber_core.cli import (
     EIGENSCRIBE_PALETTE as CLI_PALETTE,
     STYLE_MAP as CLI_STYLE_MAP,
     ansi_256 as cli_ansi_256,
@@ -61,7 +61,7 @@ from cli import (
     supports_256_color as cli_pkg_supports_256_color,
     run_messaging_smoke_test,
 )
-from cli.messaging import (
+from scriber_core.cli.messaging import (
     EIGENSCRIBE_PALETTE as FRONTEND_PALETTE,
     STYLE_MAP as FRONTEND_STYLE_MAP,
     ansi_256 as fe_ansi_256,
@@ -82,7 +82,7 @@ from cli.messaging import (
     run_smoke_test as fe_run_smoke_test,
     supports_256_color as fe_supports_256_color,
 )
-from cli import (
+from scriber_core.cli import (
     EIGENSCRIBE_PALETTE as ROOT_FE_PALETTE,
     STYLE_MAP as ROOT_FE_STYLE_MAP,
     ansi_256 as root_fe_ansi_256,
@@ -101,7 +101,7 @@ from cli import (
     render_rule as root_fe_render_rule,
     supports_256_color as root_fe_supports_256_color,
 )
-from cli.main import cli as main_cli
+from scriber_core.cli.main import cli as main_cli
 
 
 @pytest.fixture
@@ -328,7 +328,7 @@ def test_all_smoke_tests() -> None:
 
 
 def test_messaging_cli_commands(runner: CliRunner) -> None:
-    """Verify Click subcommands in src/cli/messaging.py."""
+    """Verify Click subcommands in src/scriber_core/cli/messaging.py."""
     # Banner command
     res_banner = runner.invoke(messaging_cli, ["banner", "MESSAGING BANNER", "-s", "Testing Banner"])
     assert res_banner.exit_code == 0
@@ -353,7 +353,7 @@ def test_messaging_cli_commands(runner: CliRunner) -> None:
 
 
 def test_main_cli_messaging_commands(runner: CliRunner) -> None:
-    """Verify Click subcommands in src/cli/main.py (info, gradient, colors, message, rule)."""
+    """Verify Click subcommands in src/scriber_core/cli/main.py (info, gradient, colors, message, rule)."""
     # Info command
     res_info = runner.invoke(main_cli, ["info"])
     assert res_info.exit_code == 0

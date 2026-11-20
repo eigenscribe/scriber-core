@@ -18,8 +18,8 @@ from typing import Final, NamedTuple, Sequence
 
 import click
 
-from frontend.colors import COLOR_PALETTE, hex_to_rgb
-from frontend.gradients import GRADIENT_PRESETS, multi_gradient
+from scriber_core.frontend.colors import COLOR_PALETTE, hex_to_rgb
+from scriber_core.frontend.gradients import GRADIENT_PRESETS, multi_gradient
 
 try:
     from .branding import (
@@ -33,7 +33,7 @@ try:
         ansi_color,
     )
 except ImportError:
-    from cli.branding import (
+    from scriber_core.cli.branding import (
         BORDER_FRAME_COLOR,
         CMD_NAME_COLOR,
         DESC_TEXT_COLOR,
@@ -106,7 +106,7 @@ REGISTERED_COMMANDS: Final[tuple[CommandDescriptor, ...]] = (
         name="colors-table",
         category="🎨 COLOR PALETTES & SWATCHES",
         badge="CORE",
-        syntax="python -m cli.colors_table [--sort <key>] [--style <box>] [--block-char <c>]",
+        syntax="python -m scriber_core.cli.colors_table [--sort <key>] [--style <box>] [--block-char <c>]",
         description="Render COLOR_PALETTE table with TrueColor swatch blocks, hex codes, RGB vectors, and luminance metrics.",
     ),
     CommandDescriptor(
@@ -127,7 +127,7 @@ REGISTERED_COMMANDS: Final[tuple[CommandDescriptor, ...]] = (
         name="banner",
         category="🌈 TRUECOLOR GRADIENTS & BANNERS",
         badge="STYLE",
-        syntax="python -m cli banner [--title <text>] [--subtitle <text>]",
+        syntax="python -m scriber_core.cli banner [--title <text>] [--subtitle <text>]",
         description="Display signature TrueColor ASCII block banner headers and gradient rule dividers.",
     ),
     CommandDescriptor(
@@ -155,7 +155,7 @@ REGISTERED_COMMANDS: Final[tuple[CommandDescriptor, ...]] = (
         name="commands",
         category="🏛️ WORKSPACE ARCHITECTURE & TOKENS",
         badge="CORE",
-        syntax="python -m cli [commands]",
+        syntax="python -m scriber_core.cli [commands]",
         description="Display the complete color-coded command index, syntax references, and tool directory.",
     ),
     CommandDescriptor(
@@ -183,7 +183,7 @@ REGISTERED_COMMANDS: Final[tuple[CommandDescriptor, ...]] = (
         name="smoke-test",
         category="💨 DIAGNOSTICS & VERIFICATION",
         badge="DIAG",
-        syntax="python -m cli.colors_table --smoke-test",
+        syntax="python -m scriber_core.cli.colors_table --smoke-test",
         description="Execute deterministic smoke test suite, color calculations, and verification assertions.",
     ),
 )
@@ -296,7 +296,7 @@ def run_smoke_test() -> bool:
     bool
         True if all command catalog checks pass.
     """
-    print("💨 Running src/cli/command_catalog.py smoke tests...")
+    print("💨 Running src/scriber_core/cli/command_catalog.py smoke tests...")
 
     # Verify badge colors
     assert len(BADGE_COLORS) == 4
@@ -319,7 +319,7 @@ def run_smoke_test() -> bool:
     commands_output = render_commands_list()
     assert "\033[38;2;" in commands_output
 
-    print("✅ src/cli/command_catalog.py smoke tests passed successfully.\n")
+    print("✅ src/scriber_core/cli/command_catalog.py smoke tests passed successfully.\n")
     return True
 
 

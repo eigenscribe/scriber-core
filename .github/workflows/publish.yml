@@ -1,0 +1,164 @@
+# ---------------------------------------------------------------------------------------------------------
+# 🚀 Publish scriber-core to PyPI (Trusted Publishing / OIDC)
+# ---------------------------------------------------------------------------------------------------------
+#
+# This workflow builds the `scriber-core` distributions with `uv build` and uploads them with
+# `uv publish`, following the COOP "Distribution & PyPI Publishing Protocol" documented in
+# docs/workspace-setup-guide.md (Section 11) and the official uv / PyPA GitHub Actions guides.
+#
+# It uses **Trusted Publishing (OIDC)** — no API tokens or secrets are stored in the repo.
+#
+# ── One-time setup (required before the first release) ───────────────────────────────────────────────
+#   1. Create the project on PyPI (name: `scriber-core`). For the very first upload you may need to
+#      use the "pending publisher" flow: https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/
+#   2. On PyPI → your project → Settings → Publishing → "Add a new pending/trusted publisher":
+#        • Owner:            eigenscribe
+#        • Repository name:  scriber-core
+#        • Workflow name:    publish.yml
+#        • Environment name: pypi
+#      (Repeat on https://test.pypi.org with Environment name `testpypi` if you want TestPyPI runs.)
+#   3. (Recommended) In GitHub → Settings → Environments, create environments named `pypi` and
+#      `testpypi`. You can add required reviewers to `pypi` to gate production releases behind a
+#      manual approval.
+#
+# ── How to release ──────────────────────────────────────────────────────────────────────────────────
+#   • Production: bump the version in pyproject.toml + src/scriber_core/__init__.py, update CHANGELOG.md, then push
+#       an annotated tag, e.g.  `git tag -a v1.0.1 -m "Release 1.0.1" && git push origin main --tags`.
+#       The tag push runs tests → builds → publishes to PyPI automatically.
+#   • Dry run / TestPyPI: use the "Run workflow" button (workflow_dispatch) and pick a target.
+#
+# ── Prefer API tokens instead of OIDC? ────────────────────────────────────────────────────────────────
+#   Remove the `permissions: id-token: write` + `environment:` blocks from the publish jobs, add a
+#   `PYPI_API_TOKEN` repository secret, and change the publish step to:
+#       run: uv publish --token ${{ secrets.PYPI_API_TOKEN }}
+# ---------------------------------------------------------------------------------------------------------
+
+name: Publish to PyPI
+
+on:
+  push:
+    tags:
+      # Publish on SemVer version tags, e.g. v1.0.0, v1.2.3rc1, v2.0.0a1, v2.0.0b2
+      - "v[0-9]+.[0-9]+.[0-9]+"
+      - "v[0-9]+.[0-9]+.[0-9]+rc[0-9]+"
+      - "v[0-9]+.[0-9]+.[0-9]+[ab][0-9]+"
+  workflow_dispatch:
+    inputs:
+      publish_target:
+        description: "Manual run target (tag pushes always go to PyPI)"
+        type: choice
+        default: testpypi
+        options:
+          - testpypi
+          - pypi
+
+# Least-privilege default for every job; the publishing jobs opt into `id-token: write` explicitly.
+permissions:
+  contents: read
+
+jobs:
+  # -------------------------------------------------------------------------------------------------------
+  # 1️⃣ Test across every supported Python version before anything is built or published.
+  # -------------------------------------------------------------------------------------------------------
+  test:
+    name: Test (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv (Python ${{ matrix.python-version }})
+        uses: astral-sh/setup-uv@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+          enable-cache: true
+
+      - name: Run the test suite
+        run: uv run --extra dev pytest tests
+
+  # -------------------------------------------------------------------------------------------------------
+  # 2️⃣ Build the sdist + wheel once, smoke-test the wheel, and hand the artifacts to the publish jobs.
+  #     This job intentionally has NO id-token permission (reduces supply-chain attack surface).
+  # -------------------------------------------------------------------------------------------------------
+  build:
+    name: Build distributions
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Build sdist and wheel
+        run: uv build
+
+      - name: Smoke-test the built wheel
+        run: >-
+          uv run --isolated --no-project --with dist/*.whl
+          python -c "import importlib.metadata as m; import scriber_core; from scriber_core import frontend, cli;
+          print('scriber-core', m.version('scriber-core'), '| scriber_core', scriber_core.__version__, '| frontend', frontend.__version__)"
+
+      - name: Upload distribution artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          if-no-files-found: error
+
+  # -------------------------------------------------------------------------------------------------------
+  # 3️⃣ Publish to PyPI — on version-tag pushes, or a manual run with target = pypi.
+  # -------------------------------------------------------------------------------------------------------
+  publish-pypi:
+    name: Publish to PyPI
+    needs: build
+    if: github.event_name == 'push' || github.event.inputs.publish_target == 'pypi'
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/scriber-core/
+    permissions:
+      id-token: write # Mandatory for Trusted Publishing (OIDC)
+    steps:
+      - name: Download distribution artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Publish to PyPI
+        run: uv publish --trusted-publishing always
+
+  # -------------------------------------------------------------------------------------------------------
+  # 4️⃣ Publish to TestPyPI — manual runs only (the default workflow_dispatch target).
+  # -------------------------------------------------------------------------------------------------------
+  publish-testpypi:
+    name: Publish to TestPyPI
+    needs: build
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.publish_target == 'testpypi'
+    runs-on: ubuntu-latest
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/project/scriber-core/
+    permissions:
+      id-token: write # Mandatory for Trusted Publishing (OIDC)
+    steps:
+      - name: Download distribution artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Publish to TestPyPI
+        run: uv publish --trusted-publishing always --publish-url https://test.pypi.org/legacy/

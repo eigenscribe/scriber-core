@@ -1,4 +1,4 @@
-# src/frontend/the_scriber_experience/plots/theme.py
+# src/scriber_core/frontend/the_scriber_experience/plots/theme.py
 """
 theme.py
 

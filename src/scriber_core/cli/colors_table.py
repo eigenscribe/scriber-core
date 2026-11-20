@@ -21,13 +21,13 @@ from typing import Final, Literal, NamedTuple, Sequence, TypeAlias
 
 import click
 
-from frontend.colors import COLOR_PALETTE, RGB, hex_to_rgb
-from frontend.gradients import GRADIENT_PRESETS, multi_gradient
+from scriber_core.frontend.colors import COLOR_PALETTE, RGB, hex_to_rgb
+from scriber_core.frontend.gradients import GRADIENT_PRESETS, multi_gradient
 
 try:
     from .vt_mode import enable_vt_mode
 except ImportError:
-    from cli.vt_mode import enable_vt_mode
+    from scriber_core.cli.vt_mode import enable_vt_mode
 
 
 __all__: list[str] = [
@@ -590,7 +590,7 @@ def run_smoke_test() -> bool:
     bool
         True if all assertions and table renderings succeed.
     """
-    print("💨 Running src/cli/colors_table.py smoke tests...")
+    print("💨 Running src/scriber_core/cli/colors_table.py smoke tests...")
 
     entries = build_color_entries()
     assert len(entries) == len(COLOR_PALETTE), (
@@ -623,7 +623,7 @@ def run_smoke_test() -> bool:
     assert "node-1" in table_str
     assert "\033[38;2;" in table_str
 
-    print("✅ src/cli/colors_table.py smoke tests passed successfully.\n")
+    print("✅ src/scriber_core/cli/colors_table.py smoke tests passed successfully.\n")
     return True
 
 

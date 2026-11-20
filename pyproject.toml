@@ -50,7 +50,7 @@ dependencies = [
 ]
 
 [project.scripts]
-eigenscribe = "cli.main:main"
+eigenscribe = "scriber_core.cli.main:main"
 
 [project.optional-dependencies]
 dev = [
@@ -77,7 +77,7 @@ managed = true
 package = true
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/frontend", "src/cli"]
+packages = ["src/scriber_core"]
 
 [tool.uv.pip]
 universal = true

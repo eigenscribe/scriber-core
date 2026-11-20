@@ -1,4 +1,4 @@
-# src/frontend/the_scriber_experience/__init__.py
+# src/scriber_core/frontend/the_scriber_experience/__init__.py
 """
 The Scriber Experience (TSE) - Frontend Design & Styling System.
 Unifies style design tokens, terminal CLI utilities, and scientific plot themes.
@@ -27,7 +27,7 @@ from .plots import (
     plot_eigenscribe_heatmap,
     register_colormaps,
 )
-from frontend.colors import (
+from scriber_core.frontend.colors import (
     CLI_COLORS,
     COLOR_PALETTE,
     EIGEN_COLORS,
@@ -39,7 +39,7 @@ from frontend.colors import (
     RGB,
     hex_to_rgb,
 )
-from frontend.gradients import (
+from scriber_core.frontend.gradients import (
     GRADIENT_PRESETS,
     PRESETS,
     TSE_GRADIENTS,

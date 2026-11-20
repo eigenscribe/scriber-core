@@ -1,4 +1,4 @@
-# src/frontend/the_scriber_experience/mermaid/theme.py
+# src/scriber_core/frontend/the_scriber_experience/mermaid/theme.py
 """
 theme.py
 
@@ -24,7 +24,7 @@ if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
-from frontend.colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
+from scriber_core.frontend.colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
 
 __all__: list[str] = [
     "EIGENSCRIBE_MERMAID_THEME_VARIABLES",

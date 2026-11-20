@@ -2,8 +2,8 @@
 """
 test_cli_colors_table.py
 
-Comprehensive unit and integration test suite for `src/cli/colors_table.py`,
-`src/cli/colors.py`, `src/cli/main.py`, and `src/cli/__init__.py`.
+Comprehensive unit and integration test suite for `src/scriber_core/cli/colors_table.py`,
+`src/scriber_core/cli/colors.py`, `src/scriber_core/cli/main.py`, and `src/scriber_core/cli/__init__.py`.
 """
 
 from __future__ import annotations
@@ -13,7 +13,7 @@ import click
 from click.testing import CliRunner
 import pytest
 
-from cli import (
+from scriber_core.cli import (
     BADGE_COLORS,
     BORDER_FRAME_COLOR,
     BOX_STYLES,
@@ -38,8 +38,8 @@ from cli import (
     render_colors_table,
     render_commands_list,
 )
-from cli.colors_table import _compute_hue, _compute_relative_luminance, main as colors_table_main
-from cli.main import (
+from scriber_core.cli.colors_table import _compute_hue, _compute_relative_luminance, main as colors_table_main
+from scriber_core.cli.main import (
     cli as main_cli,
     main as scriber_main,
     run_smoke_test as main_smoke_test,
@@ -137,7 +137,7 @@ def test_print_colors_table_output(capsys: pytest.CaptureFixture[str]) -> None:
 
 def test_main_and_colors_module_entry_points(capsys: pytest.CaptureFixture[str]) -> None:
     """Verify cli.main and cli.colors_table entry points execute with ANSI TrueColor codes."""
-    from cli.main import main as main_entry
+    from scriber_core.cli.main import main as main_entry
 
     # Direct function invocation of print_colors_table via main module
     print_colors_table({"pine": "#059669"}, block_width=2)
@@ -204,7 +204,7 @@ def test_render_and_print_commands_list(capsys: pytest.CaptureFixture[str]) -> N
 
 
 def test_main_cli_invocations(runner: CliRunner) -> None:
-    """Verify main Click group and subcommand invocations in src/cli/main.py."""
+    """Verify main Click group and subcommand invocations in src/scriber_core/cli/main.py."""
     # 1. Default invocation (no subcommands)
     res_default = runner.invoke(main_cli, [])
     assert res_default.exit_code == 0
@@ -239,7 +239,7 @@ def test_main_cli_invocations(runner: CliRunner) -> None:
 
 
 def test_main_smoke_test_function() -> None:
-    """Verify run_smoke_test in src/cli/main.py."""
+    """Verify run_smoke_test in src/scriber_core/cli/main.py."""
     assert main_smoke_test() is True
 
 
@@ -262,7 +262,7 @@ def test_relative_luminance_and_hue_calculations() -> None:
 
 def test_golden_ratio_proportions_and_header_gradients() -> None:
     """Verify golden ratio stop position decay and header gradient styling."""
-    from frontend.gradients import compute_golden_ratio_stop_positions, multi_gradient
+    from scriber_core.frontend.gradients import compute_golden_ratio_stop_positions, multi_gradient
 
     # Verify decay across 4 stops (blue -> cyan -> indigo -> violet/pink)
     stops = compute_golden_ratio_stop_positions(4)

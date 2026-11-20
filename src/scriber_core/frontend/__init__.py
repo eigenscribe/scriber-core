@@ -1,4 +1,4 @@
-# src/frontend/__init__.py
+# src/scriber_core/frontend/__init__.py
 """
 frontend
 

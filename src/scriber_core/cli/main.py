@@ -19,8 +19,8 @@ from typing import Final
 
 import click
 
-from frontend.colors import COLOR_PALETTE, hex_to_rgb
-from frontend.gradients import GRADIENT_PRESETS, multi_gradient
+from scriber_core.frontend.colors import COLOR_PALETTE, hex_to_rgb
+from scriber_core.frontend.gradients import GRADIENT_PRESETS, multi_gradient
 
 try:
     from .colors_table import (
@@ -49,13 +49,13 @@ try:
         supports_256_color,
     )
 except ImportError:
-    from cli.colors_table import (
+    from scriber_core.cli.colors_table import (
         cli as colors_table_cli,
         main as colors_table_main,
         print_colors_table,
         render_colors_table,
     )
-    from cli.messaging import (
+    from scriber_core.cli.messaging import (
         EIGENSCRIBE_PALETTE,
         STYLE_MAP,
         ansi_256,
@@ -75,13 +75,13 @@ except ImportError:
         supports_256_color,
     )
 
-from frontend.the_scriber_experience.plots.theme import get_eigenscribe_rcparams
-from frontend.the_scriber_experience.mermaid.theme import (
+from scriber_core.frontend.the_scriber_experience.plots.theme import get_eigenscribe_rcparams
+from scriber_core.frontend.the_scriber_experience.mermaid.theme import (
     generate_mermaid_flowchart,
     get_mermaid_init_directive,
     render_html_preview,
 )
-from frontend.colors import (
+from scriber_core.frontend.colors import (
     CLI_COLORS,
     EIGEN_COLORS,
     EIGEN_LABEL_COLORS,
@@ -109,7 +109,7 @@ try:
     from .smoke_tests import run_smoke_test
     from .vt_mode import enable_vt_mode
 except ImportError:
-    from cli.branding import (
+    from scriber_core.cli.branding import (
         CLI_VERSION,
         PRIMARY_GRADIENT,
         SECONDARY_GRADIENT,
@@ -117,15 +117,15 @@ except ImportError:
         print_brand_header,
         render_brand_header,
     )
-    from cli.command_catalog import (
+    from scriber_core.cli.command_catalog import (
         BADGE_COLORS,
         CommandDescriptor,
         REGISTERED_COMMANDS,
         print_commands_list,
         render_commands_list,
     )
-    from cli.smoke_tests import run_smoke_test
-    from cli.vt_mode import enable_vt_mode
+    from scriber_core.cli.smoke_tests import run_smoke_test
+    from scriber_core.cli.vt_mode import enable_vt_mode
 
 
 __all__: list[str] = [
@@ -395,7 +395,7 @@ def info_cmd() -> None:
     click.echo("")
     cli_rule(level="rule")
     cli_echo("  🧱 4-Layer Design Token Stack:", color="eigen_cyan", bold=True)
-    cli_echo("    • Layer 1: Primitive Hex Tokens (COLOR_PALETTE in src/frontend/colors.py)", color="eigen_white")
+    cli_echo("    • Layer 1: Primitive Hex Tokens (COLOR_PALETTE in src/scriber_core/frontend/colors.py)", color="eigen_white")
     cli_echo("    • Layer 2: Semantic Mapping (TSE_COLORS, SEMANTIC_COLORS, BADGE_COLORS)", color="eigen_white")
     cli_echo("    • Layer 3: Dynamic Engines (multi_gradient, golden ratio interpolation)", color="eigen_white")
     cli_echo("    • Layer 4: High-Level Visual Themes (Cosmic Void, Sephirah, Glassmorphic UI)", color="eigen_white")

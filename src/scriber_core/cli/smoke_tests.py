@@ -36,18 +36,18 @@ try:
         supports_256_color,
     )
 except ImportError:
-    from cli.branding import (
+    from scriber_core.cli.branding import (
         EIGENSCRIBE_BLOCK_TEXT,
         PRIMARY_GRADIENT,
         SECONDARY_GRADIENT,
         ansi_color,
         render_brand_header,
     )
-    from cli.command_catalog import (
+    from scriber_core.cli.command_catalog import (
         REGISTERED_COMMANDS,
         render_commands_list,
     )
-    from cli.messaging import (
+    from scriber_core.cli.messaging import (
         EIGENSCRIBE_PALETTE,
         render_message,
         render_rule,
@@ -67,7 +67,7 @@ __all__: list[str] = [
 
 def run_smoke_test() -> bool:
     """Execute smoke test assertions for the Scriber Core CLI suite."""
-    print("💨 Running src/cli smoke tests...")
+    print("💨 Running src/scriber_core/cli smoke tests...")
 
     # 1. Block text existence and gradient definition
     assert len(EIGENSCRIBE_BLOCK_TEXT.strip()) > 0
@@ -120,7 +120,7 @@ def run_smoke_test() -> bool:
     try:
         from .main import cli
     except ImportError:
-        from cli.main import cli
+        from scriber_core.cli.main import cli
 
     assert "info" in cli.commands
     assert "gradient" in cli.commands
@@ -148,7 +148,7 @@ def run_smoke_test() -> bool:
     res_doc = runner.invoke(cli, ["doctor"])
     assert res_doc.exit_code == 0
 
-    print("✅ src/cli smoke tests passed successfully.\n")
+    print("✅ src/scriber_core/cli smoke tests passed successfully.\n")
     return True
 
 

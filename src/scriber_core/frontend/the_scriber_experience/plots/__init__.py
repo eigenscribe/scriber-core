@@ -1,4 +1,4 @@
-# src/frontend/the_scriber_experience/plots/__init__.py
+# src/scriber_core/frontend/the_scriber_experience/plots/__init__.py
 """
 The Scriber Experience (TSE) Plots & Visualization Subpackage.
 Matplotlib, Seaborn, and Plotly theme presets, signature colormaps, and heatmap utilities.

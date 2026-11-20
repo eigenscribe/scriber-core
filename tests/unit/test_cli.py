@@ -13,7 +13,7 @@ import click
 from click.testing import CliRunner
 import pytest
 
-from cli import (
+from scriber_core.cli import (
     COLOR_PALETTE,
     build_color_entries,
     format_color_swatch,
@@ -22,8 +22,8 @@ from cli import (
     render_colors_table,
     run_cli_smoke_test,
 )
-from cli.colors_table import cli as colors_table_cli
-from cli.main import cli_group
+from scriber_core.cli.colors_table import cli as colors_table_cli
+from scriber_core.cli.main import cli_group
 
 
 @pytest.fixture

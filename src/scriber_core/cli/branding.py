@@ -19,8 +19,8 @@ from typing import Final, Sequence
 
 import click
 
-from frontend.colors import COLOR_PALETTE, RGB, hex_to_rgb
-from frontend.gradients import GRADIENT_PRESETS, multi_gradient
+from scriber_core.frontend.colors import COLOR_PALETTE, RGB, hex_to_rgb
+from scriber_core.frontend.gradients import GRADIENT_PRESETS, multi_gradient
 
 
 __all__: list[str] = [
@@ -267,7 +267,7 @@ def run_smoke_test() -> bool:
     bool
         True if all branding checks pass.
     """
-    print("💨 Running src/cli/branding.py smoke tests...")
+    print("💨 Running src/scriber_core/cli/branding.py smoke tests...")
 
     # Verify constants
     assert CLI_VERSION == "1.0.0"
@@ -294,7 +294,7 @@ def run_smoke_test() -> bool:
     header_output = render_brand_header()
     assert "\033[38;2;" in header_output or "\033[1;38;2;" in header_output
 
-    print("✅ src/cli/branding.py smoke tests passed successfully.\n")
+    print("✅ src/scriber_core/cli/branding.py smoke tests passed successfully.\n")
     return True
 
 

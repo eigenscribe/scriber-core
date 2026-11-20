@@ -6,7 +6,7 @@ This document establishes the canonical reference catalog for all color tokens, 
 
 ## 📋 1. Single Source of Truth (`COLOR_PALETTE`)
 
-All primitive color tokens in `scriber-core` are defined in `src/frontend/colors.py` as 6-digit hex values (`#rrggbb`). Downstream modules, CLI tools, plotting themes, and stylesheets must import and reference these token names rather than introducing raw, uncoordinated RGB/hex literals.
+All primitive color tokens in `scriber-core` are defined in `src/scriber_core/frontend/colors.py` as 6-digit hex values (`#rrggbb`). Downstream modules, CLI tools, plotting themes, and stylesheets must import and reference these token names rather than introducing raw, uncoordinated RGB/hex literals.
 
 ### 🎨 Complete Primitive Palette Table
 
@@ -84,7 +84,7 @@ All primitive color tokens in `scriber-core` are defined in `src/frontend/colors
 
 ## 🌈 2. Linear Gradient Engine & Preset Catalog
 
-All multi-stop TrueColor gradients in `src/frontend/gradients.py` support mathematical Golden Ratio stop proportioning ($\phi \approx 1.618$). Segment proportions decrease from left to right according to $w_k = (1/\phi)^k$, providing cognitive grounding with prominent blue/cyan start stops tapering into violet/pink.
+All multi-stop TrueColor gradients in `src/scriber_core/frontend/gradients.py` support mathematical Golden Ratio stop proportioning ($\phi \approx 1.618$). Segment proportions decrease from left to right according to $w_k = (1/\phi)^k$, providing cognitive grounding with prominent blue/cyan start stops tapering into violet/pink.
 
 ### 🌟 Registered Gradient Presets (`GRADIENT_PRESETS`)
 
@@ -135,11 +135,11 @@ A comprehensive utilitarian review of design token architecture and styling subs
 
 ### 🌟 The Good
 1. **Single Source of Truth (`COLOR_PALETTE`)**:
-   - Centralizing all 67 named color definitions in `src/frontend/colors.py` guarantees repo-wide color fidelity across terminal CLIs, Matplotlib plots, Seaborn colormaps, dark-mode Mermaid diagrams, and CSS tokens.
+   - Centralizing all 67 named color definitions in `src/scriber_core/frontend/colors.py` guarantees repo-wide color fidelity across terminal CLIs, Matplotlib plots, Seaborn colormaps, dark-mode Mermaid diagrams, and CSS tokens.
 2. **Mathematical Golden Ratio ($\phi$) Gradient Proportioning**:
    - Stop positions computed via $w_k = (1/\phi)^k$ eliminate arbitrary gradient banding, anchoring visual attention on high-luminance blue/cyan focal points while smoothly tapering into deep purple/pink accents.
 3. **Robust Separation of Concerns**:
-   - Clean architectural decoupling between `src/cli/` (terminal user interface, table formatting, click commands) and `src/frontend/` (mathematical color interpolation, design tokens, plotting themes).
+   - Clean architectural decoupling between `src/scriber_core/cli/` (terminal user interface, table formatting, click commands) and `src/scriber_core/frontend/` (mathematical color interpolation, design tokens, plotting themes).
 4. **Resilient Terminal Compatibility**:
    - Seamless cross-platform support with automatic Windows Virtual Terminal Processing enablement, 24-bit TrueColor rendering, ANSI 256-color fallback, and 16-color degradation.
 5. **Deterministic Testing Rigor**:

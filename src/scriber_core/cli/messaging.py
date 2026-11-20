@@ -20,8 +20,8 @@ from typing import Final, Sequence
 
 import click
 
-from frontend.colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
-from frontend.gradients import (
+from scriber_core.frontend.colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
+from scriber_core.frontend.gradients import (
     GRADIENT_PRESETS,
     TSE_GRADIENTS,
     multi_gradient,
@@ -30,7 +30,7 @@ from frontend.gradients import (
 try:
     from .vt_mode import enable_vt_mode
 except ImportError:
-    from cli.vt_mode import enable_vt_mode
+    from scriber_core.cli.vt_mode import enable_vt_mode
 
 
 _HAS_CLICK: Final[bool] = True
@@ -577,7 +577,7 @@ def run_smoke_test() -> bool:
     bool
         True if all verification assertions succeed.
     """
-    print("💨 Running src/frontend/messaging.py smoke tests...")
+    print("💨 Running src/scriber_core/cli/messaging.py smoke tests...")
 
     # 1. Palette completeness assertions
     assert len(EIGENSCRIBE_PALETTE) >= 40
@@ -625,7 +625,7 @@ def run_smoke_test() -> bool:
     cli_highlight("Highlight message — Bright Pink")
     cli_rule()
 
-    print("✅ src/frontend/messaging.py smoke tests passed successfully.\n")
+    print("✅ src/scriber_core/cli/messaging.py smoke tests passed successfully.\n")
     return True
 
 

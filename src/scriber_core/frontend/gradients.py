@@ -1,4 +1,4 @@
-# src/frontend/gradients.py
+# src/scriber_core/frontend/gradients.py
 """
 gradients.py
 
@@ -23,7 +23,7 @@ if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
-from frontend.colors import (
+from scriber_core.frontend.colors import (
     COLOR_PALETTE,
     Color,
     GOLDEN_RATIO_INVERSE,
