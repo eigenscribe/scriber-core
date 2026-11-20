@@ -20,9 +20,9 @@ from cli import (
     COLOR_PALETTE,
     ColorEntry,
     CommandDescriptor,
+    EIGENSCRIBE_BLOCK_TEXT,
     PRIMARY_GRADIENT,
     REGISTERED_COMMANDS,
-    SCRIBER_CORE_BLOCK_TEXT,
     SECONDARY_GRADIENT,
     SortKey,
     TableStyle,
@@ -37,7 +37,6 @@ from cli import (
     render_brand_header,
     render_colors_table,
     render_commands_list,
-    run_smoke_test,
 )
 from cli.colors_table import _compute_hue, _compute_relative_luminance, main as colors_table_main
 from cli.main import (
@@ -113,7 +112,7 @@ def test_render_colors_table_all_border_styles() -> None:
         plain_table = re.sub(r"\x1b\[[0-9;]*m", "", table_output)
         assert "SCRIBER CORE COLOR PALETTE TABLE" in plain_table
         assert "deep_pine" in table_output
-        assert "pure_cyan" in table_output
+        assert "node-1" in table_output
 
 
 def test_render_colors_table_empty_palette() -> None:
@@ -167,8 +166,8 @@ def test_cli_runner_invocations(runner: CliRunner) -> None:
 
 def test_scriber_core_block_text_and_brand_header(capsys: pytest.CaptureFixture[str]) -> None:
     """Verify block text reading 'scriber-core' with SECONDARY_GRADIENT and gradient header."""
-    assert len(SCRIBER_CORE_BLOCK_TEXT.strip()) > 0
-    assert "██" in SCRIBER_CORE_BLOCK_TEXT
+    assert len(EIGENSCRIBE_BLOCK_TEXT.strip()) > 0
+    assert "|" in EIGENSCRIBE_BLOCK_TEXT
     assert len(SECONDARY_GRADIENT) == 4
     assert len(PRIMARY_GRADIENT) == 4
 
@@ -236,7 +235,7 @@ def test_main_cli_invocations(runner: CliRunner) -> None:
     # 6. version option
     res_ver = runner.invoke(main_cli, ["--version"])
     assert res_ver.exit_code == 0
-    assert "scriber-core" in res_ver.output
+    assert "scriber-core" in re.sub(r"\x1b\[[0-9;]*m", "", res_ver.output)
 
 
 def test_main_smoke_test_function() -> None:

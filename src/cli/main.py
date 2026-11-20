@@ -81,7 +81,7 @@ from frontend.the_scriber_experience.mermaid.theme import (
     get_mermaid_init_directive,
     render_html_preview,
 )
-from frontend.the_scriber_experience.style.semantic_roles import (
+from frontend.colors import (
     CLI_COLORS,
     EIGEN_COLORS,
     EIGEN_LABEL_COLORS,

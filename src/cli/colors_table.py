@@ -620,7 +620,7 @@ def run_smoke_test() -> bool:
     plain_table = re.sub(r"\x1b\[[0-9;]*m", "", table_str)
     assert "SCRIBER CORE COLOR PALETTE TABLE" in plain_table
     assert "deep_pine" in table_str
-    assert "pure_cyan" in table_str
+    assert "node-1" in table_str
     assert "\033[38;2;" in table_str
 
     print("✅ src/cli/colors_table.py smoke tests passed successfully.\n")

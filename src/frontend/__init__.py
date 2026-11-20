@@ -15,10 +15,16 @@ from typing import Final
 
 from . import colors, gradients, the_scriber_experience
 from .colors import (
+    CLI_COLORS,
     COLOR_PALETTE,
+    EIGEN_COLORS,
+    EIGEN_LABEL_COLORS,
+    EIGEN_NODE_COLORS,
     GOLDEN_RATIO,
     PHI,
     GOLDEN_RATIO_INVERSE,
+    SEMANTIC_COLORS,
+    TSE_COLORS,
     Color,
     RGB,
     generate_golden_ratio_gradient,
@@ -29,18 +35,12 @@ from .colors import (
 )
 from .gradients import (
     GRADIENT_PRESETS,
+    PRESETS,
     TSE_GRADIENTS,
     compute_golden_ratio_stop_positions,
     multi_gradient,
 )
 from .the_scriber_experience import (
-    CLI_COLORS,
-    EIGEN_COLORS,
-    EIGEN_LABEL_COLORS,
-    EIGEN_NODE_COLORS,
-    PRESETS,
-    SEMANTIC_COLORS,
-    TSE_COLORS,
     apply_cosmic_theme,
     apply_theme,
     create_eigenscribe_colormap,
@@ -50,7 +50,6 @@ from .the_scriber_experience import (
     plot_eigenscribe_heatmap,
     plots,
     register_colormaps,
-    style,
 )
 
 __version__: Final[str] = "1.0.0"
@@ -61,7 +60,6 @@ __all__: list[str] = [
     "colors",
     "gradients",
     "the_scriber_experience",
-    "style",
     "plots",
     "mermaid",
     # Types & Core

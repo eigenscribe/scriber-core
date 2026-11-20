@@ -64,7 +64,7 @@ EIGENSCRIBE_BLOCK_TEXT: Final[str] = r"""
 """
 
 # Semantic Color Token Mapping from COLOR_PALETTE
-HEADER_CATEGORY_COLOR: Final[str] = COLOR_PALETTE["vivid_cyan"]  # #00e8ff - High contrast primary focus
+HEADER_CATEGORY_COLOR: Final[str] = COLOR_PALETTE["node-2"]  # #00e8ff - High contrast primary focus
 CMD_NAME_COLOR: Final[str] = COLOR_PALETTE["success_emerald"]  # #10b981 - Command names in help output
 SYNTAX_FLAG_COLOR: Final[str] = COLOR_PALETTE["pale_lilac"]  # #d8b4fe - Syntax and options
 DESC_TEXT_COLOR: Final[str] = COLOR_PALETTE["ice_blue"]  # #b8f6ff - Readable description body

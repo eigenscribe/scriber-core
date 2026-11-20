@@ -50,10 +50,10 @@ __all__: list[str] = [
 GRADIENT_PRESETS: Final[dict[str, tuple[str, ...]]] = {
     # 🐉 Signature Eigenscribe Gradient:
     "eigenscribe": (
-        COLOR_PALETTE["vivid_cyan"],
+        COLOR_PALETTE["node-2"],
         COLOR_PALETTE["eigen_blue"],
         COLOR_PALETTE["midwest_indigo"],
-        COLOR_PALETTE["electric_violet"],
+        COLOR_PALETTE["node-7"],
     ),
     # 🔱 Signature TSE Gradients:
     "tse-gradient-1": (
@@ -69,11 +69,11 @@ GRADIENT_PRESETS: Final[dict[str, tuple[str, ...]]] = {
         COLOR_PALETTE["neon_orchid"],
     ),
     "tse-gradient-2": (
-        COLOR_PALETTE["vivid_cyan"],
-        COLOR_PALETTE["vivid_sky_blue"],
+        COLOR_PALETTE["node-2"],
+        COLOR_PALETTE["node-3"],
         COLOR_PALETTE["skyline_blue"],
-        COLOR_PALETTE["vivid_blue"],
-        COLOR_PALETTE["electric_violet"],
+        COLOR_PALETTE["eigen_blue"],
+        COLOR_PALETTE["node-7"],
     ),
     # 🌟 Eigenscribe signature:
     "electric": (
@@ -97,18 +97,18 @@ GRADIENT_PRESETS: Final[dict[str, tuple[str, ...]]] = {
     "midnight": (
         COLOR_PALETTE["sky_info"],
         COLOR_PALETTE["midwest_indigo"],
-        COLOR_PALETTE["rose_pink"],
+        COLOR_PALETTE["node-8"],
     ),
     # ⚡ Cyberpunk Neon: Bright Cyan (#00f0ff) -> Electric Violet (#5e17eb) -> Hot Pink (#ff007b)
     "cyberpunk": (
         COLOR_PALETTE["bright_cyan"],
-        COLOR_PALETTE["electric_violet"],
+        COLOR_PALETTE["node-7"],
         COLOR_PALETTE["hot_pink"],
     ),
     # 🩵 Blue Gradient
     "blue_gradient": (
-        COLOR_PALETTE["vivid_cyan"],
-        COLOR_PALETTE["vivid_sky_blue"],
+        COLOR_PALETTE["node-2"],
+        COLOR_PALETTE["node-3"],
         COLOR_PALETTE["eigen_blue"],
         COLOR_PALETTE["strong_blue"],
     ),
@@ -117,12 +117,14 @@ GRADIENT_PRESETS: Final[dict[str, tuple[str, ...]]] = {
         COLOR_PALETTE["tropical_teal"],
         COLOR_PALETTE["success_emerald"],
         COLOR_PALETTE["bright_chartreuse"],
+        COLOR_PALETTE["node-9"],
     ),
     # 💜 Purple Gradient: Royal Purple (#7209b7) -> Bright Purple (#a855f7) -> Bright Violet (#7c3aed)
     "purple_gradient": (
         COLOR_PALETTE["royal_purple"],
         COLOR_PALETTE["bright_purple"],
         COLOR_PALETTE["bright_violet"],
+        COLOR_PALETTE["node-7"],
     ),
 }
 

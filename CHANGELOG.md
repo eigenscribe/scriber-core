@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed `src/frontend/the_scriber_experience/style/tse_colors.py` to `semantic_roles.py` to eliminate naming collision with `colors.py` in the parent directory.
 - Renamed `src/frontend/the_scriber_experience/style/tse_gradients.py` to `gradient_presets.py` to eliminate naming collision with `gradients.py` in the parent directory.
 - Moved `src/frontend/messaging.py` to `src/cli/messaging.py` — all CLI-specific terminal styling now lives in `src/cli/`.
+- Consolidated the TSE/semantic/CLI/EIGEN color palettes (`TSE_COLORS`, `SEMANTIC_COLORS`, `CLI_COLORS`, `EIGEN_COLORS`, `EIGEN_NODE_COLORS`, `EIGEN_LABEL_COLORS`) into `src/frontend/colors.py`, making `src/frontend/colors.py` and `src/frontend/gradients.py` the sole source of truth for colors and gradients; repointed `src/cli/main.py`, `src/frontend/__init__.py`, and `src/frontend/the_scriber_experience/__init__.py` to them.
 
 ### Removed
 - Deleted duplicate `src/cli/colors.py` facade in favor of direct `cli.colors_table` imports, establishing `src/frontend/colors.py` as the single owner of the `colors` module name.
@@ -38,6 +39,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed `boilerplates/python/gold-standard-boilerplate.py` (identical duplicate of `gold-standard.py`).
 - Removed `house-rules/python-rules_v1.md` (content duplicate of `python-rules.md`).
 - Removed `src/frontend/the_scriber_experience/style/plots/` forwarding bridge directory (no external imports; re-exported from `plots/`).
+- Removed the `src/frontend/the_scriber_experience/style/` directory and its modules (`__init__.py`, `semantic_roles.py`, `gradient_presets.py`); the `semantic_roles.py` palettes now live in `src/frontend/colors.py` and `gradient_presets.py` was a redundant re-export of `src/frontend/gradients.py`.
+
+### Fixed
+- Defined the previously missing `EIGEN_LABEL_COLORS` (referenced in imports and `__all__` but never defined) and corrected `src/cli/branding.py` to use `COLOR_PALETTE["node-2"]` instead of the non-existent `vivid_cyan` key — both defects had made the `frontend` and `cli` packages fail to import.
+- Aligned `tests/unit/test_cli.py` and `tests/unit/test_cli_colors_table.py` with the actual public API (`run_cli_smoke_test`, `EIGENSCRIBE_BLOCK_TEXT`, `node-1`) and ANSI-stripped the `--version` assertions; the full suite passes (46 tests).
 
 ## [1.0.0] - 2026-11-17
 

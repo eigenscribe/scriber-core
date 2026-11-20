@@ -30,6 +30,12 @@ __all__: list[str] = [
     "Color",
     "COLOR_GROUPS",
     "COLOR_PALETTE",
+    "TSE_COLORS",
+    "SEMANTIC_COLORS",
+    "CLI_COLORS",
+    "EIGEN_COLORS",
+    "EIGEN_NODE_COLORS",
+    "EIGEN_LABEL_COLORS",
     "GOLDEN_RATIO",
     "PHI",
     "GOLDEN_RATIO_INVERSE",
@@ -67,6 +73,7 @@ COLOR_GROUPS: Final[dict[str, dict[str, str]]] = {
         "success_emerald": "#10b981",  # ⌨️ cli status color: success
         "ibm_green": "#309592",
         "deep_green": "#038b00",
+        "node-9": "#00c853",
         "neon_green": "#31ff40",
         "bright_chartreuse": "#70e000",
         "junie_lime": "#a7c957",
@@ -76,12 +83,12 @@ COLOR_GROUPS: Final[dict[str, dict[str, str]]] = {
     "Cyans & Light Blues": {
         "electric_lagoon": "#1ef6eb",
         "electric_cyan": "#00ffee",  # 🌈 tse-gradient-1
-        "pure_cyan": "#00ffff",
+        "node-1": "#00ffff",
         "bright_cyan": "#00f0ff",  # 🐉 tse-cyan
-        "vivid_cyan": "#00e8ff",  # 🌈 tse-gradient-2
+        "node-2": "#00e8ff",  # 🌈 tse-gradient-2
         "reef_cyan": "#1ed9f6",
         "azure_splash": "#1eb2f6",
-        "vivid_sky_blue": "#14b5ff",  # 🌈 tse-gradient-1
+        "node-3": "#14b5ff",  # 🌈 tse-gradient-1
         "ibm_cyan": "#2ca9e6",
         "sky_info": "#38bdf8",  # ⌨️ info
         "sky_cyan": "#4cc9f0",
@@ -90,7 +97,7 @@ COLOR_GROUPS: Final[dict[str, dict[str, str]]] = {
     "Blues & Indigos": {
         "midnight_navy": "#06152b",
         "deep_ocean_blue": "#003b73",
-        "vivid_blue": "#0070eb",
+        "node-4": "#0070eb",
         "eigen_blue": "#008eff",
         "cerulean_surge": "#1e8af6",
         "skyline_blue": "#0a95eb",
@@ -115,16 +122,17 @@ COLOR_GROUPS: Final[dict[str, dict[str, str]]] = {
         "deep_iris": "#3b1ef6",
         "cosmic_violet": "#4b1ef6",
         "cosmic_iris": "#501ef6",
-        "electric_violet": "#5e17eb",
-        "bright_violet": "#7c3aed",
+        "node-7": "#5e17eb",
+        "node-6": "#7952f5",
         "nebula_purple": "#781ef6",
+        "bright_violet": "#7c3aed",
         "amethyst": "#7c1ef6",
-        "neon_orchid": "#a01ef6",
-        "vivid_orchid": "#bc1ef6",
-        "bright_purple": "#a855f7",
-        "studio_purple": "#9c1ef6",
-        "royal_purple": "#7209b7",
         "ibm_purple": "#844ccc",
+        "royal_purple": "#7209b7",
+        "bright_purple": "#a855f7",
+        "neon_orchid": "#a01ef6",
+        "studio_purple": "#9c1ef6",
+        "vivid_orchid": "#bc1ef6",
         "pale_lilac": "#d8b4fe",
     },
     "Pink & Berries": {
@@ -134,7 +142,7 @@ COLOR_GROUPS: Final[dict[str, dict[str, str]]] = {
         "vivid_pink": "#f72585",
         "ibm_pink": "#fe28a2",
         "bright_pink": "#ff40a1",
-        "rose_pink": "#ff66b3",
+        "node-8": "#ff66b3",
         "soft_rose": "#ff76a1",
         "pale_orchid_pink": "#ffb4f6",
     },
@@ -154,6 +162,7 @@ COLOR_GROUPS: Final[dict[str, dict[str, str]]] = {
         "apricot": "#ff9d57",
         "golden_amber": "#feb639",
         "warning_amber": "#f7c548",  # ⌨️ warning
+        "node-5": "#ffd94a",
     },
     "Neutrals": {
         "ibm_black": "#161616",
@@ -163,6 +172,7 @@ COLOR_GROUPS: Final[dict[str, dict[str, str]]] = {
         "slate": "#64748b",
         "ibm_white": "#f4f4f4",
         "ghost_white": "#f8fafc",
+        "node-0": "#fff9d6",
     },
 }
 
@@ -172,6 +182,79 @@ COLOR_PALETTE: Final[dict[str, str]] = {
     for group in COLOR_GROUPS.values()
     for name, hex_value in group.items()
 }
+
+
+# -----------------------------------------------------------------------------------------------------------
+# 🚦 Semantic, CLI & EIGEN Color Roles
+#
+# Canonical semantic palettes, CLI status roles, and the EIGEN / Sephirah node
+# spectra. Every entry references COLOR_PALETTE (the single source of truth) so
+# there is no hardcoded duplication of hex values downstream.
+# -----------------------------------------------------------------------------------------------------------
+
+# 🔱 Signature TSE Colors
+TSE_COLORS: Final[dict[str, str]] = {
+    "tse-cyan": COLOR_PALETTE["bright_cyan"],
+    "tse-blue": COLOR_PALETTE["electric_blue"],
+    "tse-periwinkle": COLOR_PALETTE["periwinkle_blue"],
+    "tse-purple": COLOR_PALETTE["bright_purple"],
+    "tse-pink": COLOR_PALETTE["vivid_pink"],
+}
+
+# 🚦 Semantic Attention & Domain Status Roles
+SEMANTIC_COLORS: Final[dict[str, str]] = {
+    "info": COLOR_PALETTE["sky_info"],
+    "success": COLOR_PALETTE["success_emerald"],
+    "warning": COLOR_PALETTE["warning_amber"],
+    "error": COLOR_PALETTE["error_crimson"],
+    "quantum": COLOR_PALETTE["electric_blue"],
+    "rotor": COLOR_PALETTE["bright_violet"],
+    "network": COLOR_PALETTE["bright_magenta"],
+}
+
+# ⌨️ CLI Status Colors
+CLI_COLORS: Final[dict[str, str]] = {
+    "success": COLOR_PALETTE["success_emerald"],
+    "info": COLOR_PALETTE["sky_info"],
+    "error": COLOR_PALETTE["error_crimson"],
+    "warning": COLOR_PALETTE["warning_amber"],
+}
+
+# 🐉 Canonical EIGEN Spectrum
+EIGEN_COLORS: Final[dict[str, str]] = {
+    "cyan": COLOR_PALETTE["node-2"],
+    "sky": COLOR_PALETTE["node-3"],
+    "blue": COLOR_PALETTE["eigen_blue"],
+    "purple": COLOR_PALETTE["node-6"],
+}
+
+# 🌌 Vibrant 10-Node EIGEN Spectrum (Sephirah Tree of Life nodes 0-9)
+EIGEN_NODE_COLORS: Final[list[str]] = [
+    COLOR_PALETTE["node-0"],  # 0. Crown / Divine White-Gold
+    COLOR_PALETTE["node-1"],  # 1. Electric Pure Cyan
+    COLOR_PALETTE["node-2"],  # 2. Vibrant Cyan
+    COLOR_PALETTE["node-3"],  # 3. Sky Blue
+    COLOR_PALETTE["node-4"],  # 4. Royal Cobalt
+    COLOR_PALETTE["node-5"],  # 5. Radiant Amber Gold
+    COLOR_PALETTE["node-6"],  # 6. Electric Purple
+    COLOR_PALETTE["node-7"],  # 7. Deep Violet
+    COLOR_PALETTE["node-8"],  # 8. Neon Hot Pink
+    COLOR_PALETTE["node-9"],  # 9. Vivid Emerald Green
+]
+
+# 🏷️ EIGEN Node Label Colors (high-contrast variant; node 5 uses solar cyan for legibility)
+EIGEN_LABEL_COLORS: Final[list[str]] = [
+    COLOR_PALETTE["node-0"],  # 0. Crown
+    COLOR_PALETTE["node-1"],  # 1. Pure Cyan
+    COLOR_PALETTE["node-2"],  # 2. Bright Cyan
+    COLOR_PALETTE["node-3"],  # 3. Sky Blue
+    COLOR_PALETTE["node-4"],  # 4. Royal Cobalt
+    COLOR_PALETTE["sky_cyan"],  # 5. Luminous Solar Cyan
+    COLOR_PALETTE["node-6"],  # 6. Electric Purple
+    COLOR_PALETTE["node-7"],  # 7. Deep Violet
+    COLOR_PALETTE["node-8"],  # 8. Neon Pink
+    COLOR_PALETTE["node-9"],  # 9. Vivid Emerald Green
+]
 
 
 # -----------------------------------------------------------------------------------------------------------

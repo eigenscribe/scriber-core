@@ -6,7 +6,7 @@ Unifies style design tokens, terminal CLI utilities, and scientific plot themes.
 
 from __future__ import annotations
 
-from . import mermaid, plots, style
+from . import mermaid, plots
 from .mermaid import (
     EIGENSCRIBE_MERMAID_CLASSES,
     EIGENSCRIBE_MERMAID_THEME_VARIABLES,
@@ -27,27 +27,28 @@ from .plots import (
     plot_eigenscribe_heatmap,
     register_colormaps,
 )
-from .style import (
+from frontend.colors import (
     CLI_COLORS,
     COLOR_PALETTE,
     EIGEN_COLORS,
     EIGEN_LABEL_COLORS,
     EIGEN_NODE_COLORS,
-    GRADIENT_PRESETS,
-    PRESETS,
     SEMANTIC_COLORS,
     TSE_COLORS,
-    TSE_GRADIENTS,
     Color,
     RGB,
     hex_to_rgb,
+)
+from frontend.gradients import (
+    GRADIENT_PRESETS,
+    PRESETS,
+    TSE_GRADIENTS,
     multi_gradient,
 )
 
 __all__: list[str] = [
     # Submodules
     "plots",
-    "style",
     "mermaid",
     # Style & Tokens
     "RGB",

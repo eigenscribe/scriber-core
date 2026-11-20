@@ -32,14 +32,10 @@ Welcome to the canonical environment index for autonomous development agents. Th
 │   │   └── colors.py                 # Direct CLI wrapper for palette inspection
 │   └── frontend/                     # 🎨 Frontend, design tokens & styling subsystem
 │       ├── __init__.py
-│       ├── colors.py                 # Canonical named color palette (COLOR_PALETTE), RGB, hex_to_rgb
+│       ├── colors.py                 # Canonical palette (COLOR_PALETTE), semantic/CLI/EIGEN roles, RGB, hex_to_rgb
 │       ├── gradients.py              # Golden ratio TrueColor multi-stop gradient engine (GRADIENT_PRESETS)
 │       └── the_scriber_experience/   # 🔱 The Scriber Experience (TSE) styling subsystems
 │           ├── __init__.py
-│           ├── style/                # Design tokens, TSE palettes & gradient presets
-│           │   ├── __init__.py
-│           │   ├── semantic_roles.py     # TSE semantic colors, CLI status roles, EIGEN spectrum
-│           │   └── gradient_presets.py  # TSE multi-stop gradient sequences & presets
 │           ├── plots/                # Scientific plotting themes & colormaps
 │           │   ├── __init__.py
 │           │   └── theme.py          # Theme engine for Matplotlib, Pyplot, Seaborn, Plotly

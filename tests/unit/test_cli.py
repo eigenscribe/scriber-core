@@ -20,7 +20,7 @@ from cli import (
     format_colored_name,
     print_colors_table,
     render_colors_table,
-    run_smoke_test,
+    run_cli_smoke_test,
 )
 from cli.colors_table import cli as colors_table_cli
 from cli.main import cli_group
@@ -50,7 +50,7 @@ def test_cli_version(runner: CliRunner) -> None:
     """Verify eigenscribe --version outputs version badge."""
     result = runner.invoke(cli_group, ["--version"])
     assert result.exit_code == 0
-    assert "eigenscribe v" in result.output
+    assert "eigenscribe v" in re.sub(r"\x1b\[[0-9;]*m", "", result.output)
 
 
 def test_cli_no_args_brand_header(runner: CliRunner) -> None:
@@ -159,7 +159,7 @@ def test_cli_colors_table_direct_command(runner: CliRunner) -> None:
     assert "SCRIBER CORE COLOR PALETTE TABLE" in plain_output
     assert "\033[1;38;2;" in res.output or "\033[38;2;" in res.output
     assert "deep_pine" in res.output
-    assert "pure_cyan" in res.output
+    assert "node-1" in res.output
     assert "#00ffff" in res.output
 
     # Test sorting and formatting options
@@ -202,4 +202,4 @@ def test_colors_table_rendering_helpers() -> None:
     rendered = render_colors_table()
     plain_rendered = re.sub(r"\x1b\[[0-9;]*m", "", rendered)
     assert "SCRIBER CORE COLOR PALETTE TABLE" in plain_rendered
-    assert run_smoke_test() is True
+    assert run_cli_smoke_test() is True
