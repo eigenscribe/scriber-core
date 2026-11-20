@@ -13,11 +13,12 @@ Last Updated: November 18, 2026
 
 from __future__ import annotations
 
-import math
 import re
-import sys
 from collections.abc import Sequence
 from typing import Final, TypeAlias
+
+import math
+import sys
 
 if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
     try:
@@ -74,7 +75,8 @@ COLOR_GROUPS: Final[dict[str, dict[str, str]]] = {
         "ibm_green": "#309592",
         "deep_green": "#038b00",
         "node-9": "#00c853",
-        "neon_green": "#31ff40",
+        "brigh_green": "#28d728",
+        "neon_green": "#30ff40",
         "bright_chartreuse": "#70e000",
         "junie_lime": "#a7c957",
         "pale_mint": "#b4ffcf",
